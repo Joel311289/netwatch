@@ -1,13 +1,100 @@
+@import './styles/fonts.css';
+
+:root {
+  --size-header: 64px;
+  --size-max: 1200px;
+
+  --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-heading: 'UberMove', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-text: 'UberMoveText', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --box-shadow-primary: 0px 16px 30px -10px #4660bb33;
+
+  --color-gray: #b9bdcf;
+  --color-gray-light: #e0e0e0;
+  --color-border: #a0a0a0;
+  --color-disabled: #f0f0f0;
+  --color-medium: #1d1f20;
+  --color-dark: #000000;
+  --color-white: #ffffff;
+  --color-yellow: #f8ab00;
+  --color-yellow-dark: #c08400;
+
+  --scrollbarBG: var(--color-gray);
+  --thumbBG: var(--color-yellow);
+}
+
+.theme-light {
+  --color-primary: var(--color-yellow);
+  --color-primary-dark: var(--color-yellow-dark);
+  --color-secondary: var(--color-dark);
+  --color-text: var(--color-dark);
+  --color-button-text: var(--color-white);
+  --color-link-text: var(--color-dark);
+  --background-color: var(--color-white);
+  --background-header-color: var(--color-yellow);
+}
+
+.theme-dark {
+  --color-primary: var(--color-dark);
+  --color-primary-dark: var(--color-dark);
+  --color-secondary: var(--color-yellow);
+  --color-text: var(--color-white);
+  --color-button-text: var(--color-dark);
+  --color-link-text: var(--color-yellow);
+  --background-color: var(--color-medium);
+  --background-header-color: var(--color-dark);
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-text);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+link {
+  outline: none;
+  box-shadow: none;
+}
+
+/** Scroll **/
+
+/*! Firefox */
+html,
+body {
+  scrollbar-color: var(--scrollbarBG) var(--thumbBG);
+}
+
+/*! Other Browser */
+body::-webkit-scrollbar {
+  width: 0.35rem;
+}
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
 }

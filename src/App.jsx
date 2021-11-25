@@ -1,45 +1,37 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { useTheme } from './hooks/useTheme';
+import HomePage from './pages/Home/HomePage';
+import MoviesPage from './pages/Movies/MoviesPage';
+import Header from './components/Layout/Header/Header';
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [theme, handleTheme] = useTheme();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
-}
+    <div className={`App theme-${theme}`}>
+      <Router>
+        <header className="App-header">
+          <div className="App-container">
+            <Header title="Netwatch" theme={theme} onChangeTheme={handleTheme} />
+          </div>
+        </header>
 
-export default App
+        <div className="App-body">
+          <div className="App-container">
+            <Switch>
+              <Route exact component={HomePage} path="/home" />
+
+              <Route exact component={MoviesPage} path="/movies" />
+              <Redirect to="/home" />
+            </Switch>
+          </div>
+        </div>
+
+        <footer className="App-footer"></footer>
+      </Router>
+    </div>
+  );
+};
+
+export default App;

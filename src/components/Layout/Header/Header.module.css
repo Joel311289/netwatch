@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.logo {
+  height: var(--size-header);
+  width: var(--size-header);
+  max-height: var(--size-header);
+}
+
+.title {
+  margin: 5px 15px 0;
+  font-family: var(--font-logo);
+  font-size: 35px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}

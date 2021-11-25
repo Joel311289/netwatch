@@ -1,0 +1,31 @@
+.wrapper {
+  color: var(--color-text);
+  display: block;
+}
+
+.image {
+  border-radius: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px 0 10px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.date {
+  margin-top: 5px;
+}
+
+.wrapper:hover .image {
+  transform: scale(1.02);
+  transition: all 0.2s;
+}
+
+.wrapper:hover .title {
+  color: var(--color-yellow);
+}
