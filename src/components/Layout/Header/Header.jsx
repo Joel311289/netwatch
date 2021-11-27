@@ -13,7 +13,7 @@ const Header = ({ title, logoUrl, actions, theme, onChangeTheme }) => {
       </Link>
 
       <div className={styles.actions}>
-        <Button clear onClick={onChangeTheme}>
+        <Button clear size="small" onClick={onChangeTheme}>
           <img src={`/assets/icons/icon-${getThemeMode(theme.toUpperCase())}.svg`}></img>
           {theme.toUpperCase()}
         </Button>

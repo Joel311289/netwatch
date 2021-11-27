@@ -23,7 +23,7 @@
 .title {
   margin: 5px 15px 0;
   font-family: var(--font-logo);
-  font-size: 35px;
+  font-size: 2rem;
 }
 
 .actions {

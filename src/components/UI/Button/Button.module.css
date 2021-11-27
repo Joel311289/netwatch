@@ -36,16 +36,19 @@
 .wrapper.small {
   padding: 0 10px;
   height: 36px;
+  font-size: 0.9rem;
 }
 
 .wrapper.large {
   padding: 0 16px;
   height: 50px;
+  font-size: 1.2rem;
 }
 
 .wrapper.xlarge {
   padding: 0 20px;
   height: 56px;
+  font-size: 1.5rem;
 }
 
 .wrapper.secondary {

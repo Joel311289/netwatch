@@ -1,7 +1,10 @@
 @import './styles/fonts.css';
+/* Import Slick Carousel */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
 
 :root {
-  --size-header: 64px;
+  --size-header: 58px;
   --size-max: 1200px;
 
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -20,6 +23,9 @@
   --color-yellow: #f8ab00;
   --color-yellow-dark: #c08400;
 
+  --color-white-rgb: 255, 255, 255;
+  --color-medium-rgb: 29, 31, 32;
+  
   --scrollbarBG: var(--color-gray);
   --thumbBG: var(--color-yellow);
 }
@@ -32,6 +38,7 @@
   --color-button-text: var(--color-white);
   --color-link-text: var(--color-dark);
   --background-color: var(--color-white);
+  --background-color-rgb: var(--color-white-rgb);
   --background-header-color: var(--color-yellow);
 }
 
@@ -43,6 +50,7 @@
   --color-button-text: var(--color-dark);
   --color-link-text: var(--color-yellow);
   --background-color: var(--color-medium);
+  --background-color-rgb: var(--color-medium-rgb);
   --background-header-color: var(--color-dark);
 }
 

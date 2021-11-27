@@ -5,6 +5,7 @@
 
 .image {
   border-radius: 10px;
+  box-shadow: var(--box-shadow-primary);
 }
 
 .info {
