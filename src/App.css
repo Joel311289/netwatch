@@ -55,4 +55,13 @@
 .App-sub-heading {
   font-size: 1.2rem;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.App-flexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
 }

@@ -4,8 +4,13 @@
 }
 
 .image {
-  border-radius: 10px;
   box-shadow: var(--box-shadow-primary);
+  background-color: var(--color-disabled);
+  transition: all 250ms linear 2s;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .info {
@@ -16,10 +21,12 @@
 
 .title {
   font-weight: 600;
+  font-size: 1rem;
 }
 
 .date {
   margin-top: 5px;
+  font-size: 0.95rem;
 }
 
 .wrapper:hover .image {

@@ -1,18 +1,15 @@
 import axios from 'axios';
 import { apiKey, apiUrl, mediaDetailMapper, apiMediaTypes } from './index.js';
 
-export const TIME_WINDOW = {
-  DAY: 'day',
-  WEEK: 'week',
-};
-
-export const getTrending = (mediaType = apiMediaTypes.ALL, timeWindow = TIME_WINDOW.DAY) => {
+export const getMoviesPopular = (page = 1) => {
   const params = {
     apiKey,
+    page,
+    region: 'ES',
     language: 'es-ES',
   };
 
-  return axios.get(`${apiUrl}/trending/${mediaType}/${timeWindow}`, { params })
+  return axios.get(`${apiUrl}/${apiMediaTypes.MOVIE}/popular`, { params })
     .then((response) => {
       const { results } = response.data || {};
       

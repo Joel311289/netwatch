@@ -25,7 +25,7 @@
 
   --color-white-rgb: 255, 255, 255;
   --color-medium-rgb: 29, 31, 32;
-  
+
   --scrollbarBG: var(--color-gray);
   --thumbBG: var(--color-yellow);
 }
@@ -105,4 +105,22 @@ body::-webkit-scrollbar-track {
 }
 body::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
+}
+
+.skeleton {
+  background-color: var(--color-disabled);
+  background: linear-gradient(90deg, rgba(240, 240, 240, 1) 25%, rgba(230, 230, 230, 0.9) 37%, rgba(240, 240, 240, 1) 63%);
+  background-size: 400% 100%;
+  -webkit-animation: placeholderSkeleton 1.4s ease infinite;
+  animation: placeholderSkeleton 1.4s ease infinite;
+}
+
+@keyframes placeholderSkeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }

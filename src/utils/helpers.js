@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/dist/locale/es';
 import { BREAKPOINTS, THEMES } from './constants';
 
 // Utils
@@ -34,7 +35,8 @@ export const sortArrayByKey = (array, key, descending = false) => {
 };
 
 export const formattedDate = (date) => {
-  return moment(new Date(date), 'YYYYMMDD HH:mm').fromNow();
+  moment.locale('es');
+  return moment(new Date(date)).format('DD MMM YYYY');
 };
 
 export const isValidateUrl = (value) => {
