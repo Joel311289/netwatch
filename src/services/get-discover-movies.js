@@ -3,7 +3,7 @@ import { apiKey, apiUrl, mediaDetailMapper, apiMediaTypes } from './index.js';
 
 export const getDiscoverMovies = (page = 1) => {
   const params = {
-    apiKey,
+    api_key: apiKey,
     page,
     watch_region: 'ES',
     language: 'es-ES',

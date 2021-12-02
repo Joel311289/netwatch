@@ -30,7 +30,7 @@ label:after {
   height: 18px;
   background: var(--color-white);
   border-radius: 90px;
-  transition: 0.3s;
+  transition: all 0.2s;
 }
 
 input:checked + label {

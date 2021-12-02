@@ -3,7 +3,7 @@ import { apiKey, apiUrl, getNetworksSupported, mediaDetailMapper, apiMediaTypes 
 
 export const getDiscoverSeries = (page = 1, with_networks = getNetworksSupported()) => {
   const params = {
-    apiKey,
+    api_key: apiKey,
     with_networks,
     page,
     watch_region: 'ES',

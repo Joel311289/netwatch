@@ -3,7 +3,7 @@ import { apiKey, apiUrl, mediaDetailMapper, apiMediaTypes } from './index.js';
 
 export const getMoviesPopular = (page = 1) => {
   const params = {
-    apiKey,
+    api_key: apiKey,
     page,
     region: 'ES',
     language: 'es-ES',

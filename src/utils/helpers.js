@@ -34,6 +34,8 @@ export const sortArrayByKey = (array, key, descending = false) => {
   return descending ? arraySorted.reverse() : arraySorted;
 };
 
+export const getEmptyObjectArray = (size) => Array(size).fill({});
+
 export const formattedDate = (date) => {
   moment.locale('es');
   return moment(new Date(date)).format('DD MMM YYYY');

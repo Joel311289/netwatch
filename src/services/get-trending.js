@@ -8,7 +8,7 @@ export const TIME_WINDOW = {
 
 export const getTrending = (mediaType = apiMediaTypes.ALL, timeWindow = TIME_WINDOW.DAY) => {
   const params = {
-    apiKey,
+    api_key: apiKey,
     language: 'es-ES',
   };
 

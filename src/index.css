@@ -23,9 +23,6 @@
   --color-yellow: #f8ab00;
   --color-yellow-dark: #c08400;
 
-  --color-white-rgb: 255, 255, 255;
-  --color-medium-rgb: 29, 31, 32;
-
   --scrollbarBG: var(--color-gray);
   --thumbBG: var(--color-yellow);
 }
@@ -37,8 +34,10 @@
   --color-text: var(--color-dark);
   --color-button-text: var(--color-white);
   --color-link-text: var(--color-dark);
+  --color-skeleton-gradient-1: 226, 226, 226;
+  --color-skeleton-gradient-2: 240, 240, 240;
   --background-color: var(--color-white);
-  --background-color-rgb: var(--color-white-rgb);
+  --background-color-rgb: 255, 255, 255;
   --background-header-color: var(--color-yellow);
 }
 
@@ -49,8 +48,10 @@
   --color-text: var(--color-white);
   --color-button-text: var(--color-dark);
   --color-link-text: var(--color-yellow);
+  --color-skeleton-gradient-1: 40, 40, 40;
+  --color-skeleton-gradient-2: 50, 50, 50;
   --background-color: var(--color-medium);
-  --background-color-rgb: var(--color-medium-rgb);
+  --background-color-rgb: 29, 31, 32;
   --background-header-color: var(--color-dark);
 }
 
@@ -73,19 +74,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  text-decoration: none;
-}
-
-button,
-input,
-link {
-  outline: none;
-  box-shadow: none;
-}
-
-/** Scroll **/
-
 /*! Firefox */
 html,
 body {
@@ -107,9 +95,53 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
 }
 
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+link {
+  outline: none;
+  box-shadow: none;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  width: fit-content;
+}
+
+.sub-heading {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.block {
+  display: block;
+  margin: 20px 0;
+}
+
+.block * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flexbox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.flexbox-space-between {
+  justify-content: space-between;
+}
+
 .skeleton {
   background-color: var(--color-disabled);
-  background: linear-gradient(90deg, rgba(240, 240, 240, 1) 25%, rgba(230, 230, 230, 0.9) 37%, rgba(240, 240, 240, 1) 63%);
+  background: linear-gradient(90deg, rgba(var(--color-skeleton-gradient-1), 1) 25%, rgba(var(--color-skeleton-gradient-2), 0.9) 37%, rgba(var(--color-skeleton-gradient-1), 1) 63%);
   background-size: 400% 100%;
   -webkit-animation: placeholderSkeleton 1.4s ease infinite;
   animation: placeholderSkeleton 1.4s ease infinite;
