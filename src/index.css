@@ -147,6 +147,12 @@ link {
   animation: placeholderSkeleton 1.4s ease infinite;
 }
 
+.skeleton * {
+  color: transparent !important;
+  border-color: transparent !important;
+  cursor: default !important;
+}
+
 @keyframes placeholderSkeleton {
   0% {
     background-position: 100% 50%;

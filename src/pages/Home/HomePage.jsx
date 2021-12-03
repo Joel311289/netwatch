@@ -1,36 +1,10 @@
 import { useEffect, useState } from 'react';
-import MediaItem from '../../components/Media/MediaItem/MediaItem';
-import MediaItemSkeleton from '../../components/Media/MediaItem/MediaItem.skeleton';
-import Slider from '../../components/UI/Slider/Slider';
-import Link from '../../components/UI/Link/Link';
+import MediaCategorySlider from '../../components/Media/MediaCategorySlider/MediaCategorySlider';
+import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getTrending } from '../../services/get-trending';
 import { getDiscoverMovies } from '../../services/get-discover-movies';
 import { getDiscoverSeries } from '../../services/get-discover-series';
 import './HomePage.css';
-import {useLoadDataPage} from '../../hooks/useLoadDataPage';
-
-const Category = (heading, type = 'movies', items, loading, showMoreLink) => {
-  return (
-    <div className="category-wrapper">
-      <div className="sub-heading flexbox flexbox-space-between">
-        {heading}
-        {showMoreLink && <Link to={`/${type}`}>Ver más</Link>}
-      </div>        
-      
-      <Slider>
-        {items && items.map((item) => (
-          <MediaItem key={item.id} to={`/${type}/${item.id}`} ratio={1.5} {...item}></MediaItem>
-        ))}
-      </Slider>
-
-      {loading && <Slider>
-        {loading.map((index) => (
-          <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
-        ))}
-      </Slider>}
-    </div>
-  );
-};
 
 const HomePage = () => {
   const [trendings, setTrendings] = useState([]);
@@ -61,11 +35,11 @@ const HomePage = () => {
     <div>
       <h2 className="heading">Bienvenido, películas y series para ti</h2>
 
-      {Category('Tendencias hoy', 'movies', trendings, loadingTrendings)}
+      <MediaCategorySlider heading="Tendencias hoy" items={trendings} loading={loadingTrendings}></MediaCategorySlider>
       
-      {Category('Películas populares', 'movies', movies, loadingMovies, true)}
+      <MediaCategorySlider heading="Películas populares" type="movies" items={movies} loading={loadingMovies}></MediaCategorySlider>
       
-      {Category('Series populares', 'series', series, loadingSeries, true)}
+      <MediaCategorySlider heading="Series populares" type="series" items={series} loading={loadingSeries}></MediaCategorySlider>
     </div>
   );
 };
