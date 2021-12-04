@@ -9,10 +9,6 @@ const MediaItem = ({ size, ratio, title, date, image, to }) => {
         className={styles.image}
         style={{ backgroundImage: `url(${image})`, width: size, height: size * ratio }}>
       </div>
-      <div className={styles.info}>
-        <span className={styles.title}>{title}</span>
-        {date && <span className={styles.date}>{date}</span>}
-      </div>
     </Link>
   );
 };

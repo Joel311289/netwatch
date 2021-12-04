@@ -5,7 +5,6 @@ const MediaItemSkeleton = ({ size, ratio }) => {
   return (
     <div className={styles.wrapper} style={{ width: size }}>
       <div className={`skeleton ${styles.image}`} style={{ width: size, height: size * ratio }}></div>
-      <div className={`skeleton ${styles.info}`}></div>
     </div>
   );
 };

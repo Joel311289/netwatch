@@ -2,10 +2,12 @@
 /* Import Slick Carousel */
 @import 'swiper/css';
 @import 'swiper/css/navigation';
+@import 'swiper/css/mousewheel';
+@import 'swiper/css/lazy';
 
 :root {
   --size-header: 58px;
-  --size-max: 1200px;
+  --size-max: 1600px;
 
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-heading: 'UberMove', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -22,6 +24,7 @@
   --color-white: #ffffff;
   --color-yellow: #f8ab00;
   --color-yellow-dark: #c08400;
+  --color-black-gradient: 50, 50, 50;
 
   --scrollbarBG: var(--color-gray);
   --thumbBG: var(--color-yellow);
@@ -109,6 +112,7 @@ link {
 .heading {
   font-family: var(--font-heading);
   width: fit-content;
+  margin: 30px 0;
 }
 
 .sub-heading {
@@ -140,7 +144,6 @@ link {
 }
 
 .skeleton {
-  background-color: var(--color-disabled);
   background: linear-gradient(90deg, rgba(var(--color-skeleton-gradient-1), 1) 25%, rgba(var(--color-skeleton-gradient-2), 0.9) 37%, rgba(var(--color-skeleton-gradient-1), 1) 63%);
   background-size: 400% 100%;
   -webkit-animation: placeholderSkeleton 1.4s ease infinite;

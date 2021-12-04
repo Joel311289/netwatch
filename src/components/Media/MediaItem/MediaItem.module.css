@@ -1,6 +1,7 @@
 .wrapper {
   color: var(--color-text);
   display: block;
+  overflow: hidden;
 }
 
 .image {
@@ -29,8 +30,8 @@
 }
 
 .wrapper:hover .image {
-  transform: scale(1.02);
-  transition: all 0.2s;
+  transform: scale(1.1);
+  transition: all 0.5s;
 }
 
 .wrapper:hover .title {

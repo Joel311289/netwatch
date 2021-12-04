@@ -1,20 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types';
+import { useResize } from '../../../hooks/useResize';
 import styles from './Slider.module.css';
 
-import SwiperCore, { Navigation } from 'swiper';
-SwiperCore.use([Navigation]);
+import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
+SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
 const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination, speed }) => {
   const [focused, setFocused] = useState(false);
-  const [slidesPerGroup, setSlidesPerGroup] = useState(1);  
-  const [sliderWidth, setSliderWidth] = useState(0);
+  const [slidesPerGroup, setSlidesPerGroup] = useState(1);
+  const sliderRef = useRef(null);
+  const [sliderWidth] = useResize(sliderRef);
   const [slideWidth, setSlideWidth] = useState(0);
 
   useEffect(() => {
     if (sliderWidth && slideWidth) {
+      console.log(sliderWidth, slideWidth);
       const totalSpaces = spaceBetween * (Math.floor(sliderWidth / slideWidth) - 1);
       const slidesPerGroup = Math.floor((sliderWidth - totalSpaces) / slideWidth);
       setSlidesPerGroup(slidesPerGroup);
@@ -40,8 +43,11 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
   const onMouseEnter = () => setFocused(true);
   const onMouseLeave = () => setFocused(false);
 
-  const onSliderResize = ({ size }) => setSliderWidth(size);
-  const onSliderAfterInit = ({ slides }) => setSlideWidth(slides[0].swiperSlideSize);
+  const onSliderAfterInit = ({ slides }) => {
+    if (slides && slides.length > 0) {
+      setSlideWidth(slides[0].swiperSlideSize);
+    }
+  };
 
   const settings = {
     speed,
@@ -52,11 +58,13 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
       nextEl: `.${styles['button-next']}`,
       disabledClass: styles['button-navigation-disabled'],
     },
-    cssMode: true,
+    lazy: true,
+    mousewheel: true,
+    // cssMode: true,
     pagination,
     slidesPerGroup,
     onAfterInit: onSliderAfterInit,
-    onResize: onSliderResize,
+    // onResize: onSliderResize,
     // onActiveIndexChange: (e) => console.log('activeIndexChange', e),
     // onAfterInit: (e) => console.log('afterInit', e),
     // onImagesReady: (e) => console.log('imagesReady', e),
@@ -65,14 +73,15 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
     // onObserverUpdate: (e) => console.log('observerUpdate', e),
   };
 
-  return children.length > 0 && (
+  return  (
     <div
+      ref={sliderRef}
       className={styles.wrapper} 
       onMouseEnter={onMouseEnter} 
       onMouseLeave={onMouseLeave}>
-      <Swiper {...settings}>
-        {renderPrevButton()}
-        {renderNextButton()}
+      {Array.isArray(children) && children.length > 0 && <Swiper {...settings}>
+        {navigation && renderPrevButton()}
+        {navigation && renderNextButton()}
         {children.map((element, index) => (
           <SwiperSlide 
             key={index}
@@ -80,7 +89,7 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
             {element}
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper>}
     </div>
   );
 };
