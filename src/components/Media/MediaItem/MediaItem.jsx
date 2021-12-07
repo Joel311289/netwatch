@@ -1,34 +1,32 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './MediaItem.module.css';
 
-const MediaItem = ({ size, ratio, title, date, image, to }) => {
+const MediaItem = ({ width, ratio, image, onClick, onMouseEnter, onMouseLeave }) => {
   return (
-    <Link className={styles.wrapper} to={to} style={{ width: size }}>
+    <div
+      className={styles.wrapper}
+      style={{ width }}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}>
       <div 
         className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width: size, height: size * ratio }}>
+        style={{ backgroundImage: `url(${image})`, width, height: width * ratio }}>
       </div>
-    </Link>
+    </div>
   );
 };
 
 MediaItem.defaultProps = {
-  size: 150,
+  width: 150,
   ratio: 1,
-  title: 'Title',
-  date: '',
   image: '',
-  to: '',
 };
 
 MediaItem.propTypes = {
-  size: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
   ratio: PropTypes.number,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
 };
 
 export default MediaItem;

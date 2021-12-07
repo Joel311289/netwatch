@@ -17,7 +17,6 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
 
   useEffect(() => {
     if (sliderWidth && slideWidth) {
-      console.log(sliderWidth, slideWidth);
       const totalSpaces = spaceBetween * (Math.floor(sliderWidth / slideWidth) - 1);
       const slidesPerGroup = Math.floor((sliderWidth - totalSpaces) / slideWidth);
       setSlidesPerGroup(slidesPerGroup);

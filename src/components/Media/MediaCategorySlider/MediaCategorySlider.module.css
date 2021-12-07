@@ -7,3 +7,11 @@
   margin-bottom: 20px;
   width: fit-content;
 }
+
+.slider {
+  width: 100%;
+}
+
+.slider-item {
+  pointer-events: all;
+}

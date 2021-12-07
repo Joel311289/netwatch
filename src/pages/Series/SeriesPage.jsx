@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import MediaGrid from '../../components/UI/Grid/Grid';
 import MediaItem from '../../components/Media/MediaItem/MediaItem';
 import MediaItemSkeleton from '../../components/Media/MediaItem/MediaItem.skeleton';
+import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getDiscoverSeries } from '../../services/get-discover-series';
@@ -24,7 +25,9 @@ const SeriesPage = () => {
     <div className="container">
       <h2 className="heading">Series de televisión</h2>
 
-      <div className="sub-heading">Más populares</div>
+      <div className="sub-heading">
+        <MediaHeading text="Más populares"></MediaHeading>
+      </div>
 
       <MediaGrid gap={15} itemsPerRow={5}>
         {series && series.map((item) => (

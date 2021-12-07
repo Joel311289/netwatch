@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import moment from 'moment';
 import 'moment/dist/locale/es';
 import { BREAKPOINTS, THEMES } from './constants';
@@ -34,7 +35,11 @@ export const sortArrayByKey = (array, key, descending = false) => {
   return descending ? arraySorted.reverse() : arraySorted;
 };
 
-export const getEmptyObjectArray = (size) => Array(size).fill({});
+export const getEmptyArray = (size, content = null) => Array(size).fill(content);
+
+export const isEmptyArray = (array) => (Array.isArray(array) && array.length > 0 ? !Boolean(array.find((item) => Boolean(item))) : true);
+
+export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 
 export const formattedDate = (date) => {
   moment.locale('es');
@@ -53,3 +58,6 @@ export const queryParams = () => {
 
   return queryParams;
 };
+
+export const throttle = _.throttle;
+export const debounce = _.debounce;

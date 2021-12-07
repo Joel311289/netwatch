@@ -2,11 +2,12 @@
   color: var(--color-text);
   display: block;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .image {
   box-shadow: var(--box-shadow-primary);
-  background-color: var(--color-disabled);
+  background-color: rgb(var(--color-skeleton-gradient-1));
   transition: all 0.2s;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,24 +17,27 @@
 .info {
   display: flex;
   flex-direction: column;
-  padding: 5px 10px 0 10px;
+  padding: 15px 10px;
 }
 
 .title {
+  color: var(--color-yellow);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
+}
+
+.description {
+  margin: 10px 0;
+  font-size: 0.8rem;
 }
 
 .date {
   margin-top: 5px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
-.wrapper:hover .image {
-  transform: scale(1.1);
+.extended {
+  border: 2px solid var(--color-yellow);
+  border-radius: 5px;
   transition: all 0.5s;
-}
-
-.wrapper:hover .title {
-  color: var(--color-yellow);
 }

@@ -2,7 +2,6 @@
 /* Import Slick Carousel */
 @import 'swiper/css';
 @import 'swiper/css/navigation';
-@import 'swiper/css/mousewheel';
 @import 'swiper/css/lazy';
 
 :root {
@@ -102,6 +101,11 @@ a {
   text-decoration: none;
 }
 
+ul, 
+li {
+  padding: 0 !important;
+}
+
 button,
 input,
 link {
@@ -119,6 +123,12 @@ link {
   font-size: 1.2rem;
   margin-bottom: 20px;
   width: fit-content;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .block {
@@ -164,4 +174,9 @@ link {
   100% {
     background-position: 0 50%;
   }
+}
+
+.MuiMenu-paper {
+  pointer-events: all;
+  box-shadow: none !important;
 }

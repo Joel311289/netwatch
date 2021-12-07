@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
-import styles from './MediaItem.skeleton.module.css';
 
-const MediaItemSkeleton = ({ size, ratio }) => {
+const MediaItemSkeleton = ({ width, ratio }) => {
   return (
-    <div className={styles.wrapper} style={{ width: size }}>
-      <div className={`skeleton ${styles.image}`} style={{ width: size, height: size * ratio }}></div>
+    <div style={{ width }}>
+      <div className="skeleton" style={{ width, height: width * ratio }}></div>
     </div>
   );
 };
 
 MediaItemSkeleton.defaultProps = {
-  size: 150,
+  width: 150,
   ratio: 1,
 };
 
 MediaItemSkeleton.propTypes = {
-  size: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
   ratio: PropTypes.number,
 };
 
