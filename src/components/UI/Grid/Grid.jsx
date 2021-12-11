@@ -5,7 +5,7 @@ import styles from './Grid.module.css';
 const MediaGrid = ({ children, itemsPerRow = 1, gap }) => {
   const [itemSize, setItemSize] = useState(null);
   const gridRef = useRef(null);
-  const [gridWidth] = useResize(gridRef);
+  const { width: gridWidth } = useResize(gridRef);
   
   useEffect(() => {
     const totalSpaces = gap * (itemsPerRow - 1);

@@ -72,6 +72,7 @@ body {
   margin: 0;
   font-family: var(--font-text);
   font-weight: 400;
+  padding: 0 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

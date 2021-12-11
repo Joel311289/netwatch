@@ -12,7 +12,7 @@ const MediaItemExtended = ({ width, ratio, title, date, description, image, onCl
       onMouseLeave={onMouseLeave}>
       <div 
         className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width, height: width * ratio }}>
+        style={{ backgroundImage: `url(${image})`, width, height: width && !isNaN(width) ? width * ratio : 'auto' }}>
       </div>
 
       <div className={styles.info}>
@@ -25,7 +25,7 @@ const MediaItemExtended = ({ width, ratio, title, date, description, image, onCl
 };
 
 MediaItemExtended.defaultProps = {
-  width: 150,
+  width: 'auto',
   ratio: 1,
   title: 'Title',
   date: '',
@@ -33,7 +33,7 @@ MediaItemExtended.defaultProps = {
 };
 
 MediaItemExtended.propTypes = {
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

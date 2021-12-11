@@ -1,78 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Fade from '@mui/material/Fade';
-import Menu from '@mui/material/Menu';
 import classNames from 'classnames/bind';
 import Slider from '../../UI/Slider/Slider';
 import MediaItem from '../MediaItem/MediaItem';
 import MediaItemExtended from '../MediaItem/MediaItem.extended';
 import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
 import MediaHeading from '../MediaHeading/MediaHeading';
-import { getEmptyArray } from '../../../utils/helpers';
+import { useResize } from '../../../hooks/useResize';
+import { getSizes, getWidth } from '../../../utils/helpers';
 import styles from './MediaCategorySlider.module.css';
 
 const MediaCategorySlider = ({ heading, type, items, loading }) => {
-  const itemWidth = 190;
   const [itemSelected, setItemSelected] = useState(null);
-  const [anchorElements, setAnchorElements] = useState([]);
+  const [elementSelected, setElementSelected] = useState(null);
+  const sliderRef = useRef(null);
+  const { left: sliderLeft } = useResize(sliderRef);
+
   const classes = classNames.bind(styles)({
     skeleton: Boolean(loading),
   });
 
-  useEffect(() => {
-    setAnchorElements(getEmptyArray(items.length));
-  }, [items]);
+  const getItemSelectedLeft = () => elementSelected && sliderRef ? (getSizes(elementSelected).left || 0) - sliderLeft : 0;
+  const setSelected = (item, element) => {
+    setItemSelected(item);
+    setElementSelected(element);
+  };
+  const onItemMouseEnter = (event, index) => setSelected(items[index], event.currentTarget);
+  const onItemMouseLeave = () => setSelected(null, null);
 
-  useEffect(() => {
-    if (itemSelected) {
-      const { element, position } = itemSelected;
-      setAnchorElements((prev) => [...prev.map((_, index) => (index === position ? element : null))]);
-    }
-  }, [itemSelected]);
-
-  const onMouseEnterItem = (event, position) => setItemSelected({ ...{ element: event.currentTarget, position } });
-  const onMouseLeaveItem = () => setAnchorElements(getEmptyArray(items.length));
-
-  const SliderItem = (item, index) => (
-    <div key={item.id} className={styles['slider-item']}>
-      <MediaItem width={itemWidth} ratio={1.5} onMouseEnter={(e) => onMouseEnterItem(e, index)} {...item} />
-      <Menu
-        sx={{
-          pointerEvents: 'none',
-        }}
-        open={Boolean(anchorElements[index])}
-        anchorEl={anchorElements[index]}
-        onClose={onMouseLeaveItem}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        TransitionComponent={Fade}
-        disableRestoreFocus
-        hideBackdrop>
-        <MediaItemExtended width={itemWidth * 1.2} ratio={0.7} onMouseLeave={onMouseLeaveItem} {...item} image={item.backdrop} />
-      </Menu>
-    </div>
-  );
+  const MediaItemSelected = (item) => {
+    return itemSelected && item.id === itemSelected.id && (
+      <div 
+        key={item.id}
+        className={styles['slider-item-selected']} 
+        style={{ left: getItemSelectedLeft() }}>
+        <MediaItemExtended 
+          ratio={0.8} 
+          width={getWidth(elementSelected)}
+          {...item}
+          image={item.backdrop}
+          onMouseLeave={onItemMouseLeave}
+        />
+      </div>
+    );
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={`${styles.heading} ${classes}`}>
         <MediaHeading text={heading} to={type ? `/${type}` : ''}></MediaHeading>
       </div>
-      <div className={styles.slider} onMouseLeave={onMouseLeaveItem}>
+      <div className={styles.slider} ref={sliderRef} onMouseLeave={onItemMouseLeave}>
         <Slider>
-          {Array.isArray(items) && items.map((item, index) => SliderItem(item, index))}
+          {Array.isArray(items) && items.map((item, index) => (
+            <MediaItem key={item.id} ratio={1.5} {...item} onMouseEnter={(e) => onItemMouseEnter(e, index)} />
+          ))}
         </Slider>
+        
+        {Array.isArray(items) && items.map(MediaItemSelected)}
 
         {Array.isArray(loading) && (
           <Slider navigation={false}>
-            {loading.map((index) => (
-              <MediaItemSkeleton key={index} width={itemWidth} ratio={1.5}></MediaItemSkeleton>
+            {loading.map((_, index) => (
+              <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
             ))}
           </Slider>
         )}

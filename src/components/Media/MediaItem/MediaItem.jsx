@@ -11,20 +11,20 @@ const MediaItem = ({ width, ratio, image, onClick, onMouseEnter, onMouseLeave })
       onMouseLeave={onMouseLeave}>
       <div 
         className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width, height: width * ratio }}>
+        style={{ backgroundImage: `url(${image})`, width, height: width && !isNaN(width) ? width * ratio : 'auto' }}>
       </div>
     </div>
   );
 };
 
 MediaItem.defaultProps = {
-  width: 150,
+  width: 'auto',
   ratio: 1,
   image: '',
 };
 
 MediaItem.propTypes = {
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
   image: PropTypes.string.isRequired,
 };

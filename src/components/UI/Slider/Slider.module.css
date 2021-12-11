@@ -15,7 +15,6 @@
   cursor: pointer;
   font-size: 2.5rem;
   font-weight: 700;
-  width: 25px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -25,18 +24,6 @@
 
 .button-navigation:hover {
   color: var(--color-yellow);
-}
-
-.button-navigation-icon {
-  background-color: rgba(var(--color-black-gradient), 0.3);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button-navigation-icon:hover {
-  background-color: rgba(var(--color-black-gradient), 0.5);
 }
 
 .button-prev {

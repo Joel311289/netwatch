@@ -7,24 +7,37 @@ import { BREAKPOINTS, THEMES } from './constants';
 
 export const getThemeMode = (current) => (THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK);
 
-export const getDeviceConfig = (width) => {
-  if (width < 576) {
-    return BREAKPOINTS.XS;
-  } else if (width < 768) {
-    return BREAKPOINTS.SM;
-  } else if (width < 992) {
-    return BREAKPOINTS.MD;
-  } else if (width < 1200) {
-    return BREAKPOINTS.LG;
-  } else if (width < 1600) {
-    return BREAKPOINTS.XL;
+export const getDeviceBreakpoint = (width) => {
+  if (width < BREAKPOINTS.sm.width) {
+    return 'xs';
+  } else if (width < BREAKPOINTS.md.width) {
+    return 'sm';
+  } else if (width < BREAKPOINTS.lg.width) {
+    return 'md';
+  } else if (width < BREAKPOINTS.xl.width) {
+    return 'lg';
+  } else if (width < BREAKPOINTS.xxl.width) {
+    return 'xl';
   } else {
-    return BREAKPOINTS.XXL;
+    return 'xxl';
   }
 };
-export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.XS;
-export const isMobileTablet = (breakpoint) => [BREAKPOINTS.XS, BREAKPOINTS.SM].includes(breakpoint);
-export const isMobileTabletMedium = (breakpoint) => [BREAKPOINTS.XS, BREAKPOINTS.SM, BREAKPOINTS.MD].includes(breakpoint);
+export const getBreakpoints = () => {
+  const breakpoints = {};
+  Object.keys(BREAKPOINTS).forEach((breakpoint) => {
+    const { width, slidesPerView, spaceBetween } = BREAKPOINTS[breakpoint];
+    breakpoints[width] = { slidesPerView, spaceBetween };
+  });
+  return breakpoints;
+};
+export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
+export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs;
+export const isMobileTablet = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm].includes(breakpoint);
+export const isMobileTabletMedium = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
+
+export const getWidth = (element) => element ? element.getBoundingClientRect().width : 0;
+export const getHeight = (element) => element ? element.getBoundingClientRect().height : 0;
+export const getSizes = (element) => element ? element.getBoundingClientRect() : {};
 
 export const sortArrayByKey = (array, key, descending = false) => {
   const arraySorted = array.sort((a, b) => {

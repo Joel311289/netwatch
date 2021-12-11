@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getDeviceConfig, throttle } from '../utils/helpers';
+import { getDeviceBreakpoint, throttle } from '../utils/helpers';
 
 export const useBreakpointViewport = () => {
-  const [brkPnt, setBrkPnt] = useState(() => getDeviceConfig(window.innerWidth));
+  const [brkPnt, setBrkPnt] = useState(() => getDeviceBreakpoint(window.innerWidth));
 
   useEffect(() => {
     const calcInnerWidth = throttle(() => {
-      setBrkPnt(getDeviceConfig(window.innerWidth));
+      setBrkPnt(getDeviceBreakpoint(window.innerWidth));
     }, 200);
 
     window.addEventListener('resize', calcInnerWidth);

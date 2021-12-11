@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
+import { getSizes } from '../utils/helpers';
 
 export const useResize = (elementRef, onResize) => {
-  const [size, setSize] = useState([0, 0]);
+  const [sizes, setSizes] = useState({});
 
   const listener = useCallback(() => {
-    if (elementRef && elementRef.current && elementRef.current.getBoundingClientRect) {
-      const { width, height } = elementRef.current.getBoundingClientRect();
-      setSize([width, height]);
+    if (elementRef && elementRef.current) {
+      setSizes(getSizes(elementRef.current));
 
       if (onResize) {
-        onResize(size);
+        onResize(sizes);
       }
     }
   }, [elementRef]);
@@ -18,7 +18,7 @@ export const useResize = (elementRef, onResize) => {
     listener();
     window.addEventListener('resize', listener);
     return () => window.removeEventListener('resize', listener);
-  }, [listener]);
+  }, [listener, document.body.clientHeight]);
 
-  return size;
+  return sizes;
 };

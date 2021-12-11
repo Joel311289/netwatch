@@ -1,40 +1,39 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types';
+import { useBreakpointViewport } from '../../../hooks/useBreakpointViewport';
 import { useResize } from '../../../hooks/useResize';
+import { getBreakpointConfig } from '../../../utils/helpers';
 import styles from './Slider.module.css';
 
 import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
-const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination, speed }) => {
+const Slider = ({ children, navigation }) => {
+  const breakpoint = useBreakpointViewport();
   const [focused, setFocused] = useState(false);
   const [slidesPerGroup, setSlidesPerGroup] = useState(1);
   const sliderRef = useRef(null);
-  const [sliderWidth] = useResize(sliderRef);
+  const { width: sliderWidth } = useResize(sliderRef);
   const [slideWidth, setSlideWidth] = useState(0);
+  const [navigationWidth, setNavigationWidth] = useState(0);
 
   useEffect(() => {
-    if (sliderWidth && slideWidth) {
-      const totalSpaces = spaceBetween * (Math.floor(sliderWidth / slideWidth) - 1);
-      const slidesPerGroup = Math.floor((sliderWidth - totalSpaces) / slideWidth);
-      setSlidesPerGroup(slidesPerGroup);
+    if (sliderWidth) {
+      const { slidesPerView, spaceBetween } = getBreakpointConfig(breakpoint);
+      const itemWidth = parseInt(sliderWidth / slidesPerView) - (spaceBetween / 2);
+      
+      setSlideWidth(itemWidth - spaceBetween);
+      setSlidesPerGroup(slidesPerView);
+      setNavigationWidth(sliderWidth - (itemWidth * slidesPerView) + spaceBetween); 
     }
-  }, [sliderWidth, slideWidth])
+  }, [sliderWidth, breakpoint]);
 
-  const renderPrevButton = () => {
+  const renderNavigationButton = (state, icon) => {
     return (
-      <div className={`${styles['button-navigation']} ${styles['button-prev']}`}>
-        {focused && <div className={styles['button-navigation-icon']}><FiChevronLeft /></div>}
-      </div>
-    );
-  };
-
-  const renderNextButton = () => {
-    return (
-      <div className={`${styles['button-navigation']} ${styles['button-next']}`}>
-        {focused && <div className={styles['button-navigation-icon']}><FiChevronRight /></div>}
+      <div className={`${styles['button-navigation']} ${styles['button-' + state]}`} style={{ width: navigationWidth }}>
+        {focused && icon}
       </div>
     );
   };
@@ -42,16 +41,10 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
   const onMouseEnter = () => setFocused(true);
   const onMouseLeave = () => setFocused(false);
 
-  const onSliderAfterInit = ({ slides }) => {
-    if (slides && slides.length > 0) {
-      setSlideWidth(slides[0].swiperSlideSize);
-    }
-  };
-
   const settings = {
-    speed,
-    spaceBetween,
-    slidesPerView,
+    speed: 500,
+    slidesPerView: 'auto',
+    spaceBetween: getBreakpointConfig(breakpoint).spaceBetween,
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
       nextEl: `.${styles['button-next']}`,
@@ -59,17 +52,7 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
     },
     lazy: true,
     mousewheel: true,
-    // cssMode: true,
-    pagination,
     slidesPerGroup,
-    onAfterInit: onSliderAfterInit,
-    // onResize: onSliderResize,
-    // onActiveIndexChange: (e) => console.log('activeIndexChange', e),
-    // onAfterInit: (e) => console.log('afterInit', e),
-    // onImagesReady: (e) => console.log('imagesReady', e),
-    // onInit: onSliderAfterInit,
-    // onBreakpoint: (e) => console.log('breakpoint', e),
-    // onObserverUpdate: (e) => console.log('observerUpdate', e),
   };
 
   return  (
@@ -79,13 +62,13 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
       onMouseEnter={onMouseEnter} 
       onMouseLeave={onMouseLeave}>
       {Array.isArray(children) && children.length > 0 && <Swiper {...settings}>
-        {navigation && renderPrevButton()}
-        {navigation && renderNextButton()}
+        {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
+        {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide 
             key={index}
             className={styles.item}>
-            {element}
+            {slideWidth && React.cloneElement(element, {...element.props, width: slideWidth})}
           </SwiperSlide>
         ))}
       </Swiper>}
@@ -94,19 +77,11 @@ const Slider = ({ children, slidesPerView, spaceBetween, navigation, pagination,
 };
 
 Slider.defaultProps = {
-  spaceBetween: 10,
-  speed: 500,
-  slidesPerView: 'auto',
   navigation: true,
-  pagination: false,
 };
 
 Slider.propTypes = {
-  spaceBetween: PropTypes.number,
-  speed: PropTypes.number,
-  slidesPerView: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  navigation: PropTypes.oneOfType([PropTypes.bool, PropTypes.objectOf()]),
-  pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.objectOf()]),
+  navigation: PropTypes.bool,
 };
 
 export default Slider;
