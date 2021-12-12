@@ -15,7 +15,8 @@
 }
 
 .info {
-  background-color: var(--color-white);
+  background-color: var(--background-color);
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   padding: 15px 10px;
@@ -29,16 +30,17 @@
 
 .description {
   margin: 10px 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .date {
   margin-top: 5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .extended {
-  border: 2px solid var(--color-yellow);
-  border-radius: 5px;
+  border: 1px solid var(--color-yellow);
+  box-shadow: 0 0 9px rgb(0 0 0 / 20%);
+  border-radius: 4px;
   transition: all 0.5s;
 }

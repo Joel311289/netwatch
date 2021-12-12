@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import MediaCategorySlider from '../../components/Media/MediaCategorySlider/MediaCategorySlider';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getTrending } from '../../services/get-trending';

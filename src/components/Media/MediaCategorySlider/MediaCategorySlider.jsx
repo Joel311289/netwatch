@@ -13,6 +13,8 @@ import styles from './MediaCategorySlider.module.css';
 const MediaCategorySlider = ({ heading, type, items, loading }) => {
   const [itemSelected, setItemSelected] = useState(null);
   const [elementSelected, setElementSelected] = useState(null);
+  const [delayHandler, setDelayHandler] = useState(null)
+
   const sliderRef = useRef(null);
   const { left: sliderLeft } = useResize(sliderRef);
 
@@ -25,24 +27,36 @@ const MediaCategorySlider = ({ heading, type, items, loading }) => {
     setItemSelected(item);
     setElementSelected(element);
   };
-  const onItemMouseEnter = (event, index) => setSelected(items[index], event.currentTarget);
-  const onItemMouseLeave = () => setSelected(null, null);
+  const onItemMouseEnter = (event, index) => {
+    const element = event.currentTarget;
+    onItemMouseLeave();
+    setDelayHandler(setTimeout(() => {
+      setSelected(items[index], element);
+    }, 500));
+  };
+  const onItemMouseLeave = () => {
+    setSelected(null, null);
+    clearTimeout(delayHandler);
+  };
 
   const MediaItemSelected = (item) => {
-    return itemSelected && item.id === itemSelected.id && (
+    return (
+      itemSelected && 
+      elementSelected && 
+      item.id === itemSelected.id && (
       <div 
         key={item.id}
         className={styles['slider-item-selected']} 
         style={{ left: getItemSelectedLeft() }}>
         <MediaItemExtended 
-          ratio={0.8} 
+          ratio={0.7} 
           width={getWidth(elementSelected)}
           {...item}
           image={item.backdrop}
           onMouseLeave={onItemMouseLeave}
         />
       </div>
-    );
+    ));
   };
 
   return (
@@ -74,15 +88,15 @@ const MediaCategorySlider = ({ heading, type, items, loading }) => {
 MediaCategorySlider.defaultProps = {
   heading: '',
   type: '',
-  items: [],
-  loading: [],
+  // items: [],
+  // loading: [],
 };
 
 MediaCategorySlider.propTypes = {
   heading: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   // items: PropTypes.arrayOf(PropTypes.objectOf()),
-  // loading: PropTypes.arrayOf(PropTypes.objectOf({})),
+  // loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf()]),
 };
 
 export default MediaCategorySlider;
