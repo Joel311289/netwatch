@@ -38,6 +38,7 @@ export const isMobileTabletMedium = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS
 export const getWidth = (element) => element ? element.getBoundingClientRect().width : 0;
 export const getHeight = (element) => element ? element.getBoundingClientRect().height : 0;
 export const getSizes = (element) => element ? element.getBoundingClientRect() : {};
+export const getHeightRatio = (width, ratio) => width && !isNaN(width) ? width * ratio : 'auto';
 
 export const sortArrayByKey = (array, key, descending = false) => {
   const arraySorted = array.sort((a, b) => {

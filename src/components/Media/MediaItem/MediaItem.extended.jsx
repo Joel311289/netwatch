@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { truncatedText } from '../../../utils/helpers';
+import { getHeightRatio, truncatedText } from '../../../utils/helpers';
 import styles from './MediaItem.module.css';
 
 const MediaItemExtended = ({ width, ratio, title, date, description, image, onClick, onMouseEnter, onMouseLeave }) => {
@@ -12,7 +12,7 @@ const MediaItemExtended = ({ width, ratio, title, date, description, image, onCl
       onMouseLeave={onMouseLeave}>
       <div 
         className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width, height: width && !isNaN(width) ? width * ratio : 'auto' }}>
+        style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}>
       </div>
 
       <div className={styles.info}>

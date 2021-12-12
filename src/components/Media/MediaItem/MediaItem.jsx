@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { getHeightRatio } from '../../../utils/helpers';
 import styles from './MediaItem.module.css';
 
 const MediaItem = ({ width, ratio, image, onClick, onMouseEnter, onMouseLeave }) => {
@@ -11,7 +12,7 @@ const MediaItem = ({ width, ratio, image, onClick, onMouseEnter, onMouseLeave })
       onMouseLeave={onMouseLeave}>
       <div 
         className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width, height: width && !isNaN(width) ? width * ratio : 'auto' }}>
+        style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}>
       </div>
     </div>
   );
