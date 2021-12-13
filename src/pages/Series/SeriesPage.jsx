@@ -29,13 +29,13 @@ const SeriesPage = () => {
         <MediaHeading text="Más populares"></MediaHeading>
       </div>
 
-      <MediaGrid gap={15} itemsPerRow={5}>
+      <MediaGrid>
         {series && series.map((item) => (
           <MediaItem key={item.id} to={`/series/${item.id}`} ratio={1.5} {...item}></MediaItem>
         ))}
       </MediaGrid>
       
-      <MediaGrid gap={15} itemsPerRow={5}>
+      <MediaGrid>
         {loading && loading.map((index) => (
           <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
         ))}

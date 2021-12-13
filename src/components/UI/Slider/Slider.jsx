@@ -75,7 +75,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
           <SwiperSlide 
             key={index}
             className={styles.item}>
-            {slideWidth && React.cloneElement(element, {...element.props, width: slideWidth})}
+            {Boolean(slideWidth) && React.cloneElement(element, {...element.props, width: slideWidth})}
           </SwiperSlide>
         ))}
       </Swiper>}

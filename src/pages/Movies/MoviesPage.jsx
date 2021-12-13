@@ -29,13 +29,13 @@ const MoviesPage = () => {
         <MediaHeading text="Más populares"></MediaHeading>
       </div>
 
-      <MediaGrid gap={15} itemsPerRow={5}>
+      <MediaGrid>
         {movies && movies.map((item) => (
           <MediaItem key={item.id} to={`/movies/${item.id}`} ratio={1.5} {...item}></MediaItem>
         ))}
       </MediaGrid>
       
-      <MediaGrid gap={15} itemsPerRow={5}>
+      <MediaGrid>
         {loading && loading.map((index) => (
           <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
         ))}
