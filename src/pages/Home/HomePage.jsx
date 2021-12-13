@@ -1,14 +1,18 @@
 import MediaCategorySlider from '../../components/Media/MediaCategorySlider/MediaCategorySlider';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
+import { useBreakpointViewport } from '../../hooks/useBreakpointViewport';
 import { getTrending } from '../../services/get-trending';
 import { getDiscoverMovies } from '../../services/get-discover-movies';
 import { getDiscoverSeries } from '../../services/get-discover-series';
+import { getBreakpointConfigPlaceholders } from '../../utils/helpers';
 import './HomePage.css';
 
 const HomePage = () => {
-  const { data: trendings, loading: loadingTrendings } = useLoadDataPage(() => getTrending(), 8);
-  const { data: movies, loading: loadingMovies } = useLoadDataPage(() => getDiscoverMovies(), 8);
-  const { data: series, loading: loadingSeries } = useLoadDataPage(() => getDiscoverSeries(), 8);
+  const breakpoint = useBreakpointViewport();
+  const itemsPlaceholder = getBreakpointConfigPlaceholders(breakpoint);
+  const { data: trendings, loading: loadingTrendings } = useLoadDataPage(() => getTrending(), itemsPlaceholder);
+  const { data: movies, loading: loadingMovies } = useLoadDataPage(() => getDiscoverMovies(), itemsPlaceholder);
+  const { data: series, loading: loadingSeries } = useLoadDataPage(() => getDiscoverSeries(), itemsPlaceholder);
 
   return (
     <div className="container">

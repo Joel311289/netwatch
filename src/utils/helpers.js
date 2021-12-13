@@ -30,6 +30,7 @@ export const getBreakpoints = () => {
   });
   return breakpoints;
 };
+export const getBreakpointConfigPlaceholders = (breakpoint) => BREAKPOINTS[breakpoint].slidesPerView;
 export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
 export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs;
 export const isMobileTablet = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm].includes(breakpoint);

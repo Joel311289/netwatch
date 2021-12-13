@@ -27,7 +27,7 @@ export const BREAKPOINTS = {
   xxl: {
     width: 1600,
     slidesPerView: 7,
-    spaceBetween: 15,
+    spaceBetween: 20,
   },
 };
 

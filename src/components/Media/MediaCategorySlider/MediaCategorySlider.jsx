@@ -65,7 +65,7 @@ const MediaCategorySlider = ({ heading, type, items, loading }) => {
         <MediaHeading text={heading} to={type ? `/${type}` : ''}></MediaHeading>
       </div>
       <div className={styles.slider} ref={sliderRef} onMouseLeave={onItemMouseLeave}>
-        <Slider>
+        <Slider onPrev={onItemMouseLeave} onNext={onItemMouseLeave}>
           {Array.isArray(items) && items.map((item, index) => (
             <MediaItem key={item.id} ratio={1.5} {...item} onMouseEnter={(e) => onItemMouseEnter(e, index)} />
           ))}

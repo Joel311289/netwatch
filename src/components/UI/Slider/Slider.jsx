@@ -10,23 +10,22 @@ import styles from './Slider.module.css';
 import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
-const Slider = ({ children, navigation }) => {
+const Slider = ({ children, navigation, onPrev, onNext }) => {
   const breakpoint = useBreakpointViewport();
+  const navigationWidth = 40;
   const [focused, setFocused] = useState(false);
   const [slidesPerGroup, setSlidesPerGroup] = useState(1);
   const sliderRef = useRef(null);
   const { width: sliderWidth } = useResize(sliderRef);
   const [slideWidth, setSlideWidth] = useState(0);
-  const [navigationWidth, setNavigationWidth] = useState(0);
-
+  
   useEffect(() => {
     if (sliderWidth) {
       const { slidesPerView, spaceBetween } = getBreakpointConfig(breakpoint);
-      const itemWidth = parseInt(sliderWidth / slidesPerView) - (spaceBetween / 2);
-      
-      setSlideWidth(itemWidth - spaceBetween);
+      const totalWidth = (sliderWidth - 2 * navigationWidth) -  ((slidesPerView - 1) * spaceBetween);
+      const itemWidth = totalWidth / slidesPerView;
+      setSlideWidth(itemWidth);
       setSlidesPerGroup(slidesPerView);
-      setNavigationWidth(sliderWidth - (itemWidth * slidesPerView) + spaceBetween); 
     }
   }, [sliderWidth, breakpoint]);
 
@@ -53,15 +52,23 @@ const Slider = ({ children, navigation }) => {
     lazy: true,
     mousewheel: true,
     slidesPerGroup,
+    slidesOffsetBefore: navigationWidth,
+    slidesOffsetAfter: navigationWidth,
+    onSlidePrevTransitionStart: onPrev,
+    onSlidePrevTransitionEnd: onPrev,
+    onSlideNextTransitionStart: onNext,
+    onSlideNextTransitionEnd: onNext,
   };
 
   return  (
     <div
       ref={sliderRef}
+      style={{ marginLeft: -1 * navigationWidth, width: `calc(100% + ${2 * navigationWidth}px)` }}
       className={styles.wrapper} 
       onMouseEnter={onMouseEnter} 
       onMouseLeave={onMouseLeave}>
-      {Array.isArray(children) && children.length > 0 && <Swiper {...settings}>
+      {Array.isArray(children) && children.length > 0 && 
+      <Swiper {...settings}>
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
@@ -78,10 +85,14 @@ const Slider = ({ children, navigation }) => {
 
 Slider.defaultProps = {
   navigation: true,
+  onPrev: () => {},
+  onNext: () => {},
 };
 
 Slider.propTypes = {
   navigation: PropTypes.bool,
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
 };
 
 export default Slider;
