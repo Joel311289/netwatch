@@ -1,3 +1,8 @@
+export const bps = {
+  mobile: '@media screen and (max-width: 576px)',
+  tablet: '@media screen and (min-width: 768px)',
+};
+
 export const BREAKPOINTS = {
   xs: {
     width: 0,

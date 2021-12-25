@@ -7,6 +7,7 @@
 :root {
   --size-header: 58px;
   --size-max: 1600px;
+  --padding-aside: 50px;
 
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-heading: 'UberMove', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -112,72 +113,4 @@ input,
 link {
   outline: none;
   box-shadow: none;
-}
-
-.heading {
-  font-family: var(--font-heading);
-  width: fit-content;
-  margin: 30px 0;
-}
-
-.sub-heading {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  width: fit-content;
-}
-
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.block {
-  display: block;
-  margin: 20px 0;
-}
-
-.block * {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.flexbox {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.flexbox-space-between {
-  justify-content: space-between;
-}
-
-.skeleton {
-  background: linear-gradient(90deg, rgba(var(--color-skeleton-gradient-1), 1) 25%, rgba(var(--color-skeleton-gradient-2), 0.9) 37%, rgba(var(--color-skeleton-gradient-1), 1) 63%);
-  background-size: 400% 100%;
-  -webkit-animation: placeholderSkeleton 1.4s ease infinite;
-  animation: placeholderSkeleton 1.4s ease infinite;
-}
-
-.skeleton * {
-  color: transparent !important;
-  border-color: transparent !important;
-  cursor: default !important;
-}
-
-@keyframes placeholderSkeleton {
-  0% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0 50%;
-  }
-}
-
-.MuiMenu-paper {
-  pointer-events: all;
-  box-shadow: none !important;
 }

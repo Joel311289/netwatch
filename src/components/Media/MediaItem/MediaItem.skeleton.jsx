@@ -10,12 +10,12 @@ const MediaItemSkeleton = ({ width, ratio }) => {
 };
 
 MediaItemSkeleton.defaultProps = {
-  width: 150,
+  width: 'auto',
   ratio: 1,
 };
 
 MediaItemSkeleton.propTypes = {
-  width: PropTypes.number.isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
 };
 

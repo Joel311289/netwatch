@@ -7,6 +7,7 @@ import HomePage from './pages/Home/HomePage';
 import MoviesPage from './pages/Movies/MoviesPage';
 import SeriesPage from './pages/Series/SeriesPage';
 import Header from './components/Layout/Header/Header';
+import { styles } from './styles/index.js';
 import './App.css';
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
   const breakpoint = useBreakpointViewport();
 
   return (
-    <div className={`App theme-${theme} ${breakpoint}`}>
+    <div className={`App theme-${theme} ${breakpoint} ${styles}`}>
       <Router>
         <header className="App-header">
           <div className="App-container">

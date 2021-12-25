@@ -14,9 +14,9 @@ const MediaGrid = ({ children }) => {
   useEffect(() => {
     if (gridWidth) {
       const totalSpaces = gap * (itemsPerRow - 1);
-      setItemWidth(Math.floor((gridWidth - totalSpaces - 5) / itemsPerRow));
+      setItemWidth((gridWidth - totalSpaces) / itemsPerRow);
     }
-  }, [gridRef, gridWidth]);
+  }, [gridWidth, breakpoint]);
 
   return (
     <div className={styles.wrapper} style={{ gap }} ref={gridRef}>

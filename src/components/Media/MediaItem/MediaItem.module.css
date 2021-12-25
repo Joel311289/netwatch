@@ -8,10 +8,10 @@
 .image {
   box-shadow: var(--box-shadow-primary);
   background-color: rgb(var(--color-skeleton-gradient-1));
-  transition: all 0.2s;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-width: 100%;
 }
 
 .info {
