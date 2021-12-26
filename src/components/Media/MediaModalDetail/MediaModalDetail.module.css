@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  gap: 25px;
+}
+
+.data {
+  width: calc(100% - 240px);
+  color: var(--color-text);
+  position: relative;
+}
+
+.title {
+  color: var(--color-yellow);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.description {
+  opacity: 0.5;
+  font-size: 0.9rem;
+  text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin: 10px 0 20px 0;
+}
+
+.more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

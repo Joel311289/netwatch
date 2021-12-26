@@ -47,6 +47,7 @@
   --placeholder-color: var(--color-disabled);
   --placeholder-hover-color: var(--color-gray-light);
   --skeleton-opacity: 0.15;
+  --backdrop-opacity: 0.6;
 }
 
 .theme-dark {
@@ -64,6 +65,7 @@
   --placeholder-color: var(--color-dark);
   --placeholder-hover-color: var(--color-dark-light);
   --skeleton-opacity: 0.25;
+  --backdrop-opacity: 0.9;
 }
 
 html {

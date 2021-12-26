@@ -16,7 +16,7 @@ const App = () => {
   const breakpoint = useBreakpointViewport();
 
   return (
-    <div className={`App theme-${theme} ${breakpoint} ${styles}`}>
+    <div className={`App theme-${theme} ${styles}`} data-size={breakpoint}>
       <Router>
         <header className="App-header">
           <div className="App-container">

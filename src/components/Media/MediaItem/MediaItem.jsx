@@ -20,21 +20,23 @@ const MediaItem = ({ width, ratio, skeleton, image, title, onClick, onDetail, on
         style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}
         onClick={onClick}
       ></button>
-      <div className={styles.info}>
-        <a className={styles.title} onClick={onClick}>
-          {title}
-        </a>
 
-        <div className={styles.actions} onClick={onTrailer}>
-          <button className={styles.action}>
-            {ActionIcon(<BiPlay />)}
-            <span>Trailer</span>
-          </button>
-          <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
-            {ActionIcon(<BiInfoCircle />)}
-          </button>
+      {title && (
+        <div className={styles.info}>
+          <a className={styles.title} onClick={onClick}>
+            {title}
+          </a>
+          <div className={styles.actions} onClick={onTrailer}>
+            <button className={styles.action}>
+              {ActionIcon(<BiPlay />)}
+              <span>Trailer</span>
+            </button>
+            <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
+              {ActionIcon(<BiInfoCircle />)}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

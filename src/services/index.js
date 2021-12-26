@@ -34,7 +34,7 @@ export const mediaDetailMapper = (media) => {
     id: get(media, 'id'),
     type: get(media, 'media_type'),
     title: get(media, 'title') || get(media, 'name'),
-    original_title: get(media, 'original_name'),
+    original_title: get(media, 'original_name') || get(media, 'original_title'),
     image: `${apiImagesUrl}${get(media, 'poster_path')}`,
     backdrop: `${apiImagesUrl}${get(media, 'backdrop_path')}`,
     video: get(media, 'video'),
