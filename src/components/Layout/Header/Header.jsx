@@ -8,7 +8,11 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
   return (
     <div className={styles.wrapper}>
       <Link to="/" className={styles.brand}>
-        <img className={styles.logo} src={logoUrl || `/assets/images/logo-${theme}.png`} alt="logo"></img>
+        <img
+          className={styles.logo}
+          src={logoUrl || `/assets/images/logo-${theme}.png`}
+          alt="logo"
+        ></img>
         <p className={styles.title}>{title}</p>
       </Link>
 
@@ -25,14 +29,14 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
 Header.defaultProps = {
   title: 'Title',
   theme: '',
-  logoUrl: '',
+  logoUrl: ''
 };
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   logoUrl: PropTypes.string.isRequired,
   theme: PropTypes.string.isRequired,
-  onChangeTheme: PropTypes.func,
+  onChangeTheme: PropTypes.func
 };
 
 export default Header;

@@ -13,7 +13,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     if (data && !loading) {
-      setMovies((prev) => [...prev, ...data].filter(item => Boolean(item)));
+      setMovies((prev) => [...prev, ...data].filter((item) => Boolean(item)));
     }
     if (Array.isArray(loading)) {
       setMovies((prev) => [...prev, ...loading]);
@@ -31,18 +31,19 @@ const MoviesPage = () => {
       </div>
 
       <MediaGrid>
-        {movies && movies.map((item, index) => (
-          <MediaItem 
-            key={index} 
-            ratio={1.5} 
-            skeleton={!item} 
-            {...item || {}} />
-        ))}
+        {movies &&
+          movies.map((item, index) => (
+            <MediaItem key={index} ratio={1.5} skeleton={!item} {...(item || {})} />
+          ))}
       </MediaGrid>
-      
-      {!loading && <div className="block">
-        <Button size="large" onClick={onLoadMore}>Mostrar más</Button>
-      </div>}
+
+      {!loading && (
+        <div className="block">
+          <Button size="large" onClick={onLoadMore}>
+            Mostrar más
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

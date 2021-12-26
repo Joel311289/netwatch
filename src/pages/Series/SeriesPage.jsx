@@ -30,20 +30,24 @@ const SeriesPage = () => {
       </div>
 
       <MediaGrid>
-        {series && series.map((item) => (
-          <MediaItem key={item.id} to={`/series/${item.id}`} ratio={1.5} {...item}></MediaItem>
-        ))}
-      </MediaGrid>
-      
-      <MediaGrid>
-        {loading && loading.map((index) => (
-          <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
-        ))}
+        {series &&
+          series.map((item) => (
+            <MediaItem key={item.id} to={`/series/${item.id}`} ratio={1.5} {...item}></MediaItem>
+          ))}
       </MediaGrid>
 
-      {!loading && <div className="block">
-        <Button size="large" onClick={onLoadMore}>Mostrar más</Button>
-      </div>}
+      <MediaGrid>
+        {loading &&
+          loading.map((index) => <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>)}
+      </MediaGrid>
+
+      {!loading && (
+        <div className="block">
+          <Button size="large" onClick={onLoadMore}>
+            Mostrar más
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

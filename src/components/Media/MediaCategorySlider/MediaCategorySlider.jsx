@@ -5,7 +5,6 @@ import MediaHeading from '../MediaHeading/MediaHeading';
 import MediaItem from '../MediaItem/MediaItem';
 import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
 
-
 const MediaCategorySlider = ({ type, heading, items, loading }) => {
   if (showSkeleton(loading)) {
     return (
@@ -29,26 +28,25 @@ const MediaCategorySlider = ({ type, heading, items, loading }) => {
       </div>
 
       <Slider>
-        {Array.isArray(items) && items.map((item) => 
-          <MediaItem key={item.id} ratio={1.5} {...item} />
-        )}
+        {Array.isArray(items) &&
+          items.map((item) => <MediaItem key={item.id} ratio={1.5} {...item} />)}
       </Slider>
     </>
   );
 };
 
 MediaCategorySlider.defaultProps = {
-  type: '', 
-  heading: '', 
-  items: [], 
-  loading: false,
-}
+  type: '',
+  heading: '',
+  items: [],
+  loading: false
+};
 
 MediaCategorySlider.propTypes = {
-  type: PropTypes.string, 
-  heading: PropTypes.string.isRequired, 
+  type: PropTypes.string,
+  heading: PropTypes.string.isRequired,
   items: PropTypes.array,
-  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-}
+  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
+};
 
 export default MediaCategorySlider;

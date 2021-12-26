@@ -33,11 +33,11 @@ const Grid = ({ children }) => {
 };
 
 Grid.defaultProps = {
-  children: [],
+  children: []
 };
 
 Grid.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.array
 };
 
 export default Grid;

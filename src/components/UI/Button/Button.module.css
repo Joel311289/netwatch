@@ -20,7 +20,7 @@
 }
 
 .wrapper:not([disabled]):hover {
-  opacity: .7; 
+  opacity: 0.7;
 }
 
 .wrapper[disabled] {
@@ -62,5 +62,5 @@
 }
 
 .wrapper.clear:hover {
-  opacity: .5; 
+  opacity: 0.5;
 }

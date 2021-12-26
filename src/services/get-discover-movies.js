@@ -6,13 +6,12 @@ export const getDiscoverMovies = (page = 1) => {
     api_key: apiKey,
     page,
     watch_region: 'ES',
-    language: 'es-ES',
+    language: 'es-ES'
   };
 
-  return axios.get(`${apiUrl}/discover/${apiMediaTypes.MOVIE}`, { params })
-    .then((response) => {
-      const { results } = response.data || {};
-      
-      return results.map(result => mediaDetailMapper(result));
-    });
+  return axios.get(`${apiUrl}/discover/${apiMediaTypes.MOVIE}`, { params }).then((response) => {
+    const { results } = response.data || {};
+
+    return results.map((result) => mediaDetailMapper(result));
+  });
 };

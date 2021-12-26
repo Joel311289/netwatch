@@ -5,9 +5,11 @@ import { BREAKPOINTS, THEMES } from './constants';
 
 // Utils
 
-export const showSkeleton = (skeleton) => (Array.isArray(skeleton) && skeleton.length) || Boolean(skeleton);
+export const showSkeleton = (skeleton) =>
+  (Array.isArray(skeleton) && skeleton.length) || Boolean(skeleton);
 
-export const getThemeMode = (current) => (THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK);
+export const getThemeMode = (current) =>
+  THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK;
 
 export const getDeviceBreakpoint = (width) => {
   if (width < BREAKPOINTS.sm.width) {
@@ -32,16 +34,18 @@ export const getBreakpoints = () => {
   });
   return breakpoints;
 };
-export const getBreakpointConfigPlaceholders = (breakpoint) => BREAKPOINTS[breakpoint].slidesPerView;
+export const getBreakpointConfigPlaceholders = (breakpoint) =>
+  BREAKPOINTS[breakpoint].slidesPerView;
 export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
 export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs;
 export const isMobileTablet = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm].includes(breakpoint);
-export const isMobileTabletMedium = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
+export const isMobileTabletMedium = (breakpoint) =>
+  [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
 
-export const getWidth = (element) => element ? element.getBoundingClientRect().width : 0;
-export const getHeight = (element) => element ? element.getBoundingClientRect().height : 0;
-export const getSizes = (element) => element ? element.getBoundingClientRect() : {};
-export const getHeightRatio = (width, ratio) => width && !isNaN(width) ? width * ratio : 'auto';
+export const getWidth = (element) => (element ? element.getBoundingClientRect().width : 0);
+export const getHeight = (element) => (element ? element.getBoundingClientRect().height : 0);
+export const getSizes = (element) => (element ? element.getBoundingClientRect() : {});
+export const getHeightRatio = (width, ratio) => (width && !isNaN(width) ? width * ratio : 'auto');
 
 export const sortArrayByKey = (array, key, descending = false) => {
   const arraySorted = array.sort((a, b) => {
@@ -54,7 +58,8 @@ export const sortArrayByKey = (array, key, descending = false) => {
 
 export const getEmptyArray = (size, content = null) => Array(size).fill(content);
 
-export const isEmptyArray = (array) => (Array.isArray(array) && array.length > 0 ? !array.find((item) => Boolean(item)) : true);
+export const isEmptyArray = (array) =>
+  Array.isArray(array) && array.length > 0 ? !array.find((item) => Boolean(item)) : true;
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 

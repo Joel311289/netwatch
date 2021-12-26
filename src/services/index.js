@@ -9,7 +9,7 @@ export const apiMediaTypes = {
   ALL: 'all',
   MOVIE: 'movie',
   SERIE: 'tv',
-  PERSONA: 'person',
+  PERSONA: 'person'
 };
 
 const SERIE_NETWORK_IDS_SUPPORTED = [
@@ -20,7 +20,7 @@ const SERIE_NETWORK_IDS_SUPPORTED = [
   2739, // Disney +
   3744, // Atresplayer Premium
   5081, // Movistar Play
-  3980, // Mitele
+  3980 // Mitele
 ];
 
 export const getNetworksSupported = () => SERIE_NETWORK_IDS_SUPPORTED.join('|');
@@ -47,6 +47,6 @@ export const mediaDetailMapper = (media) => {
     vote_count: get(media, 'vote_count'),
     vote_average: get(media, 'vote_average'),
     genre_ids: get(media, 'genre_ids'),
-    adult: get(media, 'adult'),
+    adult: get(media, 'adult')
   };
 };

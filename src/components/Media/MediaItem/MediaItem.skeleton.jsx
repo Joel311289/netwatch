@@ -15,17 +15,17 @@ const MediaItemSkeleton = ({ width, ratio }) => {
         <Skeleton variant="action" width={100} />
       </div>
     </div>
-  )
+  );
 };
 
 MediaItemSkeleton.defaultProps = {
   width: 'auto',
-  ratio: 1,
+  ratio: 1
 };
 
 MediaItemSkeleton.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  ratio: PropTypes.number,
+  ratio: PropTypes.number
 };
 
 export default MediaItemSkeleton;

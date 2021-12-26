@@ -12,8 +12,8 @@ export const FavoritesContextProvider = ({ children }) => {
       {children}
     </FavoritesContext.Provider>
   );
-}
+};
 
 FavoritesContextProvider.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.array
 };

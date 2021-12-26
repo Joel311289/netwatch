@@ -9,14 +9,23 @@ import MediaCategorySlider from '../../components/Media/MediaCategorySlider/Medi
 const HomePage = () => {
   const breakpoint = useBreakpointViewport();
   const itemsPlaceholder = getBreakpointConfigPlaceholders(breakpoint);
-  const { data: trendings, loading: loadingTrendings } = useLoadDataPage(() => getTrending(), itemsPlaceholder);
-  const { data: movies, loading: loadingMovies } = useLoadDataPage(() => getDiscoverMovies(), itemsPlaceholder);
-  const { data: series, loading: loadingSeries } = useLoadDataPage(() => getDiscoverSeries(), itemsPlaceholder);
+  const { data: trendings, loading: loadingTrendings } = useLoadDataPage(
+    () => getTrending(),
+    itemsPlaceholder
+  );
+  const { data: movies, loading: loadingMovies } = useLoadDataPage(
+    () => getDiscoverMovies(),
+    itemsPlaceholder
+  );
+  const { data: series, loading: loadingSeries } = useLoadDataPage(
+    () => getDiscoverSeries(),
+    itemsPlaceholder
+  );
 
   const categories = [
     { heading: 'Tendencias hoy', items: trendings, loading: loadingTrendings },
     { type: 'movies', heading: 'Películas populares', items: movies, loading: loadingMovies },
-    { type: 'series', heading: 'Series populares', items: series, loading: loadingSeries },
+    { type: 'series', heading: 'Series populares', items: series, loading: loadingSeries }
   ];
 
   return (

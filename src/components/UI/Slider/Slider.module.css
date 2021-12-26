@@ -31,7 +31,11 @@
 }
 
 .button-prev:not(.button-navigation-disabled) {
-  background-image: linear-gradient(to left, rgba(255,255,255,0) 0%, var(--background-color) 100%);
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0) 0%,
+    var(--background-color) 100%
+  );
 }
 
 .button-next {
@@ -40,7 +44,11 @@
 }
 
 .button-next:not(.button-navigation-disabled) {
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, var(--background-color) 100%);
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    var(--background-color) 100%
+  );
 }
 
 .button-navigation-disabled {

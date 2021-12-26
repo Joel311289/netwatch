@@ -18,11 +18,11 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
   const sliderRef = useRef(null);
   const { width: sliderWidth } = useResize(sliderRef);
   const [slideWidth, setSlideWidth] = useState(0);
-  
+
   useEffect(() => {
     if (sliderWidth) {
       const { slidesPerView, spaceBetween } = getBreakpointConfig(breakpoint);
-      const totalWidth = (sliderWidth - 2 * navigationWidth) -  ((slidesPerView - 1) * spaceBetween);
+      const totalWidth = sliderWidth - 2 * navigationWidth - (slidesPerView - 1) * spaceBetween;
       const itemWidth = totalWidth / slidesPerView;
       setSlideWidth(itemWidth);
       setSlidesPerGroup(slidesPerView);
@@ -31,7 +31,10 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
 
   const renderNavigationButton = (state, icon) => {
     return (
-      <div className={`${styles['button-navigation']} ${styles['button-' + state]}`} style={{ width: navigationWidth }}>
+      <div
+        className={`${styles['button-navigation']} ${styles['button-' + state]}`}
+        style={{ width: navigationWidth }}
+      >
         {focused && icon}
       </div>
     );
@@ -47,7 +50,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
       nextEl: `.${styles['button-next']}`,
-      disabledClass: styles['button-navigation-disabled'],
+      disabledClass: styles['button-navigation-disabled']
     },
     lazy: true,
     mousewheel: true,
@@ -57,28 +60,29 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
     onSlidePrevTransitionStart: onPrev,
     onSlidePrevTransitionEnd: onPrev,
     onSlideNextTransitionStart: onNext,
-    onSlideNextTransitionEnd: onNext,
+    onSlideNextTransitionEnd: onNext
   };
 
-  return  (
+  return (
     <div
       ref={sliderRef}
       style={{ marginLeft: -1 * navigationWidth, width: `calc(100% + ${2 * navigationWidth}px)` }}
-      className={styles.wrapper} 
-      onMouseEnter={onMouseEnter} 
-      onMouseLeave={onMouseLeave}>
-      {Array.isArray(children) && children.length > 0 && 
-      <Swiper {...settings}>
-        {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
-        {navigation && renderNavigationButton('next', <FiChevronRight />)}
-        {children.map((element, index) => (
-          <SwiperSlide 
-            key={index}
-            className={styles.item}>
-            {Boolean(slideWidth) && React.cloneElement(element, {...element.props, width: slideWidth})}
-          </SwiperSlide>
-        ))}
-      </Swiper>}
+      className={styles.wrapper}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {Array.isArray(children) && children.length > 0 && (
+        <Swiper {...settings}>
+          {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
+          {navigation && renderNavigationButton('next', <FiChevronRight />)}
+          {children.map((element, index) => (
+            <SwiperSlide key={index} className={styles.item}>
+              {Boolean(slideWidth) &&
+                React.cloneElement(element, { ...element.props, width: slideWidth })}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 };
@@ -86,14 +90,14 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
 Slider.defaultProps = {
   navigation: true,
   onPrev: () => {},
-  onNext: () => {},
+  onNext: () => {}
 };
 
 Slider.propTypes = {
   children: PropTypes.array,
   navigation: PropTypes.bool,
   onPrev: PropTypes.func,
-  onNext: PropTypes.func,
+  onNext: PropTypes.func
 };
 
 export default Slider;

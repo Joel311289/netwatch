@@ -5,11 +5,7 @@ import { getHeightRatio, showSkeleton } from '../../../utils/helpers';
 import styles from './MediaItem.module.css';
 
 const ActionIcon = (icon) => {
-  return (
-    <div className={styles.icon}>
-      {icon}
-    </div>
-  );
+  return <div className={styles.icon}>{icon}</div>;
 };
 
 const MediaItem = ({ width, ratio, skeleton, image, title, onClick, onDetail, onTrailer }) => {
@@ -19,14 +15,16 @@ const MediaItem = ({ width, ratio, skeleton, image, title, onClick, onDetail, on
 
   return (
     <div className={styles.wrapper} style={{ width }}>
-      <button 
+      <button
         className={styles.image}
         style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}
-        onClick={onClick}>
-      </button>
+        onClick={onClick}
+      ></button>
       <div className={styles.info}>
-        <a className={styles.title} onClick={onClick}>{title}</a>
-        
+        <a className={styles.title} onClick={onClick}>
+          {title}
+        </a>
+
         <div className={styles.actions} onClick={onTrailer}>
           <button className={styles.action}>
             {ActionIcon(<BiPlay />)}
@@ -45,7 +43,7 @@ MediaItem.defaultProps = {
   skeleton: false,
   width: 'auto',
   ratio: 1,
-  image: '',
+  image: ''
 };
 
 MediaItem.propTypes = {
@@ -56,7 +54,7 @@ MediaItem.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,
   onDetail: PropTypes.func,
-  onTrailer: PropTypes.func,
+  onTrailer: PropTypes.func
 };
 
 export default MediaItem;

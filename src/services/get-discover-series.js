@@ -7,13 +7,12 @@ export const getDiscoverSeries = (page = 1, with_networks = getNetworksSupported
     with_networks,
     page,
     watch_region: 'ES',
-    language: 'es-ES',
+    language: 'es-ES'
   };
 
-  return axios.get(`${apiUrl}/discover/${apiMediaTypes.SERIE}`, { params })
-    .then((response) => {
-      const { results } = response.data || {};
-      
-      return results.map(result => mediaDetailMapper(result));
-    });
+  return axios.get(`${apiUrl}/discover/${apiMediaTypes.SERIE}`, { params }).then((response) => {
+    const { results } = response.data || {};
+
+    return results.map((result) => mediaDetailMapper(result));
+  });
 };

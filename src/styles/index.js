@@ -7,4 +7,3 @@ export const styles = css`
     --padding-aside: 20px;
   }
 `;
-

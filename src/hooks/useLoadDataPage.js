@@ -13,9 +13,12 @@ export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
     };
   }, []);
 
-
   useEffect(() => {
-    setData({ data: null, loading: itemsPerPage ? getEmptyArray(itemsPerPage, null) : [], error: false });
+    setData({
+      data: null,
+      loading: itemsPerPage ? getEmptyArray(itemsPerPage, null) : [],
+      error: false
+    });
 
     fetchDataCallback()
       .then((response) => {
@@ -23,7 +26,7 @@ export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
           setData({
             data: response,
             loading: false,
-            error: false,
+            error: false
           });
         }
       })
@@ -31,7 +34,7 @@ export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
         setData({
           data: [],
           loading: false,
-          error: 'No se pudo cargar la info',
+          error: 'No se pudo cargar la info'
         });
       });
   }, [page]);

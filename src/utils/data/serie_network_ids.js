@@ -3115,5 +3115,5 @@ export const SERIE_NETWORK_IDS = [
   { id: 5464, name: 'COZI TV' },
   { id: 5465, name: 'Disney Channel Asia' },
   { id: 5466, name: 'T-Rex' },
-  { id: 5467, name: 'DIA TV PLUS' },
+  { id: 5467, name: 'DIA TV PLUS' }
 ];

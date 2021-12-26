@@ -14,7 +14,7 @@ const MediaHeading = ({ skeleton, text, to }) => {
   );
 
   if (showSkeleton(skeleton)) {
-    return <Skeleton variant="heading" width={200} />
+    return <Skeleton variant="heading" width={200} />;
   }
 
   return (
@@ -29,13 +29,13 @@ const MediaHeading = ({ skeleton, text, to }) => {
 MediaHeading.defaultProps = {
   skeleton: false,
   text: '',
-  to: '',
+  to: ''
 };
 
 MediaHeading.propTypes = {
   skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   text: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
 };
 
 export default MediaHeading;

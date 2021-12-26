@@ -5,16 +5,17 @@ import classNames from 'classnames/bind';
 const Button = ({ children, size, secondary, rounded, clear, disabled, onClick }) => {
   const classes = classNames.bind(styles)({
     [size]: size || undefined,
-    'clear': clear,
-    'rounded': rounded,
-    'secondary': secondary,
+    clear: clear,
+    rounded: rounded,
+    secondary: secondary
   });
 
   return (
-    <button 
+    <button
       className={`${styles.wrapper} ${classes}`}
-      onClick={onClick} 
-      disabled={Boolean(disabled)}>
+      onClick={onClick}
+      disabled={Boolean(disabled)}
+    >
       {children}
     </button>
   );
@@ -25,7 +26,7 @@ Button.defaultProps = {
   secondary: false,
   clear: false,
   rounded: false,
-  disabled: false,
+  disabled: false
 };
 
 Button.propTypes = {
@@ -35,7 +36,7 @@ Button.propTypes = {
   clear: PropTypes.bool,
   rounded: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 
 export default Button;

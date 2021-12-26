@@ -14,5 +14,5 @@ export const ContainerContextProvider = ({ children }) => {
 };
 
 ContainerContextProvider.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.object
 };

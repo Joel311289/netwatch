@@ -104,7 +104,7 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
 }
 
-ul, 
+ul,
 li {
   padding: 0 !important;
 }

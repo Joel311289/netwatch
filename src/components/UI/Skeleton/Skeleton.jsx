@@ -11,25 +11,32 @@ const Skeleton = ({ width, height, variant }) => {
       case 'action':
         return 25;
       case 'text':
-        return 20;    
+        return 20;
       default:
         return height;
     }
   }, [variant]);
 
-  return <SkeletonMUI className={`${styles.skeleton} ${styles[variant]}`} animation="wave" width={width} height={getHeight} />;
+  return (
+    <SkeletonMUI
+      className={`${styles.skeleton} ${styles[variant]}`}
+      animation="wave"
+      width={width}
+      height={getHeight}
+    />
+  );
 };
 
 Skeleton.defaultProps = {
   width: 'auto',
   height: 'auto',
-  variant: '',
+  variant: ''
 };
 
 Skeleton.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  variant: PropTypes.oneOf(['heading', 'text', 'action', 'default', '']),
+  variant: PropTypes.oneOf(['heading', 'text', 'action', 'default', ''])
 };
 
 export default Skeleton;

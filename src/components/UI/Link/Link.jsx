@@ -12,12 +12,12 @@ const Link = ({ children, to }) => {
 
 Link.defaultProps = {
   children: [],
-  to: '',
+  to: ''
 };
 
 Link.propTypes = {
   children: PropTypes.array,
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired
 };
 
 export default Link;

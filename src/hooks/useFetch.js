@@ -21,7 +21,7 @@ export const useFetch = (url, delay = 500) => {
             setState({
               loading: false,
               error: null,
-              data,
+              data
             });
           }, delay);
         }
@@ -30,7 +30,7 @@ export const useFetch = (url, delay = 500) => {
         setState({
           data: null,
           loading: false,
-          error: 'No se pudo cargar la info',
+          error: 'No se pudo cargar la info'
         });
       });
   }, [url, delay]);
