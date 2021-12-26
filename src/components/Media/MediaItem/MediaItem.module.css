@@ -56,6 +56,11 @@
   justify-content: center;
 }
 
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
 .action {
   color: var(--color-text);
   background-color: transparent;
@@ -63,17 +68,12 @@
   height: 24px;
   padding: 5px 10px 5px 2px;
 }
+.action:hover {
+  background-color: var(--placeholder-hover-color);
+  color: var(--color-yellow);
+}
 .action.circle {
   padding: 5px;
   border-radius: 50%;
   max-width: 24px;
-}
-
-.action:hover {
-  background-color: var(--placeholder-hover-color);
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
 }

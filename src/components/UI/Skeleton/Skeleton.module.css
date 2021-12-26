@@ -1,5 +1,6 @@
 .skeleton {
   transform: none !important;
+  background-color: rgba(0, 0, 0, var(--skeleton-opacity)) !important;
   border-radius: 3px !important;
 }
 
