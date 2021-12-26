@@ -1,0 +1,14 @@
+.skeleton {
+  transform: none !important;
+  border-radius: 3px !important;
+}
+
+.skeleton.text + .skeleton.text {
+  margin-top: 5px;
+}
+
+.skeleton * {
+  color: transparent !important;
+  border-color: transparent !important;
+  cursor: default !important;
+}

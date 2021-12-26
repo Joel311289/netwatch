@@ -6,7 +6,7 @@
 
 :root {
   --size-header: 58px;
-  --size-max: 1600px;
+  --size-max: 1500px;
   --padding-aside: 50px;
 
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -21,6 +21,7 @@
   --color-disabled: #f0f0f0;
   --color-medium: #1d1f20;
   --color-dark: #000000;
+  --color-dark-light: #2f2f2f;
   --color-white: #ffffff;
   --color-yellow: #f8ab00;
   --color-yellow-dark: #c08400;
@@ -42,6 +43,8 @@
   --background-color: var(--color-white);
   --background-color-rgb: 255, 255, 255;
   --background-header-color: var(--color-yellow);
+  --placeholder-color: var(--color-disabled);
+  --placeholder-hover-color: var(--color-gray-light);
 }
 
 .theme-dark {
@@ -56,6 +59,8 @@
   --background-color: var(--color-medium);
   --background-color-rgb: 29, 31, 32;
   --background-header-color: var(--color-dark);
+  --placeholder-color: var(--color-dark);
+  --placeholder-hover-color: var(--color-dark-light);
 }
 
 html {
@@ -99,18 +104,29 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--thumbBG);
 }
 
-a {
-  text-decoration: none;
-}
-
 ul, 
 li {
   padding: 0 !important;
 }
 
-button,
-input,
-link {
+input {
   outline: none;
   box-shadow: none;
+}
+
+button {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
 }

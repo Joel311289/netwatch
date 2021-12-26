@@ -5,6 +5,8 @@ import { BREAKPOINTS, THEMES } from './constants';
 
 // Utils
 
+export const showSkeleton = (skeleton) => (Array.isArray(skeleton) && skeleton.length) || Boolean(skeleton);
+
 export const getThemeMode = (current) => (THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK);
 
 export const getDeviceBreakpoint = (width) => {

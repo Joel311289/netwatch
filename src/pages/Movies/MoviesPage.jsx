@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import MediaGrid from '../../components/UI/Grid/Grid';
 import MediaItem from '../../components/Media/MediaItem/MediaItem';
-import MediaItemSkeleton from '../../components/Media/MediaItem/MediaItem.skeleton';
 import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
@@ -14,10 +13,13 @@ const MoviesPage = () => {
   const { data, loading } = useLoadDataPage(() => getDiscoverMovies(page), 20, page);
 
   useEffect(() => {
-    if (data) {
-      setMovies((prev) => [...prev, ...data]);
+    if (data && !loading) {
+      setMovies((prev) => [...prev, ...data].filter(item => Boolean(item)));
     }
-  }, [data]);
+    if (Array.isArray(loading)) {
+      setMovies((prev) => [...prev, ...loading]);
+    }
+  }, [data, loading]);
 
   const onLoadMore = () => setPage((prev) => prev + 1);
 
@@ -30,17 +32,15 @@ const MoviesPage = () => {
       </div>
 
       <MediaGrid>
-        {movies && movies.map((item) => (
-          <MediaItem key={item.id} to={`/movies/${item.id}`} ratio={1.5} {...item}></MediaItem>
+        {movies && movies.map((item, index) => (
+          <MediaItem 
+            key={index} 
+            ratio={1.5} 
+            skeleton={!Boolean(item)} 
+            {...item || {}} />
         ))}
       </MediaGrid>
       
-      <MediaGrid>
-        {loading && loading.map((index) => (
-          <MediaItemSkeleton key={index} ratio={1.5}></MediaItemSkeleton>
-        ))}
-      </MediaGrid>
-
       {!loading && <div className="block">
         <Button size="large" onClick={onLoadMore}>Mostrar más</Button>
       </div>}

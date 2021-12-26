@@ -13,7 +13,7 @@ export const BREAKPOINTS = {
   sm: {
     width: 576,
     slidesPerView: 3,
-    itemsPerRow: 2,
+    itemsPerRow: 3,
     spaceBetween: 15,
   },
   md: {
@@ -25,19 +25,19 @@ export const BREAKPOINTS = {
   lg: {
     width: 992,
     slidesPerView: 5,
-    itemsPerRow: 4,
+    itemsPerRow: 5,
     spaceBetween: 15,
   },
   xl: {
     width: 1200,
     slidesPerView: 6,
-    itemsPerRow: 5,
+    itemsPerRow: 6,
     spaceBetween: 20,
   },
   xxl: {
     width: 1600,
     slidesPerView: 7,
-    itemsPerRow: 5,
+    itemsPerRow: 7,
     spaceBetween: 20,
   },
 };

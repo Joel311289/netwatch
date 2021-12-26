@@ -15,7 +15,7 @@ export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
 
 
   useEffect(() => {
-    setData({ data: null, loading: itemsPerPage ? getEmptyArray(itemsPerPage, {}) : [], error: false });
+    setData({ data: null, loading: itemsPerPage ? getEmptyArray(itemsPerPage, null) : [], error: false });
 
     fetchDataCallback()
       .then((response) => {
