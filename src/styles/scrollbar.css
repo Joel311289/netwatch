@@ -1,0 +1,17 @@
+/* Firefox */
+html,
+.App {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG2);
+}
+
+/* Other Browser */
+.App::-webkit-scrollbar {
+  width: 0.4rem;
+}
+.App::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.App::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+}

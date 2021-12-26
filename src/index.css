@@ -28,6 +28,7 @@
   --color-black-gradient: 50, 50, 50;
 
   --scrollbarBG: var(--color-gray);
+  --scrollbarBG2: var(--color-gray-light);
   --thumbBG: var(--color-yellow);
 }
 
@@ -83,27 +84,6 @@ body {
   padding: 0 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/*! Firefox */
-html,
-body {
-  scrollbar-color: var(--scrollbarBG) var(--thumbBG);
-}
-
-/*! Other Browser */
-body::-webkit-scrollbar {
-  width: 0.35rem;
-}
-body {
-  scrollbar-width: thin;
-  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-}
-body::-webkit-scrollbar-track {
-  background: var(--scrollbarBG);
-}
-body::-webkit-scrollbar-thumb {
-  background-color: var(--thumbBG);
 }
 
 ul,
