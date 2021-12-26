@@ -29,6 +29,7 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   size: PropTypes.string.isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,

@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const ContainerContext = createContext({});
 
@@ -10,4 +11,8 @@ export const ContainerContextProvider = ({ children }) => {
       {children}
     </ContainerContext.Provider>
   );
+};
+
+ContainerContextProvider.propTypes = {
+  children: PropTypes.object,
 };

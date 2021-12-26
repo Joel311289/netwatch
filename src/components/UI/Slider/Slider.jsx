@@ -90,6 +90,7 @@ Slider.defaultProps = {
 };
 
 Slider.propTypes = {
+  children: PropTypes.array,
   navigation: PropTypes.bool,
   onPrev: PropTypes.func,
   onNext: PropTypes.func,

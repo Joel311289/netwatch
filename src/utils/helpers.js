@@ -54,7 +54,7 @@ export const sortArrayByKey = (array, key, descending = false) => {
 
 export const getEmptyArray = (size, content = null) => Array(size).fill(content);
 
-export const isEmptyArray = (array) => (Array.isArray(array) && array.length > 0 ? !Boolean(array.find((item) => Boolean(item))) : true);
+export const isEmptyArray = (array) => (Array.isArray(array) && array.length > 0 ? !array.find((item) => Boolean(item)) : true);
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { showSkeleton } from '../../../utils/helpers';
 import Slider from '../../UI/Slider/Slider';
 import MediaHeading from '../MediaHeading/MediaHeading';
@@ -35,5 +36,19 @@ const MediaCategorySlider = ({ type, heading, items, loading }) => {
     </>
   );
 };
+
+MediaCategorySlider.defaultProps = {
+  type: '', 
+  heading: '', 
+  items: [], 
+  loading: false,
+}
+
+MediaCategorySlider.propTypes = {
+  type: PropTypes.string, 
+  heading: PropTypes.string.isRequired, 
+  items: PropTypes.array,
+  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+}
 
 export default MediaCategorySlider;

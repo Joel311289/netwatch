@@ -11,10 +11,12 @@ const Link = ({ children, to }) => {
 };
 
 Link.defaultProps = {
+  children: [],
   to: '',
 };
 
 Link.propTypes = {
+  children: PropTypes.array,
   to: PropTypes.string.isRequired,
 };
 

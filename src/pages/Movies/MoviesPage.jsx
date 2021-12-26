@@ -5,7 +5,6 @@ import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getDiscoverMovies } from '../../services/get-discover-movies';
-import './MoviesPage.css';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -36,7 +35,7 @@ const MoviesPage = () => {
           <MediaItem 
             key={index} 
             ratio={1.5} 
-            skeleton={!Boolean(item)} 
+            skeleton={!item} 
             {...item || {}} />
         ))}
       </MediaGrid>

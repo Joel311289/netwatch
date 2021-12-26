@@ -1,9 +1,10 @@
 import { createContext } from 'react';
+import PropTypes from 'prop-types';
 import { useFavorites } from '../hooks/useFavorites';
 
 export const FavoritesContext = createContext({});
 
-export const FavoritesContextProvider = ({ children, id }) => {
+export const FavoritesContextProvider = ({ children }) => {
   const { favorites, isFavorite, add, remove } = useFavorites();
 
   return (
@@ -12,3 +13,7 @@ export const FavoritesContextProvider = ({ children, id }) => {
     </FavoritesContext.Provider>
   );
 }
+
+FavoritesContextProvider.propTypes = {
+  children: PropTypes.array,
+};

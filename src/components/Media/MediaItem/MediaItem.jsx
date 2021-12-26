@@ -49,10 +49,14 @@ MediaItem.defaultProps = {
 };
 
 MediaItem.propTypes = {
-  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.any)]),
+  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
   image: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  onClick: PropTypes.func,
+  onDetail: PropTypes.func,
+  onTrailer: PropTypes.func,
 };
 
 export default MediaItem;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, MutableRefObject } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const useFetch = (url, delay = 500) => {
   const isMounted = useRef(true);

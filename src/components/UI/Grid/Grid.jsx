@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '../../../hooks/useBreakpointViewport';
 import { useResize } from '../../../hooks/useResize';
 import { getBreakpointConfig } from '../../../utils/helpers';
 import styles from './Grid.module.css';
 
-const MediaGrid = ({ children }) => {
+const Grid = ({ children }) => {
   const breakpoint = useBreakpointViewport();
   const { spaceBetween: gap, itemsPerRow } = getBreakpointConfig(breakpoint);
   const [itemWidth, setItemWidth] = useState(null);
@@ -31,4 +32,12 @@ const MediaGrid = ({ children }) => {
   );
 };
 
-export default MediaGrid;
+Grid.defaultProps = {
+  children: [],
+};
+
+Grid.propTypes = {
+  children: PropTypes.array,
+};
+
+export default Grid;
