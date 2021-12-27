@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { useDetailModal } from '../../../hooks/useDetailModal';
-import { showSkeleton } from '../../../utils/helpers';
 import Slider from '../../UI/Slider/Slider';
 import MediaHeading from '../MediaHeading/MediaHeading';
 import MediaItem from '../MediaItem/MediaItem';
 import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
+import { routeMediaDetail } from '../../../services';
+import { showSkeleton } from '../../../utils/helpers';
 
 const MediaCategorySlider = ({ type, heading, items, loading }) => {
   const { onModalOpen, ModalDetail } = useDetailModal();
@@ -35,7 +36,13 @@ const MediaCategorySlider = ({ type, heading, items, loading }) => {
 
         <Slider>
           {items.map((item) => (
-            <MediaItem key={item.id} ratio={1.5} onDetail={() => onModalOpen(item)} {...item} />
+            <MediaItem
+              key={item.id}
+              to={routeMediaDetail(item)}
+              ratio={1.5}
+              onDetail={() => onModalOpen(item)}
+              {...item}
+            />
           ))}
         </Slider>
 

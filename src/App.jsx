@@ -7,6 +7,7 @@ import HomePage from './pages/Home/HomePage';
 import MoviesPage from './pages/Movies/MoviesPage';
 import SeriesPage from './pages/Series/SeriesPage';
 import Header from './components/Layout/Header/Header';
+import { mediaTypes } from './services/index';
 import { styles } from './styles/index.js';
 import './App.css';
 
@@ -28,8 +29,8 @@ const App = () => {
           <div className="App-container App-content">
             <Switch>
               <Route component={HomePage} path="/home" />
-              <Route component={MoviesPage} path="/movies" />
-              <Route component={SeriesPage} path="/series" />
+              <Route component={MoviesPage} path={`/${mediaTypes.movie}`} />
+              <Route component={SeriesPage} path={`/${mediaTypes.tv}`} />
               <Redirect to="/home" />
             </Switch>
           </div>

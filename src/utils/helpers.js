@@ -47,6 +47,11 @@ export const getHeight = (element) => (element ? element.getBoundingClientRect()
 export const getSizes = (element) => (element ? element.getBoundingClientRect() : {});
 export const getHeightRatio = (width, ratio) => (width && !isNaN(width) ? width * ratio : 'auto');
 
+export const intersectionArrays = (array1, array2) =>
+  array1.filter((value) => array2.includes(value));
+
+export const diferenceArrays = (array1, array2) => array1.filter((x) => !array2.includes(x));
+
 export const sortArrayByKey = (array, key, descending = false) => {
   const arraySorted = array.sort((a, b) => {
     const x = a[key];

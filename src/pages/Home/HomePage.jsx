@@ -5,27 +5,33 @@ import { getTrending } from '../../services/get-trending';
 import { getDiscoverMovies } from '../../services/get-discover-movies';
 import { getDiscoverSeries } from '../../services/get-discover-series';
 import { getBreakpointConfigPlaceholders } from '../../utils/helpers';
+import { mediaTypes } from '../../services/index';
 
 const HomePage = () => {
   const breakpoint = useBreakpointViewport();
   const itemsPlaceholder = getBreakpointConfigPlaceholders(breakpoint);
   const { data: trendings, loading: loadingTrendings } = useLoadDataPage(
-    () => getTrending(),
+    getTrending,
     itemsPlaceholder
   );
   const { data: movies, loading: loadingMovies } = useLoadDataPage(
-    () => getDiscoverMovies(),
+    getDiscoverMovies,
     itemsPlaceholder
   );
   const { data: series, loading: loadingSeries } = useLoadDataPage(
-    () => getDiscoverSeries(),
+    getDiscoverSeries,
     itemsPlaceholder
   );
 
   const categories = [
     { heading: 'Tendencias hoy', items: trendings, loading: loadingTrendings },
-    { type: 'movies', heading: 'Películas populares', items: movies, loading: loadingMovies },
-    { type: 'series', heading: 'Series populares', items: series, loading: loadingSeries }
+    {
+      type: mediaTypes.movie,
+      heading: 'Películas populares',
+      items: movies,
+      loading: loadingMovies
+    },
+    { type: mediaTypes.tv, heading: 'Series populares', items: series, loading: loadingSeries }
   ];
 
   return (

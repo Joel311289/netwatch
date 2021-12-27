@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { BiInfoCircle, BiPlay } from 'react-icons/bi';
 import MediaItemSkeleton from './MediaItem.skeleton';
@@ -8,24 +9,25 @@ const ActionIcon = (icon) => {
   return <div className={styles.icon}>{icon}</div>;
 };
 
-const MediaItem = ({ width, ratio, skeleton, image, title, onClick, onDetail, onTrailer }) => {
+const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrailer }) => {
   if (showSkeleton(skeleton)) {
     return <MediaItemSkeleton width={width} ratio={ratio} />;
   }
 
   return (
     <div className={styles.wrapper} style={{ width }}>
-      <button
-        className={styles.image}
-        style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}
-        onClick={onClick}
-      ></button>
+      <Link to={to}>
+        <div
+          className={styles.image}
+          style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}
+        ></div>
+      </Link>
 
       {title && (
         <div className={styles.info}>
-          <a className={styles.title} onClick={onClick}>
-            {title}
-          </a>
+          <Link to={to}>
+            <span className={styles.title}>{title}</span>
+          </Link>
           <div className={styles.actions} onClick={onTrailer}>
             <button className={styles.action}>
               {ActionIcon(<BiPlay />)}
@@ -44,8 +46,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, onClick, onDetail, on
 MediaItem.defaultProps = {
   skeleton: false,
   width: 'auto',
-  ratio: 1,
-  image: ''
+  ratio: 1
 };
 
 MediaItem.propTypes = {
@@ -54,7 +55,7 @@ MediaItem.propTypes = {
   ratio: PropTypes.number,
   image: PropTypes.string.isRequired,
   title: PropTypes.string,
-  onClick: PropTypes.func,
+  to: PropTypes.string,
   onDetail: PropTypes.func,
   onTrailer: PropTypes.func
 };

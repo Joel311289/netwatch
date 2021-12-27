@@ -11,12 +11,12 @@ export const apiMediaTypes = {
   SERIE: 'tv',
   PERSONA: 'person'
 };
-
-const mediaTypes = {
+export const mediaTypes = {
   movie: 'movies',
   tv: 'series',
   person: 'persons'
 };
+
 const SERIE_NETWORK_IDS_SUPPORTED = [
   213, // Netflix
   3186, // HBO Max
@@ -28,32 +28,55 @@ const SERIE_NETWORK_IDS_SUPPORTED = [
   3980 // Mitele
 ];
 
-export const getMediaType = (type) => type ? mediaTypes[type] : '';
+export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
+export const isMediaSerie = (media) =>
+  Object.prototype.hasOwnProperty.call(media, 'first_air_date');
+
+export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
 export const getNetworksSupported = () => SERIE_NETWORK_IDS_SUPPORTED.join('|');
+
+export const routeMediaDetail = (media) => (media ? `/${media.type}/${media.id}` : '');
 
 export const mediaDetailMapper = (media) => {
   if (!media) {
     return {};
   }
 
-  return {
+  const commonData = {
     id: get(media, 'id'),
-    type: getMediaType(get(media, 'media_type')),
-    title: get(media, 'title') || get(media, 'name'),
-    original_title: get(media, 'original_name') || get(media, 'original_title'),
+    description: get(media, 'overview'),
     image: `${apiImagesUrl}${get(media, 'poster_path')}`,
     backdrop: `${apiImagesUrl}${get(media, 'backdrop_path')}`,
-    video: get(media, 'video'),
+    genre_ids: get(media, 'genre_ids'),
     original_language: get(media, 'original_language'),
-    origin_country: get(media, 'origin_country'),
-    location: get(media, 'original_name'),
-    date: formattedDate(get(media, 'release_date') || get(media, 'first_air_date')),
-    description: get(media, 'overview'),
     popularity: get(media, 'popularity'),
     vote_count: get(media, 'vote_count'),
-    vote_average: get(media, 'vote_average'),
-    genre_ids: get(media, 'genre_ids'),
-    adult: get(media, 'adult')
+    vote_average: get(media, 'vote_average')
   };
+
+  if (isMediaMovie(media)) {
+    return {
+      ...commonData,
+      type: getMediaType(get(media, 'media_type') || apiMediaTypes.MOVIE),
+      title: get(media, 'title'),
+      original_title: get(media, 'original_title'),
+      date: formattedDate(get(media, 'release_date')),
+      adult: get(media, 'adult'),
+      video: get(media, 'video')
+    };
+  }
+
+  if (isMediaSerie(media)) {
+    return {
+      ...commonData,
+      type: getMediaType(get(media, 'media_type') || apiMediaTypes.SERIE),
+      title: get(media, 'name'),
+      original_title: get(media, 'original_name'),
+      date: formattedDate(get(media, 'first_air_date')),
+      origin_country: get(media, 'origin_country')
+    };
+  }
+
+  return commonData;
 };

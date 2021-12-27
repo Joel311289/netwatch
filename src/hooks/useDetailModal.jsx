@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import MediaModalDetail from '../components/Media/MediaModalDetail/MediaModalDetail';
 import Modal from '../components/UI/Modal/Modal';
+import { routeMediaDetail } from '../services';
 
 export const useDetailModal = () => {
   const [item, setItem] = useState({});
@@ -20,7 +21,7 @@ export const useDetailModal = () => {
   const ModalDetail = useMemo(() => {
     return (
       <Modal size="s" onClose={onModalClose} visible={opened}>
-        <MediaModalDetail {...item} />
+        <MediaModalDetail to={routeMediaDetail(item)} {...item} />
       </Modal>
     );
   }, [item, opened]);

@@ -8,7 +8,7 @@ import Link from '../../UI/Link/Link';
 const MediaModalDetail = ({ to, image, title, description, date, original_title }) => {
   return (
     <div className={styles.wrapper}>
-      <MediaItem image={image} width={200} ratio={1.5} />
+      <MediaItem to={to} image={image} width={200} ratio={1.5} />
 
       <div className={styles.data}>
         <LinkRouter to={to}>
