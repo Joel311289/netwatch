@@ -5,13 +5,13 @@ import { formattedDate, truncatedText } from '../../../utils/helpers';
 import styles from './MediaModalDetail.module.css';
 import Link from '../../UI/Link/Link';
 
-const MediaModalDetail = ({ image, title, description, date, original_title }) => {
+const MediaModalDetail = ({ to, image, title, description, date, original_title }) => {
   return (
     <div className={styles.wrapper}>
       <MediaItem image={image} width={200} ratio={1.5} />
 
       <div className={styles.data}>
-        <LinkRouter>
+        <LinkRouter to={to}>
           <span className={styles.title}>{title}</span>
         </LinkRouter>
         <p className={styles.subtitle}>
@@ -20,7 +20,7 @@ const MediaModalDetail = ({ image, title, description, date, original_title }) =
         <p className={styles.description}>{truncatedText(description, 400)}</p>
 
         <div className={styles.more}>
-          <Link>Ver más</Link>
+          <Link to={to}>Ver más</Link>
         </div>
       </div>
     </div>
@@ -28,11 +28,12 @@ const MediaModalDetail = ({ image, title, description, date, original_title }) =
 };
 
 MediaModalDetail.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  original_title: PropTypes.string.isRequired
+  to: PropTypes.string,
+  image: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  date: PropTypes.string,
+  original_title: PropTypes.string
 };
 
 export default MediaModalDetail;

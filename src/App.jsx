@@ -27,9 +27,9 @@ const App = () => {
         <div className="App-body" ref={setContainer}>
           <div className="App-container App-content">
             <Switch>
-              <Route exact component={HomePage} path="/home" />
-              <Route exact component={MoviesPage} path="/movies" />
-              <Route exact component={SeriesPage} path="/series" />
+              <Route component={HomePage} path="/home" />
+              <Route component={MoviesPage} path="/movies" />
+              <Route component={SeriesPage} path="/series" />
               <Redirect to="/home" />
             </Switch>
           </div>

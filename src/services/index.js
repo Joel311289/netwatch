@@ -12,6 +12,11 @@ export const apiMediaTypes = {
   PERSONA: 'person'
 };
 
+const mediaTypes = {
+  movie: 'movies',
+  tv: 'series',
+  person: 'persons'
+};
 const SERIE_NETWORK_IDS_SUPPORTED = [
   213, // Netflix
   3186, // HBO Max
@@ -23,6 +28,8 @@ const SERIE_NETWORK_IDS_SUPPORTED = [
   3980 // Mitele
 ];
 
+export const getMediaType = (type) => type ? mediaTypes[type] : '';
+
 export const getNetworksSupported = () => SERIE_NETWORK_IDS_SUPPORTED.join('|');
 
 export const mediaDetailMapper = (media) => {
@@ -32,7 +39,7 @@ export const mediaDetailMapper = (media) => {
 
   return {
     id: get(media, 'id'),
-    type: get(media, 'media_type'),
+    type: getMediaType(get(media, 'media_type')),
     title: get(media, 'title') || get(media, 'name'),
     original_title: get(media, 'original_name') || get(media, 'original_title'),
     image: `${apiImagesUrl}${get(media, 'poster_path')}`,

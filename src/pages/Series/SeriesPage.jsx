@@ -1,26 +1,15 @@
-import { useEffect, useState } from 'react';
-import MediaGrid from '../../components/UI/Grid/Grid';
+import Grid from '../../components/UI/Grid/Grid';
 import MediaItem from '../../components/Media/MediaItem/MediaItem';
 import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
-import { useLoadDataPage } from '../../hooks/useLoadDataPage';
+import { useDetailModal } from '../../hooks/useDetailModal';
 import { getDiscoverSeries } from '../../services/get-discover-series';
+import { useLoadMore } from '../../hooks/useLoadMore';
+import { isEmptyArray } from '../../utils/helpers';
 
 const SeriesPage = () => {
-  const [series, setSeries] = useState([]);
-  const [page, setPage] = useState(1);
-  const { data, loading } = useLoadDataPage(() => getDiscoverSeries(page), 20, page);
-
-  useEffect(() => {
-    if (data && !loading) {
-      setSeries((prev) => [...prev, ...data].filter((item) => Boolean(item)));
-    }
-    if (Array.isArray(loading)) {
-      setSeries((prev) => [...prev, ...loading]);
-    }
-  }, [data, loading]);
-
-  const onLoadMore = () => setPage((prev) => prev + 1);
+  const { onModalOpen, ModalDetail } = useDetailModal();
+  const [series, loading, onLoadMore] = useLoadMore(getDiscoverSeries, 20);
 
   return (
     <div className="container">
@@ -30,20 +19,27 @@ const SeriesPage = () => {
         <MediaHeading text="Más populares"></MediaHeading>
       </div>
 
-      <MediaGrid>
-        {series &&
-          series.map((item, index) => (
-            <MediaItem key={index} ratio={1.5} skeleton={!item} {...(item || {})} />
-          ))}
-      </MediaGrid>
+      <Grid>
+        {series.map((item, index) => (
+          <MediaItem
+            key={index}
+            ratio={1.5}
+            skeleton={!item}
+            onDetail={() => onModalOpen(item)}
+            {...(item || {})}
+          />
+        ))}
+      </Grid>
 
-      {!loading && (
+      {!loading && !isEmptyArray(series) && (
         <div className="block">
           <Button size="large" onClick={onLoadMore}>
             Mostrar más
           </Button>
         </div>
       )}
+
+      {ModalDetail}
     </div>
   );
 };

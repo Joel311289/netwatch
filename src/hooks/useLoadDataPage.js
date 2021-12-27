@@ -37,6 +37,14 @@ export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
           error: 'No se pudo cargar la info'
         });
       });
+
+    return () => {
+      setData({
+        data: null,
+        loading: itemsPerPage ? getEmptyArray(itemsPerPage, null) : [],
+        error: false
+      });
+    };
   }, [page]);
 
   return data;
