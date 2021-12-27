@@ -6,6 +6,7 @@ import { useDetailModal } from '../../hooks/useDetailModal';
 import { getDiscoverMovies } from '../../services/get-discover-movies';
 import { useLoadMore } from '../../hooks/useLoadMore';
 import { isEmptyArray } from '../../utils/helpers';
+import { routeMediaDetail } from '../../services';
 
 const MoviesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();
@@ -25,6 +26,7 @@ const MoviesPage = () => {
             key={index}
             ratio={1.5}
             skeleton={!item}
+            to={routeMediaDetail(item)}
             onDetail={() => onModalOpen(item)}
             {...(item || {})}
           />

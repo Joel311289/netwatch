@@ -6,6 +6,7 @@ import { useDetailModal } from '../../hooks/useDetailModal';
 import { getDiscoverSeries } from '../../services/get-discover-series';
 import { useLoadMore } from '../../hooks/useLoadMore';
 import { isEmptyArray } from '../../utils/helpers';
+import { routeMediaDetail } from '../../services';
 
 const SeriesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();
@@ -25,6 +26,7 @@ const SeriesPage = () => {
             key={index}
             ratio={1.5}
             skeleton={!item}
+            to={routeMediaDetail(item)}
             onDetail={() => onModalOpen(item)}
             {...(item || {})}
           />

@@ -35,7 +35,7 @@ MediaHeading.defaultProps = {
 MediaHeading.propTypes = {
   skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   text: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired
+  to: PropTypes.string
 };
 
 export default MediaHeading;

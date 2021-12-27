@@ -53,7 +53,7 @@ MediaItem.propTypes = {
   skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   title: PropTypes.string,
   to: PropTypes.string,
   onDetail: PropTypes.func,
