@@ -10,7 +10,7 @@ export const getDiscoverSeries = (page = 1, with_networks = getNetworksSupported
     language: 'es-ES'
   };
 
-  return axios.get(`${apiUrl}/discover/${apiMediaTypes.SERIE}`, { params }).then((response) => {
+  return axios.get(`${apiUrl}/discover/${apiMediaTypes.TV}`, { params }).then((response) => {
     const { results } = response.data || {};
 
     return results.map((result) => mediaDetailMapper(result));

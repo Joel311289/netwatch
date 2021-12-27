@@ -8,8 +8,8 @@ export const apiImagesUrl = import.meta.env.VITE_API_IMAGES_URL;
 export const apiMediaTypes = {
   ALL: 'all',
   MOVIE: 'movie',
-  SERIE: 'tv',
-  PERSONA: 'person'
+  TV: 'tv',
+  PERSON: 'person'
 };
 export const mediaTypes = {
   movie: 'movies',
@@ -36,7 +36,7 @@ export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
 export const getNetworksSupported = () => SERIE_NETWORK_IDS_SUPPORTED.join('|');
 
-export const routeMediaDetail = (media) => (media ? `/${media.type}/${media.id}` : '');
+export const routeMediaDetail = (media) => media ? `/${media.type}/${media.id}` : '';
 
 export const mediaDetailMapper = (media) => {
   if (!media) {
@@ -45,6 +45,7 @@ export const mediaDetailMapper = (media) => {
 
   const commonData = {
     id: get(media, 'id'),
+    type: getMediaType({ type: get(media, 'media_type') }),
     description: get(media, 'overview'),
     image: `${apiImagesUrl}${get(media, 'poster_path')}`,
     backdrop: `${apiImagesUrl}${get(media, 'backdrop_path')}`,
@@ -58,7 +59,7 @@ export const mediaDetailMapper = (media) => {
   if (isMediaMovie(media)) {
     return {
       ...commonData,
-      type: getMediaType(get(media, 'media_type') || apiMediaTypes.MOVIE),
+      type: commonData.type || mediaTypes.movie,
       title: get(media, 'title'),
       original_title: get(media, 'original_title'),
       date: formattedDate(get(media, 'release_date')),
@@ -70,7 +71,7 @@ export const mediaDetailMapper = (media) => {
   if (isMediaSerie(media)) {
     return {
       ...commonData,
-      type: getMediaType(get(media, 'media_type') || apiMediaTypes.SERIE),
+      type: commonData.type || mediaTypes.tv,
       title: get(media, 'name'),
       original_title: get(media, 'original_name'),
       date: formattedDate(get(media, 'first_air_date')),
