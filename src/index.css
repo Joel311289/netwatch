@@ -6,7 +6,7 @@
 
 :root {
   --size-header: 58px;
-  --size-max: 1500px;
+  --size-max: 1400px;
   --padding-aside: 50px;
 
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -39,10 +39,11 @@
   --color-text: var(--color-dark);
   --color-button-text: var(--color-white);
   --color-link-text: var(--color-dark);
-  --color-skeleton-gradient-1: 226, 226, 226;
-  --color-skeleton-gradient-2: 240, 240, 240;
+  --color-skeleton: 217, 217, 217;
+  --color-backdrop: 220, 220, 220;
   --background-color: var(--color-white);
   --background-color-rgb: 255, 255, 255;
+  --divider-color-rgb: 50, 50, 50;
   --background-header-color: var(--color-yellow);
   --placeholder-color: var(--color-disabled);
   --placeholder-hover-color: var(--color-gray-light);
@@ -57,10 +58,11 @@
   --color-text: var(--color-white);
   --color-button-text: var(--color-dark);
   --color-link-text: var(--color-yellow);
-  --color-skeleton-gradient-1: 40, 40, 40;
-  --color-skeleton-gradient-2: 50, 50, 50;
+  --color-skeleton: 40, 40, 40;
+  --color-backdrop: 40, 40, 40;
   --background-color: var(--color-medium);
   --background-color-rgb: 29, 31, 32;
+  --divider-color-rgb: 255, 255, 255;
   --background-header-color: var(--color-dark);
   --placeholder-color: var(--color-dark);
   --placeholder-hover-color: var(--color-dark-light);

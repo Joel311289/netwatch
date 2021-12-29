@@ -2,12 +2,13 @@ import styles from './Button.module.css';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-const Button = ({ children, size, secondary, rounded, clear, disabled, onClick }) => {
+const Button = ({ children, className, size, secondary, rounded, clear, disabled, onClick }) => {
   const classes = classNames.bind(styles)({
     [size]: size || undefined,
     clear: clear,
     rounded: rounded,
-    secondary: secondary
+    secondary: secondary,
+    [className]: Boolean(className)
   });
 
   return (
@@ -31,6 +32,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  className: PropTypes.string,
   size: PropTypes.string.isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,

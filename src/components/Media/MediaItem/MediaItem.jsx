@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { BiInfoCircle, BiPlay } from 'react-icons/bi';
 import MediaItemSkeleton from './MediaItem.skeleton';
 import { getHeightRatio, showSkeleton } from '../../../utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './MediaItem.module.css';
 
 const ActionIcon = (icon) => {
@@ -10,18 +10,27 @@ const ActionIcon = (icon) => {
 };
 
 const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrailer }) => {
+  const Image = (link) => {
+    return (
+      <div
+        className={`${styles.image} ${link ? styles.link : ''}`}
+        style={{
+          backgroundImage: `url(${image})`,
+          width,
+          height: getHeightRatio(width, ratio)
+        }}
+      ></div>
+    );
+  };
+
   if (showSkeleton(skeleton)) {
     return <MediaItemSkeleton width={width} ratio={ratio} />;
   }
 
   return (
-    <div className={styles.wrapper} style={{ width }}>
-      <Link to={to}>
-        <div
-          className={styles.image}
-          style={{ backgroundImage: `url(${image})`, width, height: getHeightRatio(width, ratio) }}
-        ></div>
-      </Link>
+    <div className={styles.wrapper} style={{ width, minWidth: width }}>
+      {to && <Link to={to}>{Image(true)}</Link>}
+      {!to && Image()}
 
       {title && (
         <div className={styles.info}>
@@ -43,21 +52,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
   );
 };
 
-MediaItem.defaultProps = {
-  skeleton: false,
-  width: 'auto',
-  ratio: 1
-};
-
-MediaItem.propTypes = {
-  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  ratio: PropTypes.number,
-  image: PropTypes.string,
-  title: PropTypes.string,
-  to: PropTypes.string,
-  onDetail: PropTypes.func,
-  onTrailer: PropTypes.func
-};
+MediaItem.defaultProps = ElementDefaultProps;
+MediaItem.propTypes = ElementPropTypes;
 
 export default MediaItem;

@@ -6,14 +6,14 @@
 
 .image {
   box-shadow: var(--box-shadow-primary);
-  background-color: rgb(var(--color-skeleton-gradient-1));
+  background-color: rgb(var(--color-skeleton));
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   min-width: 100%;
   overflow: hidden;
 }
-.image:hover {
+.image.link:hover {
   opacity: 0.8;
 }
 

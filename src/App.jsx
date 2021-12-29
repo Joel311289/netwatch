@@ -6,6 +6,8 @@ import { ContainerContext } from './contexts/ContainerContext';
 import HomePage from './pages/Home/HomePage';
 import MoviesPage from './pages/Movies/MoviesPage';
 import SeriesPage from './pages/Series/SeriesPage';
+import MoviesDetailPage from './pages/Movies/MoviesDetailPage';
+import SeriesDetailPage from './pages/Series/SeriesDetailPage';
 import Header from './components/Layout/Header/Header';
 import { mediaTypes } from './services/index';
 import { styles } from './styles/index.js';
@@ -28,9 +30,11 @@ const App = () => {
         <div className="App-body" ref={setContainer}>
           <div className="App-container App-content">
             <Switch>
-              <Route component={HomePage} path="/home" />
-              <Route component={MoviesPage} path={`/${mediaTypes.movie}`} />
-              <Route component={SeriesPage} path={`/${mediaTypes.tv}`} />
+              <Route exact component={HomePage} path="/home" />
+              <Route exact component={MoviesPage} path={`/${mediaTypes.movie}`} />
+              <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:id`} />
+              <Route exact component={SeriesPage} path={`/${mediaTypes.tv}`} />
+              <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:id`} />
               <Redirect to="/home" />
             </Switch>
           </div>

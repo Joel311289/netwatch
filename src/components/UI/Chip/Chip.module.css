@@ -1,0 +1,9 @@
+.wrapper {
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  width: fit-content;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 1rem;
+}

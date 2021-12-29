@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   gap: 25px;
+  padding: 25px;
 }
 
 .data {
@@ -16,7 +17,7 @@
 }
 
 .description {
-  opacity: 0.5;
+  opacity: 0.6;
   font-size: 0.9rem;
   text-align: justify;
   overflow: hidden;

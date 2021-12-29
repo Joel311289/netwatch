@@ -9,7 +9,7 @@ export const getDetailMovie = (id) => {
 
   return axios.get(`${apiUrl}/${apiMediaTypes.MOVIE}/${id}`, { params }).then((response) => {
     const data = response.data || {};
-    
+
     return mediaDetailMapper(data);
   });
 };

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const bps = {
   mobile: '@media screen and (max-width: 576px)',
   tablet: '@media screen and (min-width: 768px)'
@@ -36,8 +38,8 @@ export const BREAKPOINTS = {
   },
   xxl: {
     width: 1600,
-    slidesPerView: 7,
-    itemsPerRow: 7,
+    slidesPerView: 6,
+    itemsPerRow: 6,
     spaceBetween: 20
   }
 };
@@ -48,3 +50,47 @@ export const THEMES = {
 };
 
 export const THEME_STORAGE_KEY = 'theme';
+
+export const ElementDefaultProps = {
+  skeleton: false,
+  width: 'auto',
+  ratio: 1,
+  items: [],
+
+};
+
+export const ElementPropTypes = {
+  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ratio: PropTypes.number,
+  to: PropTypes.string,
+  type: PropTypes.string,
+  title: PropTypes.string,
+  text: PropTypes.string,
+  image: PropTypes.string,
+  items: PropTypes.aray,
+  onClick: PropTypes.func,
+  onDetail: PropTypes.func,
+  onTrailer: PropTypes.func
+};
+
+export const MediaDefaultProps = {
+  duration: 0,
+  genres: [],
+  cast: [],
+  director: [],
+  writer: []
+};
+
+export const MediaPropTypes = {
+  title: PropTypes.string,
+  original_title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  duration: PropTypes.number,
+  date: PropTypes.string,
+  genres: PropTypes.array,
+  cast: PropTypes.array,
+  directors: PropTypes.array,
+  writers: PropTypes.array
+};
