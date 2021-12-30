@@ -67,6 +67,8 @@ export const isEmptyArray = (array) =>
   Array.isArray(array) && array.length > 0 ? !array.find((item) => Boolean(item)) : true;
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
+export const removeSpecialCharactersText = (text, separator = ' ') =>
+  text.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, separator);
 
 export const formattedDate = (date) => {
   moment.locale('es');
@@ -102,6 +104,8 @@ export const queryParams = () => {
 
   return queryParams;
 };
+
+export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
 
 export const throttle = _.throttle;
 export const debounce = _.debounce;

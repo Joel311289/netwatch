@@ -60,22 +60,26 @@ export const ElementDefaultProps = {
 };
 
 export const ElementPropTypes = {
+  className: PropTypes.string,
   skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  children: PropTypes.node,
+  style: PropTypes.object,
+  body: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
   to: PropTypes.string,
   type: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
+  tooltip: PropTypes.string,
   image: PropTypes.string,
-  items: PropTypes.aray,
+  items: PropTypes.array,
   onClick: PropTypes.func,
   onDetail: PropTypes.func,
   onTrailer: PropTypes.func
 };
 
 export const MediaDefaultProps = {
-  duration: 0,
   genres: [],
   cast: [],
   director: [],
@@ -87,7 +91,7 @@ export const MediaPropTypes = {
   original_title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  duration: PropTypes.number,
+  duration: PropTypes.string,
   date: PropTypes.string,
   genres: PropTypes.array,
   cast: PropTypes.array,

@@ -14,38 +14,40 @@
   transition-duration: 200ms;
   transition-property: background;
   height: 44px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
-
 .wrapper:not([disabled]):hover {
   opacity: 0.7;
 }
-
 .wrapper[disabled] {
   background-color: var(--color-disabled);
   color: var(--color-gray);
   cursor: default;
 }
-
 .wrapper.rounded {
   border-radius: 30px;
 }
 
-.wrapper.small {
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.wrapper.small .content {
   padding: 0 10px;
   height: 36px;
   font-size: 0.9rem;
 }
 
-.wrapper.large {
+.wrapper.large .content {
   padding: 0 16px;
   height: 50px;
   font-size: 1.2rem;
 }
 
-.wrapper.xlarge {
+.wrapper.xlarge .content {
   padding: 0 20px;
   height: 56px;
   font-size: 1.5rem;
@@ -63,4 +65,13 @@
 
 .wrapper.clear:hover {
   opacity: 0.5;
+}
+
+.tooltip {
+  font-family: var(--font-text) !important;
+  background-color: rgba(var(--tooltip-color-rgb), 0.8) !important;
+  font-size: 0.9rem !important;
+}
+.tooltip span {
+  color: rgba(var(--tooltip-color-rgb), 0.8) !important;
 }

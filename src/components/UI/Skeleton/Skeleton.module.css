@@ -1,15 +1,19 @@
+.wrapper.text + .wrapper.text {
+  margin-top: 5px;
+}
+
 .skeleton {
   transform: none !important;
   background-color: rgba(0, 0, 0, var(--skeleton-opacity)) !important;
   border-radius: 3px !important;
 }
 
-.skeleton.text + .skeleton.text {
-  margin-top: 5px;
-}
-
 .skeleton * {
   color: transparent !important;
   border-color: transparent !important;
   cursor: default !important;
+}
+
+.wrapper.chip .skeleton {
+  border-radius: 1rem !important;
 }

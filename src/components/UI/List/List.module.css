@@ -1,7 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 0;
+  width: fit-content;
 }
 .wrapper.divider {
   border-top: 1px solid rgba(var(--divider-color-rgb), 0.3);

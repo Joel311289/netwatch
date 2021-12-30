@@ -1,5 +1,5 @@
 import objectPath from 'object-path';
-import { formattedDate, formattedTime } from '../utils/helpers';
+import { formattedDate, formattedTime, removeSpecialCharactersText } from '../utils/helpers';
 
 const get = objectPath.get;
 export const apiKey = import.meta.env.VITE_API_KEY;
@@ -21,9 +21,9 @@ export const videoTypes = {
   teaser: 'Teaser'
 };
 export const personRoleTypes = {
-  directing: 'directing',
-  writing: 'writing',
-  acting: 'acting'
+  Directing: 'directing',
+  Writing: 'writing',
+  Acting: 'acting'
 };
 export const tvNetworksSupported = {
   213: 'Netflix',
@@ -44,21 +44,19 @@ export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
 export const getImageMediaUrl = (path) => (path ? `${apiImagesUrl}${path}` : '');
 
-export const getPersonRoleType = ({ cast_id, department, job }) => {
-  if (cast_id) {
-    return personRoleTypes.acting;
-  } else if (department === 'Directing' && job === 'Director') {
-    return personRoleTypes.directing;
-  } else if (department === 'Writing' && job === 'Writer') {
-    return personRoleTypes.writing;
-  } else {
-    return '';
-  }
-};
+export const getPersonRoleType = ({ cast_id, department }) =>
+  cast_id ? personRoleTypes.Acting : personRoleTypes[department];
 
 export const getNetworksSupported = () => Object.keys(tvNetworksSupported).join('|');
 
-export const routeMediaDetail = (media) => (media ? `/${media.type}/${media.id}` : '');
+export const routeMediaDetail = (media) => {
+  if (!media) {
+    return '';
+  }
+  const { id, type, original_title = '' } = media;
+  const title = removeSpecialCharactersText(original_title, '-');
+  return (title ? `/${type}/${id}-${title}` : `/${type}/${id}`).toLowerCase();
+};
 
 export const mediaDetailMapper = (media) => {
   if (!media) {
@@ -127,6 +125,7 @@ export const creditDetailMapper = (credit) => {
   return {
     id: get(credit, 'id'),
     role: getPersonRoleType(credit),
+    job: [get(credit, 'job')],
     name: get(credit, 'name'),
     character: get(credit, 'character'),
     image: getImageMediaUrl(get(credit, 'profile_path'))

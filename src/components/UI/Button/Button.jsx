@@ -1,8 +1,19 @@
-import styles from './Button.module.css';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import styles from './Button.module.css';
 
-const Button = ({ children, className, size, secondary, rounded, clear, disabled, onClick }) => {
+const Button = ({
+  children,
+  className,
+  size,
+  secondary,
+  rounded,
+  clear,
+  disabled,
+  tooltip,
+  onClick
+}) => {
   const classes = classNames.bind(styles)({
     [size]: size || undefined,
     clear: clear,
@@ -15,9 +26,21 @@ const Button = ({ children, className, size, secondary, rounded, clear, disabled
     <button
       className={`${styles.wrapper} ${classes}`}
       onClick={onClick}
-      disabled={Boolean(disabled)}
-    >
-      {children}
+      disabled={Boolean(disabled)}>
+      {tooltip && (
+        <Tooltip
+          title={tooltip}
+          className="test"
+          classes={{ tooltip: styles.tooltip }}
+          PopperProps={{
+            disablePortal: true
+          }}
+          arrow>
+          <div className={styles.content}>{children}</div>
+        </Tooltip>
+      )}
+
+      {!tooltip && <div className={styles.content}>{children}</div>}
     </button>
   );
 };
@@ -33,6 +56,7 @@ Button.defaultProps = {
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   className: PropTypes.string,
+  tooltip: PropTypes.string,
   size: PropTypes.string.isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,

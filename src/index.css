@@ -44,6 +44,7 @@
   --background-color: var(--color-white);
   --background-color-rgb: 255, 255, 255;
   --divider-color-rgb: 50, 50, 50;
+  --tooltip-color-rgb: 20, 20, 20;
   --background-header-color: var(--color-yellow);
   --placeholder-color: var(--color-disabled);
   --placeholder-hover-color: var(--color-gray-light);
@@ -63,6 +64,7 @@
   --background-color: var(--color-medium);
   --background-color-rgb: 29, 31, 32;
   --divider-color-rgb: 255, 255, 255;
+  --tooltip-color-rgb: 140, 140, 140;
   --background-header-color: var(--color-dark);
   --placeholder-color: var(--color-dark);
   --placeholder-hover-color: var(--color-dark-light);

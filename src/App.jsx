@@ -32,9 +32,9 @@ const App = () => {
             <Switch>
               <Route exact component={HomePage} path="/home" />
               <Route exact component={MoviesPage} path={`/${mediaTypes.movie}`} />
-              <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:id`} />
+              <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:key`} />
               <Route exact component={SeriesPage} path={`/${mediaTypes.tv}`} />
-              <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:id`} />
+              <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:key`} />
               <Redirect to="/home" />
             </Switch>
           </div>

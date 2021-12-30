@@ -5,7 +5,7 @@ import { formattedDate, truncatedText } from '../../../utils/helpers';
 import styles from './MediaModalDetail.module.css';
 import Link from '../../UI/Link/Link';
 
-const MediaModalDetail = ({ to, image, title, description, date, original_title }) => {
+const MediaModalDetail = ({ to, image, title, description, date }) => {
   return (
     <div className={styles.wrapper}>
       <MediaItem to={to} image={image} width={200} ratio={1.5} />
@@ -15,7 +15,7 @@ const MediaModalDetail = ({ to, image, title, description, date, original_title 
           <span className={styles.title}>{title}</span>
         </LinkRouter>
         <p className={styles.subtitle}>
-          {original_title || title} - {formattedDate(date)}
+          {formattedDate(date)}
         </p>
         <p className={styles.description}>{truncatedText(description, 400)}</p>
 
