@@ -51,12 +51,19 @@ export const THEMES = {
 
 export const THEME_STORAGE_KEY = 'theme';
 
-export const ElementDefaultProps = {
-  skeleton: false,
-  width: 'auto',
-  ratio: 1,
-  items: [],
+export const ContextPropTypes = {
+  children: PropTypes.node
+};
 
+export const ElementDefaultProps = {
+  body: true,
+  skeleton: false,
+  checked: false,
+  disabled: false,
+  width: 'auto',
+  height: 'auto',
+  ratio: 1,
+  items: []
 };
 
 export const ElementPropTypes = {
@@ -66,17 +73,21 @@ export const ElementPropTypes = {
   style: PropTypes.object,
   body: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   ratio: PropTypes.number,
   to: PropTypes.string,
+  variant: PropTypes.string,
   type: PropTypes.string,
+  heading: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
   tooltip: PropTypes.string,
   image: PropTypes.string,
   items: PropTypes.array,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  onDetail: PropTypes.func,
-  onTrailer: PropTypes.func
+  onChange: PropTypes.func
 };
 
 export const MediaDefaultProps = {

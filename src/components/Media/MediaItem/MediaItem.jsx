@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { BiInfoCircle, BiPlay } from 'react-icons/bi';
 import MediaItemSkeleton from './MediaItem.skeleton';
 import { getHeightRatio, showSkeleton } from '../../../utils/helpers';
@@ -53,6 +54,10 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
 };
 
 MediaItem.defaultProps = ElementDefaultProps;
-MediaItem.propTypes = ElementPropTypes;
+MediaItem.propTypes = {
+  ...ElementPropTypes,
+  onDetail: PropTypes.func,
+  onTrailer: PropTypes.func
+};
 
 export default MediaItem;

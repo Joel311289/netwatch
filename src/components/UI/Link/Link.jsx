@@ -1,5 +1,5 @@
 import { Link as LinkRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './Link.module.css';
 
 const Link = ({ children, to }) => {
@@ -10,14 +10,7 @@ const Link = ({ children, to }) => {
   );
 };
 
-Link.defaultProps = {
-  children: '',
-  to: ''
-};
-
-Link.propTypes = {
-  children: PropTypes.any,
-  to: PropTypes.string.isRequired
-};
+Link.defaultProps = ElementDefaultProps;
+Link.propTypes = ElementPropTypes;
 
 export default Link;

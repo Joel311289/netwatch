@@ -24,14 +24,14 @@ const HomePage = () => {
   );
 
   const categories = [
-    { heading: 'Tendencias hoy', items: trendings, loading: loadingTrendings },
+    { heading: 'Tendencias hoy', items: trendings, skeleton: loadingTrendings },
     {
       type: mediaTypes.movie,
       heading: 'Películas populares',
       items: movies,
-      loading: loadingMovies
+      skeleton: loadingMovies
     },
-    { type: mediaTypes.tv, heading: 'Series populares', items: series, loading: loadingSeries }
+    { type: mediaTypes.tv, heading: 'Series populares', items: series, skeleton: loadingSeries }
   ];
 
   return (

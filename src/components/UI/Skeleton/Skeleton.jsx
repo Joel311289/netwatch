@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Skeleton as SkeletonMUI } from '@mui/material';
 import PropTypes from 'prop-types';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './Skeleton.module.css';
 
 const Skeleton = ({ width, height, variant, style }) => {
@@ -26,16 +27,9 @@ const Skeleton = ({ width, height, variant, style }) => {
   );
 };
 
-Skeleton.defaultProps = {
-  width: 'auto',
-  height: 'auto',
-  variant: ''
-};
-
+Skeleton.defaultProps = ElementDefaultProps;
 Skeleton.propTypes = {
-  style: PropTypes.object,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  ...ElementPropTypes,
   variant: PropTypes.oneOf(['heading', 'text', 'action', 'chip', 'default', ''])
 };
 

@@ -35,7 +35,6 @@ const Grid = ({ children }) => {
 Grid.defaultProps = {
   children: []
 };
-
 Grid.propTypes = {
   children: PropTypes.array
 };

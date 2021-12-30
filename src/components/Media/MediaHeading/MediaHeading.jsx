@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { FiChevronRight } from 'react-icons/fi';
 import Skeleton from '../../UI/Skeleton/Skeleton';
 import { showSkeleton } from '../../../utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './MediaHeading.module.css';
 
 const MediaHeading = ({ skeleton, text, to }) => {
@@ -26,16 +26,7 @@ const MediaHeading = ({ skeleton, text, to }) => {
   );
 };
 
-MediaHeading.defaultProps = {
-  skeleton: false,
-  text: '',
-  to: ''
-};
-
-MediaHeading.propTypes = {
-  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
-  text: PropTypes.string.isRequired,
-  to: PropTypes.string
-};
+MediaHeading.defaultProps = ElementDefaultProps;
+MediaHeading.propTypes = ElementPropTypes;
 
 export default MediaHeading;

@@ -59,7 +59,6 @@ Modal.defaultProps = {
   size: 'm',
   onClose: () => {}
 };
-
 Modal.propTypes = {
   children: PropTypes.any,
   visible: PropTypes.bool,

@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import Skeleton from '../../UI/Skeleton/Skeleton';
 import { getHeightRatio } from '../../../utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './MediaItem.module.css';
 
 const MediaItemSkeleton = ({ width, ratio, body }) => {
@@ -20,16 +20,7 @@ const MediaItemSkeleton = ({ width, ratio, body }) => {
   );
 };
 
-MediaItemSkeleton.defaultProps = {
-  width: 'auto',
-  ratio: 1,
-  body: true
-};
-
-MediaItemSkeleton.propTypes = {
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  ratio: PropTypes.number,
-  body: PropTypes.bool
-};
+MediaItemSkeleton.defaultProps = ElementDefaultProps;
+MediaItemSkeleton.propTypes = ElementPropTypes;
 
 export default MediaItemSkeleton;

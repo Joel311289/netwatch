@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import PropTypes from 'prop-types';
 import { useAuth } from '../hooks/useAuth';
+import { ContextPropTypes } from '../utils/constants';
 
 export const AuthContext = createContext();
 
@@ -10,6 +10,4 @@ export const AuthContextProvider = ({ children }) => {
   return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 };
 
-AuthContextProvider.propTypes = {
-  children: PropTypes.array
-};
+AuthContextProvider.propTypes = ContextPropTypes;

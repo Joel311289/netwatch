@@ -31,7 +31,6 @@ Header.defaultProps = {
   theme: '',
   logoUrl: ''
 };
-
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   logoUrl: PropTypes.string.isRequired,

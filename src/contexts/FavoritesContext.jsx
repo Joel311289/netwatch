@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import PropTypes from 'prop-types';
 import { useFavorites } from '../hooks/useFavorites';
+import { ContextPropTypes } from '../utils/constants';
 
 export const FavoritesContext = createContext({});
 
@@ -14,6 +14,4 @@ export const FavoritesContextProvider = ({ children }) => {
   );
 };
 
-FavoritesContextProvider.propTypes = {
-  children: PropTypes.array
-};
+FavoritesContextProvider.propTypes = ContextPropTypes;

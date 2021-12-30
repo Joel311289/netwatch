@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './Toggle.module.css';
 
 const Toggle = ({ checked, onChange }) => {
@@ -21,13 +21,7 @@ const Toggle = ({ checked, onChange }) => {
   );
 };
 
-Toggle.defaultProps = {
-  checked: false
-};
-
-Toggle.propTypes = {
-  checked: PropTypes.bool,
-  onChange: PropTypes.func
-};
+Toggle.defaultProps = ElementDefaultProps;
+Toggle.propTypes = ElementPropTypes;
 
 export default Toggle;

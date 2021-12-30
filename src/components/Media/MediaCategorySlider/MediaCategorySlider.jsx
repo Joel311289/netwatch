@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useDetailModal } from '../../../hooks/useDetailModal';
 import Slider from '../../UI/Slider/Slider';
 import MediaHeading from '../MediaHeading/MediaHeading';
@@ -6,18 +5,19 @@ import MediaItem from '../MediaItem/MediaItem';
 import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
 import { routeMediaDetail } from '../../../services';
 import { showSkeleton } from '../../../utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 
-const MediaCategorySlider = ({ type, heading, items, loading }) => {
+const MediaCategorySlider = ({ type, heading, items, skeleton }) => {
   const { onModalOpen, ModalDetail } = useDetailModal();
 
-  if (showSkeleton(loading)) {
+  if (showSkeleton(skeleton)) {
     return (
       <div>
         <div className="heading">
-          <MediaHeading skeleton={loading} />
+          <MediaHeading skeleton={skeleton} />
         </div>
         <Slider navigation={false}>
-          {loading.map((_, index) => (
+          {skeleton.map((_, index) => (
             <MediaItemSkeleton key={index} ratio={1.5} />
           ))}
         </Slider>
@@ -52,18 +52,7 @@ const MediaCategorySlider = ({ type, heading, items, loading }) => {
   );
 };
 
-MediaCategorySlider.defaultProps = {
-  type: '',
-  heading: '',
-  items: [],
-  loading: false
-};
-
-MediaCategorySlider.propTypes = {
-  type: PropTypes.string,
-  heading: PropTypes.string.isRequired,
-  items: PropTypes.array,
-  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.array])
-};
+MediaCategorySlider.defaultProps = ElementDefaultProps;
+MediaCategorySlider.propTypes = ElementPropTypes;
 
 export default MediaCategorySlider;
