@@ -17,13 +17,13 @@
 }
 
 .content {
-  padding: 20px var(--padding-aside);
-  max-width: 1200px;
+  padding: 20px var(--padding-aside) 70px var(--padding-aside);
+  max-width: var(--size-max);
   margin: 0 auto;
   display: grid;
   grid-gap: 0 40px;
   grid-template-columns: 250px auto;
-  box-sizing: content-box;
+  
   margin: 0 auto;
 }
 .backdrop.skeleton {
@@ -57,12 +57,7 @@
 }
 
 .image {
-  grid-row: 2 / span 4;
-}
-
-.detail {
-  display: grid;
-  grid-gap: 20px 70px;
+  grid-row: 2 / span 5;
 }
 
 .genres {
@@ -70,15 +65,20 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-bottom: 20px;
 }
 
 .description {
+  display: inline-block;
+  width: 100%;
   font-size: 1rem;
   text-align: justify;
+  margin-bottom: 20px;
 }
 
 .credits {
   width: fit-content;
+  margin-bottom: 20px;
 }
 
 .credit {

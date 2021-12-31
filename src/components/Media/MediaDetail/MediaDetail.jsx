@@ -46,31 +46,6 @@ const MediaDetail = ({
       </div>
     );
   };
-  const Detail = () => {
-    return (
-      <div className={styles.detail}>
-        <div className={styles.genres}>
-          {(genres || []).map((genre) => (
-            <Chip key={genre} text={genre} />
-          ))}
-        </div>
-
-        <span className={styles.description}>{description}</span>
-        <div className={styles.credits}>
-          <MediaDetailCredits cast={cast} directors={directors} writers={writers} />
-        </div>
-
-        <div className={styles.actions}>
-          {actions.map(({ label, icon, tooltip }, index) => (
-            <Button key={index} tooltip={tooltip} className={styles.action}>
-              {icon}
-              <span className={styles.label}>{label}</span>
-            </Button>
-          ))}
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -84,7 +59,25 @@ const MediaDetail = ({
             <MediaItem image={image} width={250} ratio={1.5} />
           </div>
 
-          {Detail()}
+          <div className={styles.genres}>
+            {(genres || []).map((genre) => (
+              <Chip key={genre} text={genre} />
+            ))}
+          </div>
+
+          <span className={styles.description}>{description}</span>
+          <div className={styles.credits}>
+            <MediaDetailCredits cast={cast} directors={directors} writers={writers} />
+          </div>
+
+          <div className={styles.actions}>
+            {actions.map(({ label, icon, tooltip }, index) => (
+              <Button key={index} tooltip={tooltip} className={styles.action}>
+                {icon}
+                <span className={styles.label}>{label}</span>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
