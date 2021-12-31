@@ -1,8 +1,13 @@
+.wrapper {
+  transition: all 0.2s;
+}
+
 .wrapper.text + .wrapper.text {
   margin-top: 5px;
 }
 
 .skeleton {
+  transition: all 0.2s;
   transform: none !important;
   background-color: rgba(0, 0, 0, var(--skeleton-opacity)) !important;
   border-radius: 3px !important;

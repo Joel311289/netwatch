@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import MediaDetail from '../../components/Media/MediaDetail/MediaDetail';
-import MediaHeaderImage from '../../components/Media/MediaHeaderImage/MediaHeaderImage';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getCreditsMovie } from '../../services/get-credits-movie';
 import { getDetailMovie } from '../../services/get-detail-movie';
@@ -18,9 +17,7 @@ const MoviesDetailPage = () => {
 
   return (
     <div className="container">
-      <MediaHeaderImage image={movie && movie.backdrop}>
-        <MediaDetail skeleton={isLoading} {...movie} {...credits} />
-      </MediaHeaderImage>
+      <MediaDetail skeleton={isLoading} {...movie} {...credits} />
     </div>
   );
 };

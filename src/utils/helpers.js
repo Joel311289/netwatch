@@ -13,17 +13,17 @@ export const getThemeMode = (current) =>
 
 export const getDeviceBreakpoint = (width) => {
   if (width < BREAKPOINTS.sm.width) {
-    return 'xs';
+    return BREAKPOINTS.xs.name;
   } else if (width < BREAKPOINTS.md.width) {
-    return 'sm';
+    return BREAKPOINTS.sm.name;
   } else if (width < BREAKPOINTS.lg.width) {
-    return 'md';
+    return BREAKPOINTS.md.name;
   } else if (width < BREAKPOINTS.xl.width) {
-    return 'lg';
+    return BREAKPOINTS.lg.name;
   } else if (width < BREAKPOINTS.xxl.width) {
-    return 'xl';
+    return BREAKPOINTS.xl.name;
   } else {
-    return 'xxl';
+    return BREAKPOINTS.xxl.name;
   }
 };
 export const getBreakpoints = () => {
@@ -37,8 +37,9 @@ export const getBreakpoints = () => {
 export const getBreakpointConfigPlaceholders = (breakpoint) =>
   BREAKPOINTS[breakpoint].slidesPerView;
 export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
-export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs;
-export const isMobileTablet = (breakpoint) => [BREAKPOINTS.xs, BREAKPOINTS.sm].includes(breakpoint);
+export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs.name;
+export const isMobileTablet = (breakpoint) =>
+  [BREAKPOINTS.xs.name, BREAKPOINTS.sm.name].includes(breakpoint);
 export const isMobileTabletMedium = (breakpoint) =>
   [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
 

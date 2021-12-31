@@ -1,6 +1,7 @@
 .App {
   position: fixed;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 100vw;
   height: 100vh;
   margin: 0 auto;

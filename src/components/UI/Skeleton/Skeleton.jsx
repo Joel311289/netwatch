@@ -21,8 +21,8 @@ const Skeleton = ({ width, height, variant, style }) => {
   }, [variant]);
 
   return (
-    <div style={style} className={`${styles.wrapper} ${styles[variant] || ''}`}>
-      <SkeletonMUI className={styles.skeleton} animation="wave" width={width} height={getHeight} />
+    <div style={{ ...style, width }} className={`${styles.wrapper} ${styles[variant] || ''}`}>
+      <SkeletonMUI className={styles.skeleton} animation="wave" height={getHeight} />
     </div>
   );
 };

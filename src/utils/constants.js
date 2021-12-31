@@ -7,36 +7,42 @@ export const bps = {
 
 export const BREAKPOINTS = {
   xs: {
+    name: 'xs',
     width: 0,
     slidesPerView: 2,
     itemsPerRow: 2,
     spaceBetween: 10
   },
   sm: {
+    name: 'sm',
     width: 576,
     slidesPerView: 3,
     itemsPerRow: 3,
     spaceBetween: 15
   },
   md: {
+    name: 'md',
     width: 768,
     slidesPerView: 4,
     itemsPerRow: 4,
     spaceBetween: 15
   },
   lg: {
+    name: 'lg',
     width: 992,
     slidesPerView: 5,
     itemsPerRow: 5,
     spaceBetween: 15
   },
   xl: {
+    name: 'xl',
     width: 1200,
     slidesPerView: 6,
     itemsPerRow: 6,
     spaceBetween: 20
   },
   xxl: {
+    name: 'xxl',
     width: 1600,
     slidesPerView: 6,
     itemsPerRow: 6,
