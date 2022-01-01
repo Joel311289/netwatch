@@ -53,7 +53,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
       disabledClass: styles['button-navigation-disabled']
     },
     lazy: true,
-    mousewheel: true,
+    mousewheel: false,
     slidesPerGroup,
     slidesOffsetBefore: navigationWidth,
     slidesOffsetAfter: navigationWidth,

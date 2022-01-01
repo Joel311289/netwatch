@@ -58,7 +58,7 @@ Button.defaultProps = {
 Button.propTypes = {
   ...ElementPropTypes,
   tooltip: PropTypes.string,
-  size: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge', '']).isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,
   rounded: PropTypes.bool
