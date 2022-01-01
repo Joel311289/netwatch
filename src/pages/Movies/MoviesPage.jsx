@@ -3,7 +3,7 @@ import MediaItem from '../../components/Media/MediaItem/MediaItem';
 import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
 import { useDetailModal } from '../../hooks/useDetailModal';
-import { getDiscoverMovies } from '../../services/get-discover-movies';
+import { getDiscoverMovies } from '../../services/movies/get-discover-movies';
 import { useLoadMore } from '../../hooks/useLoadMore';
 import { isEmptyArray } from '../../utils/helpers';
 import { routeMediaDetail } from '../../services';
@@ -13,7 +13,7 @@ const MoviesPage = () => {
   const [movies, loading, onLoadMore] = useLoadMore(getDiscoverMovies, 20);
 
   return (
-    <div className="container">
+    <div className="App-container App-content">
       <h2 className="heading">Películas</h2>
 
       <div className="sub-heading">

@@ -15,6 +15,6 @@ export const getTrending = (mediaType = apiMediaTypes.ALL, timeWindow = TIME_WIN
   return axios.get(`${apiUrl}/trending/${mediaType}/${timeWindow}`, { params }).then((response) => {
     const { results } = response.data || {};
 
-    return results.map((result) => mediaDetailMapper(result));
+    return results.map(mediaDetailMapper);
   });
 };

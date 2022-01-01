@@ -111,7 +111,10 @@ export const MediaPropTypes = {
   duration: PropTypes.string,
   date: PropTypes.string,
   genres: PropTypes.array,
+  credits: PropTypes.array,
   cast: PropTypes.array,
   directors: PropTypes.array,
-  writers: PropTypes.array
+  writers: PropTypes.array,
+  number_episodes: PropTypes.number,
+  number_seasons: PropTypes.number
 };

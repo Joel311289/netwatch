@@ -28,16 +28,14 @@ const App = () => {
         </header>
 
         <div className="App-body" ref={setContainer}>
-          <div className="App-container App-content">
-            <Switch>
-              <Route exact component={HomePage} path="/home" />
-              <Route exact component={MoviesPage} path={`/${mediaTypes.movie}`} />
-              <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:key`} />
-              <Route exact component={SeriesPage} path={`/${mediaTypes.tv}`} />
-              <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:key`} />
-              <Redirect to="/home" />
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact component={HomePage} path="/home" />
+            <Route exact component={MoviesPage} path={`/${mediaTypes.movie}`} />
+            <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:key`} />
+            <Route exact component={SeriesPage} path={`/${mediaTypes.tv}`} />
+            <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:key`} />
+            <Redirect to="/home" />
+          </Switch>
         </div>
 
         <footer className="App-footer"></footer>

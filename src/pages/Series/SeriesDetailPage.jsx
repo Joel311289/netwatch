@@ -1,10 +1,45 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import MediaDetail from '../../components/Media/MediaDetail/MediaDetail';
+import { useLoadDataPage } from '../../hooks/useLoadDataPage';
+import { getDetailSerie } from '../../services/series/get-detail-serie';
+import { getWatchProvidersSerie } from '../../services/series/get-watch-providers-serie';
+import { getCreditsSerie } from '../../services/series/get-credits-serie';
+import { getIdFromParams, truncateArray } from '../../utils/helpers';
 
 const SeriesDetailPage = () => {
-  const { id } = useParams();
+  const id = getIdFromParams(useParams(), 'key');
 
-  return <div>Serie Detail</div>;
+  const { data: serie, loading } = useLoadDataPage(getDetailSerie.bind(this, id));
+  const { data: watch_providers, loading: loadingWatchProviders } = useLoadDataPage(
+    getWatchProvidersSerie.bind(this, id)
+  );
+  const { data, loading: loadingCredits } = useLoadDataPage(getCreditsSerie.bind(this, id));
+
+  const isLoading = useMemo(
+    () => loading && loadingCredits && loadingWatchProviders,
+    [loading, loadingCredits, loadingWatchProviders]
+  );
+
+  const { creators } = serie || {};
+  const { cast } = data || {};
+  const credits = [
+    { label: 'Creadores', data: truncateArray(creators, 3) },
+    { label: 'Actores', data: truncateArray(cast, 3) }
+  ];
+
+  return (
+    <div>
+      <MediaDetail
+        skeleton={isLoading}
+        {...serie}
+        watch_providers={watch_providers}
+        credits={credits}
+      />
+
+      <div className="App-container App-content">Detail</div>
+    </div>
+  );
 };
 
 export default SeriesDetailPage;

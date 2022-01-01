@@ -23,17 +23,21 @@ export const videoTypes = {
 export const personRoleTypes = {
   Directing: 'directing',
   Writing: 'writing',
-  Acting: 'acting'
+  Acting: 'acting',
+  Creator: 'creator'
 };
-export const tvNetworksSupported = {
-  213: 'Netflix',
-  3186: 'HBO Max',
-  1024: 'Amazon Prime Video',
-  2552: 'Apple TV+',
-  2739: 'Disney +',
-  3744: 'Atresplayer Premium',
-  5081: 'Movistar Play',
-  3980: 'Mitele'
+export const tvWatchProvidersSupported = {
+  8: 'Netflix',
+  119: 'Amazon Prime Video',
+  9: 'Amazon Prime Video',
+  337: 'Disney Plus',
+  384: 'HBO Max',
+  149: 'Movistar Plus',
+  350: 'Apple TV Plus',
+  62: 'Atres Player',
+  456: 'Mitele',
+  541: 'rtve',
+  118: 'HBO'
 };
 
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
@@ -44,10 +48,10 @@ export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
 export const getImageMediaUrl = (path) => (path ? `${apiImagesUrl}${path}` : '');
 
-export const getPersonRoleType = ({ cast_id, department }) =>
-  cast_id ? personRoleTypes.Acting : personRoleTypes[department];
+export const getPersonRoleType = ({ character, department }) =>
+  character ? personRoleTypes.Acting : personRoleTypes[department];
 
-export const getNetworksSupported = () => Object.keys(tvNetworksSupported).join('|');
+export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupported).join('|');
 
 export const routeMediaDetail = (media) => {
   if (!media) {
@@ -59,10 +63,6 @@ export const routeMediaDetail = (media) => {
 };
 
 export const mediaDetailMapper = (media) => {
-  if (!media) {
-    return {};
-  }
-
   const commonData = {
     id: get(media, 'id'),
     type: getMediaType({ type: get(media, 'media_type') }),
@@ -97,7 +97,11 @@ export const mediaDetailMapper = (media) => {
       title: get(media, 'name'),
       original_title: get(media, 'original_name'),
       date: formattedDate(get(media, 'first_air_date')),
-      origin_country: get(media, 'origin_country')
+      duration: formattedTime(get(media, 'episode_run_time.0')),
+      origin_country: get(media, 'origin_country'),
+      number_seasons: get(media, 'number_of_seasons'),
+      number_episodes: get(media, 'number_of_episodes'),
+      creators: get(media, 'created_by')
     };
   }
 
@@ -105,10 +109,6 @@ export const mediaDetailMapper = (media) => {
 };
 
 export const videoDetailMapper = (video) => {
-  if (!video) {
-    return {};
-  }
-
   return {
     name: get(video, 'name'),
     key: get(video, 'key'),
@@ -118,10 +118,6 @@ export const videoDetailMapper = (video) => {
 };
 
 export const creditDetailMapper = (credit) => {
-  if (!credit) {
-    return {};
-  }
-
   return {
     id: get(credit, 'id'),
     role: getPersonRoleType(credit),
@@ -129,5 +125,45 @@ export const creditDetailMapper = (credit) => {
     name: get(credit, 'name'),
     character: get(credit, 'character'),
     image: getImageMediaUrl(get(credit, 'profile_path'))
+  };
+};
+
+export const creatorDetailMapper = (creator) => {
+  return {
+    id: get(creator, 'id'),
+    role: personRoleTypes.Creator,
+    job: 'Creator',
+    name: get(creator, 'name'),
+    image: getImageMediaUrl(get(creator, 'profile_path'))
+  };
+};
+
+export const watchProvidersDetailMapper = (providers) => {
+  return {
+    watch_link: get(providers, 'link'),
+    providers: get(providers, 'flatrate')
+  };
+};
+
+export const watchProviderDetailMapper = (provider) => {
+  return {
+    id: get(provider, 'provider_id'),
+    name: get(provider, 'provider_name'),
+    image: getImageMediaUrl(get(provider, 'logo_path'))
+  };
+};
+
+export const externalsDetailMapper = (externals) => {
+  const url = (path, key) => {
+    const id = get(externals, key);
+    return id ? `${path}${id}` : '';
+  };
+
+  return {
+    id: get(externals, 'id'),
+    imdb: url(`https://www.imdb.com/title/', 'imdb_id'`),
+    facebook: url(`https://www.facebook.com/', 'facebook_id'`),
+    instagram: url(`https://www.instagram.com/', 'instagram_id'`),
+    twitter: url(`https://twitter.com/', 'twitter_id'`)
   };
 };

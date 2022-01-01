@@ -62,6 +62,8 @@ export const sortArrayByKey = (array, key, descending = false) => {
   return descending ? arraySorted.reverse() : arraySorted;
 };
 
+export const truncateArray = (array, limit) => (Array.isArray(array) ? array.slice(0, limit) : []);
+
 export const getEmptyArray = (size, content = null) => Array(size).fill(content);
 
 export const isEmptyArray = (array) =>
@@ -81,7 +83,13 @@ export const formattedTime = (duration) => {
   const rhours = Math.floor(hours);
   const minutes = (hours - rhours) * 60;
   const rminutes = Math.round(minutes);
-  return rminutes ? `${rhours}h ${rminutes}m` : `${rhours}h`;
+  return [
+    { number: rhours, sufix: 'h' },
+    { number: rminutes, sufix: 'm' }
+  ]
+    .filter(({ number }) => !!number)
+    .map(({ number, sufix }) => `${number}${sufix}`)
+    .join(' ');
 };
 
 export const hexToRgb = (hex) =>

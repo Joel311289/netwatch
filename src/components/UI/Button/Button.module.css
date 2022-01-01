@@ -13,7 +13,7 @@
   transition-timing-function: cubic-bezier(0, 0, 1, 1);
   transition-duration: 200ms;
   transition-property: background;
-  height: fit-content;
+  height: 44px;
 }
 .wrapper:not([disabled]):hover {
   opacity: 0.7;
@@ -33,24 +33,22 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  height: 44px;
-  padding: 0 13px;
-  font-size: 1rem;
+  height: fit-content;
 }
 
-.wrapper.small .content {
+.wrapper.small {
   padding: 0 10px;
   height: 36px;
   font-size: 0.9rem;
 }
 
-.wrapper.large .content {
+.wrapper.large {
   padding: 0 16px;
   height: 50px;
   font-size: 1.2rem;
 }
 
-.wrapper.xlarge .content {
+.wrapper.xlarge {
   padding: 0 20px;
   height: 56px;
   font-size: 1.5rem;
@@ -77,4 +75,8 @@
 }
 .tooltip span {
   color: rgba(var(--tooltip-color-rgb), 0.8) !important;
+}
+
+.link {
+  color: var(--color-button-text);
 }

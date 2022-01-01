@@ -3,7 +3,7 @@ import MediaItem from '../../components/Media/MediaItem/MediaItem';
 import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
 import Button from '../../components/UI/Button/Button';
 import { useDetailModal } from '../../hooks/useDetailModal';
-import { getDiscoverSeries } from '../../services/get-discover-series';
+import { getDiscoverSeries } from '../../services/series/get-discover-series';
 import { useLoadMore } from '../../hooks/useLoadMore';
 import { isEmptyArray } from '../../utils/helpers';
 import { routeMediaDetail } from '../../services';
@@ -13,7 +13,7 @@ const SeriesPage = () => {
   const [series, loading, onLoadMore] = useLoadMore(getDiscoverSeries, 20);
 
   return (
-    <div className="container">
+    <div className="App-container App-content">
       <h2 className="heading">Series de televisión</h2>
 
       <div className="sub-heading">

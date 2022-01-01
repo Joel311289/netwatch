@@ -12,6 +12,8 @@ const Button = ({
   rounded,
   clear,
   disabled,
+  role,
+  href,
   tooltip,
   onClick
 }) => {
@@ -22,13 +24,21 @@ const Button = ({
     secondary: secondary,
     [className]: Boolean(className)
   });
+  let Content = <div className={styles.content}>{children}</div>;
+
+  if (role === 'link') {
+    Content = (
+      <a className={styles.link} href={href} target="_blank" rel="noreferrer">
+        {Content}
+      </a>
+    );
+  }
 
   return (
     <button
       className={`${styles.wrapper} ${classes}`}
       onClick={onClick}
-      disabled={Boolean(disabled)}
-    >
+      disabled={Boolean(disabled)}>
       {tooltip && (
         <Tooltip
           title={tooltip}
@@ -37,13 +47,12 @@ const Button = ({
           PopperProps={{
             disablePortal: true
           }}
-          arrow
-        >
-          <div className={styles.content}>{children}</div>
+          arrow>
+          {Content}
         </Tooltip>
       )}
 
-      {!tooltip && <div className={styles.content}>{children}</div>}
+      {!tooltip && Content}
     </button>
   );
 };
@@ -58,6 +67,8 @@ Button.defaultProps = {
 Button.propTypes = {
   ...ElementPropTypes,
   tooltip: PropTypes.string,
+  href: PropTypes.string,
+  role: PropTypes.oneOf(['button', 'link', '']).isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge', '']).isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,

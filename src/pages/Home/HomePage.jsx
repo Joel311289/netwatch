@@ -2,8 +2,8 @@ import MediaCategorySlider from '../../components/Media/MediaCategorySlider/Medi
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { useBreakpointViewport } from '../../hooks/useBreakpointViewport';
 import { getTrending } from '../../services/get-trending';
-import { getDiscoverMovies } from '../../services/get-discover-movies';
-import { getDiscoverSeries } from '../../services/get-discover-series';
+import { getDiscoverMovies } from '../../services/movies/get-discover-movies';
+import { getDiscoverSeries } from '../../services/series/get-discover-series';
 import { getBreakpointConfigPlaceholders } from '../../utils/helpers';
 import { mediaTypes } from '../../services/index';
 
@@ -35,7 +35,7 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="container">
+    <div className="App-container App-content">
       <h2 className="heading">Bienvenido, películas y series para ti</h2>
 
       {categories.map((category) => (

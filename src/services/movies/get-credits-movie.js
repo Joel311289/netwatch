@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { apiKey, apiUrl, apiMediaTypes, creditDetailMapper, personRoleTypes } from './index.js';
+import { apiKey, apiUrl, apiMediaTypes, creditDetailMapper, personRoleTypes } from '../index.js';
 
 // Filter by role type and merge jobs
 const filterCredits = (credits, role) => {
   const creditsFiltered = [];
   const creditsMapped = credits
-    .map((credit) => creditDetailMapper(credit))
+    .map(creditDetailMapper)
     .filter((credit) => credit.role === role);
 
   creditsMapped.forEach((credit) => {
