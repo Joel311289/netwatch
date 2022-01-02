@@ -24,38 +24,39 @@ const Button = ({
     secondary: secondary,
     [className]: Boolean(className)
   });
-  let Content = <div className={styles.content}>{children}</div>;
 
-  if (role === 'link') {
-    Content = (
-      <a className={styles.link} href={href} target="_blank" rel="noreferrer">
-        {Content}
-      </a>
-    );
+  const handleClick = () => {
+    if (role === 'link') {
+      window.open(href, '_blank').focus();
+    } else {
+      onClick && onClick();
+    }
+  };
+
+  const Button = () => (
+    <button
+      className={`${styles.wrapper} ${classes}`}
+      onClick={handleClick}
+      disabled={Boolean(disabled)}>
+      {children}
+    </button>
+  );
+
+  if (!tooltip) {
+    return Button();
   }
 
   return (
-    <button
-      className={`${styles.wrapper} ${classes}`}
-      onClick={onClick}
-      disabled={Boolean(disabled)}
-    >
-      {tooltip && (
-        <Tooltip
-          title={tooltip}
-          className="test"
-          classes={{ tooltip: styles.tooltip }}
-          PopperProps={{
-            disablePortal: true
-          }}
-          arrow
-        >
-          {Content}
-        </Tooltip>
-      )}
-
-      {!tooltip && Content}
-    </button>
+    <Tooltip
+      title={tooltip}
+      className="test"
+      classes={{ tooltip: styles.tooltip }}
+      PopperProps={{
+        disablePortal: true
+      }}
+      arrow>
+      {Button()}
+    </Tooltip>
   );
 };
 

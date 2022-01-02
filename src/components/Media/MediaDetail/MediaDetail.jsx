@@ -1,16 +1,16 @@
 import React from 'react';
-import { FiPlay } from 'react-icons/fi';
-import { BiGlobe, BiPlus, BiTv } from 'react-icons/bi';
+import { BiGlobe, BiPlus } from 'react-icons/bi';
 import { useBreakpointStyles } from '../../../hooks/useBreakpointStyles';
 import { useVibrantColor } from '../../../hooks/useVibrantColor';
 import MediaItem from '../MediaItem/MediaItem';
 import MediaDetailSkeleton from './MediaDetail.skeleton';
+import MediaDetailHeader from './MediaDetailHeader';
 import MediaDetailCredits from './MediaDetailCredits';
-import Chip from '../../UI/Chip/Chip';
 import Button from '../../UI/Button/Button';
 import { MediaDefaultProps, MediaPropTypes } from '../../../utils/constants';
 import desktopStyles from './MediaDetail.module.css';
 import mobileStyles from './MediaDetail.mobile.module.css';
+import MediaDetailWatch from './MediaDetailWatch';
 
 const MediaDetail = ({
   skeleton,
@@ -27,13 +27,7 @@ const MediaDetail = ({
 }) => {
   const { rgb: mainColor } = useVibrantColor(backdrop);
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
-  const subheadings = [
-    { label: date },
-    { label: duration },
-    ...(number_seasons ? [{ label: `${number_seasons} temporada(s)` }] : [])
-  ];
   const actions = [
-    { label: 'Ver trailer', icon: <FiPlay /> },
     { tooltip: 'Añadir Mi lista', icon: <BiPlus /> },
     { tooltip: 'Sitio web', icon: <BiGlobe /> }
   ];
@@ -41,29 +35,6 @@ const MediaDetail = ({
   if (skeleton) {
     return <MediaDetailSkeleton />;
   }
-
-  const Header = () => {
-    return (
-      <div className={styles.header}>
-        <div className={styles.title}>
-          <h2 className={styles.heading}>{title}</h2>
-          <span className={styles.subheadings}>
-            {subheadings.map(({ label }, index) => (
-              <React.Fragment key={index}>
-                {label}
-                <span className={styles.separator}>•</span>
-              </React.Fragment>
-            ))}
-          </span>
-        </div>
-        <div className={styles.genres}>
-          {(genres || []).map((genre) => (
-            <Chip key={genre} text={genre} />
-          ))}
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -78,26 +49,18 @@ const MediaDetail = ({
       )}
 
       <div className={`${styles.content}`}>
-        {Header()}
+        <MediaDetailHeader
+          styles={styles}
+          title={title}
+          date={date}
+          duration={duration}
+          number_seasons={number_seasons}
+          genres={genres}
+        />
 
         <div className={styles.image}>
           <MediaItem image={image} width={250} ratio={1.5} />
         </div>
-
-        {watch_providers && (
-          <div className={styles.providers}>
-            <div className={styles['provider-label']}>Disponible en:</div>
-            <div className={styles['provider-items']}>
-              {watch_providers.providers.map(({ id, image }) => (
-                <img key={id} src={image} className={styles['provider-item']} />
-              ))}
-            </div>
-            <Button className={styles.action} role="link" href={watch_providers.watch_link}>
-              <BiTv />
-              <span className={styles.label}>Ver ahora</span>
-            </Button>
-          </div>
-        )}
 
         <span className={styles.description}>{description}</span>
         <div className={styles.credits}>
@@ -105,10 +68,11 @@ const MediaDetail = ({
         </div>
 
         <div className={styles.actions}>
-          {actions.map(({ label, icon, tooltip }, index) => (
+          <MediaDetailWatch styles={styles} watch_providers={watch_providers} />
+
+          {actions.map(({ icon, tooltip }, index) => (
             <Button key={index} tooltip={tooltip} className={styles.action}>
               {icon}
-              <span className={styles.label}>{label}</span>
             </Button>
           ))}
         </div>
