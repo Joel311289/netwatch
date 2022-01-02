@@ -39,14 +39,5 @@ export const truncatedText = (text, limit) => _.truncate(text, { length: limit, 
 export const removeSpecialCharactersText = (text, separator = ' ') =>
   text.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, separator);
 
-export const hexToRgb = (hex) =>
-  hex
-    ? hex
-        .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
-        .substring(1)
-        .match(/.{2}/g)
-        .map((x) => parseInt(x, 16))
-    : '';
-
 export const camelCase = _.camelCase;
 export const kebabCase = _.kebabCase;

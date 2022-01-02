@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { THEMES } from './constants';
 
+export * from './colors.js';
 export * from './arrays.js';
 export * from './strings.js';
 export * from './objects.js';

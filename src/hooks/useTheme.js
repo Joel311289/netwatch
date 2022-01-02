@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
 import { THEMES, THEME_STORAGE_KEY } from '../utils/constants';
 import { getThemeMode } from '../utils/helpers';
+import { useLocalStorage } from './useLocalStorage';
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState(localStorage.getItem(THEME_STORAGE_KEY) || THEMES.LIGHT);
-
-  useEffect(() => {
-    localStorage.setItem(THEME_STORAGE_KEY, String(theme));
-  }, [theme]);
+  const [theme, setTheme] = useLocalStorage(THEME_STORAGE_KEY, THEMES.LIGHT);
 
   const handleTheme = () => setTheme((prev) => getThemeMode(prev.toUpperCase()));
 

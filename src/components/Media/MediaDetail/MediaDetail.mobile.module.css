@@ -5,6 +5,11 @@
   grid-gap: 0 40px;
 }
 
+.backdrop {
+  margin-top: 250px;
+  height: calc(100% - 250px);
+}
+
 .content {
   margin-top: 15px;
   padding: 0 var(--padding-aside);
@@ -13,33 +18,13 @@
 }
 
 .background {
-  display: block;
-  width: 100%;
   height: 250px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   position: relative;
-}
-.background::after {
-  content: '';
-  color: var(--color-white);
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 20px;
-  will-change: opacity;
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    var(--background-color) 60%
-  );
 }
 
 .header {
   grid-column: 1 / span 1;
-  margin: 20px 0;
+  margin: 20px 0 25px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

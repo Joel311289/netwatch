@@ -1,6 +1,8 @@
+import React from 'react';
 import { FiPlay } from 'react-icons/fi';
 import { BiGlobe, BiPlus, BiTv } from 'react-icons/bi';
 import { useBreakpointStyles } from '../../../hooks/useBreakpointStyles';
+import { useVibrantColor } from '../../../hooks/useVibrantColor';
 import MediaItem from '../MediaItem/MediaItem';
 import MediaDetailSkeleton from './MediaDetail.skeleton';
 import MediaDetailCredits from './MediaDetailCredits';
@@ -23,7 +25,13 @@ const MediaDetail = ({
   number_seasons,
   watch_providers
 }) => {
+  const { rgb: mainColor } = useVibrantColor(backdrop);
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
+  const subheadings = [
+    { label: date },
+    { label: duration },
+    ...(number_seasons ? [{ label: `${number_seasons} temporada(s)` }] : [])
+  ];
   const actions = [
     { label: 'Ver trailer', icon: <FiPlay /> },
     { tooltip: 'Añadir Mi lista', icon: <BiPlus /> },
@@ -39,15 +47,14 @@ const MediaDetail = ({
       <div className={styles.header}>
         <div className={styles.title}>
           <h2 className={styles.heading}>{title}</h2>
-          {date && duration && (
-            <span className={styles.date}>
-              {date}
-              <span className={styles.separator}>•</span>
-              {duration}
-              {number_seasons && <span className={styles.separator}>•</span>}
-              {number_seasons && `${number_seasons} temporada(s)`}
-            </span>
-          )}
+          <span className={styles.subheadings}>
+            {subheadings.map(({ label }, index) => (
+              <React.Fragment key={index}>
+                {label}
+                <span className={styles.separator}>•</span>
+              </React.Fragment>
+            ))}
+          </span>
         </div>
         <div className={styles.genres}>
           {(genres || []).map((genre) => (
@@ -60,53 +67,50 @@ const MediaDetail = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>
-
       <div
         className={styles.backdrop}
-        style={
-          {
-            // backgroundImage: `linear-gradient(to bottom, rgba(var(--divider-color-rgb), 0.8), rgba(var(--background-color-rgb), 0.8)), url(${backdrop})`
-          }
-        }
-      >
-        <div className={`${styles.content}`}>
-          {Header()}
+        style={{
+          background: `linear-gradient(to bottom, rgba(${mainColor}, 0.8), rgba(var(--color-backdrop), 0.9))`
+        }}></div>
 
-          <div className={styles.image}>
-            <MediaItem image={image} width={250} ratio={1.5} />
-          </div>
+      {mainColor && (
+        <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>
+      )}
 
-          {/* <MediaItem image={backdrop} width={750} ratio={0.5} /> */}
+      <div className={`${styles.content}`}>
+        {Header()}
 
-          {watch_providers && (
-            <div className={styles.providers}>
-              <div className={styles['provider-label']}>Disponible en:</div>
-              <div className={styles['provider-items']}>
-                {watch_providers.providers.map(({ id, image }) => (
-                  <img key={id} src={image} className={styles['provider-item']} />
-                ))}
-              </div>
-              <Button className={styles.action} role="link" href={watch_providers.watch_link}>
-                <BiTv />
-                <span className={styles.label}>Ver ahora</span>
-              </Button>
+        <div className={styles.image}>
+          <MediaItem image={image} width={250} ratio={1.5} />
+        </div>
+
+        {watch_providers && (
+          <div className={styles.providers}>
+            <div className={styles['provider-label']}>Disponible en:</div>
+            <div className={styles['provider-items']}>
+              {watch_providers.providers.map(({ id, image }) => (
+                <img key={id} src={image} className={styles['provider-item']} />
+              ))}
             </div>
-          )}
-
-          <span className={styles.description}>{description}</span>
-          <div className={styles.credits}>
-            <MediaDetailCredits credits={credits} />
+            <Button className={styles.action} role="link" href={watch_providers.watch_link}>
+              <BiTv />
+              <span className={styles.label}>Ver ahora</span>
+            </Button>
           </div>
+        )}
 
-          <div className={styles.actions}>
-            {actions.map(({ label, icon, tooltip }, index) => (
-              <Button key={index} tooltip={tooltip} className={styles.action}>
-                {icon}
-                <span className={styles.label}>{label}</span>
-              </Button>
-            ))}
-          </div>
+        <span className={styles.description}>{description}</span>
+        <div className={styles.credits}>
+          <MediaDetailCredits credits={credits} />
+        </div>
+
+        <div className={styles.actions}>
+          {actions.map(({ label, icon, tooltip }, index) => (
+            <Button key={index} tooltip={tooltip} className={styles.action}>
+              {icon}
+              <span className={styles.label}>{label}</span>
+            </Button>
+          ))}
         </div>
       </div>
     </div>
