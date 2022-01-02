@@ -1,34 +1,86 @@
-import { useState } from 'react';
+import { useCallback, useState, useRef, useLayoutEffect } from 'react';
 
-export const useLocalStorage = (key, initialValue) => {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
+const isBrowser = typeof window !== 'undefined';
+const noop = () => {};
+
+export const useLocalStorage = (key, initialValue, options) => {
+  if (!isBrowser) {
+    return [initialValue, noop, noop];
+  }
+  if (!key) {
+    throw new Error('useLocalStorage key may not be falsy');
+  }
+
+  const deserializer = options
+    ? options.raw
+      ? (value) => value
+      : options.deserializer
+    : JSON.parse;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const initializer = useRef((key) => {
     try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
+      const serializer = options ? (options.raw ? String : options.serializer) : JSON.stringify;
+
+      const localStorageValue = localStorage.getItem(key);
+      if (localStorageValue !== null) {
+        return deserializer(localStorageValue);
+      } else {
+        initialValue && localStorage.setItem(key, serializer(initialValue));
+        return initialValue;
+      }
     } catch (error) {
-      // If error also return initialValue
       console.log(error);
+      // If user is in private mode or has storage restriction
+      // localStorage can throw. JSON.parse and JSON.stringify
+      // can throw, too.
       return initialValue;
     }
   });
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [state, setState] = useState(undefined > (() => initializer.current(key)));
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useLayoutEffect(() => setState(initializer.current(key)), [key]);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const set = useCallback(
+    (valOrFunc) => {
+      try {
+        const newState = typeof valOrFunc === 'function' ? valOrFunc(state) : valOrFunc;
+        if (typeof newState === 'undefined') return;
+        let value;
+
+        if (options)
+          if (options.raw)
+            if (typeof newState === 'string') value = newState;
+            else value = JSON.stringify(newState);
+          else if (options.serializer) value = options.serializer(newState);
+          else value = JSON.stringify(newState);
+        else value = JSON.stringify(newState);
+
+        localStorage.setItem(key, value);
+        setState(deserializer(value));
+      } catch (error) {
+        console.log(error);
+        // If user is in private mode or has storage restriction
+        // localStorage can throw. Also JSON.stringify can throw.
+      }
+    },
+    [key, setState]
+  );
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const remove = useCallback(() => {
     try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
+      localStorage.removeItem(key);
+      setState(undefined);
+    } catch {
+      // If user is in private mode or has storage restriction
+      // localStorage can throw.
     }
-  };
-  return [storedValue, setValue];
+  }, [key, setState]);
+
+  return [state, set, remove];
 };

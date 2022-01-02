@@ -13,8 +13,7 @@ export * from './breakpoints.js';
 export const showSkeleton = (skeleton) =>
   Array.isArray(skeleton) ? Boolean(skeleton.length) : Boolean(skeleton);
 
-export const getThemeMode = (current) =>
-  THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK;
+export const getThemeMode = (current) => (current === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
 
 export const throttle = _.throttle;
 export const debounce = _.debounce;

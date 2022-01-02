@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmptyArray } from '../../../utils/helpers';
 import List from '../../UI/List/List';
-import styles from './MediaDetailCredits.module.css';
+import styles from './MediaDetail.module.css';
 
 const MediaDetailCredits = ({ credits }) => {
   return (
@@ -13,7 +13,7 @@ const MediaDetailCredits = ({ credits }) => {
           <div key={label} className={styles.credit}>
             <span>{label}</span>
 
-            <div className={styles.data}>
+            <div className={styles.persons}>
               {data.map(({ name }) => (
                 <React.Fragment key={name}>
                   <span>{name}</span>
