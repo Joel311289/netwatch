@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FiX } from 'react-icons/fi';
 import Portal from '../Portal/Portal';
+import { sleep } from '../../../utils/helpers';
 import styles from './Modal.module.css';
 
 const Modal = ({ children, visible, locked, size, onClose }) => {
@@ -14,17 +15,20 @@ const Modal = ({ children, visible, locked, size, onClose }) => {
     const keyHandler = (e) => !locked && [27].indexOf(e.which) >= 0 && onClose();
     const clickHandler = (e) => !locked && e.target === current && onClose();
 
+    const handleVisible = async () => {
+      await sleep(10);
+      document.activeElement.blur();
+      setActive(visible);
+      document.querySelector('#root').setAttribute('inert', 'true');
+    };
+
     if (current) {
       current.addEventListener('transitionend', transitionEnd);
       current.addEventListener('click', clickHandler);
       window.addEventListener('keyup', keyHandler);
     }
     if (visible) {
-      window.setTimeout(() => {
-        document.activeElement.blur();
-        setActive(visible);
-        document.querySelector('#root').setAttribute('inert', 'true');
-      }, 10);
+      handleVisible();
     }
 
     return () => {

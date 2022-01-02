@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { sleep } from '../utils/helpers';
 
 export const useFetch = (url, delay = 500) => {
   const isMounted = useRef(true);
@@ -15,15 +16,15 @@ export const useFetch = (url, delay = 500) => {
 
     fetch(url)
       .then((resp) => resp.json())
-      .then((data) => {
+      .then(async (data) => {
         if (isMounted.current) {
-          setTimeout(() => {
-            setState({
-              loading: false,
-              error: null,
-              data
-            });
-          }, delay);
+          await sleep(delay);
+
+          setState({
+            loading: false,
+            error: null,
+            data
+          });
         }
       })
       .catch(() => {

@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { useTheme } from '../../../hooks/useTheme';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 const Portal = ({ children, parent, className, size }) => {
-  const [theme] = useTheme();
+  const { theme } = useContext(ThemeContext);
   const el = useMemo(() => document.createElement('div'), []);
 
   useEffect(() => {

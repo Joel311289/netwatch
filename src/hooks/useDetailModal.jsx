@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import MediaModalDetail from '../components/Media/MediaModalDetail/MediaModalDetail';
 import Modal from '../components/UI/Modal/Modal';
 import { routeMediaDetail } from '../services';
+import { sleep } from '../utils/helpers';
 
 export const useDetailModal = () => {
   const [item, setItem] = useState({});
@@ -11,11 +12,10 @@ export const useDetailModal = () => {
     setItem(item);
     setOpened(true);
   };
-  const onModalClose = () => {
+  const onModalClose = async () => {
     setOpened(false);
-    setTimeout(() => {
-      setItem(null);
-    }, 500);
+    await sleep(500);
+    setItem(null);
   };
 
   const ModalDetail = useMemo(() => {
