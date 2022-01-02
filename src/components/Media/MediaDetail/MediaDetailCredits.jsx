@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmptyArray } from '../../../utils/helpers';
 import List from '../../UI/List/List';
@@ -7,17 +8,17 @@ const MediaDetailCredits = ({ credits }) => {
   return (
     <List divider>
       {(credits || [])
-        .filter((item) => !isEmptyArray(item.data))
+        .filter(({ data }) => !isEmptyArray(data))
         .map(({ label, data }) => (
           <div key={label} className={styles.credit}>
-            <span className={styles.label}>{label}</span>
+            <span>{label}</span>
 
             <div className={styles.data}>
-              {data.map(({ name }, index) => (
-                <div key={name} className={styles.item}>
+              {data.map(({ name }) => (
+                <React.Fragment key={name}>
                   <span>{name}</span>
-                  {index !== data.length - 1 && <span className={styles.separator}>•</span>}
-                </div>
+                  <span className={styles.separator}>•</span>
+                </React.Fragment>
               ))}
             </div>
           </div>

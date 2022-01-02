@@ -1,7 +1,11 @@
 import _ from 'lodash';
-import moment from 'moment';
-import 'moment/dist/locale/es';
-import { BREAKPOINTS, THEMES } from './constants';
+import { THEMES } from './constants';
+
+export * from './arrays.js';
+export * from './strings.js';
+export * from './objects.js';
+export * from './collections.js';
+export * from './breakpoints.js';
 
 // Utils
 
@@ -10,111 +14,6 @@ export const showSkeleton = (skeleton) =>
 
 export const getThemeMode = (current) =>
   THEMES[current] && Object.keys(THEMES).indexOf(current) ? THEMES.LIGHT : THEMES.DARK;
-
-export const getDeviceBreakpoint = (width) => {
-  if (width < BREAKPOINTS.sm.width) {
-    return BREAKPOINTS.xs.name;
-  } else if (width < BREAKPOINTS.md.width) {
-    return BREAKPOINTS.sm.name;
-  } else if (width < BREAKPOINTS.lg.width) {
-    return BREAKPOINTS.md.name;
-  } else if (width < BREAKPOINTS.xl.width) {
-    return BREAKPOINTS.lg.name;
-  } else if (width < BREAKPOINTS.xxl.width) {
-    return BREAKPOINTS.xl.name;
-  } else {
-    return BREAKPOINTS.xxl.name;
-  }
-};
-export const getBreakpoints = () => {
-  const breakpoints = {};
-  Object.keys(BREAKPOINTS).forEach((breakpoint) => {
-    const { width, slidesPerView, spaceBetween } = BREAKPOINTS[breakpoint];
-    breakpoints[width] = { slidesPerView, spaceBetween };
-  });
-  return breakpoints;
-};
-export const getBreakpointConfigPlaceholders = (breakpoint) =>
-  BREAKPOINTS[breakpoint].slidesPerView;
-export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
-export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs.name;
-export const isMobileTablet = (breakpoint) =>
-  [BREAKPOINTS.xs.name, BREAKPOINTS.sm.name].includes(breakpoint);
-export const isMobileTabletMedium = (breakpoint) =>
-  [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
-
-export const getWidth = (element) => (element ? element.getBoundingClientRect().width : 0);
-export const getHeight = (element) => (element ? element.getBoundingClientRect().height : 0);
-export const getSizes = (element) => (element ? element.getBoundingClientRect() : {});
-export const getHeightRatio = (width, ratio) => (width && !isNaN(width) ? width * ratio : 'auto');
-
-export const intersectionArrays = (array1, array2) =>
-  array1.filter((value) => array2.includes(value));
-
-export const diferenceArrays = (array1, array2) => array1.filter((x) => !array2.includes(x));
-
-export const sortArrayByKey = (array, key, descending = false) => {
-  const arraySorted = array.sort((a, b) => {
-    const x = a[key];
-    const y = b[key];
-    return x < y ? -1 : x > y ? 1 : 0;
-  });
-  return descending ? arraySorted.reverse() : arraySorted;
-};
-
-export const truncateArray = (array, limit) => (Array.isArray(array) ? array.slice(0, limit) : []);
-
-export const getEmptyArray = (size, content = null) => Array(size).fill(content);
-
-export const isEmptyArray = (array) =>
-  Array.isArray(array) && array.length > 0 ? !array.find((item) => Boolean(item)) : true;
-
-export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
-export const removeSpecialCharactersText = (text, separator = ' ') =>
-  text.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, separator);
-
-export const formattedDate = (date) => {
-  moment.locale('es');
-  return moment(new Date(date)).format('DD MMM YYYY');
-};
-export const formattedYear = (date) => new Date(date).getFullYear();
-export const formattedTime = (duration) => {
-  const hours = duration / 60;
-  const rhours = Math.floor(hours);
-  const minutes = (hours - rhours) * 60;
-  const rminutes = Math.round(minutes);
-  return [
-    { number: rhours, sufix: 'h' },
-    { number: rminutes, sufix: 'm' }
-  ]
-    .filter(({ number }) => !!number)
-    .map(({ number, sufix }) => `${number}${sufix}`)
-    .join(' ');
-};
-
-export const hexToRgb = (hex) =>
-  hex
-    ? hex
-        .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
-        .substring(1)
-        .match(/.{2}/g)
-        .map((x) => parseInt(x, 16))
-    : '';
-
-export const isValidateUrl = (value) => {
-  return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
-    value
-  );
-};
-
-export const queryParams = () => {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const queryParams = Object.fromEntries(urlSearchParams.entries());
-
-  return queryParams;
-};
-
-export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
 
 export const throttle = _.throttle;
 export const debounce = _.debounce;

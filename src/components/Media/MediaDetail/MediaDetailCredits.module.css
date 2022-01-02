@@ -3,9 +3,6 @@
   flex-wrap: wrap;
   gap: 5px 20px;
   padding: 10px 0;
-}
-
-.label {
   font-weight: 500;
 }
 
@@ -17,4 +14,7 @@
 
 .separator {
   margin: 0 6px;
+}
+.separator:last-of-type {
+  display: none;
 }
