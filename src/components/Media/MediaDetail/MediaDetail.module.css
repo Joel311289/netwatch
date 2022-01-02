@@ -31,19 +31,57 @@
   max-width: var(--size-max);
   margin: 0 auto;
   display: grid;
-  grid-gap: 0 40px;
-  grid-template-columns: 250px auto;
-  margin: 0 auto;
-}
-.backdrop.skeleton {
-  background-color: transparent;
+  grid-gap: 0;
+  grid-template-columns: 250px 40px min-content 20px 1fr;
 }
 
 .header {
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 5;
+  grid-row: 1 / span 1;
   margin-top: 20px;
   margin-bottom: 30px;
   min-height: 50px;
+}
+
+.image {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 5;
+}
+
+.description {
+  grid-column: 3 / span 3;
+  grid-row: 2 / span 1;
+  display: inline-block;
+  width: 100%;
+  font-size: 1rem;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.credits {
+  grid-column: 3 / span 3;
+  grid-row: 3 / span 1;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  width: fit-content;
+}
+
+.buttons {
+  grid-column: 3 / span 1;
+  grid-row: 4 / span 1;
+}
+
+.links {
+  grid-column: 5 / span 1;
+  grid-row: 4 / span 1;
 }
 
 .title {
@@ -64,10 +102,6 @@
   font-size: 1rem;
 }
 
-.image {
-  grid-row: 2 / span 5;
-}
-
 .genres {
   height: fit-content;
   display: flex;
@@ -75,19 +109,6 @@
   align-items: center;
   gap: 5px;
   margin-top: 5px;
-}
-
-.description {
-  display: inline-block;
-  width: 100%;
-  font-size: 1rem;
-  text-align: justify;
-  margin-bottom: 20px;
-}
-
-.credits {
-  width: fit-content;
-  margin-bottom: 20px;
 }
 
 .credit {
@@ -98,15 +119,6 @@
   padding: 10px 0;
   font-weight: 500;
 }
-.credit.skeleton {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin: 10px 0;
-}
-.credit.skeleton:not(:first-of-type) {
-  margin-top: 5px;
-}
 
 .persons {
   font-weight: 400;
@@ -114,31 +126,16 @@
   flex-wrap: wrap;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-}
-
 .provider-logo {
-  height: 42px;
+  height: 32px;
   border-radius: 5px;
 }
 .provider-stream {
   padding: 0 20px 0 10px !important;
-  gap: 3px !important;
+  gap: 10px !important;
 }
 
-.actions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.action {
+.link {
   border: 2px solid var(--color-text);
   color: var(--color-text);
   background-color: transparent;
@@ -150,7 +147,7 @@
   width: 44px;
   min-width: 44px;
 }
-.action:hover {
+.link:hover {
   color: var(--color-button-text);
   background-color: var(--color-link-text);
 }

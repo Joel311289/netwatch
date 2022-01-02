@@ -49,7 +49,6 @@ const Button = ({
   return (
     <Tooltip
       title={tooltip}
-      className="test"
       classes={{ tooltip: styles.tooltip }}
       PopperProps={{
         disablePortal: true
