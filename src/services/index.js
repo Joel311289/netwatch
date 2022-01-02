@@ -4,7 +4,9 @@ import { formattedDate, formattedTime, removeSpecialCharactersText } from '../ut
 const get = objectPath.get;
 export const apiKey = import.meta.env.VITE_API_KEY;
 export const apiUrl = import.meta.env.VITE_API_URL;
-export const apiImagesUrl = import.meta.env.VITE_API_IMAGES_URL;
+export const apiImageUrl = import.meta.env.VITE_API_IMAGES_URL;
+export const apiBackdropUrl = import.meta.env.VITE_API_BACKDROP_URL;
+export const apiLogoUrl = import.meta.env.VITE_API_LOGO_URL;
 export const apiMediaTypes = {
   ALL: 'all',
   MOVIE: 'movie',
@@ -46,7 +48,7 @@ export const isMediaSerie = (media) =>
 
 export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
-export const getImageMediaUrl = (path) => (path ? `${apiImagesUrl}${path}` : '');
+export const getImageMediaUrl = (baseUrl, path) => (path ? `${baseUrl}${path}` : '');
 
 export const getPersonRoleType = ({ character, department }) =>
   character ? personRoleTypes.Acting : personRoleTypes[department];
@@ -67,8 +69,8 @@ export const mediaDetailMapper = (media) => {
     id: get(media, 'id'),
     type: getMediaType({ type: get(media, 'media_type') }),
     description: get(media, 'overview'),
-    image: getImageMediaUrl(get(media, 'poster_path')),
-    backdrop: getImageMediaUrl(get(media, 'backdrop_path')),
+    image: getImageMediaUrl(apiImageUrl, get(media, 'poster_path')),
+    backdrop: getImageMediaUrl(apiBackdropUrl, get(media, 'backdrop_path')),
     genres: (get(media, 'genres') || []).map((g) => g.name),
     original_language: get(media, 'original_language'),
     popularity: get(media, 'popularity'),
@@ -124,7 +126,7 @@ export const creditDetailMapper = (credit) => {
     job: [get(credit, 'job')],
     name: get(credit, 'name'),
     character: get(credit, 'character'),
-    image: getImageMediaUrl(get(credit, 'profile_path'))
+    image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };
 };
 
@@ -134,7 +136,7 @@ export const creatorDetailMapper = (creator) => {
     role: personRoleTypes.Creator,
     job: 'Creator',
     name: get(creator, 'name'),
-    image: getImageMediaUrl(get(creator, 'profile_path'))
+    image: getImageMediaUrl(apiImageUrl, get(creator, 'profile_path'))
   };
 };
 
@@ -149,7 +151,7 @@ export const watchProviderDetailMapper = (provider) => {
   return {
     id: get(provider, 'provider_id'),
     name: get(provider, 'provider_name'),
-    image: getImageMediaUrl(get(provider, 'logo_path'))
+    image: getImageMediaUrl(apiLogoUrl, get(provider, 'logo_path'))
   };
 };
 

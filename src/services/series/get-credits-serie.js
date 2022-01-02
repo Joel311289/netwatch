@@ -4,9 +4,7 @@ import { apiKey, apiUrl, apiMediaTypes, creditDetailMapper, personRoleTypes } fr
 // Filter by role type and merge jobs
 const filterCredits = (credits, role) => {
   const creditsFiltered = [];
-  const creditsMapped = credits
-    .map(creditDetailMapper)
-    .filter((credit) => credit.role === role);
+  const creditsMapped = credits.map(creditDetailMapper).filter((credit) => credit.role === role);
 
   creditsMapped.forEach((credit) => {
     let duplicate = creditsFiltered.findIndex((c) => c.id === credit.id);
@@ -35,7 +33,7 @@ export const getCreditsSerie = (id) => {
       const { cast } = response.data || {};
 
       return {
-        cast: filterCredits(cast, personRoleTypes.Acting),
+        cast: filterCredits(cast, personRoleTypes.Acting)
       };
     })
     .catch(console.error);

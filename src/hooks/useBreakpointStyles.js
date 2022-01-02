@@ -8,7 +8,7 @@ export const useBreakpointStyles = (desktopStyles, mobileStyles) => {
 
   useEffect(() => {
     if (isMobileTablet(breakpoint)) {
-      setStyles({ ...desktopStyles, ...mobileStyles });
+      setStyles(mobileStyles);
     } else {
       setStyles(desktopStyles);
     }

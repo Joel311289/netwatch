@@ -37,16 +37,23 @@ const MediaDetail = ({
   const Header = () => {
     return (
       <div className={styles.header}>
-        <h2 className={styles.heading}>{title}</h2>
-        {date && duration && (
-          <span className={styles.date}>
-            {date}
-            <span className={styles.separator}>•</span>
-            {duration}
-            {number_seasons && <span className={styles.separator}>•</span>}
-            {number_seasons && `${number_seasons} temporada(s)`}
-          </span>
-        )}
+        <div className={styles.title}>
+          <h2 className={styles.heading}>{title}</h2>
+          {date && duration && (
+            <span className={styles.date}>
+              {date}
+              <span className={styles.separator}>•</span>
+              {duration}
+              {number_seasons && <span className={styles.separator}>•</span>}
+              {number_seasons && `${number_seasons} temporada(s)`}
+            </span>
+          )}
+        </div>
+        <div className={styles.genres}>
+          {(genres || []).map((genre) => (
+            <Chip key={genre} text={genre} />
+          ))}
+        </div>
       </div>
     );
   };
@@ -61,13 +68,16 @@ const MediaDetail = ({
           {
             // backgroundImage: `linear-gradient(to bottom, rgba(var(--divider-color-rgb), 0.8), rgba(var(--background-color-rgb), 0.8)), url(${backdrop})`
           }
-        }>
+        }
+      >
         <div className={`${styles.content}`}>
           {Header()}
 
           <div className={styles.image}>
             <MediaItem image={image} width={250} ratio={1.5} />
           </div>
+
+          {/* <MediaItem image={backdrop} width={750} ratio={0.5} /> */}
 
           {watch_providers && (
             <div className={styles.providers}>
@@ -83,12 +93,6 @@ const MediaDetail = ({
               </Button>
             </div>
           )}
-
-          <div className={styles.genres}>
-            {(genres || []).map((genre) => (
-              <Chip key={genre} text={genre} />
-            ))}
-          </div>
 
           <span className={styles.description}>{description}</span>
           <div className={styles.credits}>

@@ -42,10 +42,17 @@
   min-height: 50px;
 }
 
+.title {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .heading {
   width: fit-content;
   margin: 0 0 2px 0;
-  flex-grow: 1;
 }
 
 .date {
@@ -63,7 +70,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 5px;
-  margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .description {
@@ -139,7 +146,7 @@
 
 .provider-items {
   display: flex;
-  gap: 5px
+  gap: 5px;
 }
 
 .provider-item {

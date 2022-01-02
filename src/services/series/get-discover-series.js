@@ -1,7 +1,16 @@
 import axios from 'axios';
-import { apiKey, apiUrl, getWatchProvidersSupported, mediaDetailMapper, apiMediaTypes } from '../index.js';
+import {
+  apiKey,
+  apiUrl,
+  getWatchProvidersSupported,
+  mediaDetailMapper,
+  apiMediaTypes
+} from '../index.js';
 
-export const getDiscoverSeries = (page = 1, with_watch_providers = getWatchProvidersSupported()) => {
+export const getDiscoverSeries = (
+  page = 1,
+  with_watch_providers = getWatchProvidersSupported()
+) => {
   const params = {
     api_key: apiKey,
     with_watch_providers,

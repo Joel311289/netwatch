@@ -38,7 +38,8 @@ const Button = ({
     <button
       className={`${styles.wrapper} ${classes}`}
       onClick={onClick}
-      disabled={Boolean(disabled)}>
+      disabled={Boolean(disabled)}
+    >
       {tooltip && (
         <Tooltip
           title={tooltip}
@@ -47,7 +48,8 @@ const Button = ({
           PopperProps={{
             disablePortal: true
           }}
-          arrow>
+          arrow
+        >
           {Content}
         </Tooltip>
       )}
@@ -68,7 +70,7 @@ Button.propTypes = {
   ...ElementPropTypes,
   tooltip: PropTypes.string,
   href: PropTypes.string,
-  role: PropTypes.oneOf(['button', 'link', '']).isRequired,
+  role: PropTypes.oneOf(['button', 'link', '']),
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xlarge', '']).isRequired,
   secondary: PropTypes.bool,
   clear: PropTypes.bool,
