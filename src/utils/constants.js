@@ -97,10 +97,12 @@ export const ElementPropTypes = {
 };
 
 export const MediaDefaultProps = {
+  credits: [],
   genres: [],
   cast: [],
   director: [],
-  writer: []
+  writer: [],
+  external_ids: []
 };
 
 export const MediaPropTypes = {
@@ -116,5 +118,11 @@ export const MediaPropTypes = {
   directors: PropTypes.array,
   writers: PropTypes.array,
   number_episodes: PropTypes.number,
-  number_seasons: PropTypes.number
+  number_seasons: PropTypes.number,
+  watch_providers: PropTypes.shape({
+    watch_link: PropTypes.string,
+    providers: PropTypes.array
+  }),
+  external_ids: PropTypes.array,
+  home_page: PropTypes.string
 };

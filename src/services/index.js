@@ -75,7 +75,8 @@ export const mediaDetailMapper = (media) => {
     original_language: get(media, 'original_language'),
     popularity: get(media, 'popularity'),
     vote_count: get(media, 'vote_count'),
-    vote_average: get(media, 'vote_average')
+    vote_average: get(media, 'vote_average'),
+    homepage: get(media, 'homepage')
   };
 
   if (isMediaMovie(media)) {
@@ -87,7 +88,6 @@ export const mediaDetailMapper = (media) => {
       date: formattedDate(get(media, 'release_date')),
       duration: formattedTime(get(media, 'runtime')),
       adult: get(media, 'adult'),
-      homepage: get(media, 'homepage'),
       video: get(media, 'video')
     };
   }
@@ -155,17 +155,16 @@ export const watchProviderDetailMapper = (provider) => {
   };
 };
 
-export const externalsDetailMapper = (externals) => {
+export const externalsIdsDetailMapper = (externals) => {
   const url = (path, key) => {
     const id = get(externals, key);
     return id ? `${path}${id}` : '';
   };
 
-  return {
-    id: get(externals, 'id'),
-    imdb: url(`https://www.imdb.com/title/', 'imdb_id'`),
-    facebook: url(`https://www.facebook.com/', 'facebook_id'`),
-    instagram: url(`https://www.instagram.com/', 'instagram_id'`),
-    twitter: url(`https://twitter.com/', 'twitter_id'`)
-  };
+  return [
+    { id: 'imdb', name: 'IMDb', url: url('https://www.imdb.com/title/', 'imdb_id') },
+    { id: 'facebook', name: 'Facebook', url: url('https://www.facebook.com/', 'facebook_id') },
+    { id: 'instagram', name: 'Instagram', url: url('https://www.instagram.com/', 'instagram_id') },
+    { id: 'twitter', name: 'Twitter', url: url('https://twitter.com/', 'twitter_id') }
+  ];
 };

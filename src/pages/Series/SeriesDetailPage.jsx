@@ -4,6 +4,7 @@ import MediaDetail from '../../components/Media/MediaDetail/MediaDetail';
 import { useLoadDataPage } from '../../hooks/useLoadDataPage';
 import { getDetailSerie } from '../../services/series/get-detail-serie';
 import { getWatchProvidersSerie } from '../../services/series/get-watch-providers-serie';
+import { getExternalIdsSerie } from '../../services/series/get-external-ids-serie';
 import { getCreditsSerie } from '../../services/series/get-credits-serie';
 import { getIdFromParams, truncateArray } from '../../utils/helpers';
 
@@ -15,10 +16,13 @@ const SeriesDetailPage = () => {
     getWatchProvidersSerie.bind(this, id)
   );
   const { data, loading: loadingCredits } = useLoadDataPage(getCreditsSerie.bind(this, id));
+  const { data: external_ids, loading: loadingExternalIds } = useLoadDataPage(
+    getExternalIdsSerie.bind(this, id)
+  );
 
   const isLoading = useMemo(
-    () => loading && loadingCredits && loadingWatchProviders,
-    [loading, loadingCredits, loadingWatchProviders]
+    () => loading && loadingCredits && loadingWatchProviders && loadingExternalIds,
+    [loading, loadingCredits, loadingWatchProviders, loadingExternalIds]
   );
 
   const { creators } = serie || {};
@@ -34,6 +38,7 @@ const SeriesDetailPage = () => {
         skeleton={isLoading}
         {...serie}
         watch_providers={watch_providers}
+        external_ids={external_ids}
         credits={credits}
       />
 
