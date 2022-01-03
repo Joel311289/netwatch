@@ -12,7 +12,8 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           className={styles['toggle-checkbox']}
           type="checkbox"
           checked={theme === THEMES.DARK}
-          onChange={onChangeTheme}></input>
+          onChange={onChangeTheme}
+        ></input>
         <div className={styles['toggle-slot']}>
           <div className={styles['sun-icon-wrapper']}>
             <BiSun className={styles['sun-icon']} />
@@ -33,7 +34,8 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           <img
             className={styles.logo}
             src={logoUrl || `/assets/images/logo-${theme}.png`}
-            alt="logo"></img>
+            alt="logo"
+          ></img>
           <p className={styles.title}>{title}</p>
         </Link>
 
@@ -49,7 +51,7 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
 };
 
 Header.defaultProps = {
-  title: 'Title',
+  title: 'Title'
 };
 Header.propTypes = {
   title: PropTypes.string.isRequired,

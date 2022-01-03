@@ -1,5 +1,5 @@
 .wrapper {
-  transition: all 0.2s;
+  transition: all 0.2s ease-in;
 }
 
 .wrapper.text + .wrapper.text {
@@ -21,4 +21,8 @@
 
 .wrapper.chip .skeleton {
   border-radius: 1rem !important;
+}
+
+.wrapper.circular .skeleton {
+  border-radius: 50% !important;
 }

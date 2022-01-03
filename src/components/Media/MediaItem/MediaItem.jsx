@@ -29,7 +29,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
   }
 
   return (
-    <div className={styles.wrapper} style={{ width, minWidth: width }}>
+    <div className={`${styles.wrapper}`} style={{ width, minWidth: width }}>
       {to && <Link to={to}>{Image(true)}</Link>}
       {!to && Image()}
 

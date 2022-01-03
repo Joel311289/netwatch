@@ -149,12 +149,18 @@
   background-color: var(--color-link-text);
 }
 .link.external-id {
-  font-size: 1.5rem;  
+  font-size: 1.5rem;
 }
 
 .separator {
   margin: 0 7px;
 }
 .separator:last-of-type {
+  display: none;
+}
+
+/* Skeleton */
+
+.skeleton .background {
   display: none;
 }

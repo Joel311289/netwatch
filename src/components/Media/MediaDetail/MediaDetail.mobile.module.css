@@ -64,3 +64,9 @@
   justify-content: center;
   text-align: center;
 }
+
+/* Skeleton */
+
+.skeleton .background {
+  display: block;
+}

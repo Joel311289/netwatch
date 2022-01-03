@@ -1,65 +1,60 @@
-import { useBreakpointStyles } from '../../../hooks/useBreakpointStyles';
+import PropTypes from 'prop-types';
 import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
 import Skeleton from '../../UI/Skeleton/Skeleton';
-import { getEmptyArray } from '../../../utils/helpers';
 import List from '../../UI/List/List';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import desktopStyles from './MediaDetail.module.css';
-import mobileStyles from './MediaDetail.mobile.module.css';
+import { getEmptyArray } from '../../../utils/helpers';
 
-const MediaDetailSkeleton = () => {
-  const styles = useBreakpointStyles(desktopStyles, mobileStyles);
-
+const MediaDetailSkeleton = ({ styles }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${styles.skeleton}`}>
+      <div className={`${styles.backdrop} ${styles.skeleton}`}></div>
+
       <div className={styles.background}>
         <Skeleton height={250} />
       </div>
 
-      <div className={`${styles.backdrop} ${styles.skeleton}`}>
-        <div className={styles.content}>
-          <div className={styles.header}>
-            <Skeleton width={280} height={30} />
-            <Skeleton variant="text" width={180} height={15} style={{ marginTop: 5 }} />
-          </div>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <Skeleton width={280} height={30} />
+          <Skeleton variant="text" width={180} height={15} style={{ marginTop: 5 }} />
+        </div>
 
-          <div className={styles.image}>
-            <MediaItemSkeleton body={false} width={250} ratio={1.5} />
-          </div>
+        <div className={styles.image}>
+          <MediaItemSkeleton body={false} width={250} ratio={1.5} />
+        </div>
 
-          <div className={styles.genres}>
+        <div className={styles.description}>
+          {getEmptyArray(4).map((_, index) => (
+            <Skeleton key={index} variant="text" style={{ maxWidth: '100%' }} />
+          ))}
+        </div>
+
+        <div className={styles.credits}>
+          <List divider>
             {getEmptyArray(3).map((_, index) => (
-              <Skeleton key={index} variant="chip" width={70} />
+              <div key={index} className={styles.credit}>
+                <Skeleton width={120} height={19} />
+                <Skeleton width={350} height={19} style={{ maxWidth: '50vw' }} />
+              </div>
             ))}
-          </div>
+          </List>
+        </div>
 
-          <div className={styles.description}>
-            {getEmptyArray(4).map((_, index) => (
-              <Skeleton key={index} variant="text" style={{ maxWidth: '100%' }} />
-            ))}
-          </div>
-
-          <div className={styles.credits}>
-            <List divider>
-              {getEmptyArray(3).map((_, index) => (
-                <div key={index} className={`${styles.credit} ${styles.skeleton}`}>
-                  <Skeleton width={120} height={19} />
-                  <Skeleton width={350} height={19} style={{ maxWidth: '50vw' }} />
-                </div>
-              ))}
-            </List>
-          </div>
-
-          <div className={styles.actions}>
-            <Skeleton width={150} height={44} />
-          </div>
+        <div className={`${styles.actions} ${styles.buttons}`}>
+          <Skeleton width={150} height={44} />
+        </div>
+        <div className={`${styles.actions} ${styles.links}`}>
+          <Skeleton variant="circular" width={44} />
+          <Skeleton variant="circular" width={44} />
+          <Skeleton variant="circular" width={44} />
         </div>
       </div>
     </div>
   );
 };
 
-MediaDetailSkeleton.defaultProps = ElementDefaultProps;
-MediaDetailSkeleton.propTypes = ElementPropTypes;
+MediaDetailSkeleton.propTypes = {
+  styles: PropTypes.object
+};
 
 export default MediaDetailSkeleton;

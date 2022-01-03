@@ -29,16 +29,17 @@ const MediaDetail = ({
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
 
   if (skeleton) {
-    return <MediaDetailSkeleton />;
+    return <MediaDetailSkeleton styles={styles} />;
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} fade-in`}>
       <div
         className={styles.backdrop}
         style={{
           background: `linear-gradient(to bottom, rgba(${mainColor}, 1), rgba(${mainColor}, 0.7))`
-        }}></div>
+        }}
+      ></div>
 
       {mainColor && (
         <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>

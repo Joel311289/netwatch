@@ -37,7 +37,8 @@ const MediaDetailLinks = ({ styles, homepage, external_ids }) => {
               tooltip={tooltip}
               className={`${styles.link} ${className}`}
               role={role}
-              href={href}>
+              href={href}
+            >
               {icon}
             </Button>
           )

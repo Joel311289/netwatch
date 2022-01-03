@@ -15,13 +15,18 @@ const Skeleton = ({ width, height, variant, style }) => {
         return 20;
       case 'chip':
         return 27;
+      case 'circular':
+        return width;
       default:
         return height;
     }
   }, [variant]);
 
   return (
-    <div style={{ ...style, width }} className={`${styles.wrapper} ${styles[variant] || ''}`}>
+    <div
+      style={{ ...style, width }}
+      className={`${styles.wrapper} ${styles[variant] || ''} fade-in-slow`}
+    >
       <SkeletonMUI className={styles.skeleton} animation="wave" height={getHeight} />
     </div>
   );
@@ -30,7 +35,7 @@ const Skeleton = ({ width, height, variant, style }) => {
 Skeleton.defaultProps = ElementDefaultProps;
 Skeleton.propTypes = {
   ...ElementPropTypes,
-  variant: PropTypes.oneOf(['heading', 'text', 'action', 'chip', 'default', ''])
+  variant: PropTypes.oneOf(['heading', 'text', 'action', 'chip', 'circular', 'default', ''])
 };
 
 export default Skeleton;
