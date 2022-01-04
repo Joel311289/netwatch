@@ -1,6 +1,15 @@
-import { mediaTypes, personRoleTypes, tvWatchProvidersSupported } from '@services/constants';
+import objectPath from 'object-path';
+
+import {
+  mediaTypes,
+  personRoleTypes,
+  tvWatchProvidersSupported,
+  videoSites,
+  videoTypes
+} from '@services/constants';
 
 import { removeSpecialCharactersText } from '@utils/helpers/strings';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>
@@ -14,6 +23,18 @@ export const getPersonRoleType = ({ character, department }) =>
   character ? personRoleTypes.Acting : personRoleTypes[department];
 
 export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupported).join('|');
+
+export const getVideoUrl = ({ site, key }) =>
+  site === videoSites.youtube ? `https://www.youtube.com/watch?v=${key}` : '';
+export const getVideoTrailerYoutubeId = (videos) => {
+  if (isEmptyArray(videos)) {
+    return '';
+  }
+  return objectPath.get(
+    videos.find((video) => video.type === videoTypes.trailer) || videos[0],
+    'key'
+  );
+};
 
 export const routeMediaDetail = (media) => {
   if (!media) {

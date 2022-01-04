@@ -26,7 +26,8 @@ const MediaDetail = ({
   number_seasons,
   watch_providers,
   homepage,
-  external_ids
+  external_ids,
+  onTrailer
 }) => {
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
   const { rgb: mainColor } = useVibrantColor(backdrop);
@@ -67,7 +68,7 @@ const MediaDetail = ({
           <MediaDetailCredits styles={styles} credits={credits} />
         </div>
 
-        <MediaDetailWatch styles={styles} watch_providers={watch_providers} />
+        <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
         <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
       </div>
     </div>

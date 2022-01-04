@@ -8,26 +8,26 @@ import { routeMediaDetail } from '@services/helpers';
 import { sleep } from '@utils/helpers';
 
 export const useDetailModal = () => {
-  const [item, setItem] = useState({});
+  const [detail, setDetail] = useState({});
   const [opened, setOpened] = useState(false);
 
-  const onModalOpen = (item) => {
-    setItem(item);
+  const onModalOpen = (detail) => {
+    setDetail(detail);
     setOpened(true);
   };
   const onModalClose = async () => {
     setOpened(false);
     await sleep(500);
-    setItem(null);
+    setDetail(null);
   };
 
   const ModalDetail = useMemo(() => {
     return (
       <Modal size="m" onClose={onModalClose} visible={opened}>
-        <MediaModalDetail to={routeMediaDetail(item)} {...item} />
+        <MediaModalDetail to={routeMediaDetail(detail)} {...detail} />
       </Modal>
     );
-  }, [item, opened]);
+  }, [detail, opened]);
 
   return { onModalOpen, onModalClose, ModalDetail };
 };

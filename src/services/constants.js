@@ -18,6 +18,9 @@ export const videoTypes = {
   trailer: 'Trailer',
   teaser: 'Teaser'
 };
+export const videoSites = {
+  youtube: 'YouTube'
+};
 export const personRoleTypes = {
   Directing: 'directing',
   Writing: 'writing',

@@ -70,7 +70,7 @@ export const videoDetailMapper = (video) => {
     name: get(video, 'name'),
     key: get(video, 'key'),
     type: get(video, 'type'),
-    youtube: get(video, 'site') === 'Youtube'
+    site: get(video, 'site')
   };
 };
 

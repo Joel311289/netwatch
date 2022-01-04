@@ -7,7 +7,7 @@ import Space from '@components/Layout/Space/Space';
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
-const MediaDetailWatch = ({ styles, watch_providers }) => {
+const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
   const buttons = [
     ...(watch_providers && !isEmptyArray(watch_providers.providers)
       ? [
@@ -22,13 +22,19 @@ const MediaDetailWatch = ({ styles, watch_providers }) => {
           }
         ]
       : []),
-    { label: 'Ver trailer', icon: <FiPlay /> }
+    { label: 'Ver trailer', icon: <FiPlay />, onClick: onTrailer }
   ];
 
   return (
     <Space align="center" gap={10} className={`${styles.actions} ${styles.buttons}`}>
-      {buttons.map(({ label, icon, role, href, className }) => (
-        <Button key={label} className={`${styles.button} ${className}`} role={role} href={href}>
+      {buttons.map(({ label, icon, role, href, className, onClick }) => (
+        <Button
+          key={label}
+          className={`${styles.button} ${className}`}
+          role={role}
+          href={href}
+          onClick={onClick}
+        >
           {icon}
           <span className={styles.label}>{label}</span>
         </Button>
