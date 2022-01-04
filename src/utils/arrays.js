@@ -6,5 +6,6 @@ export const isEmptyArray = (array) => Array.isArray(array) && compactArray(arra
 
 export const compactArray = _.compact;
 export const takeArray = _.take;
+export const flattenArray = _.flatten;
 export const differenceArrays = _.difference;
 export const intersectionArrays = _.intersection;

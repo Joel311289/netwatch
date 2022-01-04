@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmptyArray } from '../../../utils/helpers';
-import List from '../../UI/List/List';
-import styles from './MediaDetail.module.css';
 
-const MediaDetailCredits = ({ credits }) => {
+import List from '@components/UI/List/List';
+import Separator from '@components/UI/Separator/Separator';
+
+import { isEmptyArray } from '@utils/helpers';
+
+const MediaDetailCredits = ({ styles, credits }) => {
   return (
     <List divider>
       {(credits || [])
@@ -13,14 +15,7 @@ const MediaDetailCredits = ({ credits }) => {
           <div key={label} className={styles.credit}>
             <span>{label}</span>
 
-            <div className={styles.persons}>
-              {data.map(({ name }) => (
-                <React.Fragment key={name}>
-                  <span>{name}</span>
-                  <span className={styles.separator}>•</span>
-                </React.Fragment>
-              ))}
-            </div>
+            <Separator items={data.map(({ name }) => name)} />
           </div>
         ))}
     </List>
@@ -31,6 +26,7 @@ MediaDetailCredits.defaultProps = {
   credit: []
 };
 MediaDetailCredits.propTypes = {
+  styles: PropTypes.object,
   credits: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,

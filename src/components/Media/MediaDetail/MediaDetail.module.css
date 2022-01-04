@@ -94,11 +94,6 @@
   margin: 0 0 2px 0;
 }
 
-.subheadings {
-  width: fit-content;
-  font-size: 1rem;
-}
-
 .genres {
   height: fit-content;
   display: flex;
@@ -115,12 +110,6 @@
   gap: 5px 20px;
   padding: 10px 0;
   font-weight: 500;
-}
-
-.persons {
-  font-weight: 400;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .provider-logo {
@@ -150,13 +139,6 @@
 }
 .link.external-id {
   font-size: 1.5rem;
-}
-
-.separator {
-  margin: 0 7px;
-}
-.separator:last-of-type {
-  display: none;
 }
 
 /* Skeleton */

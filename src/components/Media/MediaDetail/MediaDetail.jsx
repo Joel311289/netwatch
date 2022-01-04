@@ -63,7 +63,7 @@ const MediaDetail = ({
 
         <span className={styles.description}>{description}</span>
         <div className={styles.credits}>
-          <MediaDetailCredits credits={credits} />
+          <MediaDetailCredits styles={styles} credits={credits} />
         </div>
 
         <MediaDetailWatch styles={styles} watch_providers={watch_providers} />
