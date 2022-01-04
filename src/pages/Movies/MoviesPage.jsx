@@ -9,7 +9,7 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import { routeMediaDetail } from '@services/helpers';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 
-import { isEmptyArray } from '@utils/helpers';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 const MoviesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();

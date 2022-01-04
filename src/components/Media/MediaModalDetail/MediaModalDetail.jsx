@@ -5,8 +5,8 @@ import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
 import Link from '@components/UI/Link/Link';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 
-import { truncatedText } from '@utils/helpers';
-import { ElementPropTypes, MediaPropTypes } from '@utils/constants';
+import { truncatedText } from '@utils/helpers/strings';
+import { ElementPropTypes, MediaPropTypes } from '@utils/constants/proptypes';
 
 import Space from '@components/Layout/Space/Space';
 import desktopStyles from '@components/Media/MediaModalDetail/MediaModalDetail.module.css';

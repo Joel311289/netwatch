@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import { getEmptyArray } from '@utils/helpers';
+import { getEmptyArray } from '@utils/helpers/arrays';
 
 export const useLoadDataPage = (fetchData, itemsPerPage, page = 1) => {
   const isMounted = useRef(true);

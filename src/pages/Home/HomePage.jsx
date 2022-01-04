@@ -12,8 +12,8 @@ import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
-import { getBreakpointConfigPlaceholders } from '@utils/breakpoints';
-import { flattenArray, isEmptyArray } from '@utils/arrays';
+import { getBreakpointConfigPlaceholders } from '@utils/helpers/breakpoints';
+import { flattenArray, isEmptyArray } from '@utils/helpers/arrays';
 
 const HomePage = () => {
   const breakpoint = useBreakpointViewport();

@@ -5,7 +5,7 @@ import Space from '@components/Layout/Space/Space';
 import List from '@components/UI/List/List';
 import Separator from '@components/UI/Separator/Separator';
 
-import { isEmptyArray } from '@utils/helpers';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 const MediaDetailCredits = ({ styles, credits }) => {
   return (

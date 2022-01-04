@@ -4,7 +4,7 @@ import { FiChevronRight } from 'react-icons/fi';
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
 
-import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/Media/MediaHeading/MediaHeading.module.css';
 

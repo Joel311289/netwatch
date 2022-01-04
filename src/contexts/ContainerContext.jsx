@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-import { ContextPropTypes } from '@utils/constants';
+import { ContextPropTypes } from '@utils/constants/proptypes';
 
 export const ContainerContext = createContext({});
 

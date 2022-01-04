@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
 
-import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
 const externalLinkIcons = {
   imdb: <SiImdb />,

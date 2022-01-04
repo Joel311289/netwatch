@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { getSizes } from '@utils/helpers';
+import { getSizes } from '@utils/helpers/breakpoints';
 
 export const useResize = (elementRef, onResize) => {
   const [sizes, setSizes] = useState({});

@@ -2,7 +2,7 @@ import { Link as LinkRouter } from 'react-router-dom';
 
 import Space from '@components/Layout/Space/Space';
 
-import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/UI/Link/Link.module.css';
 

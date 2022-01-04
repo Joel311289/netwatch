@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { useFavorites } from '@hooks/useFavorites';
 
-import { ContextPropTypes } from '@utils/constants';
+import { ContextPropTypes } from '@utils/constants/proptypes';
 
 export const FavoritesContext = createContext({});
 

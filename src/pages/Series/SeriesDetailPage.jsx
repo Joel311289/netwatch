@@ -10,7 +10,8 @@ import { getWatchProvidersSerie } from '@services/series/get-watch-providers-ser
 import { getExternalIdsSerie } from '@services/series/get-external-ids-serie';
 import { getCreditsSerie } from '@services/series/get-credits-serie';
 
-import { getIdFromParams, truncateArray } from '@utils/helpers';
+import { getIdFromParams } from '@utils/helpers/strings';
+import { truncateArray } from '@utils/helpers/arrays';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');

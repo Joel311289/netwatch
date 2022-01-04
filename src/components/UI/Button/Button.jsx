@@ -2,7 +2,7 @@ import Tooltip from '@mui/material/Tooltip';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
-import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/UI/Button/Button.module.css';
 

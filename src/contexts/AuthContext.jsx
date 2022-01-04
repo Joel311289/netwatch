@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { useAuth } from '@hooks/useAuth';
 
-import { ContextPropTypes } from '@utils/constants';
+import { ContextPropTypes } from '@utils/constants/proptypes';
 
 export const AuthContext = createContext();
 

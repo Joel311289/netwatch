@@ -3,7 +3,7 @@ import { usePalette } from 'react-palette';
 
 import { ThemeContext } from '@contexts/ThemeContext';
 
-import { hexToRgb } from '@utils/helpers';
+import { hexToRgb } from '@utils/helpers/colors';
 
 export const useVibrantColor = (url) => {
   const { data: palette } = usePalette(url);

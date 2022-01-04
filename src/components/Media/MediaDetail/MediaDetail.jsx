@@ -8,7 +8,7 @@ import MediaDetailCredits from '@components/Media/MediaDetail/MediaDetail-credit
 import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
 import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
 
-import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';

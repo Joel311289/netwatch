@@ -9,7 +9,7 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import { routeMediaDetail } from '@services/helpers';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
-import { isEmptyArray } from '@utils/helpers';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 const SeriesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();

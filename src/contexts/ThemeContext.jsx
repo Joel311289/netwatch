@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { useTheme } from '@hooks/useTheme';
 
-import { ContextPropTypes } from '@utils/constants';
+import { ContextPropTypes } from '@utils/constants/proptypes';
 
 export const ThemeContext = createContext({});
 

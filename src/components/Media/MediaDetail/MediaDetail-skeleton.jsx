@@ -5,7 +5,7 @@ import List from '@components/UI/List/List';
 import Space from '@components/Layout/Space/Space';
 import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 
-import { getEmptyArray } from '@utils/helpers';
+import { getEmptyArray } from '@utils/helpers/arrays';
 
 const MediaDetailSkeleton = ({ styles }) => {
   return (

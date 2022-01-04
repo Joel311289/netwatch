@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Skeleton as SkeletonMUI } from '@mui/material';
 import PropTypes from 'prop-types';
 
-import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/UI/Skeleton/Skeleton.module.css';
 

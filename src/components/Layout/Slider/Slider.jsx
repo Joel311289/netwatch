@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useResize } from '@hooks/useResize';
 
-import { getBreakpointConfig } from '@utils/helpers';
+import { getBreakpointConfig } from '@utils/helpers/breakpoints';
 
 import styles from '@components/Layout/Slider/Slider.module.css';
 

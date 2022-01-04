@@ -15,7 +15,7 @@ import {
   getPersonRoleType
 } from '@services/helpers';
 
-import { formattedDate, formattedTime } from '@utils/helpers';
+import { formattedDate, formattedTime } from '@utils/helpers/strings';
 
 const get = objectPath.get;
 

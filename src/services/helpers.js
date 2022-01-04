@@ -1,6 +1,6 @@
 import { mediaTypes, personRoleTypes, tvWatchProvidersSupported } from '@services/constants';
 
-import { removeSpecialCharactersText } from '@utils/helpers';
+import { removeSpecialCharactersText } from '@utils/helpers/strings';
 
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>

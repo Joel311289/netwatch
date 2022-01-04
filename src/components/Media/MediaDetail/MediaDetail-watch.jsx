@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
 
-import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
-import { isEmptyArray } from '@utils/helpers';
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 const MediaDetailWatch = ({ styles, watch_providers }) => {
   const buttons = [

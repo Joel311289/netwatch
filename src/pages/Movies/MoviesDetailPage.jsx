@@ -10,7 +10,8 @@ import { getWatchProvidersMovie } from '@services/movies/get-watch-providers-mov
 import { getExternalIdsMovie } from '@services/movies/get-external-ids-movie';
 import { getCreditsMovie } from '@services/movies/get-credits-movie';
 
-import { getIdFromParams, truncateArray } from '@utils/helpers';
+import { getIdFromParams } from '@utils/helpers/strings';
+import { truncateArray } from '@utils/helpers/arrays';
 
 const MoviesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');

@@ -1,8 +1,8 @@
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
 
-import { getHeightRatio } from '@utils/helpers';
-import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+import { getHeightRatio } from '@utils/helpers/breakpoints';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
