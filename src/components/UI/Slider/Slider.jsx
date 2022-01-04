@@ -54,7 +54,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
     },
     lazy: true,
     mousewheel: {
-      forceToAxis: true,
+      forceToAxis: true
     },
     slidesPerGroup,
     slidesOffsetBefore: navigationWidth,

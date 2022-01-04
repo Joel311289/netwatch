@@ -1,20 +1,31 @@
 import { Link as LinkRouter } from 'react-router-dom';
-import MediaItem from '../MediaItem/MediaItem';
-import { formattedDate, truncatedText } from '../../../utils/helpers';
-import styles from './MediaModalDetail.module.css';
-import Link from '../../UI/Link/Link';
-import { ElementPropTypes, MediaPropTypes } from '../../../utils/constants';
 
-const MediaModalDetail = ({ to, image, title, description, date }) => {
+import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
+
+import Link from '@components/UI/Link/Link';
+import MediaItem from '@components/Media/MediaItem/MediaItem';
+
+import { truncatedText } from '@utils/helpers';
+import { ElementPropTypes, MediaPropTypes } from '@utils/constants';
+
+import desktopStyles from '@components/Media/MediaModalDetail/MediaModalDetail.module.css';
+import mobileStyles from '@components/Media/MediaModalDetail/MediaModalDetail-mobile.module.css';
+
+const MediaModalDetail = ({ to, image, title, description, date, backdrop }) => {
+  const styles = useBreakpointStyles(desktopStyles, mobileStyles);
+
   return (
     <div className={styles.wrapper}>
-      <MediaItem to={to} image={image} width={200} ratio={1.5} />
+      <div className={styles.image}>
+        <MediaItem image={image} width={200} ratio={1.5} />
+      </div>
+      <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>
 
       <div className={styles.data}>
         <LinkRouter to={to}>
           <span className={styles.title}>{title}</span>
         </LinkRouter>
-        <p className={styles.subtitle}>{formattedDate(date)}</p>
+        <p className={styles.subtitle}>{date}</p>
         <p className={styles.description}>{truncatedText(description, 400)}</p>
 
         <div className={styles.more}>

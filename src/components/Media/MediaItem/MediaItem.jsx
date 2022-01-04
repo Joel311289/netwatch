@@ -18,7 +18,8 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
           backgroundImage: `url(${image})`,
           width,
           height: getHeightRatio(width, ratio)
-        }}></div>
+        }}
+      ></div>
     );
   };
 

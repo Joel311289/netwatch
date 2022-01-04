@@ -1,11 +1,17 @@
 .wrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 25px;
-  padding: 25px;
+  padding: 30px;
+}
+
+.background {
+  display: none;
 }
 
 .data {
   width: calc(100% - 240px);
+  min-width: 300px;
   color: var(--color-text);
   position: relative;
 }
@@ -35,4 +41,11 @@
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.separator {
+  margin: 0 7px;
+}
+.separator:last-of-type {
+  display: none;
 }

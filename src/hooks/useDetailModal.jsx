@@ -20,7 +20,7 @@ export const useDetailModal = () => {
 
   const ModalDetail = useMemo(() => {
     return (
-      <Modal size="s" onClose={onModalClose} visible={opened}>
+      <Modal size="m" onClose={onModalClose} visible={opened}>
         <MediaModalDetail to={routeMediaDetail(item)} {...item} />
       </Modal>
     );

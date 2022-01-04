@@ -1,4 +1,4 @@
-@import './MediaDetail.module';
+@import './MediaDetail.module.css';
 
 .wrapper {
   display: grid;
