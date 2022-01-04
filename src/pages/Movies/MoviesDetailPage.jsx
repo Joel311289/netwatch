@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useLoadDataPage } from '@hooks/useLoadDataPage';
+import { useTrailerModal } from '@hooks/useTrailerModal';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 
@@ -12,9 +13,11 @@ import { getCreditsMovie } from '@services/movies/get-credits-movie';
 
 import { getIdFromParams } from '@utils/helpers/strings';
 import { truncateArray } from '@utils/helpers/arrays';
+import { mediaTypes } from '@services/constants';
 
 const MoviesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
+  const { onModalOpen, ModalTrailer } = useTrailerModal();
 
   const { data: movie, loading } = useLoadDataPage(getDetailMovie.bind(this, id));
   const { data: watch_providers, loading: loadingWatchProviders } = useLoadDataPage(
@@ -45,9 +48,12 @@ const MoviesDetailPage = () => {
         watch_providers={watch_providers}
         external_ids={external_ids}
         credits={credits}
+        onTrailer={() => onModalOpen(mediaTypes.movie, id)}
       />
 
       <div className="App-container App-content">Detail</div>
+
+      {ModalTrailer}
     </div>
   );
 };

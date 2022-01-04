@@ -35,7 +35,7 @@ export const useTrailerModal = () => {
     const fetchData =
       mediaType === mediaTypes.movie
         ? getVideosMovie.bind(this, mediaId)
-        : getVideosSerie(this, mediaId);
+        : getVideosSerie.bind(this, mediaId);
 
     const videos = await fetchData();
     setVideoId(getVideoTrailerYoutubeId(videos));

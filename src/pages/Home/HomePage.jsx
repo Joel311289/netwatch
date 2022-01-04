@@ -1,6 +1,7 @@
 import { useLoadDataPage } from '@hooks/useLoadDataPage';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useDetailModal } from '@hooks/useDetailModal';
+import { useTrailerModal } from '@hooks/useTrailerModal';
 
 import Slider from '@components/Layout/Slider/Slider';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
@@ -18,7 +19,8 @@ import { flattenArray, isEmptyArray } from '@utils/helpers/arrays';
 const HomePage = () => {
   const breakpoint = useBreakpointViewport();
   const itemsPlaceholder = getBreakpointConfigPlaceholders(breakpoint);
-  const { onModalOpen, ModalDetail } = useDetailModal();
+  const { onModalOpen: onModalDetail, ModalDetail } = useDetailModal();
+  const { onModalOpen: OnModalTrailer, ModalTrailer } = useTrailerModal();
   const { data: trendings, loading: loadingTrendings } = useLoadDataPage(
     getTrending,
     itemsPlaceholder
@@ -60,7 +62,8 @@ const HomePage = () => {
                 skeleton={!items}
                 to={routeMediaDetail(item)}
                 ratio={1.5}
-                onDetail={() => onModalOpen(item)}
+                onDetail={() => onModalDetail(item)}
+                onTrailer={() => OnModalTrailer(type, item.id)}
                 {...item}
               />
             ))}
@@ -69,6 +72,7 @@ const HomePage = () => {
       ))}
 
       {ModalDetail}
+      {ModalTrailer}
     </div>
   );
 };
