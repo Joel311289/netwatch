@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { BiInfoCircle, BiPlay } from 'react-icons/bi';
-import MediaItemSkeleton from './MediaItem.skeleton';
+import MediaItemSkeleton from './MediaItem-skeleton';
 import { getHeightRatio, showSkeleton } from '../../../utils/helpers';
 import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
 import styles from './MediaItem.module.css';
 
-const ActionIcon = (icon) => {
-  return <div className={styles.icon}>{icon}</div>;
-};
-
 const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrailer }) => {
+  const ActionIcon = (icon) => {
+    return <div className={styles.icon}>{icon}</div>;
+  };
   const Image = (link) => {
     return (
       <div
@@ -19,8 +18,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
           backgroundImage: `url(${image})`,
           width,
           height: getHeightRatio(width, ratio)
-        }}
-      ></div>
+        }}></div>
     );
   };
 
@@ -38,6 +36,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
           <Link to={to}>
             <span className={styles.title}>{title}</span>
           </Link>
+
           <div className={styles.actions} onClick={onTrailer}>
             <button className={styles.action}>
               {ActionIcon(<BiPlay />)}
@@ -59,5 +58,7 @@ MediaItem.propTypes = {
   onDetail: PropTypes.func,
   onTrailer: PropTypes.func
 };
+
+MediaItem.Skeleton = MediaItemSkeleton;
 
 export default MediaItem;

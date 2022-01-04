@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
+import MediaItemSkeleton from '../MediaItem/MediaItem-skeleton';
 import Skeleton from '../../UI/Skeleton/Skeleton';
 import List from '../../UI/List/List';
 import { getEmptyArray } from '../../../utils/helpers';

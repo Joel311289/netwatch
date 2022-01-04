@@ -1,11 +1,14 @@
-import MediaCategorySlider from '../../components/Media/MediaCategorySlider/MediaCategorySlider';
-import { useLoadDataPage } from '../../hooks/useLoadDataPage';
-import { useBreakpointViewport } from '../../hooks/useBreakpointViewport';
-import { getTrending } from '../../services/get-trending';
-import { getDiscoverMovies } from '../../services/movies/get-discover-movies';
-import { getDiscoverSeries } from '../../services/series/get-discover-series';
-import { getBreakpointConfigPlaceholders } from '../../utils/helpers';
-import { mediaTypes } from '../../services/index';
+import { useLoadDataPage } from '@hooks/useLoadDataPage';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+
+import MediaCategorySlider from '@components/Media/MediaCategorySlider/MediaCategorySlider';
+
+import { mediaTypes } from '@services/index';
+import { getTrending } from '@services/get-trending';
+import { getDiscoverMovies } from '@services/movies/get-discover-movies';
+import { getDiscoverSeries } from '@services/series/get-discover-series';
+
+import { getBreakpointConfigPlaceholders } from '@utils/breakpoints';
 
 const HomePage = () => {
   const breakpoint = useBreakpointViewport();

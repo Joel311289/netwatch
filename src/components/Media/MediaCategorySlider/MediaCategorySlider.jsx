@@ -1,11 +1,13 @@
-import { useDetailModal } from '../../../hooks/useDetailModal';
-import Slider from '../../UI/Slider/Slider';
-import MediaHeading from '../MediaHeading/MediaHeading';
-import MediaItem from '../MediaItem/MediaItem';
-import MediaItemSkeleton from '../MediaItem/MediaItem.skeleton';
-import { routeMediaDetail } from '../../../services';
-import { showSkeleton } from '../../../utils/helpers';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
+import { useDetailModal } from '@hooks/useDetailModal';
+
+import Slider from '@components/UI/Slider/Slider';
+import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
+import MediaItem from '@components/Media/MediaItem/MediaItem';
+
+import { routeMediaDetail } from '@services/index';
+
+import { showSkeleton } from '@utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
 
 const MediaCategorySlider = ({ type, heading, items, skeleton }) => {
   const { onModalOpen, ModalDetail } = useDetailModal();
@@ -18,7 +20,7 @@ const MediaCategorySlider = ({ type, heading, items, skeleton }) => {
         </div>
         <Slider navigation={false}>
           {skeleton.map((_, index) => (
-            <MediaItemSkeleton key={index} ratio={1.5} />
+            <MediaItem.Skeleton key={index} ratio={1.5} />
           ))}
         </Slider>
       </div>

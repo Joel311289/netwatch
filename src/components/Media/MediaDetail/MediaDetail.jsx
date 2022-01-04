@@ -1,14 +1,17 @@
-import { useBreakpointStyles } from '../../../hooks/useBreakpointStyles';
-import { useVibrantColor } from '../../../hooks/useVibrantColor';
-import MediaItem from '../MediaItem/MediaItem';
-import MediaDetailSkeleton from './MediaDetail.skeleton';
-import MediaDetailHeader from './MediaDetailHeader';
-import MediaDetailCredits from './MediaDetailCredits';
-import { MediaDefaultProps, MediaPropTypes } from '../../../utils/constants';
-import desktopStyles from './MediaDetail.module.css';
-import mobileStyles from './MediaDetail.mobile.module.css';
-import MediaDetailWatch from './MediaDetailWatch';
-import MediaDetailLinks from './MediaDetailLinks';
+import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
+import { useVibrantColor } from '@hooks/useVibrantColor';
+
+import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaDetailSkeleton from '@components/Media/MediaDetail/MediaDetail-skeleton';
+import MediaDetailHeader from '@components/Media/MediaDetail/MediaDetail-header';
+import MediaDetailCredits from '@components/Media/MediaDetail/MediaDetail-credits';
+import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
+import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
+
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
+
+import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
+import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
 
 const MediaDetail = ({
   skeleton,
@@ -25,8 +28,8 @@ const MediaDetail = ({
   homepage,
   external_ids
 }) => {
-  const { rgb: mainColor } = useVibrantColor(backdrop);
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
+  const { rgb: mainColor } = useVibrantColor(backdrop);
 
   if (skeleton) {
     return <MediaDetailSkeleton styles={styles} />;
@@ -38,8 +41,7 @@ const MediaDetail = ({
         className={styles.backdrop}
         style={{
           background: `linear-gradient(to bottom, rgba(${mainColor}, 1), rgba(${mainColor}, 0.7))`
-        }}
-      ></div>
+        }}></div>
 
       {mainColor && (
         <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>

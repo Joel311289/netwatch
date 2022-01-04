@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "jsx": "react",
+    "paths": {
+      "@*": ["./*"]
+    }
+  },
+  "include": ["**/*.css", "**/*.jsx", "**/*.js"],
+  "exclude": ["node_modules"]
+}
