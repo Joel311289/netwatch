@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types';
-import { useBreakpointViewport } from '../../../hooks/useBreakpointViewport';
-import { useResize } from '../../../hooks/useResize';
-import { getBreakpointConfig } from '../../../utils/helpers';
-import styles from './Slider.module.css';
+
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+import { useResize } from '@hooks/useResize';
+
+import { getBreakpointConfig } from '@utils/helpers';
+
+import styles from '@components/Layout/Slider/Slider.module.css';
 
 import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
 SwiperCore.use([Lazy, Mousewheel, Navigation]);

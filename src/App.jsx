@@ -1,16 +1,22 @@
 import { useContext } from 'react';
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import { useBreakpointViewport } from './hooks/useBreakpointViewport';
-import { ContainerContext } from './contexts/ContainerContext';
-import { ThemeContext } from './contexts/ThemeContext';
-import HomePage from './pages/Home/HomePage';
-import MoviesPage from './pages/Movies/MoviesPage';
-import SeriesPage from './pages/Series/SeriesPage';
-import MoviesDetailPage from './pages/Movies/MoviesDetailPage';
-import SeriesDetailPage from './pages/Series/SeriesDetailPage';
-import Header from './components/Layout/Header/Header';
-import { mediaTypes } from './services/index';
-import { styles } from './styles/index.js';
+
+import { ContainerContext } from '@contexts/ContainerContext';
+import { ThemeContext } from '@contexts/ThemeContext';
+
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+
+import HomePage from '@pages/Home/HomePage';
+import MoviesPage from '@pages/Movies/MoviesPage';
+import SeriesPage from '@pages/Series/SeriesPage';
+import MoviesDetailPage from '@pages/Movies/MoviesDetailPage';
+import SeriesDetailPage from '@pages/Series/SeriesDetailPage';
+
+import Header from '@components/Layout/Header/Header';
+
+import { mediaTypes } from '@services/constants';
+
+import { styles } from '@styles';
 import './App.css';
 
 const App = () => {

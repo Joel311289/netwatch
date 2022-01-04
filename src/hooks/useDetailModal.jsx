@@ -1,8 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import MediaModalDetail from '../components/Media/MediaModalDetail/MediaModalDetail';
-import Modal from '../components/UI/Modal/Modal';
-import { routeMediaDetail } from '../services';
-import { sleep } from '../utils/helpers';
+
+import Modal from '@components/UI/Modal/Modal';
+import MediaModalDetail from '@components/Media/MediaModalDetail/MediaModalDetail';
+
+import { routeMediaDetail } from '@services/helpers';
+
+import { sleep } from '@utils/helpers';
 
 export const useDetailModal = () => {
   const [item, setItem] = useState({});

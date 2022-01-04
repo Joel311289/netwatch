@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import styles from './Chip.module.css';
+
+import styles from '@components/UI/Chip/Chip.module.css';
 
 const Chip = ({ text }) => {
   return <div className={styles.wrapper}>{text}</div>;

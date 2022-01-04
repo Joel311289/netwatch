@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
 import { Skeleton as SkeletonMUI } from '@mui/material';
 import PropTypes from 'prop-types';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import styles from './Skeleton.module.css';
+
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+
+import styles from '@components/UI/Skeleton/Skeleton.module.css';
 
 const Skeleton = ({ width, height, variant, style }) => {
   const getHeight = useMemo(() => {

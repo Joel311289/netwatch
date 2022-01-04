@@ -1,11 +1,8 @@
 import axios from 'axios';
-import {
-  apiKey,
-  apiUrl,
-  getWatchProvidersSupported,
-  mediaDetailMapper,
-  apiMediaTypes
-} from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { getWatchProvidersSupported } from '@services/helpers';
+import { mediaDetailMapper } from '@services/mappers';
 
 export const getDiscoverSeries = (
   page = 1,

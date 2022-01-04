@@ -63,10 +63,6 @@
 }
 
 .actions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
   width: fit-content;
 }
 
@@ -83,10 +79,6 @@
 
 .title {
   width: fit-content;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0 10px;
 }
 
 .heading {
@@ -96,18 +88,11 @@
 
 .genres {
   height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
   margin-top: 5px;
 }
 
 .credit {
   width: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px 20px;
   padding: 10px 0;
   font-weight: 500;
 }

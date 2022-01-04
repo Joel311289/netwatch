@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useBreakpointViewport } from '../../../hooks/useBreakpointViewport';
-import { useResize } from '../../../hooks/useResize';
-import { getBreakpointConfig } from '../../../utils/helpers';
-import styles from './Grid.module.css';
+
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+import { useResize } from '@hooks/useResize';
+
+import { getBreakpointConfig } from '@utils/helpers';
+
+import styles from '@components/Layout/Grid/Grid.module.css';
 
 const Grid = ({ children }) => {
   const breakpoint = useBreakpointViewport();

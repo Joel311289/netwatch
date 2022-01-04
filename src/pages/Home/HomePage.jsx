@@ -2,12 +2,13 @@ import { useLoadDataPage } from '@hooks/useLoadDataPage';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useDetailModal } from '@hooks/useDetailModal';
 
-import Slider from '@components/UI/Slider/Slider';
+import Slider from '@components/Layout/Slider/Slider';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 
-import { mediaTypes, routeMediaDetail } from '@services/index';
-import { getTrending } from '@services/get-trending';
+import { mediaTypes } from '@services/constants';
+import { routeMediaDetail } from '@services/helpers';
+import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 

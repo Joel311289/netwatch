@@ -8,14 +8,10 @@
   box-shadow: none;
   width: fit-content;
   height: auto;
-  display: flex;
 }
 
 .text {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   width: fit-content;
   padding-bottom: 6px;
   transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);

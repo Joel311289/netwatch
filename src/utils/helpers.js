@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { THEMES } from './constants';
+import { THEMES } from '@utils/constants';
 
 export * from './colors.js';
 export * from './arrays.js';
@@ -9,9 +9,6 @@ export * from './collections.js';
 export * from './breakpoints.js';
 
 // Utils
-
-export const showSkeleton = (skeleton) =>
-  Array.isArray(skeleton) ? Boolean(skeleton.length) : Boolean(skeleton);
 
 export const getThemeMode = (current) => (current === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT);
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useLoadDataPage } from './useLoadDataPage';
+
+import { useLoadDataPage } from '@hooks/useLoadDataPage';
 
 export const useLoadMore = (fetchMoreData, itemsPerPage) => {
   const [page, setPage] = useState(1);

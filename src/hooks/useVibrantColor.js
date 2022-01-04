@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { usePalette } from 'react-palette';
-import { hexToRgb } from '../utils/helpers';
-import { ThemeContext } from '../contexts/ThemeContext';
+
+import { ThemeContext } from '@contexts/ThemeContext';
+
+import { hexToRgb } from '@utils/helpers';
 
 export const useVibrantColor = (url) => {
   const { data: palette } = usePalette(url);

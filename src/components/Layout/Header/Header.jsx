@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { BiSun, BiMoon } from 'react-icons/bi';
-import { THEMES } from '../../../utils/constants';
-import styles from './Header.module.css';
+import PropTypes from 'prop-types';
+
+import styles from '@components/Layout/Header/Header.module.css';
+import Space from '@components/Layout/Space/Space';
+
+import { THEMES } from '@utils/constants';
 
 const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
   const ToggleTheme = () => {
@@ -29,7 +32,7 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
 
   return (
     theme && (
-      <div className={styles.wrapper}>
+      <Space justify="between" align="center" className={styles.wrapper}>
         <Link to="/" className={styles.brand}>
           <img
             className={styles.logo}
@@ -39,13 +42,13 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           <p className={styles.title}>{title}</p>
         </Link>
 
-        <div className={styles.actions}>
-          <div className={styles['theme-action']}>
+        <Space align="center" gap={10} className={styles.actions}>
+          <Space align="center" gap={10} className={styles['theme-action']}>
             <span>{theme.toUpperCase()}</span>
             {ToggleTheme(onChangeTheme)}
-          </div>
-        </div>
-      </div>
+          </Space>
+        </Space>
+      </Space>
     )
   );
 };

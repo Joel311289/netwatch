@@ -1,8 +1,11 @@
 import { FiPlay } from 'react-icons/fi';
 import PropTypes from 'prop-types';
-import Button from '../../UI/Button/Button';
-import { MediaDefaultProps, MediaPropTypes } from '../../../utils/constants';
-import { isEmptyArray } from '../../../utils/helpers';
+
+import Button from '@components/UI/Button/Button';
+import Space from '@components/Layout/Space/Space';
+
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
+import { isEmptyArray } from '@utils/helpers';
 
 const MediaDetailWatch = ({ styles, watch_providers }) => {
   const buttons = [
@@ -23,14 +26,14 @@ const MediaDetailWatch = ({ styles, watch_providers }) => {
   ];
 
   return (
-    <div className={`${styles.actions} ${styles.buttons}`}>
+    <Space align="center" gap={10} className={`${styles.actions} ${styles.buttons}`}>
       {buttons.map(({ label, icon, role, href, className }) => (
         <Button key={label} className={`${styles.button} ${className}`} role={role} href={href}>
           {icon}
           <span className={styles.label}>{label}</span>
         </Button>
       ))}
-    </div>
+    </Space>
   );
 };
 

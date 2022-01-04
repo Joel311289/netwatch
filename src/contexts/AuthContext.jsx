@@ -1,6 +1,8 @@
 import { createContext } from 'react';
-import { useAuth } from '../hooks/useAuth';
-import { ContextPropTypes } from '../utils/constants';
+
+import { useAuth } from '@hooks/useAuth';
+
+import { ContextPropTypes } from '@utils/constants';
 
 export const AuthContext = createContext();
 

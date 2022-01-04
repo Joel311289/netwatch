@@ -1,12 +1,15 @@
-import Grid from '../../components/UI/Grid/Grid';
-import MediaItem from '../../components/Media/MediaItem/MediaItem';
-import MediaHeading from '../../components/Media/MediaHeading/MediaHeading';
-import Button from '../../components/UI/Button/Button';
-import { useDetailModal } from '../../hooks/useDetailModal';
-import { getDiscoverMovies } from '../../services/movies/get-discover-movies';
-import { useLoadMore } from '../../hooks/useLoadMore';
-import { isEmptyArray } from '../../utils/helpers';
-import { routeMediaDetail } from '../../services';
+import { useDetailModal } from '@hooks/useDetailModal';
+import { useLoadMore } from '@hooks/useLoadMore';
+
+import Button from '@components/UI/Button/Button';
+import Grid from '@components/Layout/Grid/Grid';
+import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
+
+import { routeMediaDetail } from '@services/helpers';
+import { getDiscoverMovies } from '@services/movies/get-discover-movies';
+
+import { isEmptyArray } from '@utils/helpers';
 
 const MoviesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();

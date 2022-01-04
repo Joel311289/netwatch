@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from './constants';
+import { BREAKPOINTS } from '@utils/constants';
 
 export const getDeviceBreakpoint = (width) => {
   if (width < BREAKPOINTS.sm.width) {

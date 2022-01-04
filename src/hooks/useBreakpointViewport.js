@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getDeviceBreakpoint, throttle } from '../utils/helpers';
+
+import { getDeviceBreakpoint, throttle } from '@utils/helpers';
 
 export const useBreakpointViewport = () => {
   const [brkPnt, setBrkPnt] = useState(() => getDeviceBreakpoint(window.innerWidth));

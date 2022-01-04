@@ -1,11 +1,7 @@
 import axios from 'axios';
-import {
-  apiKey,
-  apiUrl,
-  apiMediaTypes,
-  watchProvidersDetailMapper,
-  watchProviderDetailMapper
-} from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { watchProvidersDetailMapper, watchProviderDetailMapper } from '@services/mappers';
 
 export const getWatchProvidersSerie = (id) => {
   const params = {

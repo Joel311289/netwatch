@@ -1,6 +1,4 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   width: fit-content;
 }
@@ -9,8 +7,6 @@
 }
 
 .item {
-  display: flex;
-  align-items: center;
   min-height: 20px;
 }
 .wrapper.divider .item {

@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { apiKey, apiUrl, apiMediaTypes, videoDetailMapper } from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { videoDetailMapper } from '@services/mappers';
 
 export const getVideosMovie = (id) => {
   const params = {

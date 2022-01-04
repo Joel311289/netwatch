@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styles from './List.module.css';
+
+import Space from '@components/Layout/Space/Space';
+
+import styles from '@components/UI/List/List.module.css';
 
 const List = ({ children, divider }) => {
   const classes = classNames.bind(styles)({
@@ -8,13 +11,13 @@ const List = ({ children, divider }) => {
   });
 
   return (
-    <div className={`${styles.wrapper} ${classes}`}>
+    <Space direction="column" className={`${styles.wrapper} ${classes}`}>
       {children.map((element, index) => (
-        <div key={index} className={styles.item}>
+        <Space align="center" key={index} className={styles.item}>
           {element}
-        </div>
+        </Space>
       ))}
-    </div>
+    </Space>
   );
 };
 

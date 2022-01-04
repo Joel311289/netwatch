@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { apiKey, apiUrl, apiMediaTypes, externalsIdsDetailMapper } from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { externalsIdsDetailMapper } from '@services/mappers';
 
 export const getExternalIdsMovie = (id) => {
   const params = {

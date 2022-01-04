@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { FiX } from 'react-icons/fi';
-import Portal from '../Portal/Portal';
-import { sleep } from '../../../utils/helpers';
-import styles from './Modal.module.css';
+import PropTypes from 'prop-types';
+
+import Portal from '@components/UI/Portal/Portal';
+
+import { sleep } from '@utils/helpers';
+
+import styles from '@components/UI/Modal/Modal.module.css';
 
 const Modal = ({ children, visible, locked, size, onClose }) => {
   const [active, setActive] = useState(false);

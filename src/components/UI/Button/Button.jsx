@@ -1,8 +1,10 @@
 import Tooltip from '@mui/material/Tooltip';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import styles from './Button.module.css';
+import PropTypes from 'prop-types';
+
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+
+import styles from '@components/UI/Button/Button.module.css';
 
 const Button = ({
   children,

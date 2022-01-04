@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import styles from './Toggle.module.css';
+
+import Space from '@components/Layout/Space/Space';
+
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+
+import styles from '@components/UI/Toggle/Toggle.module.css';
 
 const Toggle = ({ checked, onChange }) => {
   const [state, setState] = useState(checked);
@@ -14,10 +18,10 @@ const Toggle = ({ checked, onChange }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <Space align="center" className={styles.wrapper}>
       <input type="checkbox" id="switch" checked={Boolean(state)} onChange={handleOnChange}></input>
       <label htmlFor="switch"></label>
-    </div>
+    </Space>
   );
 };
 

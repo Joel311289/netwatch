@@ -1,68 +1,23 @@
 import objectPath from 'object-path';
-import { formattedDate, formattedTime, removeSpecialCharactersText } from '../utils/helpers';
+
+import {
+  apiBackdropUrl,
+  apiImageUrl,
+  apiLogoUrl,
+  mediaTypes,
+  personRoleTypes
+} from '@services/constants';
+import {
+  getImageMediaUrl,
+  getMediaType,
+  isMediaMovie,
+  isMediaSerie,
+  getPersonRoleType
+} from '@services/helpers';
+
+import { formattedDate, formattedTime } from '@utils/helpers';
 
 const get = objectPath.get;
-export const apiKey = import.meta.env.VITE_API_KEY;
-export const apiUrl = import.meta.env.VITE_API_URL;
-export const apiImageUrl = import.meta.env.VITE_API_IMAGES_URL;
-export const apiBackdropUrl = import.meta.env.VITE_API_BACKDROP_URL;
-export const apiLogoUrl = import.meta.env.VITE_API_LOGO_URL;
-export const apiMediaTypes = {
-  ALL: 'all',
-  MOVIE: 'movie',
-  TV: 'tv',
-  PERSON: 'person'
-};
-export const mediaTypes = {
-  movie: 'movies',
-  tv: 'series',
-  person: 'persons'
-};
-export const videoTypes = {
-  trailer: 'Trailer',
-  teaser: 'Teaser'
-};
-export const personRoleTypes = {
-  Directing: 'directing',
-  Writing: 'writing',
-  Acting: 'acting',
-  Creator: 'creator'
-};
-export const tvWatchProvidersSupported = {
-  8: 'Netflix',
-  119: 'Amazon Prime Video',
-  9: 'Amazon Prime Video',
-  337: 'Disney Plus',
-  384: 'HBO Max',
-  149: 'Movistar Plus',
-  350: 'Apple TV Plus',
-  62: 'Atres Player',
-  456: 'Mitele',
-  541: 'rtve',
-  118: 'HBO'
-};
-
-export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
-export const isMediaSerie = (media) =>
-  Object.prototype.hasOwnProperty.call(media, 'first_air_date');
-
-export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
-
-export const getImageMediaUrl = (baseUrl, path) => (path ? `${baseUrl}${path}` : '');
-
-export const getPersonRoleType = ({ character, department }) =>
-  character ? personRoleTypes.Acting : personRoleTypes[department];
-
-export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupported).join('|');
-
-export const routeMediaDetail = (media) => {
-  if (!media) {
-    return '';
-  }
-  const { id, type, original_title = '' } = media;
-  const title = removeSpecialCharactersText(original_title, '-');
-  return (title ? `/${type}/${id}-${title}` : `/${type}/${id}`).toLowerCase();
-};
 
 export const mediaDetailMapper = (media) => {
   const commonData = {

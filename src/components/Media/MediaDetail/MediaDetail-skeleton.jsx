@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
-import MediaItemSkeleton from '../MediaItem/MediaItem-skeleton';
-import Skeleton from '../../UI/Skeleton/Skeleton';
-import List from '../../UI/List/List';
-import { getEmptyArray } from '../../../utils/helpers';
+
+import Skeleton from '@components/UI/Skeleton/Skeleton';
+import List from '@components/UI/List/List';
+import Space from '@components/Layout/Space/Space';
+import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
+
+import { getEmptyArray } from '@utils/helpers';
 
 const MediaDetailSkeleton = ({ styles }) => {
   return (
@@ -32,10 +35,10 @@ const MediaDetailSkeleton = ({ styles }) => {
         <div className={styles.credits}>
           <List divider>
             {getEmptyArray(3).map((_, index) => (
-              <div key={index} className={styles.credit}>
+              <Space key={index} gap={[5, 20]} className={styles.credit}>
                 <Skeleton width={120} height={19} />
                 <Skeleton width={350} height={19} style={{ maxWidth: '50vw' }} />
-              </div>
+              </Space>
             ))}
           </List>
         </div>
@@ -43,11 +46,11 @@ const MediaDetailSkeleton = ({ styles }) => {
         <div className={`${styles.actions} ${styles.buttons}`}>
           <Skeleton width={150} height={44} />
         </div>
-        <div className={`${styles.actions} ${styles.links}`}>
+        <Space align="center" gap={10} className={`${styles.actions} ${styles.links}`}>
           <Skeleton variant="circular" width={44} />
           <Skeleton variant="circular" width={44} />
           <Skeleton variant="circular" width={44} />
-        </div>
+        </Space>
       </div>
     </div>
   );

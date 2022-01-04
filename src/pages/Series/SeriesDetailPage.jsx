@@ -1,12 +1,16 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import MediaDetail from '../../components/Media/MediaDetail/MediaDetail';
-import { useLoadDataPage } from '../../hooks/useLoadDataPage';
-import { getDetailSerie } from '../../services/series/get-detail-serie';
-import { getWatchProvidersSerie } from '../../services/series/get-watch-providers-serie';
-import { getExternalIdsSerie } from '../../services/series/get-external-ids-serie';
-import { getCreditsSerie } from '../../services/series/get-credits-serie';
-import { getIdFromParams, truncateArray } from '../../utils/helpers';
+
+import { useLoadDataPage } from '@hooks/useLoadDataPage';
+
+import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
+
+import { getDetailSerie } from '@services/series/get-detail-serie';
+import { getWatchProvidersSerie } from '@services/series/get-watch-providers-serie';
+import { getExternalIdsSerie } from '@services/series/get-external-ids-serie';
+import { getCreditsSerie } from '@services/series/get-credits-serie';
+
+import { getIdFromParams, truncateArray } from '@utils/helpers';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');

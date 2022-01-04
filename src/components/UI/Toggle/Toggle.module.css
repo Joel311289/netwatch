@@ -1,6 +1,5 @@
 .wrapper {
-  display: flex;
-  align-items: center;
+  width: fit-content;
 }
 
 input[type='checkbox'] {

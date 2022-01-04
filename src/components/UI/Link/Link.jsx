@@ -1,11 +1,17 @@
 import { Link as LinkRouter } from 'react-router-dom';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import styles from './Link.module.css';
+
+import Space from '@components/Layout/Space/Space';
+
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+
+import styles from '@components/UI/Link/Link.module.css';
 
 const Link = ({ children, to }) => {
   return (
     <LinkRouter to={to} className={styles.wrapper}>
-      <div className={styles.text}>{children}</div>
+      <Space align="center" gap={10} className={styles.text}>
+        {children}
+      </Space>
     </LinkRouter>
   );
 };

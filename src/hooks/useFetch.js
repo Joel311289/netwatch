@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { sleep } from '../utils/helpers';
+
+import { sleep } from '@utils/helpers';
 
 export const useFetch = (url, delay = 500) => {
   const isMounted = useRef(true);

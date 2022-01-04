@@ -8,6 +8,7 @@ import MediaItem from '@components/Media/MediaItem/MediaItem';
 import { truncatedText } from '@utils/helpers';
 import { ElementPropTypes, MediaPropTypes } from '@utils/constants';
 
+import Space from '@components/Layout/Space/Space';
 import desktopStyles from '@components/Media/MediaModalDetail/MediaModalDetail.module.css';
 import mobileStyles from '@components/Media/MediaModalDetail/MediaModalDetail-mobile.module.css';
 
@@ -15,7 +16,7 @@ const MediaModalDetail = ({ to, image, title, description, date, backdrop }) => 
   const styles = useBreakpointStyles(desktopStyles, mobileStyles);
 
   return (
-    <div className={styles.wrapper}>
+    <Space gap={25} className={styles.wrapper}>
       <div className={styles.image}>
         <MediaItem image={image} width={200} ratio={1.5} />
       </div>
@@ -32,7 +33,7 @@ const MediaModalDetail = ({ to, image, title, description, date, backdrop }) => 
           <Link to={to}>Ver más</Link>
         </div>
       </div>
-    </div>
+    </Space>
   );
 };
 

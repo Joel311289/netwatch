@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { apiKey, apiUrl, mediaDetailMapper, creatorDetailMapper, apiMediaTypes } from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { mediaDetailMapper, creatorDetailMapper } from '@services/mappers';
 
 export const getDetailSerie = (id) => {
   const params = {

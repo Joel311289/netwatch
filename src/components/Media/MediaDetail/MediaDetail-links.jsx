@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
 import { BiPlus, BiGlobe } from 'react-icons/bi';
 import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
 import { SiImdb } from 'react-icons/si';
-import Button from '../../UI/Button/Button';
-import { MediaDefaultProps, MediaPropTypes } from '../../../utils/constants';
+import PropTypes from 'prop-types';
+
+import Button from '@components/UI/Button/Button';
+import Space from '@components/Layout/Space/Space';
+
+import { MediaDefaultProps, MediaPropTypes } from '@utils/constants';
 
 const externalLinkIcons = {
   imdb: <SiImdb />,
@@ -28,7 +31,7 @@ const MediaDetailLinks = ({ styles, homepage, external_ids }) => {
   ];
 
   return (
-    <div className={`${styles.actions} ${styles.links}`}>
+    <Space align="center" gap={10} className={`${styles.actions} ${styles.links}`}>
       {actions.map(
         ({ icon, tooltip, role, href, className }) =>
           icon && (
@@ -43,7 +46,7 @@ const MediaDetailLinks = ({ styles, homepage, external_ids }) => {
             </Button>
           )
       )}
-    </div>
+    </Space>
   );
 };
 

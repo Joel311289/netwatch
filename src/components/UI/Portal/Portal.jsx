@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeContext } from '../../../contexts/ThemeContext';
+
+import { ThemeContext } from '@contexts/ThemeContext';
 
 const Portal = ({ children, parent, className, size }) => {
   const { theme } = useContext(ThemeContext);

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Space from '@components/Layout/Space/Space';
 import List from '@components/UI/List/List';
 import Separator from '@components/UI/Separator/Separator';
 
@@ -12,11 +13,11 @@ const MediaDetailCredits = ({ styles, credits }) => {
       {(credits || [])
         .filter(({ data }) => !isEmptyArray(data))
         .map(({ label, data }) => (
-          <div key={label} className={styles.credit}>
+          <Space key={label} gap={[5, 20]} className={styles.credit}>
             <span>{label}</span>
 
             <Separator items={data.map(({ name }) => name)} />
-          </div>
+          </Space>
         ))}
     </List>
   );

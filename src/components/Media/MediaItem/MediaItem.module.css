@@ -21,9 +21,6 @@
   background-color: var(--placeholder-color);
   color: var(--color-text);
   box-sizing: content-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 10px;
   height: 80px;
   z-index: 9;
@@ -52,14 +49,6 @@
 
 .icon {
   font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
 }
 
 .action {

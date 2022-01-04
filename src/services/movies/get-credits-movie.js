@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { apiKey, apiUrl, apiMediaTypes, creditDetailMapper, personRoleTypes } from '../index.js';
+
+import { apiKey, apiUrl, apiMediaTypes, personRoleTypes } from '@services/constants';
+import { creditDetailMapper } from '@services/mappers';
 
 // Filter by role type and merge jobs
 const filterCredits = (credits, role) => {

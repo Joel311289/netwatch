@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { BiInfoCircle, BiPlay } from 'react-icons/bi';
-import MediaItemSkeleton from './MediaItem-skeleton';
-import { getHeightRatio, showSkeleton } from '../../../utils/helpers';
-import { ElementDefaultProps, ElementPropTypes } from '../../../utils/constants';
-import styles from './MediaItem.module.css';
+import PropTypes from 'prop-types';
+
+import Space from '@components/Layout/Space/Space';
+import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
+
+import { getHeightRatio } from '@utils/helpers';
+import { ElementDefaultProps, ElementPropTypes } from '@utils/constants';
+
+import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
 const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrailer }) => {
   const ActionIcon = (icon) => {
-    return <div className={styles.icon}>{icon}</div>;
+    return (
+      <Space align="center" justify="center" className={styles.icon}>
+        {icon}
+      </Space>
+    );
   };
   const Image = (link) => {
     return (
@@ -23,31 +31,31 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
     );
   };
 
-  if (showSkeleton(skeleton)) {
+  if (skeleton) {
     return <MediaItemSkeleton width={width} ratio={ratio} />;
   }
 
   return (
-    <div className={`${styles.wrapper}`} style={{ width, minWidth: width }}>
+    <div className={styles.wrapper} style={{ width, minWidth: width }}>
       {to && <Link to={to}>{Image(true)}</Link>}
       {!to && Image()}
 
       {title && (
-        <div className={styles.info}>
+        <Space direction="column" justify="between" className={styles.info}>
           <Link to={to}>
             <span className={styles.title}>{title}</span>
           </Link>
 
-          <div className={styles.actions} onClick={onTrailer}>
-            <button className={styles.action}>
+          <Space justify="between">
+            <button className={styles.action} onClick={onTrailer}>
               {ActionIcon(<BiPlay />)}
               <span>Trailer</span>
             </button>
             <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
               {ActionIcon(<BiInfoCircle />)}
             </button>
-          </div>
-        </div>
+          </Space>
+        </Space>
       )}
     </div>
   );
