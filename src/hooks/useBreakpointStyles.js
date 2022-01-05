@@ -6,7 +6,7 @@ import { isMobileTablet } from '@utils/helpers/breakpoints';
 
 export const useBreakpointStyles = (desktopStyles, mobileStyles) => {
   const [styles, setStyles] = useState(desktopStyles);
-  const breakpoint = useBreakpointViewport();
+  const { breakpoint } = useBreakpointViewport();
 
   useEffect(() => {
     if (isMobileTablet(breakpoint)) {

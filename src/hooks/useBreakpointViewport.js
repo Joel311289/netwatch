@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 
-import { getDeviceBreakpoint } from '@utils/helpers/breakpoints';
 import { throttle } from '@utils/helpers';
+import { getDeviceBreakpoint, getBreakpointConfig } from '@utils/helpers/breakpoints';
 
 export const useBreakpointViewport = () => {
-  const [brkPnt, setBrkPnt] = useState(() => getDeviceBreakpoint(window.innerWidth));
+  const [breakpoint, setBreakpoint] = useState(() =>
+    getBreakpointConfig(getDeviceBreakpoint(window.innerWidth))
+  );
 
   useEffect(() => {
     const calcInnerWidth = throttle(() => {
-      setBrkPnt(getDeviceBreakpoint(window.innerWidth));
+      setBreakpoint(getDeviceBreakpoint(window.innerWidth));
     }, 200);
 
     window.addEventListener('resize', calcInnerWidth);
     return () => window.removeEventListener('resize', calcInnerWidth);
   }, []);
 
-  return brkPnt;
+  return { breakpoint: breakpoint.name, ...breakpoint };
 };

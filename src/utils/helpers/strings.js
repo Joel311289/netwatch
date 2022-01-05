@@ -27,8 +27,8 @@ export const formattedTime = (duration) => {
     .join(' ');
 };
 
-export const queryParams = () => {
-  const urlSearchParams = new URLSearchParams(window.location.search);
+export const queryParams = (url = window.location.search) => {
+  const urlSearchParams = new URLSearchParams(url);
   const queryParams = Object.fromEntries(urlSearchParams.entries());
 
   return queryParams;

@@ -4,13 +4,10 @@ import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useResize } from '@hooks/useResize';
 
-import { getBreakpointConfig } from '@utils/helpers/breakpoints';
-
 import styles from '@components/Layout/Grid/Grid.module.css';
 
 const Grid = ({ children }) => {
-  const breakpoint = useBreakpointViewport();
-  const { spaceBetween: gap, itemsPerRow } = getBreakpointConfig(breakpoint);
+  const { breakpoint, spaceBetween: gap, itemsPerRow } = useBreakpointViewport();
   const [itemWidth, setItemWidth] = useState(null);
   const gridRef = useRef(null);
   const { width: gridWidth } = useResize(gridRef);

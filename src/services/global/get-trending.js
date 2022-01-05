@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { apiUrl, apiMediaTypes } from '@services/constants';
 import { mediaDetailMapper } from '@services/mappers';
 
 export const TIME_WINDOW = {
@@ -9,14 +9,7 @@ export const TIME_WINDOW = {
 };
 
 export const getTrending = (mediaType = apiMediaTypes.ALL, timeWindow = TIME_WINDOW.DAY) => {
-  const params = {
-    api_key: apiKey,
-    language: 'es-ES'
-  };
-
-  return axios.get(`${apiUrl}/trending/${mediaType}/${timeWindow}`, { params }).then((response) => {
-    const { results } = response.data || {};
-
+  return axios.get(`${apiUrl}/trending/${mediaType}/${timeWindow}`).then(({ results }) => {
     return results.map(mediaDetailMapper);
   });
 };

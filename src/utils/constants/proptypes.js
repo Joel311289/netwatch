@@ -17,7 +17,7 @@ export const ElementDefaultProps = {
 
 export const ElementPropTypes = {
   className: PropTypes.string,
-  skeleton: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+  skeleton: PropTypes.bool,
   children: PropTypes.node,
   style: PropTypes.object,
   body: PropTypes.bool,

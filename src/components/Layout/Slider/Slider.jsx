@@ -6,15 +6,13 @@ import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useResize } from '@hooks/useResize';
 
-import { getBreakpointConfig } from '@utils/helpers/breakpoints';
-
 import styles from '@components/Layout/Slider/Slider.module.css';
 
 import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
 const Slider = ({ children, navigation, onPrev, onNext }) => {
-  const breakpoint = useBreakpointViewport();
+  const { breakpoint, slidesPerView, spaceBetween } = useBreakpointViewport();
   const navigationWidth = 40;
   const [focused, setFocused] = useState(false);
   const [slidesPerGroup, setSlidesPerGroup] = useState(1);
@@ -24,7 +22,6 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
 
   useEffect(() => {
     if (sliderWidth) {
-      const { slidesPerView, spaceBetween } = getBreakpointConfig(breakpoint);
       const totalWidth = sliderWidth - 2 * navigationWidth - (slidesPerView - 1) * spaceBetween;
       const itemWidth = totalWidth / slidesPerView;
       setSlideWidth(itemWidth);
@@ -49,7 +46,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
   const settings = {
     speed: 500,
     slidesPerView: 'auto',
-    spaceBetween: getBreakpointConfig(breakpoint).spaceBetween,
+    spaceBetween,
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
       nextEl: `.${styles['button-next']}`,

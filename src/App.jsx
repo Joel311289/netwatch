@@ -22,7 +22,7 @@ import './App.css';
 const App = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const { setContainer } = useContext(ContainerContext);
-  const breakpoint = useBreakpointViewport();
+  const { breakpoint } = useBreakpointViewport();
 
   return (
     <div className={`App theme-${theme} ${styles}`} data-size={breakpoint}>

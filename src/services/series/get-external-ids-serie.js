@@ -1,19 +1,10 @@
 import axios from 'axios';
 
-import { apiKey, apiUrl, apiMediaTypes } from '@services/constants';
+import { apiUrl, apiMediaTypes } from '@services/constants';
 import { externalsIdsDetailMapper } from '@services/mappers';
 
 export const getExternalIdsSerie = (id) => {
-  const params = {
-    api_key: apiKey,
-    language: 'es-ES'
-  };
-
-  return axios
-    .get(`${apiUrl}/${apiMediaTypes.TV}/${id}/external_ids`, { params })
-    .then((response) => {
-      const data = response.data || {};
-
-      return externalsIdsDetailMapper(data);
-    });
+  return axios.get(`${apiUrl}/${apiMediaTypes.TV}/${id}/external_ids`).then((response) => {
+    return externalsIdsDetailMapper(response);
+  });
 };
