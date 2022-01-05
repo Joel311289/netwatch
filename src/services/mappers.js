@@ -70,7 +70,9 @@ export const videoDetailMapper = (video) => {
     name: get(video, 'name'),
     key: get(video, 'key'),
     type: get(video, 'type'),
-    site: get(video, 'site')
+    site: get(video, 'site'),
+    language: get(video, 'iso_639_1'),
+    region: get(video, 'iso_3166_1')
   };
 };
 

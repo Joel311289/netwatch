@@ -13,11 +13,11 @@ export const httpInterceptor = () => {
       // Do something before request is sent
       if (request.url.startsWith(apiUrl)) {
         request.params = {
-          ...request.params,
           api_key: apiKey,
           language,
           region,
-          watch_region: region
+          watch_region: region,
+          ...request.params
         };
 
         return request;

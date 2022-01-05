@@ -16,7 +16,7 @@ import { getDiscoverSeries } from '@services/series/get-discover-series';
 const HomePage = () => {
   const { itemsPerRow } = useBreakpointViewport();
   const { onModalOpen: onModalDetail, ModalDetail } = useDetailModal();
-  const { onModalOpen: OnModalTrailer, ModalTrailer } = useTrailerModal();
+  const { onModalOpen: onModalTrailer, ModalTrailer } = useTrailerModal();
   const { data: trendings, loading: loadingTrendings } = useFetchData(getTrending, itemsPerRow);
   const { data: movies, loading: loadingMovies } = useFetchData(getDiscoverMovies, itemsPerRow);
   const { data: series, loading: loadingSeries } = useFetchData(getDiscoverSeries, itemsPerRow);
@@ -39,7 +39,7 @@ const HomePage = () => {
       {categories.map(({ loading, type, heading, items }) => (
         <div key={heading} style={{ marginBottom: 40 }}>
           <div className="sub-heading">
-            <MediaHeading skeleton={loading} text={heading} to={type ? `/${type}` : ''} />
+            {items && <MediaHeading skeleton={loading} text={heading} to={type ? `/${type}` : ''} />}
           </div>
 
           <Slider navigation={!loading}>
@@ -50,7 +50,7 @@ const HomePage = () => {
                 to={routeMediaDetail(item)}
                 ratio={1.5}
                 onDetail={() => onModalDetail(item)}
-                onTrailer={() => OnModalTrailer(type, item.id)}
+                onTrailer={() => onModalTrailer(item.type, item.id)}
                 {...item}
               />
             ))}

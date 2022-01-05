@@ -30,8 +30,12 @@ export const getVideoTrailerYoutubeId = (videos) => {
   if (isEmptyArray(videos)) {
     return '';
   }
+  const trailers = videos.filter(
+    (video) => video.type === videoTypes.trailer && video.site === videoSites.youtube
+  );
   return objectPath.get(
-    videos.find((video) => video.type === videoTypes.trailer) || videos[0],
+    trailers.find(({ language }) => language === 'es') ||
+      trailers.find(({ language }) => language === 'en'),
     'key'
   );
 };
