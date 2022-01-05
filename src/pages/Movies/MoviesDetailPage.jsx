@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useLoadDataPage } from '@hooks/useLoadDataPage';
+import { useFetchData } from '@hooks/useFetchData';
 import { useTrailerModal } from '@hooks/useTrailerModal';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
@@ -19,12 +19,12 @@ const MoviesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
   const { onModalOpen, ModalTrailer } = useTrailerModal();
 
-  const { data: movie, loading } = useLoadDataPage(getDetailMovie.bind(this, id));
-  const { data: watch_providers, loading: loadingWatchProviders } = useLoadDataPage(
+  const { data: movie, loading } = useFetchData(getDetailMovie.bind(this, id));
+  const { data: watch_providers, loading: loadingWatchProviders } = useFetchData(
     getWatchProvidersMovie.bind(this, id)
   );
-  const { data, loading: loadingCredits } = useLoadDataPage(getCreditsMovie.bind(this, id));
-  const { data: external_ids, loading: loadingExternalIds } = useLoadDataPage(
+  const { data, loading: loadingCredits } = useFetchData(getCreditsMovie.bind(this, id));
+  const { data: external_ids, loading: loadingExternalIds } = useFetchData(
     getExternalIdsMovie.bind(this, id)
   );
 

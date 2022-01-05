@@ -13,7 +13,7 @@ import desktopStyles from '@components/Media/MediaModalDetail/MediaModalDetail.m
 import mobileStyles from '@components/Media/MediaModalDetail/MediaModalDetail-mobile.module.css';
 
 const MediaModalDetail = ({ to, image, title, description, date, backdrop }) => {
-  const styles = useBreakpointStyles(desktopStyles, mobileStyles);
+  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
 
   return (
     <Space gap={25} className={styles.wrapper}>

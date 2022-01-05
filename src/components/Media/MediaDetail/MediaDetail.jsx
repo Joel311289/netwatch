@@ -29,7 +29,7 @@ const MediaDetail = ({
   external_ids,
   onTrailer
 }) => {
-  const styles = useBreakpointStyles(desktopStyles, mobileStyles);
+  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
   const { rgb: mainColor } = useVibrantColor(backdrop);
 
   if (skeleton) {

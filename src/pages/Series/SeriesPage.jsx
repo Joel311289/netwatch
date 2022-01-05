@@ -9,11 +9,9 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import { routeMediaDetail } from '@services/helpers';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
-import { isEmptyArray } from '@utils/helpers/arrays';
-
 const SeriesPage = () => {
   const { onModalOpen, ModalDetail } = useDetailModal();
-  const [series, loading, onLoadMore] = useLoadMore(getDiscoverSeries, 20);
+  const { data: series, loading, onLoadMore } = useLoadMore(getDiscoverSeries, 20);
 
   return (
     <div className="App-container App-content">
@@ -31,12 +29,12 @@ const SeriesPage = () => {
             skeleton={!item}
             to={routeMediaDetail(item)}
             onDetail={() => onModalOpen(item)}
-            {...(item || {})}
+            {...item}
           />
         ))}
       </Grid>
 
-      {!loading && !isEmptyArray(series) && (
+      {!loading && (
         <div className="block">
           <Button size="large" onClick={onLoadMore}>
             Mostrar más

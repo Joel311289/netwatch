@@ -2,17 +2,17 @@ import { BREAKPOINTS } from '@utils/constants';
 
 export const getDeviceBreakpoint = (width) => {
   if (width < BREAKPOINTS.sm.width) {
-    return BREAKPOINTS.xs.name;
+    return BREAKPOINTS.xs;
   } else if (width < BREAKPOINTS.md.width) {
-    return BREAKPOINTS.sm.name;
+    return BREAKPOINTS.sm;
   } else if (width < BREAKPOINTS.lg.width) {
-    return BREAKPOINTS.md.name;
+    return BREAKPOINTS.md;
   } else if (width < BREAKPOINTS.xl.width) {
-    return BREAKPOINTS.lg.name;
+    return BREAKPOINTS.lg;
   } else if (width < BREAKPOINTS.xxl.width) {
-    return BREAKPOINTS.xl.name;
+    return BREAKPOINTS.xl;
   } else {
-    return BREAKPOINTS.xxl.name;
+    return BREAKPOINTS.xxl;
   }
 };
 export const getBreakpoints = () => {
@@ -23,8 +23,6 @@ export const getBreakpoints = () => {
   });
   return breakpoints;
 };
-
-export const getBreakpointConfig = (breakpoint) => BREAKPOINTS[breakpoint];
 
 export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs.name;
 export const isMobileTablet = (breakpoint) =>

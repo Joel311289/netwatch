@@ -15,7 +15,7 @@ import { bps } from '@utils/constants';
 
 const VideoTrailer = styled(Space)`
   background: #010001;
-  height: 600px;
+  height: 520px;
 
   ${bps.mobile} {
     height: 300px;

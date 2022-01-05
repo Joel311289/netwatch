@@ -1,4 +1,4 @@
-import { useLoadDataPage } from '@hooks/useLoadDataPage';
+import { useFetchData } from '@hooks/useFetchData';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useDetailModal } from '@hooks/useDetailModal';
 import { useTrailerModal } from '@hooks/useTrailerModal';
@@ -13,26 +13,13 @@ import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
-import { getBreakpointConfigPlaceholders } from '@utils/helpers/breakpoints';
-import { flattenArray, isEmptyArray } from '@utils/helpers/arrays';
-
 const HomePage = () => {
-  const breakpoint = useBreakpointViewport();
-  const itemsPlaceholder = getBreakpointConfigPlaceholders(breakpoint);
+  const { itemsPerRow } = useBreakpointViewport();
   const { onModalOpen: onModalDetail, ModalDetail } = useDetailModal();
   const { onModalOpen: OnModalTrailer, ModalTrailer } = useTrailerModal();
-  const { data: trendings, loading: loadingTrendings } = useLoadDataPage(
-    getTrending,
-    itemsPlaceholder
-  );
-  const { data: movies, loading: loadingMovies } = useLoadDataPage(
-    getDiscoverMovies,
-    itemsPlaceholder
-  );
-  const { data: series, loading: loadingSeries } = useLoadDataPage(
-    getDiscoverSeries,
-    itemsPlaceholder
-  );
+  const { data: trendings, loading: loadingTrendings } = useFetchData(getTrending, itemsPerRow);
+  const { data: movies, loading: loadingMovies } = useFetchData(getDiscoverMovies, itemsPerRow);
+  const { data: series, loading: loadingSeries } = useFetchData(getDiscoverSeries, itemsPerRow);
 
   const categories = [
     { heading: 'Tendencias hoy', items: trendings, loading: loadingTrendings },
@@ -52,14 +39,14 @@ const HomePage = () => {
       {categories.map(({ loading, type, heading, items }) => (
         <div key={heading} style={{ marginBottom: 40 }}>
           <div className="sub-heading">
-            <MediaHeading skeleton={!items} text={heading} to={type ? `/${type}` : ''} />
+            <MediaHeading skeleton={loading} text={heading} to={type ? `/${type}` : ''} />
           </div>
 
-          <Slider navigation={!isEmptyArray(items)}>
-            {flattenArray(!items ? loading : items).map((item, index) => (
+          <Slider navigation={!loading}>
+            {items.map((item, index) => (
               <MediaItem
                 key={index}
-                skeleton={!items}
+                skeleton={loading}
                 to={routeMediaDetail(item)}
                 ratio={1.5}
                 onDetail={() => onModalDetail(item)}
