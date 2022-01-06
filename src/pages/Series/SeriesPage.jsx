@@ -31,7 +31,7 @@ const SeriesPage = () => {
             ratio={1.5}
             skeleton={!item}
             to={routeMediaDetail(item)}
-            onDetail={() => onModalDetail(item)}
+            onDetail={() => onModalDetail(mediaTypes.tv, item.id)}
             onTrailer={() => onModalTrailer(mediaTypes.tv, item.id)}
             {...item}
           />

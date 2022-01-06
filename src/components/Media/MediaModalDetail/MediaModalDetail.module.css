@@ -13,15 +13,30 @@
   position: relative;
 }
 
+.header {
+  gap: 6px !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
 .title {
   color: var(--color-yellow);
   font-size: 1.3rem;
   font-weight: 500;
 }
+.title:hover {
+  border-bottom: 1px solid var(--color-yellow);
+}
+
+.genres {
+  flex: 0 0 100%;
+}
 
 .description {
+  width: 100%;
   opacity: 0.6;
   font-size: 0.9rem;
+  padding: 14px 0;
   text-align: justify;
   overflow: hidden;
   text-overflow: ellipsis;

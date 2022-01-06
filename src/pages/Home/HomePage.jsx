@@ -51,7 +51,7 @@ const HomePage = () => {
                 skeleton={loading}
                 to={routeMediaDetail(item)}
                 ratio={1.5}
-                onDetail={() => onModalDetail(item)}
+                onDetail={() => onModalDetail(item.type, item.id)}
                 onTrailer={() => onModalTrailer(item.type, item.id)}
                 {...item}
               />

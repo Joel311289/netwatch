@@ -8,35 +8,33 @@
 }
 
 .button-navigation {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  z-index: 9;
-  background-color: transparent;
-}
-
-.button-navigation-icon {
   background-color: var(--color-secondary);
-  height: 55px !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+  height: 70px !important;
   padding: 0 !important;
   font-size: 2rem !important;
   min-width: 40px;
   font-weight: 700;
   opacity: 0.5;
+  display: flex;
+  justify-content: center;
 }
-.button-navigation-icon:hover,
-.wrapper:hover .button-navigation-icon {
+.wrapper:hover .button-navigation {
   opacity: 1;
+}
+.button-navigation:hover {
+  opacity: 0.7 !important;
 }
 
 .button-prev {
   left: 0;
-  justify-content: flex-start;
 }
 
 .button-next {
   right: 0;
-  justify-content: flex-end;
 }
 
 .button-navigation-disabled {

@@ -7,7 +7,7 @@ import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
-const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, genres }) => {
+const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, genres, children }) => {
   const subheadings = [
     date,
     duration,
@@ -15,24 +15,25 @@ const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, genr
   ];
 
   return (
-    <div className={styles.header}>
-      <Space align="center" gap={[0, 10]} className={styles.title}>
-        <h2 className={styles.heading}>{title}</h2>
+    <Space align="center" gap={[0, 10]} className={`media-detail-header ${styles.header}`}>
+      {children || <h2 className={styles.heading}>{title}</h2>}
+      <div className={styles.subheadings}>
         <Separator items={subheadings} />
-      </Space>
+      </div>
 
       <Space align="center" gap={5} className={styles.genres}>
         {(genres || []).map((genre) => (
           <Chip key={genre} text={genre} />
         ))}
       </Space>
-    </div>
+    </Space>
   );
 };
 
 MediaDetailHeader.defaultProps = MediaDefaultProps;
 MediaDetailHeader.propTypes = {
   styles: PropTypes.object,
+  children: PropTypes.node,
   ...MediaPropTypes
 };
 

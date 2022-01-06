@@ -2,6 +2,8 @@
 
 .wrapper {
   flex-direction: column;
+  padding: 20px !important;
+  gap: 15px 0 !important;
 }
 
 .background {
@@ -13,8 +15,23 @@
   background-size: cover;
 }
 
+.data {
+  width: 100% !important;
+}
+
 .image {
   display: none;
+}
+
+.header {
+  text-align: center;
+  justify-content: center;
+  align-items: center !important;
+}
+
+.genres {
+  flex: initial;
+  justify-content: center;
 }
 
 .more {

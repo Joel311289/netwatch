@@ -39,7 +39,7 @@
   grid-column: 1 / span 2;
   margin-top: 20px;
   margin-bottom: 30px;
-  min-height: 50px;
+  min-height: 63px;
 }
 
 .image {
@@ -86,9 +86,14 @@
   margin: 0 0 2px 0;
 }
 
+.subheadings {
+  margin-top: 2px;
+}
+
 .genres {
   height: fit-content;
   margin-top: 5px;
+  flex: 0 0 100%;
 }
 
 .credit {

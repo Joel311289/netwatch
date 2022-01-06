@@ -35,7 +35,7 @@
   color: var(--color-text);
   font-weight: 500;
   font-size: 0.94rem;
-  max-height: 34px;
+  max-height: 36px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

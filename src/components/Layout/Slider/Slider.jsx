@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import { useResize } from '@hooks/useResize';
 
-import Space from '@components/Layout/Space/Space';
 import Button from '@components/UI/Button/Button';
 
 import { isEmptyArray } from '@utils/helpers/arrays';
@@ -31,12 +30,9 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
 
   const renderNavigationButton = (state, icon) => {
     return (
-      <Space
-        align="center"
-        className={`${styles['button-navigation']} ${styles['button-' + state]}`}
-      >
-        <Button className={styles['button-navigation-icon']}>{icon}</Button>
-      </Space>
+      <Button className={`${styles['button-navigation']} ${styles['button-' + state]}`}>
+        {icon}
+      </Button>
     );
   };
 

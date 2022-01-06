@@ -28,7 +28,12 @@
   margin: 20px 0 25px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.genres {
+  flex: initial;
 }
 
 .image {
