@@ -27,7 +27,7 @@
   overflow: hidden;
 }
 .info.skeleton {
-  background-color: transparent;
+  background-color: var(--background-color);
   padding: 10px 0;
 }
 

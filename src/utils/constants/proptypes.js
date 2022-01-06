@@ -32,6 +32,7 @@ export const ElementPropTypes = {
   text: PropTypes.string,
   tooltip: PropTypes.string,
   image: PropTypes.string,
+  lazy: PropTypes.bool,
   items: PropTypes.array,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,

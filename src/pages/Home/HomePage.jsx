@@ -39,7 +39,9 @@ const HomePage = () => {
       {categories.map(({ loading, type, heading, items }) => (
         <div key={heading} style={{ marginBottom: 40 }}>
           <div className="sub-heading">
-            {items && <MediaHeading skeleton={loading} text={heading} to={type ? `/${type}` : ''} />}
+            {items && (
+              <MediaHeading skeleton={loading} text={heading} to={type ? `/${type}` : ''} />
+            )}
           </div>
 
           <Slider navigation={!loading}>

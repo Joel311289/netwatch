@@ -60,7 +60,7 @@ const MediaDetail = ({
         />
 
         <div className={styles.image}>
-          <MediaItem image={image} width={250} ratio={1.5} />
+          <MediaItem.Image image={image} width={250} ratio={1.5} />
         </div>
 
         <span className={styles.description}>{description}</span>
@@ -77,5 +77,11 @@ const MediaDetail = ({
 
 MediaDetail.defaultProps = MediaDefaultProps;
 MediaDetail.propTypes = MediaPropTypes;
+
+MediaDetail.Skeleton = MediaDetailSkeleton;
+MediaDetail.Header = MediaDetailHeader;
+MediaDetail.Credits = MediaDetailCredits;
+MediaDetail.Watch = MediaDetailWatch;
+MediaDetail.Links = MediaDetailLinks;
 
 export default MediaDetail;

@@ -4,30 +4,18 @@ import PropTypes from 'prop-types';
 
 import Space from '@components/Layout/Space/Space';
 import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
+import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
-import { getHeightRatio } from '@utils/helpers/breakpoints';
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
-const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrailer }) => {
+const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, onTrailer }) => {
   const ActionIcon = (icon) => {
     return (
       <Space align="center" justify="center" className={styles.icon}>
         {icon}
       </Space>
-    );
-  };
-  const Image = (link) => {
-    return (
-      <div
-        className={`${styles.image} ${link ? styles.link : ''}`}
-        style={{
-          backgroundImage: `url(${image})`,
-          width,
-          height: getHeightRatio(width, ratio)
-        }}
-      ></div>
     );
   };
 
@@ -36,9 +24,8 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, onDetail, onTrail
   }
 
   return (
-    <div className={styles.wrapper} style={{ width, minWidth: width }}>
-      {to && <Link to={to}>{Image(true)}</Link>}
-      {!to && Image()}
+    <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width, minWidth: width }}>
+      <MediaItemImage image={image} width={width} ratio={ratio} to={to} lazy={lazy} />
 
       {title && (
         <Space direction="column" justify="between" className={styles.info}>
@@ -69,5 +56,6 @@ MediaItem.propTypes = {
 };
 
 MediaItem.Skeleton = MediaItemSkeleton;
+MediaItem.Image = MediaItemImage;
 
 export default MediaItem;

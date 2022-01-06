@@ -8,21 +8,25 @@
 }
 
 .button-navigation {
-  color: var(--color-white);
   position: absolute;
   top: 0;
-  cursor: pointer;
-  font-size: 2.5rem;
-  font-weight: 700;
   height: 100%;
-  display: flex;
-  align-items: center;
   z-index: 9;
-  will-change: opacity;
+  background-color: transparent;
 }
 
-.button-navigation:hover {
-  color: var(--color-yellow);
+.button-navigation-icon {
+  background-color: var(--color-secondary);
+  height: 55px !important;
+  padding: 0 !important;
+  font-size: 2rem !important;
+  min-width: 40px;
+  font-weight: 700;
+  opacity: 0.5;
+}
+.button-navigation-icon:hover,
+.wrapper:hover .button-navigation-icon {
+  opacity: 1;
 }
 
 .button-prev {
@@ -30,25 +34,9 @@
   justify-content: flex-start;
 }
 
-.button-prev:not(.button-navigation-disabled) {
-  background-image: linear-gradient(
-    to left,
-    rgba(255, 255, 255, 0) 0%,
-    var(--background-color) 100%
-  );
-}
-
 .button-next {
   right: 0;
   justify-content: flex-end;
-}
-
-.button-next:not(.button-navigation-disabled) {
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    var(--background-color) 100%
-  );
 }
 
 .button-navigation-disabled {
