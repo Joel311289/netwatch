@@ -1,25 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getSizes } from '@utils/helpers/breakpoints';
 
-export const useResize = (elementRef, onResize) => {
+export const useResize = (elementRef) => {
   const [sizes, setSizes] = useState({});
-
-  const listener = useCallback(() => {
-    if (elementRef && elementRef.current) {
-      setSizes(getSizes(elementRef.current));
-
-      if (onResize) {
-        onResize(sizes);
-      }
-    }
-  }, [elementRef]);
+  const container = document.querySelector('.App');
 
   useEffect(() => {
-    listener();
-    window.addEventListener('resize', listener);
-    return () => window.removeEventListener('resize', listener);
-  }, [listener, document.body.clientHeight]);
+    let ro;
+    if (container) {
+      ro = new ResizeObserver(() => {
+        if (elementRef && elementRef.current) {
+          setSizes(getSizes(elementRef.current));
+        }
+      });
+      ro.observe(container);
+    }
+    return () => ro && ro.unobserve(container);
+  }, [container, elementRef]);
 
   return sizes;
 };

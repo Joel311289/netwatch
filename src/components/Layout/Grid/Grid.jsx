@@ -7,7 +7,7 @@ import { useResize } from '@hooks/useResize';
 import styles from '@components/Layout/Grid/Grid.module.css';
 
 const Grid = ({ children }) => {
-  const { breakpoint, spaceBetween: gap, itemsPerRow } = useBreakpointViewport();
+  const { spaceBetween: gap, itemsPerRow } = useBreakpointViewport();
   const [itemWidth, setItemWidth] = useState(null);
   const gridRef = useRef(null);
   const { width: gridWidth } = useResize(gridRef);
@@ -17,7 +17,7 @@ const Grid = ({ children }) => {
       const totalSpaces = gap * (itemsPerRow - 1);
       setItemWidth((gridWidth - totalSpaces) / itemsPerRow);
     }
-  }, [gridWidth, breakpoint]);
+  }, [gridWidth, gap, itemsPerRow]);
 
   return (
     <div className={styles.wrapper} style={{ gap }} ref={gridRef}>

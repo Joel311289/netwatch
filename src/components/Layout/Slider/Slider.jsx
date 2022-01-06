@@ -17,7 +17,7 @@ import styles from '@components/Layout/Slider/Slider.module.css';
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
 const Slider = ({ children, navigation, onPrev, onNext }) => {
-  const { breakpoint, slidesPerView, spaceBetween } = useBreakpointViewport();
+  const { slidesPerView, spaceBetween } = useBreakpointViewport();
   const sliderRef = useRef(null);
   const { width: sliderWidth } = useResize(sliderRef);
   const [slideWidth, setSlideWidth] = useState(0);
@@ -27,7 +27,7 @@ const Slider = ({ children, navigation, onPrev, onNext }) => {
       const totalWidth = sliderWidth - (slidesPerView - 1) * spaceBetween;
       setSlideWidth(totalWidth / slidesPerView);
     }
-  }, [sliderWidth, breakpoint]);
+  }, [sliderWidth, slidesPerView, spaceBetween]);
 
   const renderNavigationButton = (state, icon) => {
     return (

@@ -11,19 +11,14 @@ const MediaItemImage = ({ image, width, ratio, to, lazy }) => {
     'swiper-lazy': lazy,
     link: to
   });
-  const background = lazy
-    ? {
-        'data-background': image
-      }
-    : { backgroundImage: `url(${image})` };
 
   const Content = () => {
     return (
       <div
         className={`media-image-wrapper ${styles.image} ${classes}`}
-        {...background}
+        {...(lazy && { 'data-background': image })}
         style={{
-          ...background,
+          ...(!lazy && { backgroundImage: `url(${image})` }),
           width,
           height: getHeightRatio(width, ratio)
         }}
