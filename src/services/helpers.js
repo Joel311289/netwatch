@@ -1,7 +1,7 @@
 import objectPath from 'object-path';
 
 import {
-  mediaTypes,
+  routeMediaTypes,
   personRoleTypes,
   tvWatchProvidersSupported,
   videoSites,
@@ -14,8 +14,6 @@ import { isEmptyArray } from '@utils/helpers/arrays';
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>
   Object.prototype.hasOwnProperty.call(media, 'first_air_date');
-
-export const getMediaType = ({ type }) => (type ? mediaTypes[type] : '');
 
 export const getImageMediaUrl = (baseUrl, path) => (path ? `${baseUrl}${path}` : '');
 
@@ -42,9 +40,10 @@ export const getVideoTrailerYoutubeId = (videos) => {
 
 export const routeMediaDetail = (media) => {
   if (!media) {
-    return '';
+    return '/';
   }
   const { id, type, original_title = '' } = media;
   const title = removeSpecialCharactersText(original_title, '-');
-  return (title ? `/${type}/${id}-${title}` : `/${type}/${id}`).toLowerCase();
+  const pathType = routeMediaTypes[type];
+  return (title ? `/${pathType}/${id}-${title}` : `/${pathType}/${id}`).toLowerCase();
 };

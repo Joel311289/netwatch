@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { apiUrl, apiMediaTypes } from '@services/constants';
+import { apiUrl, mediaTypes } from '@services/constants';
 import { videoDetailMapper } from '@services/mappers';
 
 const params = {
@@ -9,7 +9,7 @@ const params = {
 
 export const getVideosMovie = (id) => {
   return axios
-    .get(`${apiUrl}/${apiMediaTypes.MOVIE}/${id}/videos`, { params })
+    .get(`${apiUrl}/${mediaTypes.MOVIE}/${id}/videos`, { params })
     .then(({ results }) => {
       return results.map(videoDetailMapper);
     });

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { apiUrl, apiMediaTypes } from '@services/constants';
+import { apiUrl, mediaTypes } from '@services/constants';
 import { watchProvidersDetailMapper, watchProviderDetailMapper } from '@services/mappers';
 
 export const getWatchProvidersMovie = (id) => {
-  return axios.get(`${apiUrl}/${apiMediaTypes.MOVIE}/${id}/watch/providers`).then(({ results }) => {
+  return axios.get(`${apiUrl}/${mediaTypes.MOVIE}/${id}/watch/providers`).then(({ results }) => {
     const { watch_link, providers } = watchProvidersDetailMapper(results['ES']);
 
     return {

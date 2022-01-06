@@ -7,13 +7,7 @@ import {
   mediaTypes,
   personRoleTypes
 } from '@services/constants';
-import {
-  getImageMediaUrl,
-  getMediaType,
-  isMediaMovie,
-  isMediaSerie,
-  getPersonRoleType
-} from '@services/helpers';
+import { getImageMediaUrl, isMediaMovie, isMediaSerie, getPersonRoleType } from '@services/helpers';
 
 import { formattedDate, formattedTime } from '@utils/helpers/strings';
 
@@ -22,7 +16,7 @@ const get = objectPath.get;
 export const mediaDetailMapper = (media) => {
   const commonData = {
     id: get(media, 'id'),
-    type: getMediaType({ type: get(media, 'media_type') }),
+    type: get(media, 'media_type'),
     description: get(media, 'overview'),
     image: getImageMediaUrl(apiImageUrl, get(media, 'poster_path')),
     backdrop: getImageMediaUrl(apiBackdropUrl, get(media, 'backdrop_path')),
@@ -37,7 +31,7 @@ export const mediaDetailMapper = (media) => {
   if (isMediaMovie(media)) {
     return {
       ...commonData,
-      type: commonData.type || mediaTypes.movie,
+      type: commonData.type || mediaTypes.MOVIE,
       title: get(media, 'title'),
       original_title: get(media, 'original_title'),
       date: formattedDate(get(media, 'release_date')),
@@ -50,7 +44,7 @@ export const mediaDetailMapper = (media) => {
   if (isMediaSerie(media)) {
     return {
       ...commonData,
-      type: commonData.type || mediaTypes.tv,
+      type: commonData.type || mediaTypes.TV,
       title: get(media, 'name'),
       original_title: get(media, 'original_name'),
       date: formattedDate(get(media, 'first_air_date')),

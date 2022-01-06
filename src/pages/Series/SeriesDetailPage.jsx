@@ -48,7 +48,7 @@ const SeriesDetailPage = () => {
         watch_providers={watch_providers}
         external_ids={external_ids}
         credits={credits}
-        onTrailer={() => onModalOpen(mediaTypes.tv, id)}
+        onTrailer={() => onModalOpen(mediaTypes.TV, id)}
       />
 
       <div className="App-container App-content">Detail</div>

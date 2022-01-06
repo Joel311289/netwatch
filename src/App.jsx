@@ -14,7 +14,7 @@ import SeriesDetailPage from '@pages/Series/SeriesDetailPage';
 
 import Header from '@components/Layout/Header/Header';
 
-import { mediaTypes } from '@services/constants';
+import { routeMediaTypes } from '@services/constants';
 
 import { styles } from '@styles';
 import './App.css';
@@ -36,10 +36,10 @@ const App = () => {
         <div className="App-body" ref={setContainer}>
           <Switch>
             <Route exact component={HomePage} path="/home" />
-            <Route exact component={MoviesPage} path={`/${mediaTypes.movie}`} />
-            <Route exact component={MoviesDetailPage} path={`/${mediaTypes.movie}/:key`} />
-            <Route exact component={SeriesPage} path={`/${mediaTypes.tv}`} />
-            <Route exact component={SeriesDetailPage} path={`/${mediaTypes.tv}/:key`} />
+            <Route exact component={MoviesPage} path={`/${routeMediaTypes.movie}`} />
+            <Route exact component={MoviesDetailPage} path={`/${routeMediaTypes.movie}/:key`} />
+            <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
+            <Route exact component={SeriesDetailPage} path={`/${routeMediaTypes.tv}/:key`} />
             <Redirect to="/home" />
           </Switch>
         </div>

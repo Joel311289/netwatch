@@ -3,13 +3,13 @@ export const apiUrl = import.meta.env.VITE_API_URL;
 export const apiImageUrl = import.meta.env.VITE_API_IMAGES_URL;
 export const apiBackdropUrl = import.meta.env.VITE_API_BACKDROP_URL;
 export const apiLogoUrl = import.meta.env.VITE_API_LOGO_URL;
-export const apiMediaTypes = {
+export const mediaTypes = {
   ALL: 'all',
   MOVIE: 'movie',
   TV: 'tv',
   PERSON: 'person'
 };
-export const mediaTypes = {
+export const routeMediaTypes = {
   movie: 'movies',
   tv: 'series',
   person: 'persons'

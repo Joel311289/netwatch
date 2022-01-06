@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { apiUrl, apiMediaTypes } from '@services/constants';
+import { apiUrl, mediaTypes } from '@services/constants';
 import { mediaDetailMapper } from '@services/mappers';
-
-export const getDetailMovie = (id) => {
-  return axios.get(`${apiUrl}/${apiMediaTypes.MOVIE}/${id}`).then((response) => {
+// `${apiUrl}/${mediaTypes.MOVIE}/${id}`
+export const getDetailMovie = (url) => {
+  return axios.get(url).then((response) => {
     return mediaDetailMapper(response);
   });
 };

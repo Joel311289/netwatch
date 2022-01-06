@@ -31,8 +31,8 @@ const MoviesPage = () => {
             ratio={1.5}
             skeleton={!item}
             to={routeMediaDetail(item)}
-            onDetail={() => onModalDetail(mediaTypes.movie, item.id)}
-            onTrailer={() => onModalTrailer(mediaTypes.movie, item.id)}
+            onDetail={() => onModalDetail(mediaTypes.MOVIE, item.id)}
+            onTrailer={() => onModalTrailer(mediaTypes.MOVIE, item.id)}
             {...item}
           />
         ))}

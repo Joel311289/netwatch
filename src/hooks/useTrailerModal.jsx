@@ -33,7 +33,7 @@ export const useTrailerModal = () => {
 
   const onFetchTrailer = async (mediaType, mediaId) => {
     const fetchData =
-      mediaType === mediaTypes.movie
+      mediaType === mediaTypes.MOVIE
         ? getVideosMovie.bind(this, mediaId)
         : getVideosSerie.bind(this, mediaId);
 

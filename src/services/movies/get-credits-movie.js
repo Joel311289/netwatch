@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { apiUrl, apiMediaTypes, personRoleTypes } from '@services/constants';
+import { apiUrl, mediaTypes, personRoleTypes } from '@services/constants';
 import { creditDetailMapper } from '@services/mappers';
 
 // Filter by role type and merge jobs
@@ -25,7 +25,7 @@ const filterCredits = (credits, role) => {
 
 export const getCreditsMovie = (id) => {
   return axios
-    .get(`${apiUrl}/${apiMediaTypes.MOVIE}/${id}/credits`)
+    .get(`${apiUrl}/${mediaTypes.MOVIE}/${id}/credits`)
     .then(({ cast, crew }) => {
       return {
         cast: filterCredits(cast, personRoleTypes.Acting),
