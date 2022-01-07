@@ -19,32 +19,34 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, o
     );
   };
 
-  if (skeleton) {
-    return <MediaItemSkeleton width={width} ratio={ratio} />;
-  }
-
   return (
-    <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width, minWidth: width }}>
-      <MediaItemImage image={image} width={width} ratio={ratio} to={to} lazy={lazy} />
+    <>
+      <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width, minWidth: width }}>
+        {!skeleton && (
+          <MediaItemImage image={image} width={width} ratio={ratio} to={to} lazy={lazy} />
+        )}
 
-      {title && (
-        <Space direction="column" justify="between" className={styles.info}>
-          <Link to={to}>
-            <span className={styles.title}>{title}</span>
-          </Link>
+        {title && (
+          <Space direction="column" justify="between" className={styles.info}>
+            <Link to={to}>
+              <span className={styles.title}>{title}</span>
+            </Link>
 
-          <Space justify="between">
-            <button className={styles.action} onClick={onTrailer}>
-              {ActionIcon(<BiPlay />)}
-              <span>Trailer</span>
-            </button>
-            <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
-              {ActionIcon(<BiInfoCircle />)}
-            </button>
+            <Space justify="between">
+              <button className={styles.action} onClick={onTrailer}>
+                {ActionIcon(<BiPlay />)}
+                <span>Trailer</span>
+              </button>
+              <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
+                {ActionIcon(<BiInfoCircle />)}
+              </button>
+            </Space>
           </Space>
-        </Space>
-      )}
-    </div>
+        )}
+      </div>
+
+      {skeleton && <MediaItemSkeleton width={width} ratio={ratio} />}
+    </>
   );
 };
 

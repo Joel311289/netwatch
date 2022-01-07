@@ -15,8 +15,8 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           className={styles['toggle-checkbox']}
           type="checkbox"
           checked={theme === THEMES.DARK}
-          onChange={onChangeTheme}
-        ></input>
+          onChange={() => onChangeTheme(theme)}
+        />
         <div className={styles['toggle-slot']}>
           <div className={styles['sun-icon-wrapper']}>
             <BiSun className={styles['sun-icon']} />
@@ -31,30 +31,29 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
   };
 
   return (
-    theme && (
-      <Space justify="between" align="center" className={styles.wrapper}>
-        <Link to="/" className={styles.brand}>
-          <img
-            className={styles.logo}
-            src={logoUrl || `/assets/images/logo-${theme}.png`}
-            alt="logo"
-          ></img>
-          <p className={styles.title}>{title}</p>
-        </Link>
+    <Space justify="between" align="center" className={styles.wrapper}>
+      <Link to="/" className={styles.brand}>
+        <img
+          className={styles.logo}
+          src={logoUrl || `/assets/images/logo-${theme}.png`}
+          alt="logo"
+        ></img>
+        <p className={styles.title}>{title}</p>
+      </Link>
 
-        <Space align="center" gap={10} className={styles.actions}>
-          <Space align="center" gap={10} className={styles['theme-action']}>
-            <span>{theme}</span>
-            {ToggleTheme(onChangeTheme)}
-          </Space>
+      <Space align="center" gap={10} className={styles.actions}>
+        <Space align="center" gap={10} className={styles['theme-action']}>
+          <span>{theme}</span>
+          {ToggleTheme(onChangeTheme)}
         </Space>
       </Space>
-    )
+    </Space>
   );
 };
 
 Header.defaultProps = {
-  title: 'Title'
+  title: 'Title',
+  theme: THEMES.LIGHT
 };
 Header.propTypes = {
   title: PropTypes.string.isRequired,

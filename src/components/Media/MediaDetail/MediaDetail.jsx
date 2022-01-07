@@ -41,7 +41,7 @@ const MediaDetail = ({
       <div
         className={styles.backdrop}
         style={{
-          background: `linear-gradient(to bottom, rgba(${mainColor}, 1), rgba(${mainColor}, 0.7))`
+          background: `linear-gradient(to bottom, rgba(${mainColor}, 0.8), rgba(${mainColor}, 1))`
         }}
       ></div>
 
