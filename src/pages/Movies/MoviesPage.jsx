@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useFetchPagination } from '@hooks/useLoadMore';
+import { useFetchPagination } from '@hooks/useFetchPagination';
 
 import Button from '@components/UI/Button/Button';
 import Grid from '@components/Layout/Grid/Grid';

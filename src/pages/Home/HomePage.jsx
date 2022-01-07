@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useFetch } from '@hooks/useFetch';
-import { useFetchPagination } from '@hooks/useLoadMore';
+import { useFetchPagination } from '@hooks/useFetchPagination';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Slider from '@components/Layout/Slider/Slider';
