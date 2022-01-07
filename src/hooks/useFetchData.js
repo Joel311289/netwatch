@@ -8,6 +8,7 @@ export const useFetchData = (fetchData, itemsPerView, page = 1) => {
   const isMounted = useRef(true);
   const [data, setData] = useState({ data: initialData(itemsPerView), loading: true, error: null });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchDataCallback = useCallback(
     typeof fetchData === 'string' ? fetch(fetchData) : fetchData,
     [page]
@@ -43,7 +44,7 @@ export const useFetchData = (fetchData, itemsPerView, page = 1) => {
           error
         });
       });
-  }, [page]);
+  }, [fetchDataCallback, itemsPerView, page]);
 
   return data;
 };

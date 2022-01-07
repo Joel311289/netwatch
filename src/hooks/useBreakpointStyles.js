@@ -14,7 +14,7 @@ export const useBreakpointStyles = ({ desktopStyles, mobileStyles }) => {
     } else {
       setStyles(desktopStyles);
     }
-  }, [breakpoint]);
+  }, [breakpoint, desktopStyles, mobileStyles]);
 
   return styles;
 };

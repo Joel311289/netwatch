@@ -44,7 +44,7 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
 
         <Space align="center" gap={10} className={styles.actions}>
           <Space align="center" gap={10} className={styles['theme-action']}>
-            <span>{theme.toUpperCase()}</span>
+            <span>{theme}</span>
             {ToggleTheme(onChangeTheme)}
           </Space>
         </Space>

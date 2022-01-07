@@ -26,6 +26,7 @@
 .theme-action {
   font-size: 1rem;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .toggle-checkbox {
