@@ -8,7 +8,7 @@ const initialData = (itemsPerView) => (itemsPerView ? getEmptyArray(itemsPerView
 export const useFetchPagination = (path, fetcherMoreData, itemsPerView) => {
   const getKey = (index, previousPageData) => {
     if (previousPageData && !previousPageData.length) return null;
-    return path(index + 1);
+    return `${path}?page=${index + 1}`;
   };
 
   const [limit, setLimit] = useState(1);

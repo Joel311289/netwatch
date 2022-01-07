@@ -9,15 +9,13 @@ import { mediaTypes } from '@services/constants';
 import { useFetch } from '@hooks/useFetch';
 
 import { getVideoTrailerYoutubeId } from '@services/helpers';
-import { getVideosMovie, pathVideosMovie } from '@services/movies/get-videos-movie';
-import { getVideosSerie, pathVideosSerie } from '@services/series/get-videos-serie';
+import { getVideosMovie } from '@services/movies/get-videos-movie';
+import { getVideosSerie } from '@services/series/get-videos-serie';
 
 const fetcherVideo = (type) => (type === mediaTypes.MOVIE ? getVideosMovie : getVideosSerie);
-const pathService = (type, id) =>
-  type === mediaTypes.MOVIE ? pathVideosMovie(id) : pathVideosSerie(id);
 
 const MediaModalVideo = ({ styles, type, id }) => {
-  const { data, loading } = useFetch(pathService(type, id), fetcherVideo(type));
+  const { data, loading } = useFetch(`/api/${type}/${id}/videos`, fetcherVideo(type));
 
   const videoId = useMemo(() => getVideoTrailerYoutubeId(data), [data]);
 

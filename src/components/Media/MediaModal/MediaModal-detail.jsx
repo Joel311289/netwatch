@@ -11,17 +11,15 @@ import MediaModalDetailSkeleton from '@components/Media/MediaModal/MediaModal-de
 
 import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
-import { pathDetailMovie, getDetailMovie } from '@services/movies/get-detail-movie';
-import { pathDetailSerie, getDetailSerie } from '@services/series/get-detail-serie';
+import { getDetailMovie } from '@services/movies/get-detail-movie';
+import { getDetailSerie } from '@services/series/get-detail-serie';
 
 import { truncatedText } from '@utils/helpers/strings';
 
 const fetcherDetail = (type) => (type === mediaTypes.MOVIE ? getDetailMovie : getDetailSerie);
-const pathService = (type, id) =>
-  type === mediaTypes.MOVIE ? pathDetailMovie(id) : pathDetailSerie(id);
 
 const MediaModalDetail = ({ styles, type, id }) => {
-  const { data, loading } = useFetch(pathService(type, id), fetcherDetail(type));
+  const { data, loading } = useFetch(`/api/${type}/${id}`, fetcherDetail(type));
   const { image, title, description, backdrop } = data || {};
 
   if (loading) {

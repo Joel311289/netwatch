@@ -30,7 +30,7 @@ export const useLocalStorage = (key, initialValue, options) => {
         return initialValue;
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       // If user is in private mode or has storage restriction
       // localStorage can throw. JSON.parse and JSON.stringify
       // can throw, too.
@@ -63,7 +63,7 @@ export const useLocalStorage = (key, initialValue, options) => {
         localStorage.setItem(key, value);
         setState(deserializer(value));
       } catch (error) {
-        console.log(error);
+        console.error(error);
         // If user is in private mode or has storage restriction
         // localStorage can throw. Also JSON.stringify can throw.
       }

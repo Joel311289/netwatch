@@ -9,26 +9,28 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 
-import { routeMediaTypes } from '@services/constants';
+import { routeMediaTypes, mediaTypes, timesWindow } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
-import { pathTrending, getTrending } from '@services/global/get-trending';
-import { pathDiscoverMovies, getDiscoverMovies } from '@services/movies/get-discover-movies';
-import { pathDiscoverSeries, getDiscoverSeries } from '@services/series/get-discover-series';
+import { getTrending } from '@services/global/get-trending';
+import { getDiscoverMovies } from '@services/movies/get-discover-movies';
+import { getDiscoverSeries } from '@services/series/get-discover-series';
+
+const timeWindow = timesWindow.DAY;
 
 const HomePage = () => {
   const { itemsPerRow } = useBreakpointViewport();
   const { data: trendings, loading: loadingTrendings } = useFetch(
-    pathTrending(),
+    `/api/trending/${mediaTypes.ALL}/${timeWindow}`,
     getTrending,
     itemsPerRow
   );
   const { data: movies, loading: loadingMovies } = useFetchPagination(
-    pathDiscoverMovies,
+    `/api/discover/${mediaTypes.MOVIE}`,
     getDiscoverMovies,
     itemsPerRow
   );
   const { data: series, loading: loadingSeries } = useFetchPagination(
-    pathDiscoverSeries,
+    `/api/discover/${mediaTypes.TV}`,
     getDiscoverSeries,
     itemsPerRow
   );

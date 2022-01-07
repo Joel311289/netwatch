@@ -7,7 +7,7 @@ import { useFetch } from '@hooks/useFetch';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 
-import { pathDetailSerie, getDetailSerie } from '@services/series/get-detail-serie';
+import { getDetailSerie } from '@services/series/get-detail-serie';
 import { getWatchProvidersSerie } from '@services/series/get-watch-providers-serie';
 import { getExternalIdsSerie } from '@services/series/get-external-ids-serie';
 import { getCreditsSerie } from '@services/series/get-credits-serie';
@@ -20,7 +20,7 @@ const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const { data: serie, loading } = useFetch(pathDetailSerie(id), getDetailSerie);
+  const { data: serie, loading } = useFetch(`/api/${mediaTypes.TV}/${id}`, getDetailSerie);
   const { data: watch_providers, loading: loadingWatchProviders } = useFetchData(
     getWatchProvidersSerie.bind(this, id)
   );

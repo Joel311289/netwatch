@@ -10,7 +10,7 @@ import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
-import { pathDiscoverMovies, getDiscoverMovies } from '@services/movies/get-discover-movies';
+import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 
 const MoviesPage = () => {
   const {
@@ -18,7 +18,7 @@ const MoviesPage = () => {
     loading,
     onLoadMore,
     paginationEnd
-  } = useFetchPagination(pathDiscoverMovies, getDiscoverMovies, 20);
+  } = useFetchPagination(`/api/discover/${mediaTypes.MOVIE}`, getDiscoverMovies, 20);
   const [fetchModalData, setFetchModalData] = useState({});
 
   const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });

@@ -11,7 +11,8 @@ export const httpInterceptor = () => {
   axios.interceptors.request.use(
     (request) => {
       // Do something before request is sent
-      if (request.url.startsWith(apiUrl)) {
+      if (request.url.startsWith('/api/')) {
+        request.url = request.url.replace(/\/api/, apiUrl);
         request.params = {
           api_key: apiKey,
           language,

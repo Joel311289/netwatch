@@ -6,7 +6,7 @@ import { useFetch } from '@hooks/useFetch';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 
-import { pathDetailMovie, getDetailMovie } from '@services/movies/get-detail-movie';
+import { getDetailMovie } from '@services/movies/get-detail-movie';
 import { getWatchProvidersMovie } from '@services/movies/get-watch-providers-movie';
 import { getExternalIdsMovie } from '@services/movies/get-external-ids-movie';
 import { getCreditsMovie } from '@services/movies/get-credits-movie';
@@ -20,7 +20,7 @@ const MoviesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const { data: movie, loading } = useFetch(pathDetailMovie(id), getDetailMovie);
+  const { data: movie, loading } = useFetch(`/api/${mediaTypes.MOVIE}/${id}`, getDetailMovie);
   const { data: watch_providers, loading: loadingWatchProviders } = useFetchData(
     getWatchProvidersMovie.bind(this, id)
   );
