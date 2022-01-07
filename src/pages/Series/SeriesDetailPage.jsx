@@ -17,7 +17,7 @@ const SeriesDetailPage = () => {
   const { data: serie, loading } = useFetch(
     [
       `/api/${mediaTypes.TV}/${id}`,
-      { append_to_response: ['watch/providers', 'credits', 'external_ids'] }
+      { append_to_response: ['watch/providers', 'aggregate_credits', 'external_ids'] }
     ],
     getDetailSerie
   );

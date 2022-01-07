@@ -69,12 +69,26 @@ export const videoDetailMapper = (video) => {
 };
 
 export const creditDetailMapper = (credit) => {
+  const character = get(credit, 'character');
   return {
     id: get(credit, 'id'),
     role: getPersonRoleType(credit),
     job: [get(credit, 'job')],
     name: get(credit, 'name'),
-    character: get(credit, 'character'),
+    characters: character && character.split(' / '),
+    image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
+  };
+};
+
+export const aggregateCreditDetailMapper = (credit) => {
+  return {
+    id: get(credit, 'id'),
+    role: personRoleTypes.Acting,
+    name: get(credit, 'name'),
+    characters: (get(credit, 'roles') || []).map((character) => ({
+      character_id: get(character, 'credit_id'),
+      character: get(character, 'character')
+    })),
     image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };
 };

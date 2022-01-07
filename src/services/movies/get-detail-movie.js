@@ -31,7 +31,7 @@ const filterCredits = (credits, role) => {
 
 const detailCredits = ({ cast, crew }) => {
   return {
-    cast: filterCredits(cast, personRoleTypes.Acting),
+    cast: cast.map(creditDetailMapper),
     directors: filterCredits(crew, personRoleTypes.Directing),
     writers: filterCredits(crew, personRoleTypes.Writing)
   };

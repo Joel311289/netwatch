@@ -5,34 +5,13 @@ import {
   creatorDetailMapper,
   watchProvidersDetailMapper,
   externalsIdsDetailMapper,
-  creditDetailMapper,
+  aggregateCreditDetailMapper,
   watchProviderDetailMapper
 } from '@services/mappers';
-import { personRoleTypes } from '@services/constants';
-
-// Filter by role type and merge jobs
-const filterCredits = (credits, role) => {
-  const creditsFiltered = [];
-  const creditsMapped = credits.map(creditDetailMapper).filter((credit) => credit.role === role);
-
-  creditsMapped.forEach((credit) => {
-    let duplicate = creditsFiltered.findIndex((c) => c.id === credit.id);
-    if (duplicate >= 0) {
-      creditsFiltered[duplicate] = {
-        ...creditsFiltered[duplicate],
-        job: [...creditsFiltered[duplicate].job, ...credit.job]
-      };
-    } else {
-      creditsFiltered.push(credit);
-    }
-  });
-
-  return creditsFiltered;
-};
 
 const detailCredits = ({ cast }) => {
   return {
-    cast: filterCredits(cast, personRoleTypes.Acting)
+    cast: cast.map(aggregateCreditDetailMapper)
   };
 };
 
@@ -52,7 +31,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
 
   return axios.get(`${url}`, { params }).then((response) => {
     const {
-      credits,
+      aggregate_credits: credits,
       ['watch/providers']: watch_providers,
       external_ids,
       created_by: creators,
