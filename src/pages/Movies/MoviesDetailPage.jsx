@@ -1,12 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useFetchData } from '@hooks/useFetchData';
-import { useTrailerModal } from '@hooks/useTrailerModal';
+import { useFetch } from '@hooks/useFetch';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 
-import { getDetailMovie } from '@services/movies/get-detail-movie';
+import { pathDetailMovie, getDetailMovie } from '@services/movies/get-detail-movie';
 import { getWatchProvidersMovie } from '@services/movies/get-watch-providers-movie';
 import { getExternalIdsMovie } from '@services/movies/get-external-ids-movie';
 import { getCreditsMovie } from '@services/movies/get-credits-movie';
@@ -14,12 +14,13 @@ import { getCreditsMovie } from '@services/movies/get-credits-movie';
 import { getIdFromParams } from '@utils/helpers/strings';
 import { truncateArray } from '@utils/helpers/arrays';
 import { mediaTypes } from '@services/constants';
+import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 const MoviesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
-  const { onModalOpen, ModalTrailer } = useTrailerModal();
+  const [fetchModalData, setFetchModalData] = useState({});
 
-  const { data: movie, loading } = useFetchData(getDetailMovie.bind(this, id));
+  const { data: movie, loading } = useFetch(pathDetailMovie(id), getDetailMovie);
   const { data: watch_providers, loading: loadingWatchProviders } = useFetchData(
     getWatchProvidersMovie.bind(this, id)
   );
@@ -40,6 +41,8 @@ const MoviesDetailPage = () => {
     { label: 'Actores', data: truncateArray(cast, 3) }
   ];
 
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+
   return (
     <div>
       <MediaDetail
@@ -48,12 +51,14 @@ const MoviesDetailPage = () => {
         watch_providers={watch_providers}
         external_ids={external_ids}
         credits={credits}
-        onTrailer={() => onModalOpen(mediaTypes.MOVIE, id)}
+        onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
       />
 
       <div className="App-container App-content">Detail</div>
 
-      {ModalTrailer}
+      {fetchModalData.id && (
+        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+      )}
     </div>
   );
 };

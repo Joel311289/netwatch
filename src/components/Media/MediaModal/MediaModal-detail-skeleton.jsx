@@ -7,7 +7,7 @@ import { getEmptyArray } from '@utils/helpers/arrays';
 
 const MediaModalDetailSkeleton = ({ styles }) => {
   return (
-    <Space gap={25} className={styles.wrapper}>
+    <Space gap={25} className={styles.detail}>
       <div className={styles.image}>
         <MediaItem.Skeleton width={200} ratio={1.5} body={false} />
       </div>

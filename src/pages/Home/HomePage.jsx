@@ -1,31 +1,24 @@
+import { useState } from 'react';
+
 import { useFetchData } from '@hooks/useFetchData';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
-import { useDetailModal } from '@hooks/useDetailModal';
-import { useTrailerModal } from '@hooks/useTrailerModal';
 
 import Slider from '@components/Layout/Slider/Slider';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaModal from '@components/Media/MediaModal/MediaModal';
 
-import { routeMediaTypes, mediaTypes } from '@services/constants';
+import { routeMediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
 import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
-import { useState } from 'react';
-import { getDetailMovie } from '@services/movies/get-detail-movie';
-import { getDetailSerie } from '@services/series/get-detail-serie';
-import Modal from '@components/UI/Modal/Modal';
-import MediaModalDetail from '@components/Media/MediaModalDetail/MediaModalDetail';
 
 const HomePage = () => {
   const { itemsPerRow } = useBreakpointViewport();
-  // const { onModalOpen: onModalDetail, ModalDetail } = useDetailModal();
-  const { onModalOpen: onModalTrailer, ModalTrailer } = useTrailerModal();
   const { data: trendings, loading: loadingTrendings } = useFetchData(getTrending, itemsPerRow);
   const { data: movies, loading: loadingMovies } = useFetchData(getDiscoverMovies, itemsPerRow);
   const { data: series, loading: loadingSeries } = useFetchData(getDiscoverSeries, itemsPerRow);
-
   const [fetchModalData, setFetchModalData] = useState({});
 
   const categories = [
@@ -44,9 +37,8 @@ const HomePage = () => {
     }
   ];
 
-  const onDetail = (item) => {
-    setFetchModalData(item);
-  };
+  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
   return (
     <div className="App-container App-content">
@@ -68,7 +60,7 @@ const HomePage = () => {
                 to={routeMediaDetail(item)}
                 ratio={1.5}
                 onDetail={() => onDetail(item)}
-                onTrailer={() => onModalTrailer(item.type, item.id)}
+                onTrailer={() => onTrailer(item)}
                 {...item}
               />
             ))}
@@ -76,12 +68,9 @@ const HomePage = () => {
         </div>
       ))}
 
-      <Modal size="m" visible={!!fetchModalData.id} onClose={() => setFetchModalData({})}>
-        {fetchModalData.id && <MediaModalDetail {...fetchModalData} />}
-      </Modal>
-
-      {/* {ModalDetail} */}
-      {ModalTrailer}
+      {fetchModalData.id && (
+        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+      )}
     </div>
   );
 };

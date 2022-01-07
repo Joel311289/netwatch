@@ -1,20 +1,23 @@
+import { useState } from 'react';
+
 import { useLoadMore } from '@hooks/useLoadMore';
-import { useDetailModal } from '@hooks/useDetailModal';
-import { useTrailerModal } from '@hooks/useTrailerModal';
 
 import Button from '@components/UI/Button/Button';
 import Grid from '@components/Layout/Grid/Grid';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
+import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
 const SeriesPage = () => {
-  const { onModalOpen: onModalDetail, ModalDetail } = useDetailModal();
-  const { onModalOpen: onModalTrailer, ModalTrailer } = useTrailerModal();
   const { data: series, loading, onLoadMore } = useLoadMore(getDiscoverSeries, 20);
+  const [fetchModalData, setFetchModalData] = useState({});
+
+  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
   return (
     <div className="App-container App-content">
@@ -31,8 +34,8 @@ const SeriesPage = () => {
             ratio={1.5}
             skeleton={!item}
             to={routeMediaDetail(item)}
-            onDetail={() => onModalDetail(mediaTypes.TV, item.id)}
-            onTrailer={() => onModalTrailer(mediaTypes.TV, item.id)}
+            onDetail={() => onDetail({ ...item, type: mediaTypes.TV })}
+            onTrailer={() => onTrailer({ ...item, type: mediaTypes.TV })}
             {...item}
           />
         ))}
@@ -46,8 +49,9 @@ const SeriesPage = () => {
         </div>
       )}
 
-      {ModalDetail}
-      {ModalTrailer}
+      {fetchModalData.id && (
+        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+      )}
     </div>
   );
 };

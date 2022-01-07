@@ -9,7 +9,7 @@ import {
 } from '@services/constants';
 
 import { removeSpecialCharactersText } from '@utils/helpers/strings';
-import { isEmptyArray } from '@utils/helpers/arrays';
+import { compactArray, isEmptyArray } from '@utils/helpers/arrays';
 
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>
@@ -25,15 +25,18 @@ export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupp
 export const getVideoUrl = ({ site, key }) =>
   site === videoSites.youtube ? `https://www.youtube.com/watch?v=${key}` : '';
 export const getVideoTrailerYoutubeId = (videos) => {
-  if (isEmptyArray(videos)) {
+  if (!videos || isEmptyArray(videos)) {
     return '';
   }
   const trailers = videos.filter(
     (video) => video.type === videoTypes.trailer && video.site === videoSites.youtube
   );
   return objectPath.get(
-    trailers.find(({ language }) => language === 'es') ||
-      trailers.find(({ language }) => language === 'en'),
+    compactArray([
+      ...[trailers.find(({ language }) => language === 'es')],
+      ...[trailers.find(({ language }) => language === 'en')],
+      ...[videos[0]]
+    ])[0],
     'key'
   );
 };

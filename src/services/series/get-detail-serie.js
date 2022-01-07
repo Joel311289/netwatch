@@ -3,10 +3,10 @@ import axios from 'axios';
 import { apiUrl, mediaTypes } from '@services/constants';
 import { mediaDetailMapper, creatorDetailMapper } from '@services/mappers';
 
-export const path = (id) => `api/${mediaTypes.TV}/${id}`;
+export const pathDetailSerie = (id) => `${apiUrl}/${mediaTypes.TV}/${id}`;
 
-export const getDetailSerie = (id) => {
-  return axios.get(`${apiUrl}/${path(id)}`).then((response) => {
+export const getDetailSerie = (url) => {
+  return axios.get(url).then((response) => {
     const { creators, ...detail } = mediaDetailMapper(response);
 
     return {

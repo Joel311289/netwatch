@@ -1,6 +1,8 @@
-@import './MediaModalDetail.module.css';
+@import './MediaModal.module.css';
 
-.wrapper {
+/* ---------- Detail */
+
+.detail {
   flex-direction: column;
   padding: 20px !important;
   gap: 15px 0 !important;
@@ -38,4 +40,10 @@
   position: initial;
   margin: 10px 0 5px 0;
   float: right;
+}
+
+/* ---------- Video */
+
+.video {
+  height: 300px;
 }

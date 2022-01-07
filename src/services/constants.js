@@ -18,7 +18,8 @@ export const videoTypes = {
   trailer: 'Trailer',
   teaser: 'Teaser',
   featurette: 'Featurette',
-  behind_scenes: 'Behind the Scenes'
+  behind_scenes: 'Behind the Scenes',
+  clip: 'Clip'
 };
 export const videoSites = {
   youtube: 'YouTube'

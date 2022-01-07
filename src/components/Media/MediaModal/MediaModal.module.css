@@ -1,4 +1,6 @@
-.wrapper {
+/* ---------- Detail */
+
+.detail {
   padding: 30px;
 }
 
@@ -60,4 +62,15 @@
 }
 .separator:last-of-type {
   display: none;
+}
+
+/* ---------- Video */
+
+.video {
+  background: #010001;
+  height: 520px;
+}
+
+img {
+  height: 45px;
 }

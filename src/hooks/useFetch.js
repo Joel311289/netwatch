@@ -1,11 +1,16 @@
 import useSWR from 'swr';
 
-export const useFetch = (path, fetcher) => {
+import { getEmptyArray } from '@utils/helpers/arrays';
+
+const initialData = (itemsPerView) => (itemsPerView ? getEmptyArray(itemsPerView) : null);
+
+export const useFetch = (path, fetcher, itemsPerView) => {
   const { data, error } = useSWR(path, fetcher);
+  const loading = !error && !data;
 
   return {
-    data,
-    loading: !error && !data,
+    data: loading ? initialData(itemsPerView) : data,
+    loading,
     error
   };
 };

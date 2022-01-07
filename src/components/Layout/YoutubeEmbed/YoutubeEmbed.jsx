@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from '@components/Layout/YoutubeEmbed/YoutubeEmbed.module.css';
 
 const YoutubeEmbed = ({ embedId, autoplay }) => (
-  <div className={styles.video}>
+  <div className={styles.youtube}>
     <iframe
       src={`https://www.youtube.com/embed/${embedId}?autoplay=${Number(autoplay)}`}
       frameBorder="0"

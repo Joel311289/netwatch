@@ -1,39 +1,35 @@
 import { Link as LinkRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
 import { useFetch } from '@hooks/useFetch';
 
 import Link from '@components/UI/Link/Link';
 import Space from '@components/Layout/Space/Space';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
-import MediaModalDetailSkeleton from '@components/Media/MediaModalDetail/MediaModalDetail-skeleton';
+import MediaModalDetailSkeleton from '@components/Media/MediaModal/MediaModal-detail-skeleton';
 
-import { mediaTypes, apiUrl } from '@services/constants';
+import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
-import { getDetailMovie } from '@services/movies/get-detail-movie';
-import { getDetailSerie } from '@services/series/get-detail-serie';
+import { pathDetailMovie, getDetailMovie } from '@services/movies/get-detail-movie';
+import { pathDetailSerie, getDetailSerie } from '@services/series/get-detail-serie';
 
-import { ElementPropTypes, MediaPropTypes } from '@utils/constants/proptypes';
 import { truncatedText } from '@utils/helpers/strings';
 
-import desktopStyles from '@components/Media/MediaModalDetail/MediaModalDetail.module.css';
-import mobileStyles from '@components/Media/MediaModalDetail/MediaModalDetail-mobile.module.css';
-
 const fetcherDetail = (type) => (type === mediaTypes.MOVIE ? getDetailMovie : getDetailSerie);
+const pathService = (type, id) =>
+  type === mediaTypes.MOVIE ? pathDetailMovie(id) : pathDetailSerie(id);
 
-const MediaModalDetail = ({ type, id }) => {
-  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const response = useFetch(`${apiUrl}/${type}/${id}`, fetcherDetail(type));
-  const { data, loading: skeleton } = response;
+const MediaModalDetail = ({ styles, type, id }) => {
+  const { data, loading } = useFetch(pathService(type, id), fetcherDetail(type));
   const { image, title, description, backdrop } = data || {};
 
-  if (skeleton) {
+  if (loading) {
     return <MediaModalDetailSkeleton styles={styles} />;
   }
 
   return (
-    <Space gap={25} className={styles.wrapper}>
+    <Space gap={25} className={`media-modal-detail ${styles.detail}`}>
       <div className={styles.image}>
         <MediaItem image={image} width={200} ratio={1.5} />
       </div>
@@ -57,10 +53,9 @@ const MediaModalDetail = ({ type, id }) => {
 };
 
 MediaModalDetail.propTypes = {
-  ...ElementPropTypes,
-  ...MediaPropTypes
+  type: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  styles: PropTypes.object
 };
-
-MediaDetail.Skeleton = MediaModalDetailSkeleton;
 
 export default MediaModalDetail;

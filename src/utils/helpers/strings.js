@@ -33,6 +33,12 @@ export const queryParams = (url = window.location.search) => {
 
   return queryParams;
 };
+export const queryString = (params) =>
+  Object.keys(params)
+    .map((key) => {
+      return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])})`;
+    })
+    .join('&');
 export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });

@@ -7,10 +7,10 @@ const params = {
   include_video_language: 'es,null'
 };
 
-export const getVideosMovie = (id) => {
-  return axios
-    .get(`${apiUrl}/${mediaTypes.MOVIE}/${id}/videos`, { params })
-    .then(({ results }) => {
-      return results.map(videoDetailMapper);
-    });
+export const pathVideosMovie = (id) => `${apiUrl}/${mediaTypes.MOVIE}/${id}/videos`;
+
+export const getVideosMovie = (url) => {
+  return axios.get(url, { params }).then(({ results }) => {
+    return results.map(videoDetailMapper);
+  });
 };
