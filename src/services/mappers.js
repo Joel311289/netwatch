@@ -1,4 +1,4 @@
-import objectPath from 'object-path';
+import { get } from 'lodash';
 
 import {
   apiBackdropUrl,
@@ -10,8 +10,6 @@ import {
 import { getImageMediaUrl, isMediaMovie, isMediaSerie, getPersonRoleType } from '@services/helpers';
 
 import { formattedDate, formattedTime } from '@utils/helpers/strings';
-
-const get = objectPath.get;
 
 export const mediaDetailMapper = (media) => {
   const commonData = {
@@ -48,7 +46,7 @@ export const mediaDetailMapper = (media) => {
       title: get(media, 'name'),
       original_title: get(media, 'original_name'),
       date: formattedDate(get(media, 'first_air_date')),
-      duration: formattedTime(get(media, 'episode_run_time.0')),
+      duration: formattedTime(get(media, 'episode_run_time[0]')),
       origin_country: get(media, 'origin_country'),
       number_seasons: get(media, 'number_of_seasons'),
       number_episodes: get(media, 'number_of_episodes'),

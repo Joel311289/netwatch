@@ -1,22 +1,47 @@
-import { useEffect, useState } from 'react';
+import useSWRInfinite from 'swr/infinite';
 
-import { useFetchData } from '@hooks/useFetchData';
+import { getEmptyArray } from '@utils/helpers/arrays';
+import { useState } from 'react';
 
-export const useLoadMore = (fetchMoreData, itemsPerView) => {
-  const [page, setPage] = useState(1);
-  const [current, setCurrent] = useState([]);
-  const { data, loading } = useFetchData(() => fetchMoreData(page), itemsPerView, page);
+const initialData = (itemsPerView) => (itemsPerView ? getEmptyArray(itemsPerView) : null);
 
-  const onLoadMore = () => setPage((prev) => prev + 1);
+export const useFetchPagination = (path, fetcherMoreData, itemsPerView) => {
+  const getKey = (index, previousPageData) => {
+    if (previousPageData && !previousPageData.length) return null;
+    return path(index + 1);
+  };
 
-  useEffect(() => {
-    if (loading) {
-      setCurrent((prev) => [...prev, ...data].splice(0, itemsPerView * page));
+  const [limit, setLimit] = useState(1);
+  const { data, error, size, setSize } = useSWRInfinite(
+    getKey,
+    (...args) => {
+      return fetcherMoreData(...args).then(({ items, total_pages }) => {
+        setLimit(total_pages);
+        return items;
+      });
+    },
+    {
+      initialSize: 1,
+      revalidateAll: false,
+      persistSize: true
     }
-    if (data && !loading) {
-      setCurrent((prev) => [...prev, ...data].filter(Boolean));
-    }
-  }, [data, loading]);
+  );
 
-  return { data: current, loading, onLoadMore };
+  const isLoadingInitialData = !data && !error;
+  const isLoadingMore =
+    isLoadingInitialData || (size > 0 && data && typeof data[size - 1] === 'undefined');
+  const isReachingEnd = size === limit;
+
+  const onLoadMore = () => setSize(size + 1);
+
+  return {
+    data: !isLoadingMore
+      ? [].concat(...(data || []))
+      : [].concat(...(data || []), initialData(itemsPerView)),
+    loading: isLoadingMore,
+    error,
+    page: size,
+    paginationEnd: isReachingEnd,
+    onLoadMore
+  };
 };

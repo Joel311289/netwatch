@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useLoadMore } from '@hooks/useLoadMore';
+import { useFetchPagination } from '@hooks/useLoadMore';
 
 import Button from '@components/UI/Button/Button';
 import Grid from '@components/Layout/Grid/Grid';
@@ -10,10 +10,15 @@ import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
-import { getDiscoverMovies } from '@services/movies/get-discover-movies';
+import { pathDiscoverMovies, getDiscoverMovies } from '@services/movies/get-discover-movies';
 
 const MoviesPage = () => {
-  const { data: movies, loading, onLoadMore } = useLoadMore(getDiscoverMovies, 20);
+  const {
+    data: movies,
+    loading,
+    onLoadMore,
+    paginationEnd
+  } = useFetchPagination(pathDiscoverMovies, getDiscoverMovies, 20);
   const [fetchModalData, setFetchModalData] = useState({});
 
   const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
@@ -41,7 +46,7 @@ const MoviesPage = () => {
         ))}
       </Grid>
 
-      {!loading && (
+      {!loading && !paginationEnd && (
         <div className="block">
           <Button size="large" onClick={onLoadMore}>
             Mostrar más

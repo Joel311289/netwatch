@@ -1,4 +1,4 @@
-import objectPath from 'object-path';
+import { get } from 'lodash';
 
 import {
   routeMediaTypes,
@@ -31,7 +31,7 @@ export const getVideoTrailerYoutubeId = (videos) => {
   const trailers = videos.filter(
     (video) => video.type === videoTypes.trailer && video.site === videoSites.youtube
   );
-  return objectPath.get(
+  return get(
     compactArray([
       ...[trailers.find(({ language }) => language === 'es')],
       ...[trailers.find(({ language }) => language === 'en')],

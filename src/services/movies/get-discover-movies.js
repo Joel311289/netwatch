@@ -3,10 +3,11 @@ import axios from 'axios';
 import { apiUrl, mediaTypes } from '@services/constants';
 import { mediaDetailMapper } from '@services/mappers';
 
-export const getDiscoverMovies = (page = 1) => {
-  const params = { page };
+export const pathDiscoverMovies = (page = 1) =>
+  `${apiUrl}/discover/${mediaTypes.MOVIE}?page=${page}`;
 
-  return axios.get(`${apiUrl}/discover/${mediaTypes.MOVIE}`, { params }).then(({ results }) => {
-    return results.map(mediaDetailMapper);
+export const getDiscoverMovies = (url) => {
+  return axios.get(url).then(({ results, total_pages }) => {
+    return { items: results.map(mediaDetailMapper), total_pages };
   });
 };
