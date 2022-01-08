@@ -1,0 +1,7 @@
+.section {
+  max-width: var(--width-percentage-section, 60%);
+}
+
+.section-heading {
+  margin: 20px 0;
+}

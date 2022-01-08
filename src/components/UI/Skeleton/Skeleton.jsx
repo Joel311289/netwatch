@@ -27,7 +27,7 @@ const Skeleton = ({ width, height, variant, style }) => {
   return (
     <div
       style={{ ...style, width, height: getHeight }}
-      className={`${styles.wrapper} ${styles[variant] || ''} fade-in-slow`}
+      className={`${styles.wrapper} ${styles[variant] || ''} fade-in`}
     >
       <SkeletonMUI className={styles.skeleton} animation="wave" height={getHeight} />
     </div>

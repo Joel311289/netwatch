@@ -12,7 +12,7 @@ import styles from '@components/Layout/Slider/Slider.module.css';
 
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
-const Slider = ({ children, navigation }) => {
+const Slider = ({ children, navigation, lazy }) => {
   const { slidesPerView, spaceBetween } = useBreakpointViewport();
 
   const renderNavigationButton = (state, icon) => {
@@ -33,7 +33,7 @@ const Slider = ({ children, navigation }) => {
       nextEl: `.${styles['button-next']}`,
       disabledClass: styles['button-navigation-disabled']
     },
-    lazy: {
+    lazy: lazy && {
       loadOnTransitionStart: true
     },
     watchSlidesProgress: true,
@@ -49,7 +49,7 @@ const Slider = ({ children, navigation }) => {
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide key={index} className={styles.item}>
-            {React.cloneElement(element, { ...element.props, width: '100%', lazy: true })}
+            {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -62,7 +62,8 @@ Slider.defaultProps = {
 };
 Slider.propTypes = {
   children: PropTypes.array,
-  navigation: PropTypes.bool
+  navigation: PropTypes.bool,
+  lazy: PropTypes.bool
 };
 
 export default Slider;

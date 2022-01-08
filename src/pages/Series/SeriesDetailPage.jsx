@@ -5,12 +5,15 @@ import { useFetch } from '@hooks/useFetch';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
+import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
+import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 
 import { getDetailSerie } from '@services/series/get-detail-serie';
 
 import { getIdFromParams } from '@utils/helpers/strings';
-import { truncateArray } from '@utils/helpers/arrays';
 import { mediaTypes } from '@services/constants';
+
+import styles from '@pages/Series/SeriesPage.module.css';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
@@ -23,11 +26,7 @@ const SeriesDetailPage = () => {
   );
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const { creators, credits: { cast } = {}, watch_providers, external_ids } = serie || {};
-  const credits = [
-    { label: 'Creadores', data: truncateArray(creators, 3) },
-    { label: 'Actores', data: truncateArray(cast, 3) }
-  ];
+  const { creators, credits, watch_providers, external_ids } = serie || {};
 
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
@@ -38,11 +37,21 @@ const SeriesDetailPage = () => {
         {...serie}
         watch_providers={watch_providers}
         external_ids={external_ids}
-        credits={credits}
+        credits={{ ...credits, creators }}
         onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}
       />
 
-      <div className="App-container App-content">Detail</div>
+      {!loading && (
+        <div className="App-container App-content">
+          <div className={styles.section}>
+            <div className={styles['section-heading']}>
+              <MediaHeading text="Reparto principal" to={`/${mediaTypes.TV}/${id}/credits`} />
+            </div>
+
+            <MediaCredits to={`/${mediaTypes.TV}/${id}/credits`} credits={credits} />
+          </div>
+        </div>
+      )}
 
       {fetchModalData.id && (
         <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />

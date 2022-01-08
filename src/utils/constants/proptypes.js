@@ -41,7 +41,7 @@ export const ElementPropTypes = {
 };
 
 export const MediaDefaultProps = {
-  credits: [],
+  credits: {},
   genres: [],
   cast: [],
   director: [],
@@ -57,7 +57,7 @@ export const MediaPropTypes = {
   duration: PropTypes.string,
   date: PropTypes.string,
   genres: PropTypes.array,
-  credits: PropTypes.array,
+  credits: PropTypes.object,
   cast: PropTypes.array,
   directors: PropTypes.array,
   writers: PropTypes.array,

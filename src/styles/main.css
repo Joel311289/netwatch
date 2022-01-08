@@ -54,4 +54,5 @@
   padding-bottom: 100px;
   height: fit-content;
   margin: 0 auto;
+  max-width: 100vw;
 }

@@ -85,10 +85,7 @@ export const aggregateCreditDetailMapper = (credit) => {
     id: get(credit, 'id'),
     role: personRoleTypes.Acting,
     name: get(credit, 'name'),
-    characters: (get(credit, 'roles') || []).map((character) => ({
-      character_id: get(character, 'credit_id'),
-      character: get(character, 'character')
-    })),
+    characters: (get(credit, 'roles') || []).map((character) => get(character, 'character')),
     image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };
 };
