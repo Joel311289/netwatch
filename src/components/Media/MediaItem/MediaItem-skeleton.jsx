@@ -1,15 +1,29 @@
+import styled from '@emotion/styled';
+
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
 
-import { getHeightRatio } from '@utils/helpers/breakpoints';
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
+const Image = styled.div`
+  background-color: transparent;
+
+  &:before {
+    padding-top: ${({ ratio }) => `${100 * ratio}%`};
+  }
+`;
+
 const MediaItemSkeleton = ({ width, ratio, body }) => {
   return (
     <div style={{ width }}>
-      <Skeleton width={width} height={getHeightRatio(width, ratio)} />
+      <Image className={`${styles.image} ${styles.skeleton}`} ratio={ratio}>
+        <div className={styles.content}>
+          <Skeleton height="100%" />
+        </div>
+      </Image>
+
       {body && (
         <Space direction="column" justify="between" className={`${styles.info} ${styles.skeleton}`}>
           <div>

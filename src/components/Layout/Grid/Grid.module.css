@@ -1,9 +1,11 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  width: calc(100% + var(--grid-gap));
 }
 
 .item {
-  padding-bottom: 5px;
+  flex: 0 0 var(--grid-item-percentage);
+  padding-bottom: var(--grid-gap);
+  padding-right: var(--grid-gap);
 }

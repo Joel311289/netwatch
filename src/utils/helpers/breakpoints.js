@@ -1,19 +1,9 @@
 import { BREAKPOINTS } from '@utils/constants';
 
 export const getDeviceBreakpoint = (width) => {
-  if (width < BREAKPOINTS.sm.width) {
-    return BREAKPOINTS.xs;
-  } else if (width < BREAKPOINTS.md.width) {
-    return BREAKPOINTS.sm;
-  } else if (width < BREAKPOINTS.lg.width) {
-    return BREAKPOINTS.md;
-  } else if (width < BREAKPOINTS.xl.width) {
-    return BREAKPOINTS.lg;
-  } else if (width < BREAKPOINTS.xxl.width) {
-    return BREAKPOINTS.xl;
-  } else {
-    return BREAKPOINTS.xxl;
-  }
+  return Object.keys(BREAKPOINTS)
+    .map((k) => BREAKPOINTS[k])
+    .find((b) => width <= b.width);
 };
 export const getBreakpoints = () => {
   const breakpoints = {};

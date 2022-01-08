@@ -7,14 +7,31 @@
 .image {
   box-shadow: var(--box-shadow-primary);
   background-color: rgb(var(--color-skeleton));
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.image.skeleton {
+  box-shadow: none;
+}
+.image:before {
+  content: '';
+  display: block;
+}
+.image .link:hover {
+  opacity: 0.8;
+}
+.image .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-width: 100%;
-  overflow: hidden;
-}
-.image.link:hover {
-  opacity: 0.8;
 }
 
 .info {
@@ -34,7 +51,7 @@
 .title {
   color: var(--color-text);
   font-weight: 500;
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   max-height: 36px;
   overflow: hidden;
   text-overflow: ellipsis;

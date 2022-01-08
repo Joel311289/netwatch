@@ -5,6 +5,7 @@
 
 .item {
   width: fit-content;
+  max-width: var(--grid-item-percentage);
 }
 
 .button-navigation {

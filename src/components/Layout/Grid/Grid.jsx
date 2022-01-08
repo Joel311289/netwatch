@@ -1,33 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
-import { useResize } from '@hooks/useResize';
 
 import styles from '@components/Layout/Grid/Grid.module.css';
 
 const Grid = ({ children }) => {
-  const { spaceBetween: gap, itemsPerRow } = useBreakpointViewport();
-  const [itemWidth, setItemWidth] = useState(null);
-  const gridRef = useRef(null);
-  const { width: gridWidth } = useResize(gridRef);
-
-  useEffect(() => {
-    if (gridWidth) {
-      const totalSpaces = gap * (itemsPerRow - 1);
-      setItemWidth((gridWidth - totalSpaces) / itemsPerRow);
-    }
-  }, [gridWidth, gap, itemsPerRow]);
-
   return (
-    <div className={styles.wrapper} style={{ gap }} ref={gridRef}>
-      {Array.isArray(children) &&
-        Boolean(itemWidth) &&
-        children.map((element, index) => (
-          <div className={styles.item} key={index}>
-            {React.cloneElement(element, { ...element.props, width: itemWidth })}
-          </div>
-        ))}
+    <div className={styles.wrapper}>
+      {children.map((element, index) => (
+        <div key={index} className={styles.item}>
+          {React.cloneElement(element, { ...element.props, width: '100%' })}
+        </div>
+      ))}
     </div>
   );
 };
