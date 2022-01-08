@@ -19,8 +19,9 @@ import { getDiscoverSeries } from '@services/series/get-discover-series';
 const HomePage = () => {
   const [timeWindow, setTimeWindow] = useState(timesWindow.DAY);
   const { itemsPerRow } = useBreakpointViewport();
+
   const { data: trendings, loading: loadingTrendings } = useFetch(
-    `/api/trending/${mediaTypes.ALL}/${timeWindow}`,
+    timeWindow ? `/api/trending/${mediaTypes.ALL}/${timeWindow}` : null,
     getTrending,
     itemsPerRow
   );
@@ -36,7 +37,12 @@ const HomePage = () => {
   );
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const onChangeTimeWindow = (index) => setTimeWindow(index ? timesWindow.WEEK : timesWindow.DAY);
+  const onChangeTimeWindow = (index) => {
+    setTimeWindow(null);
+    setTimeout(() => {
+      setTimeWindow(index ? timesWindow.WEEK : timesWindow.DAY);
+    }, 100);
+  };
   const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
@@ -47,7 +53,10 @@ const HomePage = () => {
       loading: loadingTrendings,
       content: (
         <div style={{ marginTop: 4 }}>
-          <ToggleButton activeIndex={0} onChange={onChangeTimeWindow}>
+          <ToggleButton
+            activeIndex={Number(timeWindow === timesWindow.WEEK)}
+            onChange={onChangeTimeWindow}
+          >
             <span>hoy</span>
             <span>semana</span>
           </ToggleButton>
@@ -70,14 +79,12 @@ const HomePage = () => {
 
   return (
     <div className="App-container App-content">
-      <h2 className="heading">Bienvenido, películas y series para ti</h2>
+      <h2 className="heading">Bienvenid@, películas y series para ti</h2>
 
       {categories.map(({ loading, route, heading, items, content }) => (
         <div key={heading} style={{ marginBottom: 40 }}>
           <div className="sub-heading">
-            {!loading && (
-              <MediaHeading text={heading} to={route ? `/${route}` : ''} content={content} />
-            )}
+            <MediaHeading text={heading} to={route ? `/${route}` : ''} content={content} />
           </div>
 
           <Slider navigation={!loading}>

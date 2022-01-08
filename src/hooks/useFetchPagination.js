@@ -12,7 +12,7 @@ export const useFetchPagination = (path, fetcherMoreData, itemsPerView) => {
   };
 
   const [limit, setLimit] = useState(1);
-  const { data, error, size, setSize } = useSWRInfinite(
+  const { data, error, size, setSize, mutate } = useSWRInfinite(
     getKey,
     (...args) => {
       return fetcherMoreData(...args).then(({ items, total_pages }) => {
@@ -42,6 +42,7 @@ export const useFetchPagination = (path, fetcherMoreData, itemsPerView) => {
     error,
     page: size,
     paginationEnd: isReachingEnd,
-    onLoadMore
+    onLoadMore,
+    mutate
   };
 };

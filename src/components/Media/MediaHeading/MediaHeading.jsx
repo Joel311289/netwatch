@@ -10,7 +10,7 @@ import styles from '@components/Media/MediaHeading/MediaHeading.module.css';
 
 const MediaHeading = ({ content, skeleton, text, to }) => {
   const Content = () => (
-    <Space justify="between" align="center" gap={30}>
+    <Space justify="between" align="center" gap={20}>
       <Space align="center" className={styles.wrapper}>
         <span className={styles.text}>{text}</span>
         {to && <FiChevronRight className={styles.icon} />}
