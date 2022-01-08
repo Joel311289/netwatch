@@ -6,27 +6,23 @@ import styles from '@components/Layout/Header/Header.module.css';
 import Space from '@components/Layout/Space/Space';
 
 import { THEMES } from '@utils/constants';
+import Toggle from '@components/UI/Toggle/Toggle';
 
 const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
   const ToggleTheme = () => {
     return (
-      <label>
-        <input
-          className={styles['toggle-checkbox']}
-          type="checkbox"
-          checked={theme === THEMES.DARK}
-          onChange={() => onChangeTheme(theme)}
-        />
-        <div className={styles['toggle-slot']}>
-          <div className={styles['sun-icon-wrapper']}>
-            <BiSun className={styles['sun-icon']} />
-          </div>
-          <div className={styles['toggle-button']}></div>
-          <div className={styles['moon-icon-wrapper']}>
-            <BiMoon className={styles['moon-icon']} />
-          </div>
+      <Toggle
+        labels={[theme]}
+        checked={theme === THEMES.DARK}
+        onChange={() => onChangeTheme(theme)}
+      >
+        <div className="content-no-checked">
+          <BiSun className={styles['sun-icon']} />
         </div>
-      </label>
+        <div className="content-checked">
+          <BiMoon className={styles['moon-icon']} />
+        </div>
+      </Toggle>
     );
   };
 
@@ -37,14 +33,13 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           className={styles.logo}
           src={logoUrl || `/assets/images/logo-${theme}.png`}
           alt="logo"
-        ></img>
+        />
         <p className={styles.title}>{title}</p>
       </Link>
 
       <Space align="center" gap={10} className={styles.actions}>
         <Space align="center" gap={10} className={styles['theme-action']}>
-          <span>{theme}</span>
-          {ToggleTheme(onChangeTheme)}
+          {ToggleTheme()}
         </Space>
       </Space>
     </Space>

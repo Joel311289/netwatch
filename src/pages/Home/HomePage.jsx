@@ -4,6 +4,7 @@ import { useFetch } from '@hooks/useFetch';
 import { useFetchPagination } from '@hooks/useFetchPagination';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
+import ToggleButton from '@components/UI/ToggleButton/ToggleButton';
 import Slider from '@components/Layout/Slider/Slider';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
@@ -15,9 +16,8 @@ import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
-const timeWindow = timesWindow.DAY;
-
 const HomePage = () => {
+  const [timeWindow, setTimeWindow] = useState(timesWindow.DAY);
   const { itemsPerRow } = useBreakpointViewport();
   const { data: trendings, loading: loadingTrendings } = useFetch(
     `/api/trending/${mediaTypes.ALL}/${timeWindow}`,
@@ -36,8 +36,24 @@ const HomePage = () => {
   );
   const [fetchModalData, setFetchModalData] = useState({});
 
+  const onChangeTimeWindow = (index) => setTimeWindow(index ? timesWindow.WEEK : timesWindow.DAY);
+  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+
   const categories = [
-    { heading: 'Tendencias hoy', items: trendings, loading: loadingTrendings },
+    {
+      heading: 'Tendencias',
+      items: trendings,
+      loading: loadingTrendings,
+      content: (
+        <div style={{ marginTop: 4 }}>
+          <ToggleButton activeIndex={0} onChange={onChangeTimeWindow}>
+            <span>hoy</span>
+            <span>semana</span>
+          </ToggleButton>
+        </div>
+      )
+    },
     {
       route: routeMediaTypes.movie,
       heading: 'Películas populares',
@@ -52,17 +68,16 @@ const HomePage = () => {
     }
   ];
 
-  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
-  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
-
   return (
     <div className="App-container App-content">
       <h2 className="heading">Bienvenido, películas y series para ti</h2>
 
-      {categories.map(({ loading, route, heading, items }) => (
+      {categories.map(({ loading, route, heading, items, content }) => (
         <div key={heading} style={{ marginBottom: 40 }}>
           <div className="sub-heading">
-            {!loading && <MediaHeading text={heading} to={route ? `/${route}` : ''} />}
+            {!loading && (
+              <MediaHeading text={heading} to={route ? `/${route}` : ''} content={content} />
+            )}
           </div>
 
           <Slider navigation={!loading}>

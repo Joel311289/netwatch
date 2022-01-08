@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+export const getElementArray = (array, position) => _.nth(array, position);
 export const isEmptyArray = (array) => Array.isArray(array) && compactArray(array).length === 0;
 export const getEmptyArray = (size, content = false) => Array(size).fill(content);
 export const truncateArray = (array, limit) => (Array.isArray(array) ? array.slice(0, limit) : []);

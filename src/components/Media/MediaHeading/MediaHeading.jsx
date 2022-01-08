@@ -8,11 +8,15 @@ import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptype
 
 import styles from '@components/Media/MediaHeading/MediaHeading.module.css';
 
-const MediaHeading = ({ skeleton, text, to }) => {
+const MediaHeading = ({ content, skeleton, text, to }) => {
   const Content = () => (
-    <Space align="center" className={styles.wrapper}>
-      <span className={styles.text}>{text}</span>
-      {to && <FiChevronRight className={styles.icon} />}
+    <Space justify="between" align="center" gap={30}>
+      <Space align="center" className={styles.wrapper}>
+        <span className={styles.text}>{text}</span>
+        {to && <FiChevronRight className={styles.icon} />}
+      </Space>
+
+      {content}
     </Space>
   );
 
