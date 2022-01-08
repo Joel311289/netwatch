@@ -14,6 +14,7 @@ import { getIdFromParams } from '@utils/helpers/strings';
 import { mediaTypes } from '@services/constants';
 
 import styles from '@pages/Series/SeriesPage.module.css';
+import MediaSeasons from '@components/Media/MediaSeasons/MediaSeasons';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
@@ -26,7 +27,7 @@ const SeriesDetailPage = () => {
   );
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const { creators, credits, watch_providers, external_ids } = serie || {};
+  const { creators, credits, watch_providers, external_ids, number_seasons, seasons } = serie || {};
 
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
@@ -43,6 +44,17 @@ const SeriesDetailPage = () => {
 
       {!loading && (
         <div className="App-container App-content">
+          <div className={styles.section}>
+            <div className={styles['section-heading']}>
+              <MediaHeading
+                text={`Temporadas (${number_seasons})`}
+                to={`/${mediaTypes.TV}/${id}/seasons`}
+              />
+            </div>
+
+            <MediaSeasons to={`/${mediaTypes.TV}/${id}/seasons`} seasons={seasons} />
+          </div>
+
           <div className={styles.section}>
             <div className={styles['section-heading']}>
               <MediaHeading text="Reparto principal" to={`/${mediaTypes.TV}/${id}/credits`} />

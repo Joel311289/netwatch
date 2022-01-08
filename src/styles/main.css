@@ -17,9 +17,10 @@
   height: var(--size-header);
   display: flex;
   justify-content: center;
-  /* position: sticky;
-  top: 0; */
+  position: sticky;
+  top: 0;
   transition: all 0.2s;
+  z-index: 5;
 }
 
 .App-body {
@@ -54,5 +55,4 @@
   padding-bottom: 100px;
   height: fit-content;
   margin: 0 auto;
-  max-width: 100vw;
 }

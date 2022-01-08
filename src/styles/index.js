@@ -19,6 +19,7 @@ export const styles = css`
   ${`@media screen and (max-width: ${BREAKPOINTS.xs.width}px)`} {
     --size-header: 50px;
     --padding-aside: 20px;
+    --size-max: 100vw;
     --width-percentage-section: 100%;
   }
 `;

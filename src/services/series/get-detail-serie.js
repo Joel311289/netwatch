@@ -6,8 +6,10 @@ import {
   watchProvidersDetailMapper,
   externalsIdsDetailMapper,
   aggregateCreditDetailMapper,
-  watchProviderDetailMapper
+  watchProviderDetailMapper,
+  seasonDetailMapper
 } from '@services/mappers';
+import { sortCollectionBy } from '@utils/helpers/collections';
 
 const detailCredits = ({ cast }) => {
   return {
@@ -24,6 +26,12 @@ const detailWatchProviders = ({ results }) => {
   };
 };
 
+const detailSeasons = (seasons = []) => {
+  const sortedSeasons = sortCollectionBy(seasons, 'season_number', true);
+
+  return (sortedSeasons.filter(({ air_date }) => air_date) || []).map(seasonDetailMapper);
+};
+
 export const getDetailSerie = (url, { append_to_response } = {}) => {
   const params = {
     ...(append_to_response && { append_to_response: append_to_response.join(',') })
@@ -35,6 +43,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
       ['watch/providers']: watch_providers,
       external_ids,
       created_by: creators,
+      seasons,
       ...detail
     } = response;
 
@@ -44,7 +53,8 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         creators: (creators || []).map(creatorDetailMapper),
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
-        ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) })
+        ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
+        ...(seasons && { seasons: detailSeasons(seasons) })
       };
     } catch (error) {
       console.error(error);

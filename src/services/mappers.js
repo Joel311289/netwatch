@@ -57,6 +57,18 @@ export const mediaDetailMapper = (media) => {
   return commonData;
 };
 
+export const seasonDetailMapper = (season) => {
+  return {
+    id: get(season, 'id'),
+    number: get(season, 'season_number'),
+    name: get(season, 'name'),
+    date: get(season, 'air_date'),
+    episodes: get(season, 'episode_count'),
+    description: get(season, 'overview'),
+    image: getImageMediaUrl(apiImageUrl, get(season, 'poster_path'))
+  };
+};
+
 export const videoDetailMapper = (video) => {
   return {
     name: get(video, 'name'),
@@ -65,6 +77,16 @@ export const videoDetailMapper = (video) => {
     site: get(video, 'site'),
     language: get(video, 'iso_639_1'),
     region: get(video, 'iso_3166_1')
+  };
+};
+
+export const imageDetailMapper = (image) => {
+  return {
+    image: getImageMediaUrl(apiImageUrl, get(image, 'file_path')),
+    width: get(image, 'width'),
+    height: get(image, 'height'),
+    ratio: get(image, 'aspect_ratio'),
+    language: get(image, 'iso_639_1')
   };
 };
 

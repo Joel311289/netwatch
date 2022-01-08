@@ -12,7 +12,7 @@ import styles from '@components/Layout/Slider/Slider.module.css';
 
 SwiperCore.use([Lazy, Mousewheel, Navigation]);
 
-const Slider = ({ children, navigation, lazy }) => {
+const Slider = ({ children, navigation, lazy, sliderPerRow }) => {
   const { slidesPerView, spaceBetween } = useBreakpointViewport();
 
   const renderNavigationButton = (state, icon) => {
@@ -25,8 +25,8 @@ const Slider = ({ children, navigation, lazy }) => {
 
   const settings = {
     speed: 500,
-    slidesPerView,
-    slidesPerGroup: slidesPerView,
+    slidesPerView: sliderPerRow || slidesPerView,
+    slidesPerGroup: sliderPerRow || slidesPerView,
     spaceBetween,
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
@@ -48,8 +48,10 @@ const Slider = ({ children, navigation, lazy }) => {
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
-          <SwiperSlide key={index} className={styles.item}>
-            {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
+          <SwiperSlide key={index} className={!sliderPerRow && styles.item}>
+            <div style={{ margin: 1 }}>
+              {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -63,7 +65,8 @@ Slider.defaultProps = {
 Slider.propTypes = {
   children: PropTypes.array,
   navigation: PropTypes.bool,
-  lazy: PropTypes.bool
+  lazy: PropTypes.bool,
+  sliderPerRow: PropTypes.number
 };
 
 export default Slider;

@@ -6,7 +6,8 @@ mkdir -p $path;
 touch "$path/$name.jsx" "$path/$name.module.css";
 
 echo "import PropTypes from 'prop-types';
-import styles from './$name.module.css';
+
+import styles from '@components/$name/$name.module.css';
 
 const $name = ({ name }) => {
   return (
