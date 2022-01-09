@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { string } from '@utils/helpers/strings';
+
 import styles from '@components/Layout/Space/Space.module.css';
 
 const positions = {
@@ -13,7 +15,7 @@ const positions = {
 const Space = ({ children, className, direction, gap, justify, align }) => {
   return (
     <div
-      className={`${styles.wrapper} ${className}`}
+      className={`${styles.wrapper} ${string(className)}`}
       style={{
         ...(direction && { flexDirection: direction }),
         ...(justify && { justifyContent: positions[justify] }),

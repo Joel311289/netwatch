@@ -24,3 +24,7 @@
 .characters {
   -webkit-line-clamp: 1;
 }
+
+.cast {
+  margin-bottom: 20px;
+}

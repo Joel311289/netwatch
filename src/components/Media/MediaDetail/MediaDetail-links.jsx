@@ -1,4 +1,4 @@
-import { BiPlus, BiGlobe } from 'react-icons/bi';
+import { BiGlobe } from 'react-icons/bi';
 import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
 import { SiImdb } from 'react-icons/si';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
+import { string } from '@utils/helpers/strings';
 
 const externalLinkIcons = {
   imdb: <SiImdb />,
@@ -17,7 +18,6 @@ const externalLinkIcons = {
 
 const MediaDetailLinks = ({ styles, homepage, external_ids }) => {
   const actions = [
-    { tooltip: 'Añadir Mi lista', icon: <BiPlus /> },
     ...(homepage
       ? [{ tooltip: 'Sitio web', icon: <BiGlobe />, role: 'link', href: homepage }]
       : []),
@@ -38,7 +38,7 @@ const MediaDetailLinks = ({ styles, homepage, external_ids }) => {
             <Button
               key={tooltip}
               tooltip={tooltip}
-              className={`${styles.link} ${className}`}
+              className={`${styles.link} ${string(className)}`}
               role={role}
               href={href}
             >

@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import { isMobileTablet } from '@utils/helpers/breakpoints';
-
 export const useBreakpointStyles = ({ desktopStyles, mobileStyles }) => {
   const [styles, setStyles] = useState(desktopStyles);
-  const { breakpoint } = useBreakpointViewport();
+  const { tablet } = useBreakpointViewport();
 
   useEffect(() => {
-    if (isMobileTablet(breakpoint)) {
+    if (tablet) {
       setStyles(mobileStyles);
     } else {
       setStyles(desktopStyles);
     }
-  }, [breakpoint, desktopStyles, mobileStyles]);
+  }, [tablet, desktopStyles, mobileStyles]);
 
   return styles;
 };

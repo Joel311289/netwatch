@@ -18,7 +18,11 @@ export const isMobile = (breakpoint) => breakpoint === BREAKPOINTS.xs.name;
 export const isMobileTablet = (breakpoint) =>
   [BREAKPOINTS.xs.name, BREAKPOINTS.sm.name].includes(breakpoint);
 export const isMobileTabletMedium = (breakpoint) =>
-  [BREAKPOINTS.xs, BREAKPOINTS.sm, BREAKPOINTS.md].includes(breakpoint);
+  [BREAKPOINTS.xs.name, BREAKPOINTS.sm.name, BREAKPOINTS.md.name].includes(breakpoint);
+export const isSmallDesktop = (breakpoint) =>
+  [BREAKPOINTS.xs.name, BREAKPOINTS.sm.name, BREAKPOINTS.md.name, BREAKPOINTS.lg.name].includes(
+    breakpoint
+  );
 
 export const getWidth = (element) => (element ? element.getBoundingClientRect().width : 0);
 export const getHeight = (element) => (element ? element.getBoundingClientRect().height : 0);

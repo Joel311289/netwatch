@@ -31,7 +31,7 @@ const MoviesDetailPage = () => {
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
   return (
-    <div>
+    <div className="App-container App-content">
       <MediaDetail
         skeleton={loading}
         {...movie}
@@ -42,7 +42,7 @@ const MoviesDetailPage = () => {
       />
 
       {!loading && (
-        <div className="App-container App-content">
+        <div className="">
           <div className={styles.section}>
             <div className={styles['section-heading']}>
               <MediaHeading text="Reparto principal" to={`/${mediaTypes.MOVIE}/${id}/credits`} />

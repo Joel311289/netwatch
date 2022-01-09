@@ -44,6 +44,7 @@ export const getIdFromParams = (params, key) => (params[key] ? params[key].split
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 export const removeSpecialCharactersText = (text, separator = ' ') =>
   text.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, separator);
+export const string = (text) => (text ? String(text) : '');
 
 export const camelCase = _.camelCase;
 export const kebabCase = _.kebabCase;

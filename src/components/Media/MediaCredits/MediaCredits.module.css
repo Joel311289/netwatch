@@ -45,3 +45,13 @@
 .characters {
   font-size: 0.9rem;
 }
+
+.credit {
+  width: fit-content;
+  padding: 10px 20px 10px 0;
+  font-weight: 500;
+}
+
+.cast {
+  margin-bottom: 10px;
+}

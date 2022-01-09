@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { throttle } from '@utils/helpers';
-import { getDeviceBreakpoint } from '@utils/helpers/breakpoints';
+import {
+  getDeviceBreakpoint,
+  isMobile,
+  isMobileTablet,
+  isMobileTabletMedium
+} from '@utils/helpers/breakpoints';
 
 export const useBreakpointViewport = () => {
   const [breakpoint, setBreakpoint] = useState(() => getDeviceBreakpoint(window.innerWidth));
@@ -15,5 +20,11 @@ export const useBreakpointViewport = () => {
     return () => window.removeEventListener('resize', calcInnerWidth);
   }, []);
 
-  return { breakpoint: breakpoint.name, ...breakpoint };
+  return {
+    breakpoint: breakpoint.name,
+    mobile: isMobile(breakpoint.name),
+    tablet: isMobileTablet(breakpoint.name),
+    smallDesktop: isMobileTabletMedium(breakpoint.name),
+    ...breakpoint
+  };
 };

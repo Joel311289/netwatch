@@ -1,36 +1,42 @@
+import PropTypes from 'prop-types';
+
 import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
-import { useVibrantColor } from '@hooks/useVibrantColor';
 
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaDetailSkeleton from '@components/Media/MediaDetail/MediaDetail-skeleton';
 import MediaDetailHeader from '@components/Media/MediaDetail/MediaDetail-header';
-import MediaDetailCredits from '@components/Media/MediaDetail/MediaDetail-credits';
 import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
 import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
+import MediaDetailBackground from '@components/Media/MediaDetail/MediaDetail-background';
+import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+
+const MediaBackground = (props) => {
+  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
+  return <MediaDetailBackground styles={styles} {...props} />;
+};
 
 const MediaDetail = ({
+  sections,
   skeleton,
   title,
   description,
   image,
-  backdrop,
   genres,
   duration,
   date,
-  credits,
-  number_seasons,
   watch_providers,
   homepage,
   external_ids,
   onTrailer
 }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { rgb: mainColor } = useVibrantColor(backdrop);
+  const { tablet } = useBreakpointViewport();
 
   if (skeleton) {
     return <MediaDetailSkeleton styles={styles} />;
@@ -38,50 +44,47 @@ const MediaDetail = ({
 
   return (
     <div className={`${styles.wrapper} fade-in`}>
-      <div
-        className={styles.backdrop}
-        style={{
-          background: `linear-gradient(to bottom, rgba(${mainColor}, 0.8), rgba(${mainColor}, 1))`
-        }}
-      ></div>
-
-      {mainColor && (
-        <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>
-      )}
-
       <div className={`${styles.content}`}>
+        <div className={styles.image}>
+          <MediaItem.Image image={image} width={tablet ? 180 : 250} ratio={1.5} />
+        </div>
+        <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
+        <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
+
         <MediaDetailHeader
           styles={styles}
           title={title}
           date={date}
           duration={duration}
-          number_seasons={number_seasons}
           genres={genres}
         />
 
-        <div className={styles.image}>
-          <MediaItem.Image image={image} width={250} ratio={1.5} />
-        </div>
-
         <span className={styles.description}>{description}</span>
-        <div className={styles.credits}>
-          <MediaDetailCredits styles={styles} credits={credits} />
-        </div>
 
-        <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
-        <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
+        {sections.map(({ key, heading, data, to, Element }, index) => (
+          <div key={key} className={`${styles.section} ${styles[`section-${index + 1}`]}`}>
+            <div className={styles['section-heading']}>
+              <MediaHeading text={heading} to={to} />
+            </div>
+
+            <Element to={to} {...{ [key]: data }} />
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
 MediaDetail.defaultProps = MediaDefaultProps;
-MediaDetail.propTypes = MediaPropTypes;
+MediaDetail.propTypes = {
+  sections: PropTypes.array,
+  ...MediaPropTypes
+};
 
 MediaDetail.Skeleton = MediaDetailSkeleton;
 MediaDetail.Header = MediaDetailHeader;
-MediaDetail.Credits = MediaDetailCredits;
 MediaDetail.Watch = MediaDetailWatch;
 MediaDetail.Links = MediaDetailLinks;
+MediaDetail.Background = MediaBackground;
 
 export default MediaDetail;

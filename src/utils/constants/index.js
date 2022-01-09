@@ -6,42 +6,48 @@ export const BREAKPOINTS = {
     width: 576,
     slidesPerView: 2,
     itemsPerRow: 2,
-    spaceBetween: 10
+    spaceBetween: 10,
+    sizeImage: 160
   },
   sm: {
     name: 'sm',
     width: 768,
     slidesPerView: 3,
     itemsPerRow: 3,
-    spaceBetween: 15
+    spaceBetween: 15,
+    sizeImage: 180
   },
   md: {
     name: 'md',
     width: 992,
     slidesPerView: 4,
     itemsPerRow: 4,
-    spaceBetween: 15
+    spaceBetween: 15,
+    sizeImage: 200
   },
   lg: {
     name: 'lg',
     width: 1200,
     slidesPerView: 5,
     itemsPerRow: 5,
-    spaceBetween: 15
+    spaceBetween: 15,
+    sizeImage: 250
   },
   xl: {
     name: 'xl',
     width: 1600,
     slidesPerView: 6,
     itemsPerRow: 6,
-    spaceBetween: 15
+    spaceBetween: 15,
+    sizeImage: 250
   },
   xxl: {
     name: 'xxl',
     width: 9999,
     slidesPerView: 6,
     itemsPerRow: 6,
-    spaceBetween: 15
+    spaceBetween: 15,
+    sizeImage: 250
   }
 };
 

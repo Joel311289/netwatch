@@ -7,7 +7,8 @@ import {
   externalsIdsDetailMapper,
   aggregateCreditDetailMapper,
   watchProviderDetailMapper,
-  seasonDetailMapper
+  seasonDetailMapper,
+  imageDetailMapper
 } from '@services/mappers';
 import { sortCollectionBy } from '@utils/helpers/collections';
 
@@ -32,9 +33,18 @@ const detailSeasons = (seasons = []) => {
   return (sortedSeasons.filter(({ air_date }) => air_date) || []).map(seasonDetailMapper);
 };
 
+const detailImages = ({ backdrops, posters }) => {
+  return {
+    backdrops: backdrops.map((image) => imageDetailMapper(image, true)),
+    posters: posters.map(imageDetailMapper)
+  };
+};
+
 export const getDetailSerie = (url, { append_to_response } = {}) => {
   const params = {
-    ...(append_to_response && { append_to_response: append_to_response.join(',') })
+    ...(append_to_response && { append_to_response: append_to_response.join(',') }),
+    include_image_language: 'es,null',
+    include_video_language: 'es,null'
   };
 
   return axios.get(`${url}`, { params }).then((response) => {
@@ -44,6 +54,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
       external_ids,
       created_by: creators,
       seasons,
+      images,
       ...detail
     } = response;
 
@@ -54,7 +65,8 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
-        ...(seasons && { seasons: detailSeasons(seasons) })
+        ...(seasons && { seasons: detailSeasons(seasons) }),
+        ...(images && { ...detailImages(images) })
       };
     } catch (error) {
       console.error(error);

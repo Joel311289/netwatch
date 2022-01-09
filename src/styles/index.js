@@ -6,12 +6,13 @@ export const styles = css`
   ${Object.keys(BREAKPOINTS)
     .reverse()
     .map((key) => {
-      const { width, itemsPerRow, spaceBetween } = BREAKPOINTS[key];
+      const { width, itemsPerRow, spaceBetween, sizeImage } = BREAKPOINTS[key];
       return `
       ${`@media screen and (max-width: ${width}px)`} {
         --grid-gap: ${spaceBetween}px;
         --grid-item-percentage: ${100 / itemsPerRow}%;
         --grid-items-per-row: ${itemsPerRow};
+        --size-image: ${sizeImage}px;
       }
     `;
     })}
@@ -20,6 +21,8 @@ export const styles = css`
     --size-header: 50px;
     --padding-aside: 20px;
     --size-max: 100vw;
+    --padding-body-detail: 0;
+    --margin-top-slider-backdrops: 0;
     --width-percentage-section: 100%;
   }
 `;

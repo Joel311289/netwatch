@@ -9,14 +9,13 @@ import MediaItem from '@components/Media/MediaItem/MediaItem';
 import Slider from '@components/Layout/Slider/Slider';
 
 import { formattedDate } from '@utils/helpers/strings';
-import { isMobileTablet } from '@utils/helpers/breakpoints';
 
 import mobileStyles from '@components/Media/MediaSeasons/MediaSeasons-mobile.module.css';
 import desktopStyles from '@components/Media/MediaSeasons/MediaSeasons.module.css';
 
 const MediaSeasons = ({ to, seasons }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { breakpoint } = useBreakpointViewport();
+  const { smallDesktop } = useBreakpointViewport();
 
   // eslint-disable-next-line react/prop-types
   const Season = ({ id, name, date, episodes, image }) => (
@@ -34,10 +33,8 @@ const MediaSeasons = ({ to, seasons }) => {
 
   return (
     <div className={`media-seasons-wrapper ${styles.wrapper}`}>
-      {isMobileTablet(breakpoint) && (
-        <Slider sliderPerRow={1}>{seasons.map((season) => Season(season))}</Slider>
-      )}
-      {!isMobileTablet(breakpoint) && seasons.map((season) => Season(season))}
+      {smallDesktop && <Slider sliderPerRow={1}>{seasons.map((season) => Season(season))}</Slider>}
+      {!smallDesktop && seasons.map((season) => Season(season))}
     </div>
   );
 };

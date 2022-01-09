@@ -1,7 +1,15 @@
 .section {
-  max-width: var(--width-percentage-section, 60%);
+  /* max-width: var(--width-percentage-section, 60%); */
+  /* margin-left: 300px; */
 }
 
 .section-heading {
   margin: 20px 0;
+}
+
+.body {
+  background-color: var(--background-color);
+  padding: var(--padding-body-detail, 30px 40px);
+  margin-top: var(--margin-top-slider-backdrops, -200px);
+  z-index: 2;
 }

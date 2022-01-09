@@ -6,6 +6,7 @@ import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { isEmptyArray } from '@utils/helpers/arrays';
+import { string } from '@utils/helpers/strings';
 
 const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
   const withWatchProviders = watch_providers && !isEmptyArray(watch_providers.providers);
@@ -14,7 +15,7 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
       {
         label: 'Ver ahora',
         role: 'link',
-        href: watch_providers.watch_link,
+        href: withWatchProviders && watch_providers.watch_link,
         ...(withWatchProviders && { className: styles['provider-stream'] }),
         icon: withWatchProviders ? (
           <img src={watch_providers.providers[0].image} className={styles['provider-logo']} />
@@ -27,11 +28,11 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
   ];
 
   return (
-    <Space align="center" gap={10} className={`${styles.actions} ${styles.buttons}`}>
+    <Space align="center" gap={5} className={`${styles.actions} ${styles.buttons}`}>
       {buttons.map(({ label, icon, role, href, className, onClick }) => (
         <Button
           key={label}
-          className={`${styles.button} ${className}`}
+          className={`${styles.button} ${string(className)}`}
           role={role}
           href={href}
           onClick={onClick}
