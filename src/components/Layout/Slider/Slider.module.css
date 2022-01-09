@@ -46,13 +46,14 @@
 }
 
 .pagination-bullet {
-  border: 2px solid var(--background-color) !important;
+  border: 2px solid var(--color-white) !important;
   background: transparent !important;
   border-radius: 50%;
   height: 10px;
   width: 10px;
   opacity: 1 !important;
+  cursor: pointer;
 }
 .pagination-bullet-active {
-  background: var(--background-color) !important;
+  background: var(--color-white) !important;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Lazy, Mousewheel, Navigation, Pagination } from 'swiper';
+import SwiperCore, { Lazy, Mousewheel, Navigation, Pagination, EffectFade } from 'swiper';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
@@ -12,7 +12,7 @@ import { string } from '@utils/helpers/strings';
 
 import styles from '@components/Layout/Slider/Slider.module.css';
 
-SwiperCore.use([Lazy, Mousewheel, Navigation, Pagination]);
+SwiperCore.use([Lazy, Mousewheel, Navigation, Pagination, EffectFade]);
 
 const Slider = ({
   children,
@@ -24,6 +24,7 @@ const Slider = ({
   slideClass,
   paginationBulletsClass,
   paginationBulletClass,
+  effectFade,
   offset
 }) => {
   const { slidesPerView, spaceBetween } = useBreakpointViewport();
@@ -62,6 +63,7 @@ const Slider = ({
     lazy: lazy && {
       loadOnTransitionStart: true
     },
+    ...(effectFade ? { effect: 'fade' } : {}),
     watchSlidesProgress: true,
     mousewheel: {
       forceToAxis: true
@@ -73,15 +75,15 @@ const Slider = ({
       <Swiper
         {...settings}
         className={string(sliderClass)}
-        style={{ padding: offset ? `0 ${offset}px` : 0 }}
-      >
+        style={{ padding: offset ? `0 ${offset}px` : 0 }}>
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide
             key={index}
-            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}
-          >
+            className={`${string(slideClass)} ${styles.item} ${
+              !sliderPerRow && styles.breakpoint
+            }`}>
             {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
           </SwiperSlide>
         ))}
@@ -104,6 +106,7 @@ Slider.propTypes = {
   slideClass: PropTypes.string,
   paginationBulletsClass: PropTypes.string,
   paginationBulletClass: PropTypes.string,
+  effectFade: PropTypes.string,
   offset: PropTypes.number
 };
 

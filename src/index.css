@@ -4,6 +4,7 @@
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
 @import 'swiper/css/lazy';
+@import 'swiper/css/effect-fade';
 
 :root {
   --size-header: 58px;
