@@ -152,10 +152,13 @@
 
 .section {
   margin-top: 20px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .section-heading {
   margin-bottom: 20px;
+  width: fit-content;
 }
 
 .section-1 {

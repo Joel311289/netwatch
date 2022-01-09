@@ -1,7 +1,8 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
   grid-gap: 20px;
+  width: 100%;
 }
 
 .item {
@@ -13,6 +14,7 @@
   padding-right: 15px;
   background-color: rgb(var(--placeholder-color-rgb), 0.5);
   flex-wrap: wrap;
+  min-width: 290px;
 }
 
 .image {
@@ -32,4 +34,8 @@
   font-size: 0.95rem;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.slide-season {
+  width: fit-content;
 }

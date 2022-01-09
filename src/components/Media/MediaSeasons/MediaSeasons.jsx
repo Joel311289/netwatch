@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
@@ -15,7 +14,6 @@ import desktopStyles from '@components/Media/MediaSeasons/MediaSeasons.module.cs
 
 const MediaSeasons = ({ to, seasons }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { smallDesktop } = useBreakpointViewport();
 
   // eslint-disable-next-line react/prop-types
   const Season = ({ id, name, date, episodes, image }) => (
@@ -33,8 +31,9 @@ const MediaSeasons = ({ to, seasons }) => {
 
   return (
     <div className={`media-seasons-wrapper ${styles.wrapper}`}>
-      {smallDesktop && <Slider sliderPerRow={1}>{seasons.map((season) => Season(season))}</Slider>}
-      {!smallDesktop && seasons.map((season) => Season(season))}
+      <Slider sliderPerRow="auto" slideClass={styles['slide-season']}>
+        {seasons.map((season) => Season(season))}
+      </Slider>
     </div>
   );
 };

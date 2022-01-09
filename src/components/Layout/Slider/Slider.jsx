@@ -28,7 +28,8 @@ const Slider = ({ children, navigation, lazy, sliderPerRow, sliderClass, slideCl
   const settings = {
     speed: 500,
     slidesPerView: sliderPerRow || slidesPerView,
-    slidesPerGroup: sliderPerRow || slidesPerView,
+    slidesPerGroup:
+      sliderPerRow === 'auto' ? 1 : !isNaN(sliderPerRow) ? sliderPerRow : slidesPerView,
     spaceBetween,
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
@@ -46,14 +47,13 @@ const Slider = ({ children, navigation, lazy, sliderPerRow, sliderClass, slideCl
 
   return (
     <div className={styles.wrapper}>
-      <Swiper {...settings} className={string(sliderClass)}>
+      <Swiper {...settings} className={`${styles.slider} ${string(sliderClass)}`}>
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide
             key={index}
-            className={`${string(slideClass)} ${!sliderPerRow && styles.item}`}
-          >
+            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}>
             {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
           </SwiperSlide>
         ))}

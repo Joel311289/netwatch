@@ -3,8 +3,15 @@
   width: 100%;
 }
 
+.slider {
+  padding: 0 1px;
+}
+
 .item {
   width: fit-content;
+  margin: 1px 0;
+}
+.item.breakpoint {
   max-width: var(--grid-item-percentage);
 }
 
