@@ -8,11 +8,11 @@ import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
 const Image = styled.div`
   &:before {
-    padding-top: ${({ ratio }) => `${100 * ratio}%`};
+    padding-top: ${({ ratio }) => (ratio ? `${100 * ratio}%` : '0')};
   }
 `;
 
-const MediaItemImage = ({ image, ratio, to, lazy }) => {
+const MediaItemImage = ({ image, ratio, to, lazy, width, height }) => {
   const classes = classNames.bind(styles)({
     'swiper-lazy': lazy,
     link: to
@@ -20,14 +20,21 @@ const MediaItemImage = ({ image, ratio, to, lazy }) => {
 
   const Content = () => {
     return (
-      <Image className={`media-image-wrapper ${styles.image}`} ratio={ratio}>
+      <Image
+        className={`media-image-wrapper ${styles.image}`}
+        ratio={ratio}
+        style={{
+          ...(width && !ratio && { width }),
+          ...(height && !ratio && { height })
+        }}>
         <div
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
           style={{
+            ...(width && { width }),
+            ...(height && { height }),
             ...(!lazy && { backgroundImage: `url(${image})` })
-          }}
-        ></div>
+          }}></div>
       </Image>
     );
   };

@@ -71,6 +71,7 @@
 }
 
 .heading {
+  text-align: center;
   width: fit-content;
   margin: 0 0 2px 0;
 }
@@ -127,10 +128,8 @@
 
 .background {
   position: relative;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   width: 100%;
+  height: fit-content;
   overflow: hidden;
   margin-top: -1px;
 }
@@ -147,8 +146,11 @@
   pointer-events: none;
 }
 
-.slider-backgrounds {
-  max-height: 450px;
+.background-image {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .pagination-bullets-backgrounds {
@@ -182,5 +184,5 @@
   display: none;
 }
 .skeleton .content {
-  margin-top: var(--margin-top-slider-backdrops, 200px);
+  margin-top: 200px;
 }

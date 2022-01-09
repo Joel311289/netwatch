@@ -91,6 +91,7 @@ const HomePage = () => {
             {items.map((item, index) => (
               <MediaItem
                 key={index}
+                lazy={true}
                 skeleton={loading}
                 to={routeMediaDetail(item)}
                 ratio={1.5}

@@ -39,7 +39,11 @@ const MediaCredits = ({ to, credits }) => {
   return (
     <div className={`media-credits-wrapper ${styles.wrapper}`}>
       <Space align="center" className={`${styles.credits} ${styles.cast}`}>
-        {tablet && <Slider>{truncateArray(cast, 10).map((credit) => Cast(credit))}</Slider>}
+        {tablet && (
+          <Slider sliderPerRow="auto">
+            {truncateArray(cast, 10).map((credit) => Cast(credit))}
+          </Slider>
+        )}
         {!tablet && truncateArray(cast, 10).map((credit) => Cast(credit))}
       </Space>
 

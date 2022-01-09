@@ -23,7 +23,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, o
     <>
       <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
         {!skeleton && (
-          <MediaItemImage image={image} width={width} ratio={ratio} to={to} lazy={lazy} />
+          <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />
         )}
 
         {title && (

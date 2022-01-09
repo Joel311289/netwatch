@@ -1,6 +1,11 @@
 .body {
   background-color: var(--background-color);
-  padding: var(--padding-body-detail, 30px 40px);
-  margin-top: var(--margin-top-slider-backdrops, -200px);
+  padding: 30px 40px;
+  margin-top: -200px;
   z-index: 2;
+}
+
+.tablet .body {
+  margin-top: 0;
+  padding: 0;
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useFetch } from '@hooks/useFetch';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
@@ -34,6 +35,7 @@ const SeriesDetailPage = () => {
     getDetailSerie
   );
   const [fetchModalData, setFetchModalData] = useState({});
+  const { tablet } = useBreakpointViewport();
 
   const { creators, credits, watch_providers, external_ids, number_seasons, seasons, backdrops } =
     serie || {};
@@ -60,7 +62,7 @@ const SeriesDetailPage = () => {
     <Space className="full">
       {!loading && <MediaDetail.Background items={backdrops} />}
 
-      <div className="App-container App-content">
+      <div className={`App-container App-content ${styles.wrapper} ${tablet && styles.tablet}`}>
         <div className={styles.body}>
           <MediaDetail
             skeleton={loading}

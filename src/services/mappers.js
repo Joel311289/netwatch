@@ -125,7 +125,7 @@ export const creatorDetailMapper = (creator) => {
 export const watchProvidersDetailMapper = (providers) => {
   return {
     watch_link: get(providers, 'link'),
-    providers: get(providers, 'flatrate')
+    providers: get(providers, 'flatrate') || []
   };
 };
 

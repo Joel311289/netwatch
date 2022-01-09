@@ -33,7 +33,7 @@ const detailWatchProviders = ({ results }) => {
 const detailSeasons = (seasons = []) => {
   const sortedSeasons = sortCollectionBy(seasons, 'season_number', true);
 
-  return (sortedSeasons.filter(({ air_date }) => air_date) || []).map(seasonDetailMapper);
+  return sortedSeasons.map(seasonDetailMapper);
 };
 
 const detailImages = ({ backdrops, posters }) => {

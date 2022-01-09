@@ -9,18 +9,17 @@ const MediaDetailBackground = ({ styles, items }) => {
   const { tablet } = useBreakpointViewport();
 
   return (
-    <div className={styles.background}>
+    <div className={`${styles.background} fade-in`}>
       {items && (
         <Slider
           sliderPerRow={1}
           lazy={true}
           effectFade={true}
-          pagination={!tablet}
-          navigation={tablet}
+          navigation={true}
           sliderClass={styles['slider-backgrounds']}
           paginationBulletsClass={styles['pagination-bullets-backgrounds']}>
           {items.map(({ image }) => (
-            <MediaItem.Image key={image} image={image} ratio={tablet ? 0.7 : 0.4} />
+            <MediaItem.Image key={image} lazy={true} image={image} height={tablet ? 300 : 450} />
           ))}
         </Slider>
       )}

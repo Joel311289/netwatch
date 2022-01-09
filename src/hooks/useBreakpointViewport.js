@@ -25,6 +25,7 @@ export const useBreakpointViewport = () => {
     mobile: isMobile(breakpoint.name),
     tablet: isMobileTablet(breakpoint.name),
     smallDesktop: isMobileTabletMedium(breakpoint.name),
+    sizeImage: breakpoint.sizeImage,
     ...breakpoint
   };
 };

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useFetch } from '@hooks/useFetch';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
@@ -25,6 +26,7 @@ const MoviesDetailPage = () => {
     getDetailMovie
   );
   const [fetchModalData, setFetchModalData] = useState({});
+  const { tablet } = useBreakpointViewport();
 
   const { credits, watch_providers, external_ids, backdrops } = movie || {};
   const sections = [
@@ -43,8 +45,8 @@ const MoviesDetailPage = () => {
     <Space className="full">
       {!loading && <MediaDetail.Background items={backdrops} />}
 
-      <div className="App-container App-content">
-        <div className={styles.body}>
+      <div className={`App-container App-content ${styles.wrapper} ${tablet && styles.tablet}`}>
+        <div className={`${styles.body} fade-in-slow`}>
           <MediaDetail
             skeleton={loading}
             {...movie}

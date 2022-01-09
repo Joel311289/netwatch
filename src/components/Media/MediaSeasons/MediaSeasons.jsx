@@ -19,12 +19,12 @@ const MediaSeasons = ({ to, seasons }) => {
   const Season = ({ id, name, date, episodes, image }) => (
     <Link key={id} to={`${to}/${id}`} className={styles.item}>
       <div className={styles.image}>
-        <MediaItem.Image image={image} width={200} ratio={1.5} />
+        <MediaItem.Image image={image} ratio={1.5} />
       </div>
       <Space direction="column" gap={10}>
         <span className={styles.title}>{name}</span>
-        <span className={styles.description}>{formattedDate(date)}</span>
-        <span className={styles.description}>{episodes} episodio(s)</span>
+        <span className={styles.description}>{date ? formattedDate(date) : 'Por determinar'}</span>
+        {Boolean(episodes) && <span className={styles.description}>{episodes} episodio(s)</span>}
       </Space>
     </Link>
   );

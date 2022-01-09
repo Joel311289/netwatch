@@ -11,7 +11,6 @@ export const ElementDefaultProps = {
   disabled: false,
   width: 'auto',
   height: 'auto',
-  ratio: 1,
   items: []
 };
 

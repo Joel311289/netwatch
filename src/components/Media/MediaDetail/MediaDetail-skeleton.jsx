@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import {useBreakpointViewport} from '@hooks/useBreakpointViewport';
+
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
 import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
@@ -7,10 +9,12 @@ import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 import { getEmptyArray } from '@utils/helpers/arrays';
 
 const MediaDetailSkeleton = ({ styles }) => {
+  const {sizeImage} = useBreakpointViewport();
+
   return (
     <div className={`${styles.wrapper} ${styles.skeleton}`}>
       <div className={styles.background}>
-        <Skeleton height={200} />
+        <Skeleton height={300} />
       </div>
 
       <div className={styles.content}>
@@ -20,7 +24,7 @@ const MediaDetailSkeleton = ({ styles }) => {
         </div>
 
         <div className={styles.image}>
-          <MediaItemSkeleton body={false} width={250} ratio={1.5} />
+          <MediaItemSkeleton body={false} width={sizeImage} ratio={1.5} />
         </div>
 
         <Space gap={10} direction="column" className={`${styles.actions} ${styles.buttons}`}>
@@ -34,7 +38,7 @@ const MediaDetailSkeleton = ({ styles }) => {
           ))}
         </div>
 
-        {getEmptyArray(2).map((_, index) => (
+        {getEmptyArray(1).map((_, index) => (
           <div key={index} className={styles.section}>
             <div className={styles['section-heading']}>
               <Skeleton width={200} height={30} />

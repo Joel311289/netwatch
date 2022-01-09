@@ -21,8 +21,6 @@ export const styles = css`
     --size-header: 50px;
     --padding-aside: 20px;
     --size-max: 100vw;
-    --padding-body-detail: 0;
-    --margin-top-slider-backdrops: 0;
     --width-percentage-section: 100%;
   }
 `;

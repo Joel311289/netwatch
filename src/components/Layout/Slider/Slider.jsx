@@ -55,7 +55,6 @@ const Slider = ({
           ...(paginationBulletClass && { bulletClass: paginationBulletClass }),
           bulletActiveClass: styles['pagination-bullet-active'],
           renderBullet: (_, className) => {
-            console.log(className);
             return `<span class="${className} ${styles['pagination-bullet']}"></span>`;
           }
         }
@@ -84,7 +83,7 @@ const Slider = ({
             className={`${string(slideClass)} ${styles.item} ${
               !sliderPerRow && styles.breakpoint
             }`}>
-            {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
+            {React.cloneElement(element, { ...element.props, width: '100%' })}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -106,7 +105,7 @@ Slider.propTypes = {
   slideClass: PropTypes.string,
   paginationBulletsClass: PropTypes.string,
   paginationBulletClass: PropTypes.string,
-  effectFade: PropTypes.string,
+  effectFade: PropTypes.bool,
   offset: PropTypes.number
 };
 

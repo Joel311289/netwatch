@@ -5,21 +5,21 @@ import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
-import { isEmptyArray } from '@utils/helpers/arrays';
 import { string } from '@utils/helpers/strings';
 
 const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
-  const withWatchProviders = watch_providers && !isEmptyArray(watch_providers.providers);
+  const { watch_link, providers = [] } = watch_providers || {};
+  const withWatchProviders = watch_link || Boolean(providers.length);
   const buttons = [
     ...(withWatchProviders
       ? [
           {
             label: 'Ver ahora',
             role: 'link',
-            href: withWatchProviders && watch_providers.watch_link,
-            ...(withWatchProviders && { className: styles['provider-stream'] }),
-            icon: withWatchProviders ? (
-              <img src={watch_providers.providers[0].image} className={styles['provider-logo']} />
+            ...(watch_link ? { href: watch_link } : {}),
+            ...(providers[0] && { className: styles['provider-stream'] }),
+            icon: providers[0] ? (
+              <img src={providers[0].image} className={styles['provider-logo']} />
             ) : (
               <FiTv />
             )
@@ -37,8 +37,7 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
           className={`${styles.button} ${string(className)}`}
           role={role}
           href={href}
-          onClick={onClick}
-        >
+          onClick={onClick}>
           {icon}
           <span className={styles.label}>{label}</span>
         </Button>

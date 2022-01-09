@@ -14,7 +14,6 @@ import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 const MediaBackground = (props) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
@@ -36,17 +35,16 @@ const MediaDetail = ({
   onTrailer
 }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { tablet } = useBreakpointViewport();
 
   if (skeleton) {
     return <MediaDetailSkeleton styles={styles} />;
   }
 
   return (
-    <div className={`${styles.wrapper} fade-in`}>
+    <div className={styles.wrapper}>
       <div className={`${styles.content}`}>
         <div className={styles.image}>
-          <MediaItem.Image image={image} width={tablet ? 180 : 250} ratio={1.5} />
+          <MediaItem.Image image={image} ratio={1.5} />
         </div>
         <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
         <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
