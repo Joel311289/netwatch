@@ -61,7 +61,7 @@ const MediaDetail = ({
 
         <span className={styles.description}>{description}</span>
 
-        {sections.map(({ key, heading, data, to, Element }, index) => (
+        {(sections || []).map(({ key, heading, data, to, Element }, index) => (
           <div key={key} className={`${styles.section} ${styles[`section-${index + 1}`]}`}>
             <div className={styles['section-heading']}>
               <MediaHeading text={heading} to={to} />

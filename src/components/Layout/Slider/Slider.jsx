@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Lazy, Mousewheel, Navigation } from 'swiper';
+import SwiperCore, { Lazy, Mousewheel, Navigation, Pagination } from 'swiper';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
@@ -12,9 +12,20 @@ import { string } from '@utils/helpers/strings';
 
 import styles from '@components/Layout/Slider/Slider.module.css';
 
-SwiperCore.use([Lazy, Mousewheel, Navigation]);
+SwiperCore.use([Lazy, Mousewheel, Navigation, Pagination]);
 
-const Slider = ({ children, navigation, lazy, sliderPerRow, sliderClass, slideClass }) => {
+const Slider = ({
+  children,
+  navigation,
+  pagination,
+  lazy,
+  sliderPerRow,
+  sliderClass,
+  slideClass,
+  paginationBulletsClass,
+  paginationBulletClass,
+  offset
+}) => {
   const { slidesPerView, spaceBetween } = useBreakpointViewport();
 
   const renderNavigationButton = (state, icon) => {
@@ -36,6 +47,18 @@ const Slider = ({ children, navigation, lazy, sliderPerRow, sliderClass, slideCl
       nextEl: `.${styles['button-next']}`,
       disabledClass: styles['button-navigation-disabled']
     },
+    pagination: pagination
+      ? {
+          clickable: true,
+          ...(paginationBulletsClass && { clickableClass: paginationBulletsClass }),
+          ...(paginationBulletClass && { bulletClass: paginationBulletClass }),
+          bulletActiveClass: styles['pagination-bullet-active'],
+          renderBullet: (_, className) => {
+            console.log(className);
+            return `<span class="${className} ${styles['pagination-bullet']}"></span>`;
+          }
+        }
+      : false,
     lazy: lazy && {
       loadOnTransitionStart: true
     },
@@ -47,13 +70,18 @@ const Slider = ({ children, navigation, lazy, sliderPerRow, sliderClass, slideCl
 
   return (
     <div className={styles.wrapper}>
-      <Swiper {...settings} className={`${styles.slider} ${string(sliderClass)}`}>
+      <Swiper
+        {...settings}
+        className={string(sliderClass)}
+        style={{ padding: offset ? `0 ${offset}px` : 0 }}
+      >
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide
             key={index}
-            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}>
+            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}
+          >
             {React.cloneElement(element, { ...element.props, width: '100%', lazy })}
           </SwiperSlide>
         ))}
@@ -67,11 +95,16 @@ Slider.defaultProps = {
 };
 Slider.propTypes = {
   children: PropTypes.array,
+  direction: PropTypes.oneOf(['horizontal', 'vertical', undefined]),
   navigation: PropTypes.bool,
+  pagination: PropTypes.bool,
   lazy: PropTypes.bool,
-  sliderPerRow: PropTypes.number,
+  sliderPerRow: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   sliderClass: PropTypes.string,
-  slideClass: PropTypes.string
+  slideClass: PropTypes.string,
+  paginationBulletsClass: PropTypes.string,
+  paginationBulletClass: PropTypes.string,
+  offset: PropTypes.number
 };
 
 export default Slider;

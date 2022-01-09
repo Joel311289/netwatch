@@ -2,6 +2,7 @@
 /* Import Slick Carousel */
 @import 'swiper/css';
 @import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 @import 'swiper/css/lazy';
 
 :root {
@@ -12,10 +13,6 @@
   --font-logo: 'BebasNeue', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-heading: 'UberMove', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-text: 'UberMoveText', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-  --box-shadow-primary: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
-    0px 1px 5px 0px rgb(0 0 0 / 12%);
-  --box-shadow-secondary: 0px 16px 30px -10px #4660bb33;
 
   --color-gray: #b9bdcf;
   --color-gray-light: #e0e0e0;
@@ -53,6 +50,9 @@
   --placeholder-hover-color: var(--color-gray-light);
   --skeleton-opacity: 0.15;
   --backdrop-opacity: 0.6;
+  --box-shadow-secondary: 0px 16px 30px -10px #4660bb33;
+  --box-shadow-primary: 0px 3px 1px -2px rgb(155 155 155 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 .theme-dark {
@@ -72,8 +72,11 @@
   --background-header-color: var(--color-dark);
   --placeholder-color: var(--color-dark);
   --placeholder-hover-color: var(--color-dark-light);
-  --skeleton-opacity: 0.25;
+  --skeleton-opacity: 0.5;
   --backdrop-opacity: 0.9;
+  --box-shadow-secondary: 0px 16px 30px -10px #a2a4ad33;
+  --box-shadow-primary: 0px 3px 1px -2px rgb(75 75 75 / 20%), 0px 2px 2px 0px rgb(75 75 75 / 14%),
+    0px 1px 5px 0px rgb(75 75 75 / 12%);
 }
 
 html {

@@ -19,6 +19,9 @@ const detailCredits = ({ cast }) => {
 };
 
 const detailWatchProviders = ({ results }) => {
+  if (!results['ES']) {
+    return null;
+  }
   const { watch_link, providers } = watchProvidersDetailMapper(results['ES']);
 
   return {

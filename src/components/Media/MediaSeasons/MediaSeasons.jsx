@@ -31,7 +31,7 @@ const MediaSeasons = ({ to, seasons }) => {
 
   return (
     <div className={`media-seasons-wrapper ${styles.wrapper}`}>
-      <Slider sliderPerRow="auto" slideClass={styles['slide-season']}>
+      <Slider offset={1} sliderPerRow="auto" slideClass={styles['slide-season']}>
         {seasons.map((season) => Season(season))}
       </Slider>
     </div>

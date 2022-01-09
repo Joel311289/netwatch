@@ -11,19 +11,21 @@ import { string } from '@utils/helpers/strings';
 const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
   const withWatchProviders = watch_providers && !isEmptyArray(watch_providers.providers);
   const buttons = [
-    ...[
-      {
-        label: 'Ver ahora',
-        role: 'link',
-        href: withWatchProviders && watch_providers.watch_link,
-        ...(withWatchProviders && { className: styles['provider-stream'] }),
-        icon: withWatchProviders ? (
-          <img src={watch_providers.providers[0].image} className={styles['provider-logo']} />
-        ) : (
-          <FiTv />
-        )
-      }
-    ],
+    ...(withWatchProviders
+      ? [
+          {
+            label: 'Ver ahora',
+            role: 'link',
+            href: withWatchProviders && watch_providers.watch_link,
+            ...(withWatchProviders && { className: styles['provider-stream'] }),
+            icon: withWatchProviders ? (
+              <img src={watch_providers.providers[0].image} className={styles['provider-logo']} />
+            ) : (
+              <FiTv />
+            )
+          }
+        ]
+      : []),
     { label: 'Ver trailer', icon: <FiPlay />, onClick: onTrailer }
   ];
 

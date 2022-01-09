@@ -73,7 +73,27 @@
 
 /* ---------- Sections */
 
-.section {
-  /* display: none; */
-  /* max-width: 100%; */
+/* ---------- Skeleton */
+
+.skeleton .background {
+  display: block;
+  margin-top: -15px;
+  margin-left: -20px;
+  width: calc(100% + 40px);
+}
+
+.skeleton .actions {
+  flex-direction: row !important;
+  margin-top: 15px !important;
+}
+
+.skeleton .actions .button {
+  width: 40% !important;
+}
+
+.skeleton .section {
+  grid-row: 5 / span 1;
+}
+.skeleton .section + .section {
+  display: none;
 }

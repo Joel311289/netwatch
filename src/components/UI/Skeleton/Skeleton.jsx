@@ -3,10 +3,11 @@ import { Skeleton as SkeletonMUI } from '@mui/material';
 import PropTypes from 'prop-types';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
+import { string } from '@utils/helpers/strings';
 
 import styles from '@components/UI/Skeleton/Skeleton.module.css';
 
-const Skeleton = ({ width, height, variant, style }) => {
+const Skeleton = ({ width, height, variant, style, className }) => {
   const getHeight = useMemo(() => {
     switch (variant) {
       case 'heading':
@@ -27,7 +28,7 @@ const Skeleton = ({ width, height, variant, style }) => {
   return (
     <div
       style={{ ...style, width, height: getHeight }}
-      className={`${styles.wrapper} ${styles[variant] || ''} fade-in`}
+      className={`${styles.wrapper} ${styles[variant] || ''} fade-in ${string(className)}`}
     >
       <SkeletonMUI className={styles.skeleton} animation="wave" height={getHeight} />
     </div>

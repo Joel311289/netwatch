@@ -3,10 +3,6 @@
   width: 100%;
 }
 
-.slider {
-  padding: 0 1px;
-}
-
 .item {
   width: fit-content;
   margin: 1px 0;
@@ -38,13 +34,25 @@
 }
 
 .button-prev {
-  left: 0;
+  left: 1px;
 }
 
 .button-next {
-  right: 0;
+  right: 1px;
 }
 
 .button-navigation-disabled {
   display: none !important;
+}
+
+.pagination-bullet {
+  border: 2px solid var(--background-color) !important;
+  background: transparent !important;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  opacity: 1 !important;
+}
+.pagination-bullet-active {
+  background: var(--background-color) !important;
 }

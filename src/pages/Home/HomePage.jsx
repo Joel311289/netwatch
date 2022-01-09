@@ -87,7 +87,7 @@ const HomePage = () => {
             <MediaHeading text={heading} to={route ? `/${route}` : ''} content={content} />
           </div>
 
-          <Slider navigation={!loading} lazy={true}>
+          <Slider navigation={!loading} lazy={true} offset={1}>
             {items.map((item, index) => (
               <MediaItem
                 key={index}

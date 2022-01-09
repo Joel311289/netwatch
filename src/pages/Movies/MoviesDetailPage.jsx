@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 
 import { useFetch } from '@hooks/useFetch';
 
+import Space from '@components/Layout/Space/Space';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
-import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 
 import { getDetailMovie } from '@services/movies/get-detail-movie';
@@ -20,43 +20,47 @@ const MoviesDetailPage = () => {
   const { data: movie, loading } = useFetch(
     [
       `/api/${mediaTypes.MOVIE}/${id}`,
-      { append_to_response: ['watch/providers', 'credits', 'external_ids'] }
+      { append_to_response: ['watch/providers', 'credits', 'external_ids', 'images', 'videos'] }
     ],
     getDetailMovie
   );
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const { credits, watch_providers, external_ids } = movie || {};
+  const { credits, watch_providers, external_ids, backdrops } = movie || {};
+  const sections = [
+    {
+      key: 'credits',
+      heading: 'Reparto principal',
+      data: { ...credits },
+      to: `/${mediaTypes.MOVIE}/${id}/credits`,
+      Element: MediaCredits
+    }
+  ];
 
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
 
   return (
-    <div className="App-container App-content">
-      <MediaDetail
-        skeleton={loading}
-        {...movie}
-        watch_providers={watch_providers}
-        external_ids={external_ids}
-        credits={credits}
-        onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
-      />
+    <Space className="full">
+      {!loading && <MediaDetail.Background items={backdrops} />}
 
-      {!loading && (
-        <div className="">
-          <div className={styles.section}>
-            <div className={styles['section-heading']}>
-              <MediaHeading text="Reparto principal" to={`/${mediaTypes.MOVIE}/${id}/credits`} />
-            </div>
-
-            <MediaCredits to={`/movie/${mediaTypes.MOVIE}/credits`} credits={credits} />
-          </div>
+      <div className="App-container App-content">
+        <div className={styles.body}>
+          <MediaDetail
+            skeleton={loading}
+            {...movie}
+            watch_providers={watch_providers}
+            external_ids={external_ids}
+            credits={credits}
+            sections={sections}
+            onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
+          />
         </div>
-      )}
 
-      {fetchModalData.id && (
-        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
-      )}
-    </div>
+        {fetchModalData.id && (
+          <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+        )}
+      </div>
+    </Space>
   );
 };
 

@@ -4,6 +4,7 @@ import { personRoleTypes } from '@services/constants';
 import {
   creditDetailMapper,
   externalsIdsDetailMapper,
+  imageDetailMapper,
   mediaDetailMapper,
   watchProviderDetailMapper,
   watchProvidersDetailMapper
@@ -38,8 +39,10 @@ const detailCredits = ({ cast, crew }) => {
 };
 
 const detailWatchProviders = ({ results }) => {
-  const resp = watchProvidersDetailMapper(results['ES']);
-  const { watch_link, providers } = resp;
+  if (!results['ES']) {
+    return null;
+  }
+  const { watch_link, providers } = watchProvidersDetailMapper(results['ES']);
 
   return {
     watch_link,
@@ -47,20 +50,36 @@ const detailWatchProviders = ({ results }) => {
   };
 };
 
+const detailImages = ({ backdrops, posters }) => {
+  return {
+    backdrops: backdrops.map((image) => imageDetailMapper(image, true)),
+    posters: posters.map(imageDetailMapper)
+  };
+};
+
 export const getDetailMovie = (url, { append_to_response } = {}) => {
   try {
     const params = {
-      ...(append_to_response && { append_to_response: append_to_response.join(',') })
+      ...(append_to_response && { append_to_response: append_to_response.join(',') }),
+      include_image_language: 'es,null',
+      include_video_language: 'es,null'
     };
 
     return axios.get(`${url}`, { params }).then((response) => {
-      const { credits, ['watch/providers']: watch_providers, external_ids, ...detail } = response;
+      const {
+        credits,
+        ['watch/providers']: watch_providers,
+        external_ids,
+        images,
+        ...detail
+      } = response;
 
       return {
         ...mediaDetailMapper(detail),
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
-        ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) })
+        ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
+        ...(images && { ...detailImages(images) })
       };
     });
   } catch (error) {

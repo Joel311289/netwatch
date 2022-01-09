@@ -31,6 +31,7 @@
 
 .image {
   grid-area: image;
+  height: fit-content;
 }
 
 .description {
@@ -48,6 +49,7 @@
 }
 
 .buttons {
+  z-index: 2;
   grid-column: image / 1;
   grid-row: image;
   gap: 5px;
@@ -130,6 +132,7 @@
   background-size: cover;
   width: 100%;
   overflow: hidden;
+  margin-top: -1px;
 }
 .background::after {
   content: '';
@@ -148,7 +151,7 @@
   max-height: 450px;
 }
 
-/* ---------- Section 1 */
+/* ---------- Sections */
 
 .section {
   margin-top: 20px;
@@ -167,4 +170,13 @@
 
 .section-2 {
   grid-area: section-2;
+}
+
+/* ---------- Skeleton */
+
+.skeleton .background {
+  display: none;
+}
+.skeleton .content {
+  margin-top: var(--margin-top-slider-backdrops, 200px);
 }
