@@ -67,9 +67,14 @@
 
 .video {
   background: #010001;
-  height: 520px;
 }
 
 img {
   height: 45px;
+}
+
+/* ---------- Image */
+
+.image {
+  max-width: 100%;
 }

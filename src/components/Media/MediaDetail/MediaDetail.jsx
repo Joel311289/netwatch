@@ -44,7 +44,7 @@ const MediaDetail = ({
     <div className={styles.wrapper}>
       <div className={`${styles.content}`}>
         <div className={styles.image}>
-          <MediaItem.Image image={image} ratio={1.5} />
+          <MediaItem.Image image={image} ratio={1.5} zoom={true} />
         </div>
         <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
         <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />

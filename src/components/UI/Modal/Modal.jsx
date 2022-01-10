@@ -70,7 +70,7 @@ Modal.propTypes = {
   children: PropTypes.any,
   visible: PropTypes.bool,
   locked: PropTypes.bool,
-  size: PropTypes.oneOf(['s', 'm', 'l']),
+  size: PropTypes.oneOf(['s', 'm', 'l', 'auto']),
   onClose: PropTypes.func
 };
 

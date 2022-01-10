@@ -39,6 +39,7 @@ const Slider = ({
 
   const settings = {
     speed: 500,
+    allowTouchMove: false,
     slidesPerView: sliderPerRow || slidesPerView,
     slidesPerGroup:
       sliderPerRow === 'auto' ? 1 : !isNaN(sliderPerRow) ? sliderPerRow : slidesPerView,

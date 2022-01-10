@@ -21,10 +21,6 @@
   width: 100% !important;
 }
 
-.image {
-  display: none;
-}
-
 .header {
   text-align: center;
   justify-content: center;
@@ -45,5 +41,5 @@
 /* ---------- Video */
 
 .video {
-  height: 210px;
+  min-height: 210px;
 }

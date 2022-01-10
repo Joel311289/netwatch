@@ -19,7 +19,14 @@ const MediaDetailBackground = ({ styles, items }) => {
           sliderClass={styles['slider-backgrounds']}
           paginationBulletsClass={styles['pagination-bullets-backgrounds']}>
           {items.map(({ image }) => (
-            <MediaItem.Image key={image} lazy={true} image={image} height={tablet ? 300 : 450} />
+            <MediaItem.Image
+              key={image}
+              lazy={true}
+              image={image}
+              height={tablet ? 250 : 450}
+              zoom={true}
+              type="backdrop"
+            />
           ))}
         </Slider>
       )}

@@ -34,6 +34,23 @@
   background-size: cover;
   background-position: center;
 }
+.image .zoom {
+  color: var(--color-dark);
+  box-shadow: var(--box-shadow-primary);
+  cursor: pointer;
+  height: 1.5em;
+  width: 1.5em;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-radius: 50%;
+  opacity: .7;
+  font-size: 1.5rem;
+  padding: 0 !important;
+}
+.image .zoom:hover {
+  opacity: 1;
+}
 
 .info {
   background-color: rgb(var(--placeholder-color-rgb), 0.5);
