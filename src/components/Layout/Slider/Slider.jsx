@@ -75,15 +75,15 @@ const Slider = ({
       <Swiper
         {...settings}
         className={string(sliderClass)}
-        style={{ padding: offset ? `0 ${offset}px` : 0 }}>
+        style={{ padding: offset ? `0 ${offset}px` : 0 }}
+      >
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide
             key={index}
-            className={`${string(slideClass)} ${styles.item} ${
-              !sliderPerRow && styles.breakpoint
-            }`}>
+            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}
+          >
             {React.cloneElement(element, { ...element.props, width: '100%' })}
           </SwiperSlide>
         ))}

@@ -44,7 +44,7 @@ const HomePage = () => {
     }, 100);
   };
   const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
-  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'video' });
 
   const categories = [
     {

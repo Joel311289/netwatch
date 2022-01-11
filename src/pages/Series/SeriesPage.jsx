@@ -22,7 +22,7 @@ const SeriesPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
 
   const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
-  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'video' });
 
   return (
     <div className="App-container App-content">

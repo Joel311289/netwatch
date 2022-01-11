@@ -22,9 +22,7 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, o
   return (
     <>
       <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
-        {!skeleton && (
-          <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />
-        )}
+        {!skeleton && <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />}
 
         {title && (
           <Space direction="column" justify="between" className={styles.info}>

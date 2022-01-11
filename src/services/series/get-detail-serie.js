@@ -8,7 +8,8 @@ import {
   aggregateCreditDetailMapper,
   watchProviderDetailMapper,
   seasonDetailMapper,
-  imageDetailMapper
+  imageDetailMapper,
+  videoDetailMapper
 } from '@services/mappers';
 import { sortCollectionBy } from '@utils/helpers/collections';
 
@@ -43,6 +44,10 @@ const detailImages = ({ backdrops, posters }) => {
   };
 };
 
+const detailVideos = ({ results }) => {
+  return results.map(videoDetailMapper);
+};
+
 export const getDetailSerie = (url, { append_to_response } = {}) => {
   const params = {
     ...(append_to_response && { append_to_response: append_to_response.join(',') }),
@@ -58,6 +63,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
       created_by: creators,
       seasons,
       images,
+      videos,
       ...detail
     } = response;
 
@@ -69,7 +75,8 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
         ...(seasons && { seasons: detailSeasons(seasons) }),
-        ...(images && { ...detailImages(images) })
+        ...(images && { ...detailImages(images) }),
+        ...(videos && { videos: detailVideos(videos) })
       };
     } catch (error) {
       console.error(error);

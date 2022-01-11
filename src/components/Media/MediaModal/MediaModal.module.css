@@ -67,6 +67,14 @@
 
 .video {
   background: #010001;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video:before {
+  content: '';
+  display: block;
 }
 
 img {

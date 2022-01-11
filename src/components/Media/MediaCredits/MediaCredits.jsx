@@ -16,14 +16,20 @@ import mobileStyles from '@components/Media/MediaCredits/MediaCredits-mobile.mod
 import desktopStyles from '@components/Media/MediaCredits/MediaCredits.module.css';
 
 const MediaCredits = ({ to, credits }) => {
-  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { tablet } = useBreakpointViewport();
+  const styles = useBreakpointStyles({
+    desktopStyles,
+    mobileStyles,
+    smallDesktopStyles: mobileStyles
+  });
+  const { smallDesktop } = useBreakpointViewport();
   const { cast, directors, creators, writers } = credits || {};
   const sections = [
     { id: 'crew', label: 'Director', data: truncateArray(directors, 3) },
     { id: 'crew', label: 'Escritores', data: truncateArray(writers, 3) },
     { id: 'crew', label: 'Creadores', data: truncateArray(creators, 3) }
   ];
+
+  const filteredSections = () => sections.filter(({ data }) => !isEmptyArray(data));
 
   // eslint-disable-next-line react/prop-types
   const Cast = ({ id, characters, image, name }) => (
@@ -39,25 +45,25 @@ const MediaCredits = ({ to, credits }) => {
   return (
     <div className={`media-credits-wrapper ${styles.wrapper}`}>
       <Space align="center" className={`${styles.credits} ${styles.cast}`}>
-        {tablet && (
+        {smallDesktop && (
           <Slider sliderPerRow="auto">
             {truncateArray(cast, 10).map((credit) => Cast(credit))}
           </Slider>
         )}
-        {!tablet && truncateArray(cast, 10).map((credit) => Cast(credit))}
+        {!smallDesktop && truncateArray(cast, 10).map((credit) => Cast(credit))}
       </Space>
 
-      <List divider>
-        {sections
-          .filter(({ data }) => !isEmptyArray(data))
-          .map(({ label, data }) => (
+      {!isEmptyArray(filteredSections()) && (
+        <List divider>
+          {filteredSections().map(({ label, data }) => (
             <Space key={label} gap={[5, 20]} className={styles.credit}>
               <span>{label}</span>
 
               <Separator items={data.map(({ name }) => name)} />
             </Space>
           ))}
-      </List>
+        </List>
+      )}
     </div>
   );
 };

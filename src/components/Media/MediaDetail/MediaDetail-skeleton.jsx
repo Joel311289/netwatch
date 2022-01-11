@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import {useBreakpointViewport} from '@hooks/useBreakpointViewport';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
@@ -9,7 +9,7 @@ import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 import { getEmptyArray } from '@utils/helpers/arrays';
 
 const MediaDetailSkeleton = ({ styles }) => {
-  const {sizeImage} = useBreakpointViewport();
+  const { sizeImage } = useBreakpointViewport();
 
   return (
     <div className={`${styles.wrapper} ${styles.skeleton}`}>

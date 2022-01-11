@@ -6,6 +6,7 @@ import {
   externalsIdsDetailMapper,
   imageDetailMapper,
   mediaDetailMapper,
+  videoDetailMapper,
   watchProviderDetailMapper,
   watchProvidersDetailMapper
 } from '@services/mappers';
@@ -57,6 +58,10 @@ const detailImages = ({ backdrops, posters }) => {
   };
 };
 
+const detailVideos = ({ results }) => {
+  return results.map(videoDetailMapper);
+};
+
 export const getDetailMovie = (url, { append_to_response } = {}) => {
   try {
     const params = {
@@ -71,6 +76,7 @@ export const getDetailMovie = (url, { append_to_response } = {}) => {
         ['watch/providers']: watch_providers,
         external_ids,
         images,
+        videos,
         ...detail
       } = response;
 
@@ -79,7 +85,8 @@ export const getDetailMovie = (url, { append_to_response } = {}) => {
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
-        ...(images && { ...detailImages(images) })
+        ...(images && { ...detailImages(images) }),
+        ...(videos && { videos: detailVideos(videos) })
       };
     });
   } catch (error) {

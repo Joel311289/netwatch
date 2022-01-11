@@ -17,7 +17,8 @@ const MediaDetailBackground = ({ styles, items }) => {
           effectFade={true}
           navigation={true}
           sliderClass={styles['slider-backgrounds']}
-          paginationBulletsClass={styles['pagination-bullets-backgrounds']}>
+          paginationBulletsClass={styles['pagination-bullets-backgrounds']}
+        >
           {items.map(({ image }) => (
             <MediaItem.Image
               key={image}

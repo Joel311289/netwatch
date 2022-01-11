@@ -11,6 +11,7 @@ import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaSeasons from '@components/Media/MediaSeasons/MediaSeasons';
 
 import { mediaTypes } from '@services/constants';
+import { getVideoTrailerYoutubeId } from '@services/helpers';
 import { getDetailSerie } from '@services/series/get-detail-serie';
 
 import { getIdFromParams } from '@utils/helpers/strings';
@@ -37,8 +38,16 @@ const SeriesDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { creators, credits, watch_providers, external_ids, number_seasons, seasons, backdrops } =
-    serie || {};
+  const {
+    creators,
+    credits,
+    watch_providers,
+    external_ids,
+    number_seasons,
+    seasons,
+    backdrops,
+    videos
+  } = serie || {};
   const sections = [
     {
       key: 'seasons',
@@ -56,7 +65,8 @@ const SeriesDetailPage = () => {
     }
   ];
 
-  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+  const onTrailer = (item) =>
+    setFetchModalData({ ...item, mode: 'video', videoId: getVideoTrailerYoutubeId(videos) });
 
   return (
     <Space className="full">

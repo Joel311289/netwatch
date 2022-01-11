@@ -9,10 +9,11 @@ import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 
+import { mediaTypes } from '@services/constants';
+import { getVideoTrailerYoutubeId } from '@services/helpers';
 import { getDetailMovie } from '@services/movies/get-detail-movie';
 
 import { getIdFromParams } from '@utils/helpers/strings';
-import { mediaTypes } from '@services/constants';
 
 import styles from '@pages/Movies/MoviesPage.module.css';
 
@@ -28,7 +29,7 @@ const MoviesDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, watch_providers, external_ids, backdrops } = movie || {};
+  const { credits, watch_providers, external_ids, backdrops, videos } = movie || {};
   const sections = [
     {
       key: 'credits',
@@ -39,7 +40,8 @@ const MoviesDetailPage = () => {
     }
   ];
 
-  const onTrailer = (item) => setFetchModalData({ ...item, mode: 'trailer' });
+  const onTrailer = (item) =>
+    setFetchModalData({ ...item, mode: 'video', videoId: getVideoTrailerYoutubeId(videos) });
 
   return (
     <Space className="full">

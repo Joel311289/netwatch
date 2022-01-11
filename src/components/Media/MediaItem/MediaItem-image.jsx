@@ -35,7 +35,8 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
         style={{
           ...(width && !ratio && { width }),
           ...(height && !ratio && { height })
-        }}>
+        }}
+      >
         <div
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
@@ -43,7 +44,8 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
             ...(width && { width }),
             ...(height && { height }),
             ...(!lazy && { backgroundImage: `url(${image})` })
-          }}></div>
+          }}
+        ></div>
 
         {zoom && (
           <Button className={styles.zoom} secondary={true} onClick={onZoom}>

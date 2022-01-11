@@ -37,7 +37,8 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
           className={`${styles.button} ${string(className)}`}
           role={role}
           href={href}
-          onClick={onClick}>
+          onClick={onClick}
+        >
           {icon}
           <span className={styles.label}>{label}</span>
         </Button>
