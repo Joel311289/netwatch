@@ -37,18 +37,18 @@
   margin-bottom: 20px;
 }
 
-.actions {
-  margin: 0 auto !important;
-}
-
 .buttons {
   grid-area: buttons;
+  margin: 0 auto !important;
   flex-direction: row !important;
 }
 
 .links {
-  grid-area: links;
-  padding: 0 0 20px 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  box-shadow: none;
+  margin: 30px auto;
 }
 
 .title {

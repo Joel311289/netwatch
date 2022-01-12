@@ -39,6 +39,7 @@
   --color-text: var(--color-dark);
   --color-button-text: var(--color-white);
   --color-link-text: var(--color-dark);
+  --color-input: #eeeeee;
   --color-skeleton: 217, 217, 217;
   --color-backdrop: 220, 220, 220;
   --background-color: var(--color-white);
@@ -63,6 +64,7 @@
   --color-text: var(--color-white);
   --color-button-text: var(--color-dark);
   --color-link-text: var(--color-yellow);
+  --color-input: #373737;
   --color-skeleton: 40, 40, 40;
   --color-backdrop: 40, 40, 40;
   --background-color: var(--color-medium);
@@ -108,6 +110,7 @@ li {
 input {
   outline: none;
   box-shadow: none;
+  font-family: var(--font-text);
 }
 
 button {

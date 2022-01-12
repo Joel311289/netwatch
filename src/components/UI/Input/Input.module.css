@@ -1,0 +1,68 @@
+.wrapper {
+  box-shadow: inset 0px -1px 0px var(--color-input);
+  position: relative;
+  min-height: 40px;
+  width: 100%;
+}
+
+.icon {
+  color: var(--color-text);
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  margin-top: 2px;
+  font-size: 1.2rem;
+}
+
+.input {
+  background-color: var(--color-input) !important;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0 20px 2px 16px;
+  border: none;
+  outline: none;
+  width: 100%;
+  min-height: 100%;
+}
+.icon ~ .input {
+  padding-left: 40px;
+}
+.clear ~ .input[value]:not([value='']),
+.clear ~ .input:focus {
+  padding-right: 65px;
+}
+.input:focus {
+  box-shadow: rgb(var(--divider-color-rgb)) 0 -2px 0 inset;
+}
+.input::placeholder {
+  opacity: 0.6;
+  color: currentColor;
+}
+
+.clear {
+  display: none;
+  background-color: transparent;
+  color: var(--color-text);
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.clear:hover {
+  opacity: 0.6;
+}
+
+.wrapper.has-value .clear {
+  display: block;
+}
+
+.wrapper.disabled .icon {
+  opacity: .3;
+}
+.wrapper.disabled .input {
+  color: var(--color-border) !important;
+}

@@ -47,8 +47,7 @@ const MediaDetail = ({
           <MediaItem.Image image={image} ratio={1.5} zoom={true} />
         </div>
         <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
-        <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
-
+        
         <MediaDetailHeader
           styles={styles}
           title={title}
@@ -69,6 +68,8 @@ const MediaDetail = ({
           </div>
         ))}
       </div>
+
+      <MediaDetailLinks styles={styles} external_ids={external_ids} homepage={homepage} />
     </div>
   );
 };

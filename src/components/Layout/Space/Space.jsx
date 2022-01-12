@@ -12,17 +12,17 @@ const positions = {
   baseline: 'baseline'
 };
 
-const Space = ({ children, className, direction, gap, justify, align }) => {
+const Space = ({ children, className, direction, gap, justify, align, nowrap }) => {
   return (
     <div
       className={`${styles.wrapper} ${string(className)}`}
       style={{
+        ...(nowrap && { flexWrap: nowrap ? 'nowrap' : 'wrap' }),
         ...(direction && { flexDirection: direction }),
         ...(justify && { justifyContent: positions[justify] }),
         ...(align && { alignItems: positions[align] }),
         ...(gap && { gap: Array.isArray(gap) ? gap.map((s) => `${s}px`).join(' ') : gap })
-      }}
-    >
+      }}>
       {children}
     </div>
   );
@@ -34,9 +34,10 @@ Space.defaultProps = {
   direction: 'row'
 };
 Space.propTypes = {
+  nowrap: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
-  direction: PropTypes.oneOf(['row', 'column']),
+  direction: PropTypes.oneOf(['row', 'column', 'row-reverse', 'column-reverse']),
   justify: PropTypes.oneOf(['start', 'end', 'between', 'center']),
   align: PropTypes.oneOf(['start', 'end', 'baseline', 'center']),
   gap: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)])

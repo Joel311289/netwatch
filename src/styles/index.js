@@ -8,13 +8,13 @@ export const styles = css`
     .map((key) => {
       const { width, itemsPerRow, spaceBetween, sizeImage } = BREAKPOINTS[key];
       return `
-      ${`@media screen and (max-width: ${width}px)`} {
-        --grid-gap: ${spaceBetween}px;
-        --grid-item-percentage: ${100 / itemsPerRow}%;
-        --grid-items-per-row: ${itemsPerRow};
-        --size-image: ${sizeImage}px;
-      }
-    `;
+        ${`@media screen and (max-width: ${width}px)`} {
+          --grid-gap: ${spaceBetween}px;
+          --grid-item-percentage: ${100 / itemsPerRow}%;
+          --grid-items-per-row: ${itemsPerRow};
+          --size-image: ${sizeImage}px;
+        }
+      `;
     })}
 
   ${`@media screen and (max-width: ${BREAKPOINTS.xs.width}px)`} {
