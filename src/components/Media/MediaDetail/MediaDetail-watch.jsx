@@ -6,8 +6,9 @@ import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { string } from '@utils/helpers/strings';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
-const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
+const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
   const { watch_link, providers = [] } = watch_providers || {};
   const withWatchProviders = watch_link || Boolean(providers.length);
   const buttons = [
@@ -26,7 +27,9 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
           }
         ]
       : []),
-    { label: 'Ver trailer', icon: <FiPlay />, onClick: onTrailer }
+    ...(!isEmptyArray(videos)
+      ? [{ label: 'Ver trailer', icon: <FiPlay />, onClick: onTrailer }]
+      : [])
   ];
 
   return (
@@ -37,8 +40,7 @@ const MediaDetailWatch = ({ styles, watch_providers, onTrailer }) => {
           className={`${styles.button} ${string(className)}`}
           role={role}
           href={href}
-          onClick={onClick}
-        >
+          onClick={onClick}>
           {icon}
           <span className={styles.label}>{label}</span>
         </Button>

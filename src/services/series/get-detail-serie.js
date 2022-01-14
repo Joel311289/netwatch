@@ -37,10 +37,10 @@ const detailSeasons = (seasons = []) => {
   return sortedSeasons.map(seasonDetailMapper);
 };
 
-const detailImages = ({ backdrops, posters }) => {
+const detailImages = ({ backdrops, posters }, { image, backdrop }) => {
   return {
-    backdrops: backdrops.map((image) => imageDetailMapper(image, true)),
-    posters: posters.map(imageDetailMapper)
+    backdrops: [{ image: backdrop }, ...backdrops.map((image) => imageDetailMapper(image, true))],
+    posters: [{ image }, ...posters.map(imageDetailMapper)]
   };
 };
 
@@ -75,7 +75,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
         ...(seasons && { seasons: detailSeasons(seasons) }),
-        ...(images && { ...detailImages(images) }),
+        ...(images && { ...detailImages(images, mediaDetailMapper(detail)) }),
         ...(videos && { videos: detailVideos(videos) })
       };
     } catch (error) {

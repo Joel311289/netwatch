@@ -5,12 +5,16 @@ import {
   personRoleTypes,
   tvWatchProvidersSupported,
   videoSites,
-  videoTypes
+  videoTypes,
+  mediaTypes
 } from '@services/constants';
 
 import { removeSpecialCharactersText } from '@utils/helpers/strings';
 import { compactArray, isEmptyArray } from '@utils/helpers/arrays';
 
+export const isMediaPerson = (media) =>
+  Object.prototype.hasOwnProperty.call(media, 'media_type') &&
+  media.media_type === mediaTypes.PERSON;
 export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>
   Object.prototype.hasOwnProperty.call(media, 'first_air_date');

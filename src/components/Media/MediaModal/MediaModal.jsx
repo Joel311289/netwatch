@@ -10,15 +10,11 @@ import MediaModalImage from '@components/Media/MediaModal/MediaModal-image';
 import desktopStyles from '@components/Media/MediaModal/MediaModal.module.css';
 import mobileStyles from '@components/Media/MediaModal/MediaModal-mobile.module.css';
 
-const sizes = {
-  detail: 'm'
-};
-
 const MediaModal = ({ id, size, type, mode, onClose, image, videoId, ...restProps }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
 
   return (
-    <Modal size={sizes[size] || 'auto'} visible={Boolean(id || image)} onClose={onClose}>
+    <Modal size={size || 'auto'} visible={Boolean(id || image)} onClose={onClose}>
       {mode === 'detail' && <MediaModalDetail styles={styles} id={id} type={type} />}
       {mode === 'video' && (
         <MediaModalVideo

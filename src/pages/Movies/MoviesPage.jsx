@@ -21,7 +21,7 @@ const MoviesPage = () => {
   } = useFetchPagination(`/api/discover/${mediaTypes.MOVIE}`, getDiscoverMovies, 20);
   const [fetchModalData, setFetchModalData] = useState({});
 
-  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail' });
+  const onDetail = (item) => setFetchModalData({ ...item, mode: 'detail', size: 'm' });
   const onTrailer = (item) => setFetchModalData({ ...item, mode: 'video' });
 
   return (

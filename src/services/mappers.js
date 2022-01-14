@@ -7,7 +7,7 @@ import {
   mediaTypes,
   personRoleTypes
 } from '@services/constants';
-import { getImageMediaUrl, isMediaMovie, isMediaSerie, getPersonRoleType } from '@services/helpers';
+import { getImageMediaUrl, isMediaMovie, isMediaSerie, getPersonRoleType, isMediaPerson } from '@services/helpers';
 
 import { formattedDate, formattedTime } from '@utils/helpers/strings';
 
@@ -51,6 +51,15 @@ export const mediaDetailMapper = (media) => {
       number_seasons: get(media, 'number_of_seasons'),
       number_episodes: get(media, 'number_of_episodes'),
       creators: get(media, 'created_by')
+    };
+  }
+
+  if (isMediaPerson(media)) {
+    return {
+      ...commonData,
+      image: getImageMediaUrl(apiImageUrl, get(media, 'profile_path')),
+      type: commonData.type || mediaTypes.PERSON,
+      title: get(media, 'name'),
     };
   }
 

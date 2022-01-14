@@ -15,8 +15,8 @@
 }
 
 .image {
-  min-width: 100px;
-  height: 100px;
+  min-width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: rgb(var(--color-skeleton));
   background-repeat: no-repeat;

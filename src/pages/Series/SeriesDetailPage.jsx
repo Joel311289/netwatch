@@ -72,7 +72,7 @@ const SeriesDetailPage = () => {
     <Space className="full">
       {!loading && <MediaDetail.Background items={backdrops} />}
 
-      <div className={`App-container App-content ${styles.wrapper} ${tablet && styles.tablet}`}>
+      <div className={`App-container App-content ${tablet && styles.tablet}`}>
         <div className={styles.body}>
           <MediaDetail
             skeleton={loading}
@@ -81,6 +81,7 @@ const SeriesDetailPage = () => {
             external_ids={external_ids}
             credits={{ ...credits, creators }}
             sections={sections}
+            videos={videos}
             onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}
           />
         </div>

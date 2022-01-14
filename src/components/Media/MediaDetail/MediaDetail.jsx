@@ -32,6 +32,7 @@ const MediaDetail = ({
   watch_providers,
   homepage,
   external_ids,
+  videos,
   onTrailer
 }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
@@ -46,7 +47,7 @@ const MediaDetail = ({
         <div className={styles.image}>
           <MediaItem.Image image={image} ratio={1.5} zoom={true} />
         </div>
-        <MediaDetailWatch styles={styles} watch_providers={watch_providers} onTrailer={onTrailer} />
+        <MediaDetailWatch styles={styles} watch_providers={watch_providers} videos={videos} onTrailer={onTrailer} />
         
         <MediaDetailHeader
           styles={styles}

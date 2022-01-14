@@ -105,7 +105,7 @@ const HomePage = () => {
       ))}
 
       {fetchModalData.id && (
-        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+        <MediaModal size="m" {...fetchModalData} onClose={() => setFetchModalData({})} />
       )}
     </div>
   );

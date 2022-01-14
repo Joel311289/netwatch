@@ -51,10 +51,10 @@ const detailWatchProviders = ({ results }) => {
   };
 };
 
-const detailImages = ({ backdrops, posters }) => {
+const detailImages = ({ backdrops, posters }, { image, backdrop }) => {
   return {
-    backdrops: backdrops.map((image) => imageDetailMapper(image, true)),
-    posters: posters.map(imageDetailMapper)
+    backdrops: [{ image: backdrop }, ...backdrops.map((image) => imageDetailMapper(image, true))],
+    posters: [{ image }, ...posters.map(imageDetailMapper)]
   };
 };
 
@@ -85,7 +85,7 @@ export const getDetailMovie = (url, { append_to_response } = {}) => {
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
-        ...(images && { ...detailImages(images) }),
+        ...(images && { ...detailImages(images, mediaDetailMapper(detail)) }),
         ...(videos && { videos: detailVideos(videos) })
       };
     });

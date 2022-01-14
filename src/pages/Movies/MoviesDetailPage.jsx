@@ -47,7 +47,7 @@ const MoviesDetailPage = () => {
     <Space className="full">
       {!loading && <MediaDetail.Background items={backdrops} />}
 
-      <div className={`App-container App-content ${styles.wrapper} ${tablet && styles.tablet}`}>
+      <div className={`App-container App-content ${tablet && styles.tablet}`}>
         <div className={`${styles.body} fade-in-slow`}>
           <MediaDetail
             skeleton={loading}
@@ -56,6 +56,7 @@ const MoviesDetailPage = () => {
             external_ids={external_ids}
             credits={credits}
             sections={sections}
+            videos={videos}
             onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
           />
         </div>

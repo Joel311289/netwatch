@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
@@ -8,80 +8,86 @@ import { string } from '@utils/helpers/strings';
 
 import styles from '@components/UI/Input/Input.module.css';
 
-const Input = ({
-  name,
-  value,
-  placeholder,
-  icon,
-  clear,
-  focused,
-  disabled,
-  onChange,
-  onClickIcon
-}) => {
-  const [inputValue, setInputValue] = useState(string(value));
-  const [inputFocused, setInputFocused] = useState(Boolean(focused));
-  const inputRef = useRef(null);
+// eslint-disable-next-line react/display-name
+const Input = forwardRef(
+  (
+    {
+      name,
+      value,
+      placeholder,
+      icon,
+      clear,
+      focused,
+      disabled,
+      onChange,
+      onClickIcon,
+      ...restProps
+    },
+    ref
+  ) => {
+    const [inputValue, setInputValue] = useState(string(value));
+    const [inputFocused, setInputFocused] = useState(Boolean(focused));
 
-  const classes = classNames.bind(styles)({
-    'has-value': inputValue,
-    'has-focus': inputFocused,
-    disabled: disabled
-  });
+    const classes = classNames.bind(styles)({
+      'has-value': inputValue,
+      'has-focus': inputFocused,
+      disabled: disabled
+    });
 
-  useEffect(() => {
-    if (inputFocused) {
-      inputRef.current.focus();
-    }
-  }, [inputFocused, inputValue, inputRef]);
+    useEffect(() => {
+      if (inputFocused) {
+        ref.current.focus();
+      }
+    }, [inputFocused, inputValue, ref]);
 
-  const handleFocus = (value) => setInputFocused(value);
+    const handleFocus = (value) => setInputFocused(value);
 
-  const handleChange = (e) => {
-    const val = e.target.value;
-    handleFocus(true);
-    setInputValue(val);
-    onChange && onChange(val);
-  };
-  const handleReset = () => {
-    handleFocus(true);
-    setInputValue('');
-    onChange && onChange('');
-  };
+    const handleChange = (e) => {
+      const val = e.target.value;
+      handleFocus(true);
+      setInputValue(val);
+      onChange && onChange(e);
+    };
+    const handleReset = () => {
+      handleFocus(true);
+      setInputValue('');
+      onChange && onChange('');
+    };
 
-  return (
-    <Space nowrap className={`input-wrapper ${styles.wrapper} ${classes}`}>
-      {icon && (
-        <div
-          className={styles.icon}
-          onClick={onClickIcon}
-          style={onClickIcon && { cursor: 'pointer' }}>
-          {icon}
-        </div>
-      )}
-      {clear && (
-        <button className={styles.clear} onClick={handleReset}>
-          CLEAR
-        </button>
-      )}
-      <input
-        ref={inputRef}
-        className={styles.input}
-        name={name}
-        placeholder={placeholder}
-        autoComplete="off"
-        onChange={handleChange}
-        value={inputValue}
-        disabled={disabled}
-        onMouseEnter={() => handleFocus(true)}
-        onMouseLeave={() => handleFocus(false)}
-      />
-    </Space>
-  );
-};
+    return (
+      <Space nowrap className={`input-wrapper ${styles.wrapper} ${classes}`}>
+        {icon && (
+          <div
+            className={styles.icon}
+            onClick={onClickIcon}
+            style={onClickIcon && { cursor: 'pointer' }}>
+            {icon}
+          </div>
+        )}
+        {clear && (
+          <button className={styles.clear} onClick={handleReset}>
+            CLEAR
+          </button>
+        )}
+        <input
+          ref={ref}
+          className={styles.input}
+          name={name}
+          placeholder={placeholder}
+          autoComplete="off"
+          onChange={handleChange}
+          value={inputValue}
+          disabled={disabled}
+          onMouseEnter={() => handleFocus(true)}
+          onMouseLeave={() => handleFocus(false)}
+          {...restProps}
+        />
+      </Space>
+    );
+  }
+);
 
 Input.propTypes = {
-  ref: PropTypes.object,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   placeholder: PropTypes.string,
