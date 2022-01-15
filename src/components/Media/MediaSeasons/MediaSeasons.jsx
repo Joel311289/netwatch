@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
 
 import Space from '@components/Layout/Space/Space';
-import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import Slider from '@components/Layout/Slider/Slider';
 
 import { formattedDate } from '@utils/helpers/strings';
@@ -19,8 +19,9 @@ const MediaSeasons = ({ to, seasons }) => {
   const Season = ({ id, name, date, episodes, image }) => (
     <Link key={id} to={`${to}/${id}`} className={styles.item}>
       <div className={styles.image}>
-        <MediaItem.Image image={image} ratio={1.5} />
+        <MediaItemImage image={image} ratio={1.5} />
       </div>
+
       <Space direction="column" gap={10}>
         <span className={styles.title}>{name}</span>
         <span className={styles.description}>{date ? formattedDate(date) : 'Por determinar'}</span>

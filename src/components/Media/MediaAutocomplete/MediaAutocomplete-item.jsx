@@ -3,16 +3,18 @@ import { BsArrowReturnLeft } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
 import Space from '@components/Layout/Space/Space';
-import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
+
+import { truncatedText } from '@utils/helpers/strings';
 
 const MediaAutocompleteItem = ({ styles, selected, to, title, image, date }) => {
   return (
     <Link to={to} className={`${styles['autocomplete-item']} ${selected && styles.selected}`}>
       <div className={styles.image}>
-        <MediaItem.Image image={image} ratio={1.5} />
+        <MediaItemImage image={image} ratio={1.5} />
       </div>
       <Space direction="column" gap={5}>
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title}>{truncatedText(title, 70)}</span>
         {date && <span className={styles.date}>{date}</span>}
         <div className={styles.enter}>
           <BsArrowReturnLeft />

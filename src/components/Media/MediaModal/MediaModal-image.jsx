@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
 const MediaModalImage = ({ styles, image, ratio, width }) => {
   return (
     <div className={`media-modal-image ${styles.image}`} style={{ width }} role="img">
-      <MediaItem.Image image={image} ratio={ratio} />
+      <MediaItemImage image={image} ratio={ratio} />
     </div>
   );
 };

@@ -4,10 +4,17 @@ import {
   apiBackdropUrl,
   apiImageUrl,
   apiLogoUrl,
+  languages,
   mediaTypes,
   personRoleTypes
 } from '@services/constants';
-import { getImageMediaUrl, isMediaMovie, isMediaSerie, getPersonRoleType, isMediaPerson } from '@services/helpers';
+import {
+  getImageMediaUrl,
+  isMediaMovie,
+  isMediaSerie,
+  getPersonRoleType,
+  isMediaPerson
+} from '@services/helpers';
 
 import { formattedDate, formattedTime } from '@utils/helpers/strings';
 
@@ -19,7 +26,7 @@ export const mediaDetailMapper = (media) => {
     image: getImageMediaUrl(apiImageUrl, get(media, 'poster_path')),
     backdrop: getImageMediaUrl(apiBackdropUrl, get(media, 'backdrop_path')),
     genres: (get(media, 'genres') || []).map((g) => g.name),
-    original_language: get(media, 'original_language'),
+    original_language: languages[get(media, 'original_language')] || languages.en,
     popularity: get(media, 'popularity'),
     vote_count: get(media, 'vote_count'),
     vote_average: get(media, 'vote_average'),
@@ -31,7 +38,7 @@ export const mediaDetailMapper = (media) => {
       ...commonData,
       type: commonData.type || mediaTypes.MOVIE,
       title: get(media, 'title'),
-      original_title: get(media, 'original_title'),
+      original_title: get(media, 'original_title') || get(media, 'title'),
       date: formattedDate(get(media, 'release_date')),
       duration: formattedTime(get(media, 'runtime')),
       adult: get(media, 'adult'),
@@ -40,12 +47,20 @@ export const mediaDetailMapper = (media) => {
   }
 
   if (isMediaSerie(media)) {
+    const next_date = formattedDate(get(media, 'next_episode_to_air.air_date'));
+
     return {
       ...commonData,
       type: commonData.type || mediaTypes.TV,
       title: get(media, 'name'),
-      original_title: get(media, 'original_name'),
+      original_title: get(media, 'original_name') || get(media, 'name'),
       date: formattedDate(get(media, 'first_air_date')),
+      next_episode_to_air: next_date && {
+        next_episode_date: next_date,
+        next_episode_season_number: get(media, 'next_episode_to_air.season_number'),
+        next_episode_name: get(media, 'next_episode_to_air.name'),
+        next_episode_description: get(media, 'next_episode_to_air.description')
+      },
       duration: formattedTime(get(media, 'episode_run_time[0]')),
       origin_country: get(media, 'origin_country'),
       number_seasons: get(media, 'number_of_seasons'),
@@ -59,7 +74,7 @@ export const mediaDetailMapper = (media) => {
       ...commonData,
       image: getImageMediaUrl(apiImageUrl, get(media, 'profile_path')),
       type: commonData.type || mediaTypes.PERSON,
-      title: get(media, 'name'),
+      title: get(media, 'name')
     };
   }
 

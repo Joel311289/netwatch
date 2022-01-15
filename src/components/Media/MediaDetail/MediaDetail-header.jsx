@@ -1,29 +1,24 @@
 import PropTypes from 'prop-types';
 
-import Chip from '@components/UI/Chip/Chip';
 import Separator from '@components/UI/Separator/Separator';
 import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
-const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, genres, children }) => {
+const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, children }) => {
   const subheadings = [
     date,
-    duration,
+    ...(duration ? [duration] : []),
     ...(number_seasons ? [`${number_seasons} temporada(s)`] : [])
   ];
 
   return (
-    <Space align="center" gap={[0, 10]} className={`media-detail-header ${styles.header}`}>
-      {children || <h2 className={styles.heading}>{title}</h2>}
-      <div className={styles.subheadings}>
-        <Separator items={subheadings} />
-      </div>
-
-      <Space align="center" gap={5} className={styles.genres}>
-        {(genres || []).map((genre) => (
-          <Chip key={genre} text={genre} />
-        ))}
+    <Space direction="column" gap={[5, 10]} className={`media-detail-header ${styles.header}`}>
+      <Space align="center" gap={10} className={styles.headings}>
+        {children || <h2 className={styles.heading}>{title}</h2>}
+        <div className={styles.subheadings}>
+          <Separator items={subheadings} />
+        </div>
       </Space>
     </Space>
   );

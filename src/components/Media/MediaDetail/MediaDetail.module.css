@@ -5,18 +5,23 @@
   position: relative;
 }
 
+.images {
+  display: grid;
+  grid-gap: 0 20px;
+  grid-template-areas: 'image background';
+  grid-template-columns: var(--size-image) auto;
+}
+
 .content {
   z-index: 2;
-  background-color: var(--background-color);
-  margin: 0 auto;
   display: grid;
-  grid-gap: 0px 40px;
+  grid-gap: 0 60px;
   grid-template-areas:
-    'image header'
-    'image  description'
-    'image  section-1'
-    'image  section-2';
-  grid-template-columns: var(--size-image) auto;
+    'general extras'
+    'seasons extras'
+    'credits extras'
+    'recommendations extras';
+  grid-template-columns: auto calc(var(--size-image) + 50px);
 }
 
 .slot {
@@ -25,20 +30,23 @@
 
 .header {
   grid-area: header;
-  margin-bottom: 20px;
   min-height: 63px;
 }
 
 .image {
   grid-area: image;
   height: fit-content;
+  overflow: hidden;
 }
 
-.description {
-  grid-area: description;
-  display: inline-block;
-  width: 100%;
-  font-size: 1rem;
+.background {
+  grid-area: background;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.general {
+  grid-area: general;
 }
 
 .actions {
@@ -47,25 +55,22 @@
   justify-content: center;
 }
 
+.extras {
+  grid-area: extras;
+  margin-top: 40px;
+}
+
 .buttons {
   z-index: 2;
-  grid-column: image / 1;
-  grid-row: image;
   gap: 5px;
-  margin: calc(1.5 * var(--size-image)) 0 10px 0;
-  padding-top: 10px;
 }
 
 .links {
-  background-color: var(--background-color);
-  box-shadow: var(--box-shadow-primary);
-  padding: 6px;
-  border-radius: 20px 20px 0 0;
-  position: absolute;
-  top: -78px;
-  right: -30px;
   width: fit-content;
+  flex-direction: row !important;
 }
+
+/* ---------- Header */
 
 .title {
   width: fit-content;
@@ -74,7 +79,6 @@
 .heading {
   text-align: center;
   width: fit-content;
-  margin: 0 0 2px 0;
 }
 
 .subheadings {
@@ -83,14 +87,31 @@
 
 .genres {
   height: fit-content;
-  margin-top: 5px;
-  flex: 0 0 100%;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+}
+
+/* ---------- General */
+
+.description {
+  display: inline-block;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.genre {
+  height: 30px !important;
 }
 
 /* ---------- Watch */
 
 .button {
   width: 100%;
+  justify-content: flex-start;
+}
+
+.next-date {
+  margin-bottom: 10px;
 }
 
 .provider-logo {
@@ -104,79 +125,55 @@
 
 /* ---------- Links */
 
+.data-item {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
 .link {
-  border: 2px solid var(--color-text);
-  color: var(--color-text);
-  background-color: transparent;
   padding: 0 !important;
   font-size: 1.3rem;
   border-radius: 50%;
   justify-content: center;
   font-weight: 700;
-  height: 33px;
-  width: 33px;
-  min-width: 33px;
-}
-.link:hover {
-  color: var(--color-button-text);
-  background-color: var(--color-link-text);
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  margin-top: 10px;
 }
 .link.external-id {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
 }
 
 /* ---------- Background */
 
-.background {
-  position: relative;
-  width: 100%;
-  height: fit-content;
-  overflow: hidden;
-  margin-top: -1px;
-}
-.background::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(0deg, var(--background-color), transparent 120px);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.background-image {
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.pagination-bullets-backgrounds {
-  top: 20px !important;
-}
-
 /* ---------- Sections */
 
 .section {
-  margin-top: 35px;
+  margin-top: 30px;
   width: 100%;
   overflow: hidden;
 }
 
 .section-heading {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   width: fit-content;
 }
 
 .section-1 {
-  grid-area: section-1;
+  grid-area: general;
 }
 
 .section-2 {
-  grid-area: section-2;
+  grid-area: seasons;
+}
+
+.section-3 {
+  grid-area: credits;
+}
+
+.section-4 {
+  grid-area: recommendations;
 }
 
 /* ---------- Skeleton */

@@ -47,3 +47,32 @@ export const tvWatchProvidersSupported = {
   541: 'rtve',
   118: 'HBO'
 };
+export const languages = {
+  ar: 'Árabe',
+  ca: 'Catalán',
+  da: 'Danés',
+  de: 'Alemán',
+  el: 'Griego',
+  en: 'Inglés',
+  es: 'Español',
+  eu: 'Euskera',
+  fi: 'Finés',
+  gl: 'Gallego',
+  he: 'Hebreo',
+  id: 'Indonesio',
+  it: 'Italiano',
+  jp: 'Japonés',
+  ko: 'Coreano',
+  nl: 'Holandés',
+  no: 'Noruego',
+  pl: 'Polaco',
+  pt: 'Portugués',
+  ro: 'Rumano',
+  ru: 'Ruso',
+  sr: 'Serbio',
+  sv: 'Sueco',
+  th: 'Tailandés',
+  tr: 'Turco',
+  uk: 'Ucraniano',
+  zh: 'Chino'
+};

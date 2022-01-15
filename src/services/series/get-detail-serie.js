@@ -11,7 +11,7 @@ import {
   imageDetailMapper,
   videoDetailMapper
 } from '@services/mappers';
-import { sortCollectionBy } from '@utils/helpers/collections';
+import { removeCollectionBy, sortCollectionBy } from '@utils/helpers/collections';
 
 const detailCredits = ({ cast }) => {
   return {
@@ -37,21 +37,25 @@ const detailSeasons = (seasons = []) => {
   return sortedSeasons.map(seasonDetailMapper);
 };
 
-const detailImages = ({ backdrops, posters }, { image, backdrop }) => {
-  const existBackdrop = (backdrops || []).find(({ file_path }) => backdrop.includes(file_path));
-  const existPoster = (posters || []).find(({ file_path }) => image.includes(file_path));
-
+const detailImages = ({ backdrops, posters }, { backdrop_path, poster_path }) => {
   return {
     backdrops: [
-      ...(existBackdrop ? [] : [{ image: backdrop }]),
-      ...backdrops.map((image) => imageDetailMapper(image, true))
-    ],
-    posters: [...(existPoster ? [] : [{ image }]), ...posters.map(imageDetailMapper)]
+      { file_path: backdrop_path },
+      ...removeCollectionBy(backdrops, 'file_path', backdrop_path)
+    ].map((item) => imageDetailMapper(item, true)),
+    posters: [
+      { file_path: poster_path },
+      ...removeCollectionBy(posters, 'file_path', poster_path)
+    ].map((item) => imageDetailMapper(item, true))
   };
 };
 
 const detailVideos = ({ results }) => {
   return results.map(videoDetailMapper);
+};
+
+const detailRecommendations = ({ results }) => {
+  return sortCollectionBy(results.map(mediaDetailMapper), 'popularity', true);
 };
 
 export const getDetailSerie = (url, { append_to_response } = {}) => {
@@ -70,6 +74,8 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
       seasons,
       images,
       videos,
+      recommendations,
+      similar,
       ...detail
     } = response;
 
@@ -81,8 +87,10 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
         ...(seasons && { seasons: detailSeasons(seasons) }),
-        ...(images && { ...detailImages(images, mediaDetailMapper(detail)) }),
-        ...(videos && { videos: detailVideos(videos) })
+        ...(images && { ...detailImages(images, detail) }),
+        ...(videos && { videos: detailVideos(videos) }),
+        ...(recommendations && { recommendations: detailRecommendations(recommendations) }),
+        ...(similar && { similar: detailRecommendations(similar) })
       };
     } catch (error) {
       console.error(error);

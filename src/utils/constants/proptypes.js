@@ -29,6 +29,7 @@ export const ElementPropTypes = {
   heading: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
+  subtext: PropTypes.string,
   tooltip: PropTypes.string,
   image: PropTypes.string,
   lazy: PropTypes.bool,

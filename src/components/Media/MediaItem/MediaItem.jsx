@@ -43,7 +43,4 @@ MediaItem.propTypes = {
   onTrailer: PropTypes.func
 };
 
-MediaItem.Skeleton = MediaItemSkeleton;
-MediaItem.Image = MediaItemImage;
-
 export default MediaItem;

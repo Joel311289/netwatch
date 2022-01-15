@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '@hooks/useFetch';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import Space from '@components/Layout/Space/Space';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
@@ -17,6 +16,8 @@ import { getDetailSerie } from '@services/series/get-detail-serie';
 import { getIdFromParams } from '@utils/helpers/strings';
 
 import styles from '@pages/Series/SeriesPage.module.css';
+import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
+import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
@@ -29,7 +30,8 @@ const SeriesDetailPage = () => {
           'aggregate_credits',
           'external_ids',
           'images',
-          'videos'
+          'videos',
+          'recommendations'
         ]
       }
     ],
@@ -45,23 +47,36 @@ const SeriesDetailPage = () => {
     external_ids,
     number_seasons,
     seasons,
-    backdrops,
-    videos
+    videos,
+    recommendations
   } = serie || {};
+
   const sections = [
+    {
+      key: 'general',
+      heading: 'Vista general',
+      data: { ...serie },
+      Element: MediaDetailGeneral
+    },
     {
       key: 'seasons',
       heading: `Temporadas (${number_seasons})`,
-      data: seasons,
+      data: { seasons },
       to: `/${mediaTypes.TV}/${id}/seasons`,
       Element: MediaSeasons
     },
     {
       key: 'credits',
       heading: 'Reparto principal',
-      data: { ...credits, creators },
+      data: { credits: { ...credits, creators } },
       to: `/${mediaTypes.TV}/${id}/credits`,
       Element: MediaCredits
+    },
+    {
+      key: 'recommendations',
+      heading: 'Recomendaciones',
+      data: { items: recommendations },
+      Element: MediaDetailRecommendations
     }
   ];
 
@@ -69,28 +84,24 @@ const SeriesDetailPage = () => {
     setFetchModalData({ ...item, mode: 'video', videoId: getVideoTrailerYoutubeId(videos) });
 
   return (
-    <Space className="full">
-      {!loading && <MediaDetail.Background items={backdrops} />}
-
-      <div className={`App-container App-content ${tablet && styles.tablet}`}>
-        <div className={styles.body}>
-          <MediaDetail
-            skeleton={loading}
-            {...serie}
-            watch_providers={watch_providers}
-            external_ids={external_ids}
-            credits={{ ...credits, creators }}
-            sections={sections}
-            videos={videos}
-            onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}
-          />
-        </div>
+    <div className={`App-container App-content ${styles.wrapper} ${tablet && styles.tablet}`}>
+      <div className={styles.body}>
+        <MediaDetail
+          skeleton={loading}
+          {...serie}
+          watch_providers={watch_providers}
+          external_ids={external_ids}
+          credits={{ ...credits, creators }}
+          sections={sections}
+          videos={videos}
+          onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}
+        />
       </div>
 
       {fetchModalData.id && (
         <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
       )}
-    </Space>
+    </div>
   );
 };
 
