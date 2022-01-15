@@ -65,3 +65,8 @@
 [data-size='l'] .modal-content {
   width: 900px;
 }
+
+[data-position='top'] .modal-content {
+  position: fixed;
+  top: 120px;
+}

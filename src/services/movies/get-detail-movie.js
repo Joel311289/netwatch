@@ -52,9 +52,15 @@ const detailWatchProviders = ({ results }) => {
 };
 
 const detailImages = ({ backdrops, posters }, { image, backdrop }) => {
+  const existBackdrop = (backdrops || []).find(({ file_path }) => backdrop.includes(file_path));
+  const existPoster = (posters || []).find(({ file_path }) => image.includes(file_path));
+
   return {
-    backdrops: [{ image: backdrop }, ...backdrops.map((image) => imageDetailMapper(image, true))],
-    posters: [{ image }, ...posters.map(imageDetailMapper)]
+    backdrops: [
+      ...(existBackdrop ? [] : [{ image: backdrop }]),
+      ...backdrops.map((image) => imageDetailMapper(image, true))
+    ],
+    posters: [...(existPoster ? [] : [{ image }]), ...posters.map(imageDetailMapper)]
   };
 };
 

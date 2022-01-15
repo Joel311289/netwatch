@@ -12,7 +12,7 @@ const MediaDetailBackground = ({ styles, items }) => {
     <div className={`${styles.background} fade-in`}>
       {items && (
         <Slider
-          sliderPerRow={1}
+          sliderPerView={1}
           lazy={true}
           effectFade={true}
           navigation={true}

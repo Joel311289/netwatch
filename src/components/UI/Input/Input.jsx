@@ -35,8 +35,10 @@ const Input = forwardRef(
     });
 
     useEffect(() => {
-      if (inputFocused) {
-        ref.current.focus();
+      if (inputFocused && ref) {
+        setTimeout(() => {
+          ref.current && ref.current.focus();
+        }, 100);
       }
     }, [inputFocused, inputValue, ref]);
 

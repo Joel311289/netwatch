@@ -8,7 +8,7 @@ import { sleep } from '@utils/helpers';
 
 import styles from '@components/UI/Modal/Modal.module.css';
 
-const Modal = ({ children, visible, locked, size, onClose }) => {
+const Modal = ({ children, visible, locked, size, onClose, position }) => {
   const [active, setActive] = useState(false);
   const backdrop = useRef(null);
 
@@ -46,7 +46,11 @@ const Modal = ({ children, visible, locked, size, onClose }) => {
 
   return (
     (visible || active) && (
-      <Portal className="Modal" parent={document.getElementById('root')} size={size}>
+      <Portal
+        className="Modal"
+        parent={document.getElementById('root')}
+        size={size}
+        position={position}>
         <div ref={backdrop} className={`${styles.backdrop} ${active && visible && styles.active}`}>
           <div className={styles['modal-content']}>
             <button className={styles.close} onClick={onClose}>
@@ -70,6 +74,7 @@ Modal.propTypes = {
   children: PropTypes.any,
   visible: PropTypes.bool,
   locked: PropTypes.bool,
+  position: PropTypes.oneOf(['top', 'center', 'auto']),
   size: PropTypes.oneOf(['s', 'm', 'l', 'auto']),
   onClose: PropTypes.func
 };

@@ -46,7 +46,7 @@ const MediaCredits = ({ to, credits }) => {
     <div className={`media-credits-wrapper ${styles.wrapper}`}>
       <Space align="center" className={`${styles.credits} ${styles.cast}`}>
         {smallDesktop && (
-          <Slider sliderPerRow="auto">
+          <Slider sliderPerView="auto" spaceBetween={30}>
             {truncateArray(cast, 10).map((credit) => Cast(credit))}
           </Slider>
         )}

@@ -3,6 +3,7 @@
   display: block;
   overflow: hidden;
   box-shadow: var(--box-shadow-primary);
+  position: relative;
 }
 
 .image {
@@ -22,7 +23,7 @@
   display: block;
 }
 .image .link:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .image .content {
   position: absolute;
@@ -34,21 +35,29 @@
   background-size: cover;
   background-position: center;
 }
-.image .zoom {
+
+.actions {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  width: calc(100% - 16px);
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.action {
   color: var(--color-dark);
   box-shadow: var(--box-shadow-primary);
   cursor: pointer;
   height: 1.5em;
   width: 1.5em;
-  position: absolute;
-  top: 8px;
-  right: 8px;
   border-radius: 50%;
   opacity: 0.3;
   font-size: 1.5rem;
   padding: 0 !important;
 }
-.image .zoom:hover {
+.action:hover {
   opacity: 0.7;
 }
 
@@ -82,23 +91,17 @@
   cursor: pointer;
 }
 
-.icon {
-  font-size: 24px;
-}
-
-.action {
+.button {
   color: var(--color-text);
   background-color: transparent;
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   height: 24px;
   padding: 5px 10px 5px 2px;
 }
-.action:hover {
+.button:hover {
   background-color: var(--placeholder-hover-color);
-  color: var(--color-yellow);
 }
-.action.circle {
+.button.circle {
   padding: 5px;
   border-radius: 50%;
-  max-width: 24px;
 }

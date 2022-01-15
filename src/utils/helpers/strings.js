@@ -10,21 +10,23 @@ export const isValidateUrl = (value) => {
 
 export const formattedDate = (date) => {
   moment.locale('es');
-  return moment(new Date(date)).format('DD MMM YYYY');
+  return date ? moment(new Date(date)).format('DD MMM YYYY') : '';
 };
-export const formattedYear = (date) => new Date(date).getFullYear();
+export const formattedYear = (date) => (date ? new Date(date).getFullYear() : '');
 export const formattedTime = (duration) => {
   const hours = duration / 60;
   const rhours = Math.floor(hours);
   const minutes = (hours - rhours) * 60;
   const rminutes = Math.round(minutes);
-  return [
-    { number: rhours, sufix: 'h' },
-    { number: rminutes, sufix: 'm' }
-  ]
-    .filter(({ number }) => !!number)
-    .map(({ number, sufix }) => `${number}${sufix}`)
-    .join(' ');
+  return duration
+    ? [
+        { number: rhours, sufix: 'h' },
+        { number: rminutes, sufix: 'm' }
+      ]
+        .filter(({ number }) => !!number)
+        .map(({ number, sufix }) => `${number}${sufix}`)
+        .join(' ')
+    : '';
 };
 
 export const queryParams = (url = window.location.search) => {

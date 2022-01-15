@@ -19,7 +19,8 @@ const Slider = ({
   navigation,
   pagination,
   lazy,
-  sliderPerRow,
+  sliderPerView,
+  spaceBetween,
   sliderClass,
   slideClass,
   paginationBulletsClass,
@@ -27,7 +28,8 @@ const Slider = ({
   effectFade,
   offset
 }) => {
-  const { slidesPerView, spaceBetween } = useBreakpointViewport();
+  const { slidesPerView: slidesPerViewBrk, spaceBetween: spaceBetweenBrk } =
+    useBreakpointViewport();
 
   const renderNavigationButton = (state, icon) => {
     return (
@@ -40,10 +42,10 @@ const Slider = ({
   const settings = {
     speed: 500,
     allowTouchMove: false,
-    slidesPerView: sliderPerRow || slidesPerView,
+    slidesPerView: sliderPerView || slidesPerViewBrk,
     slidesPerGroup:
-      sliderPerRow === 'auto' ? 1 : !isNaN(sliderPerRow) ? sliderPerRow : slidesPerView,
-    spaceBetween,
+      sliderPerView === 'auto' ? 1 : !isNaN(sliderPerView) ? sliderPerView : slidesPerViewBrk,
+    spaceBetween: spaceBetween || spaceBetweenBrk,
     navigation: navigation && {
       prevEl: `.${styles['button-prev']}`,
       nextEl: `.${styles['button-next']}`,
@@ -75,15 +77,15 @@ const Slider = ({
       <Swiper
         {...settings}
         className={string(sliderClass)}
-        style={{ padding: offset ? `0 ${offset}px` : 0 }}
-      >
+        style={{ padding: offset ? `0 ${offset}px` : 0 }}>
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
           <SwiperSlide
             key={index}
-            className={`${string(slideClass)} ${styles.item} ${!sliderPerRow && styles.breakpoint}`}
-          >
+            className={`${string(slideClass)} ${styles.item} ${
+              !sliderPerView && styles.breakpoint
+            }`}>
             {React.cloneElement(element, { ...element.props, width: '100%' })}
           </SwiperSlide>
         ))}
@@ -101,7 +103,8 @@ Slider.propTypes = {
   navigation: PropTypes.bool,
   pagination: PropTypes.bool,
   lazy: PropTypes.bool,
-  sliderPerRow: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  sliderPerView: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  spaceBetween: PropTypes.number,
   sliderClass: PropTypes.string,
   slideClass: PropTypes.string,
   paginationBulletsClass: PropTypes.string,

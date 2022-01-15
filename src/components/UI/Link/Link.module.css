@@ -2,15 +2,13 @@
   text-decoration: none;
   color: var(--color-link-text);
   font-weight: 500;
-  font-size: 1rem;
+  font-size: inherit;
   border: none;
   outline: none;
   box-shadow: none;
   width: fit-content;
   height: auto;
-}
-
-.text {
+  
   cursor: pointer;
   width: fit-content;
   padding-bottom: 6px;
@@ -20,8 +18,12 @@
   background-size: 0% 6px, 100% 6px;
   background-position: 0 bottom, 0 bottom;
   background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.text:hover {
+.wrapper:hover {
   background-size: 100% 6px, 100% 6px;
 }

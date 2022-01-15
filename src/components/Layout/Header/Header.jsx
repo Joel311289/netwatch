@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BiSun, BiMoon } from 'react-icons/bi';
+import { FiSearch } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Toggle from '@components/UI/Toggle/Toggle';
 import Space from '@components/Layout/Space/Space';
-import MediaAutocomplete from '@components/Media/MediaAutocomplete/MediaAutocomplete';
+import Input from '@components/UI/Input/Input';
+import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { THEMES } from '@utils/constants';
 
@@ -14,6 +17,7 @@ import styles from '@components/Layout/Header/Header.module.css';
 
 const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
   const { tablet } = useBreakpointViewport();
+  const [openedSearch, setOpenedSearch] = useState(false);
 
   const ToggleTheme = () => {
     return (
@@ -28,6 +32,23 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           <BiMoon className={styles['moon-icon']} />
         </div>
       </Toggle>
+    );
+  };
+
+  const Search = () => {
+    return (
+      <>
+        {!tablet && (
+          <div className={styles['input-search']} onClick={() => setOpenedSearch(true)}>
+            <Input name="search" placeholder="Buscar..." clear icon={<FiSearch />} />
+          </div>
+        )}
+        {tablet && (
+          <div className={styles['button-search']}>
+            <FiSearch />
+          </div>
+        )}
+      </>
     );
   };
 
@@ -48,12 +69,19 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
         justify="end"
         gap={tablet ? 5 : 30}
         className={styles.actions}>
-        <MediaAutocomplete />
+        {Search()}
 
         <Space align="center" gap={10} className={styles['theme-action']}>
           {ToggleTheme()}
         </Space>
       </Space>
+
+      <MediaModal
+        opened={openedSearch}
+        size="auto"
+        mode="search"
+        onClose={() => setOpenedSearch(false)}
+      />
     </Space>
   );
 };

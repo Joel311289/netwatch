@@ -1,27 +1,20 @@
 import { useMemo, useRef, useState } from 'react';
 import { createAutocomplete } from '@algolia/autocomplete-core';
-import { FiArrowLeft, FiSearch } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import PropTypes from 'prop-types';
-
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Input from '@components/UI/Input/Input';
 import MediaAutocompleteItem from '@components/Media/MediaAutocomplete/MediaAutocomplete-item';
 
+import { routeMediaDetail } from '@services/helpers';
 import { getSearch } from '@services/global/get-search';
 
 import { string } from '@utils/helpers/strings';
+import { truncateArray } from '@utils/helpers/arrays';
 
 import styles from '@components/Media/MediaAutocomplete/MediaAutocomplete.module.css';
-import { truncateArray } from '@utils/helpers/arrays';
-import {routeMediaDetail} from '@services/helpers';
 
-const MediaAutocomplete = () => {
-  const { tablet } = useBreakpointViewport();
-  const [searchOpened, setSearchOpened] = useState(!tablet);
-
-  const onSearchOpened = () => setSearchOpened((prev) => !prev);
-
+const MediaAutocomplete = ({ onClose }) => {
   const [autocompleteState, setAutocompleteState] = useState({
     collections: [],
     isOpen: false
@@ -30,13 +23,16 @@ const MediaAutocomplete = () => {
   const autocomplete = useMemo(
     () =>
       createAutocomplete({
+        id: 'autocomplete',
         placeholder: 'Busca una película, serie...',
         onStateChange: ({ state }) => setAutocompleteState(state),
+        autoFocus: true,
         getSources: ({ query }) => {
           return getSearch(`/api/search/multi?query=${query}`).then((items) => {
             return [
               {
                 sourceId: 'results',
+                getItemUrl: ({ item }) => routeMediaDetail(item),
                 getItems: () => {
                   return items;
                 }
@@ -62,35 +58,15 @@ const MediaAutocomplete = () => {
   const InputSearch = (icon, className) => {
     return (
       <div className={`${styles['autocomplete-input']} ${string(className)}`}>
-        <Input
-          ref={inputRef}
-          name="search"
-          clear
-          icon={icon}
-          {...{ focused: tablet && searchOpened }}
-          onClickIcon={onSearchOpened}
-          {...inputProps}
-        />
+        <Input ref={inputRef} name="search" clear icon={icon} {...inputProps} focused />
       </div>
-    );
-  };
-
-  const ButtonSearch = () => {
-    return (
-      <button className={styles['autocomplete-button']} onClick={onSearchOpened}>
-        <FiSearch />
-      </button>
     );
   };
 
   return (
     <div className="autocomplete-wrapper">
       <form ref={formRef} {...formProps}>
-        {!tablet && InputSearch(<FiSearch />)}
-
-        {tablet && ButtonSearch()}
-
-        {tablet && searchOpened && InputSearch(<FiArrowLeft />, styles.full)}
+        {InputSearch(<FiSearch />)}
 
         {autocompleteState.isOpen && (
           <div ref={panelRef} {...autocomplete.getPanelProps()}>
@@ -100,11 +76,22 @@ const MediaAutocomplete = () => {
               return (
                 <section key={`section-${index}`}>
                   {items.length > 0 && (
-                    <div className={styles['autocomplete-result']} {...autocomplete.getListProps()}>
-                      {truncateArray(items, 5).map((item) => (
-                        <MediaAutocompleteItem key={item.id} to={routeMediaDetail(item)} styles={styles} {...item} />
-                      ))}
-                    </div>
+                    <ul className={styles['autocomplete-result']} {...autocomplete.getListProps()}>
+                      {truncateArray(items, 5).map((item, index) => {
+                        const id = `autocomplete-item-${index}`;
+
+                        return (
+                          <li key={item.id} id={id} onClick={onClose}>
+                            <MediaAutocompleteItem
+                              to={routeMediaDetail(item)}
+                              selected={autocompleteState.activeItemId === id}
+                              styles={styles}
+                              {...item}
+                            />
+                          </li>
+                        );
+                      })}
+                    </ul>
                   )}
                 </section>
               );
@@ -117,7 +104,7 @@ const MediaAutocomplete = () => {
 };
 
 MediaAutocomplete.propTypes = {
-  name: PropTypes.string
+  onClose: PropTypes.func
 };
 
 export default MediaAutocomplete;

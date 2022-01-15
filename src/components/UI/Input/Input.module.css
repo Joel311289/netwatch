@@ -3,6 +3,7 @@
   position: relative;
   min-height: 40px;
   width: 100%;
+  height: inherit;
 }
 
 .icon {

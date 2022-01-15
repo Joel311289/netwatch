@@ -47,11 +47,13 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           }}
         ></div>
 
-        {zoom && (
-          <Button className={styles.zoom} secondary={true} onClick={onZoom}>
-            <FaExpand />
-          </Button>
-        )}
+        <div className={styles.actions}>
+          {zoom && (
+            <Button className={styles.action} secondary onClick={onZoom}>
+              <FaExpand />
+            </Button>
+          )}
+        </div>
       </Image>
     );
   };

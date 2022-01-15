@@ -15,8 +15,11 @@ import { compactArray, isEmptyArray } from '@utils/helpers/arrays';
 export const isMediaPerson = (media) =>
   Object.prototype.hasOwnProperty.call(media, 'media_type') &&
   media.media_type === mediaTypes.PERSON;
-export const isMediaMovie = (media) => Object.prototype.hasOwnProperty.call(media, 'release_date');
+export const isMediaMovie = (media) =>
+  media.media_type === mediaTypes.MOVIE ||
+  Object.prototype.hasOwnProperty.call(media, 'release_date');
 export const isMediaSerie = (media) =>
+  media.media_type === mediaTypes.TV ||
   Object.prototype.hasOwnProperty.call(media, 'first_air_date');
 
 export const getImageMediaUrl = (baseUrl, path) => (path ? `${baseUrl}${path}` : '');

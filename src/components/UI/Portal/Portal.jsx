@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { ThemeContext } from '@contexts/ThemeContext';
 
-const Portal = ({ children, parent, className, size }) => {
+const Portal = ({ children, parent, className, size, position }) => {
   const { theme } = useContext(ThemeContext);
   const el = useMemo(() => document.createElement('div'), []);
 
@@ -16,6 +16,7 @@ const Portal = ({ children, parent, className, size }) => {
     }
     classList.forEach((item) => el.classList.add(item));
     el.setAttribute('data-size', size);
+    el.setAttribute('data-position', position || 'center');
     target.appendChild(el);
 
     return () => {

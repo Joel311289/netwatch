@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BiInfoCircle, BiPlay } from 'react-icons/bi';
+import { FiInfo } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
 import Space from '@components/Layout/Space/Space';
@@ -10,15 +10,7 @@ import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptype
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
-const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, onTrailer }) => {
-  const ActionIcon = (icon) => {
-    return (
-      <Space align="center" justify="center" className={styles.icon}>
-        {icon}
-      </Space>
-    );
-  };
-
+const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail }) => {
   return (
     <>
       <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
@@ -30,13 +22,9 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail, o
               <span className={styles.title}>{title}</span>
             </Link>
 
-            <Space justify="between">
-              <button className={styles.action} onClick={onTrailer}>
-                {ActionIcon(<BiPlay />)}
-                <span>Trailer</span>
-              </button>
-              <button className={`${styles.action} ${styles.circle}`} onClick={onDetail}>
-                {ActionIcon(<BiInfoCircle />)}
+            <Space justify="between" direction="row-reverse">
+              <button className={`${styles.button} ${styles.circle}`} onClick={onDetail}>
+                <FiInfo />
               </button>
             </Space>
           </Space>

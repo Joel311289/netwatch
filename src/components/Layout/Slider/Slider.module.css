@@ -16,11 +16,12 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  border-radius: 5px;
   z-index: 9;
-  height: 70px !important;
-  padding: 0 !important;
+  height: 50px !important;
+  padding: 5px 0 !important;
   font-size: 2rem !important;
-  min-width: 40px;
+  min-width: 25px;
   font-weight: 700;
   opacity: 0.5;
   display: flex;
@@ -34,11 +35,11 @@
 }
 
 .button-prev {
-  left: 1px;
+  left: 5px;
 }
 
 .button-next {
-  right: 1px;
+  right: 5px;
 }
 
 .button-navigation-disabled {
