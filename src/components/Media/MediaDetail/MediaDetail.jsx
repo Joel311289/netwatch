@@ -14,6 +14,7 @@ import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
+import { getWidthRatio } from '@utils/helpers/breakpoints';
 
 const MediaBackground = (props) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
@@ -41,6 +42,9 @@ const MediaDetail = ({
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
   const { mobile, tablet, smallDesktop } = useBreakpointViewport();
 
+  const imageWidth = () => {
+    return getWidthRatio(imageHeight(210), 1.5);
+  };
   const imageHeight = (mobileHeight) => {
     if (mobile) return mobileHeight;
     if (smallDesktop) return 300;
@@ -75,9 +79,9 @@ const MediaDetail = ({
       <div className={styles.content}>
         {!tablet && Header()}
 
-        <div className={styles.images}>
-          <div className={styles.image}>
-            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} width={imageHeight(210)} ratio={1.5} />
+        <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
+          <div className={styles.image} style={{ width: imageWidth() }}>
+            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} />
           </div>
 
           <div className={styles.background}>
@@ -90,8 +94,9 @@ const MediaDetail = ({
           </div>
 
           {tablet && Header()}
-          {tablet && Watch()}
         </div>
+
+        {tablet && Watch()}
 
         <div className={styles.extras}>
           {!tablet && Watch()}

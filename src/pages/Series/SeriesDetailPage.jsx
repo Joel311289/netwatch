@@ -10,6 +10,7 @@ import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaSeasons from '@components/Media/MediaSeasons/MediaSeasons';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
+import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 
 import { mediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
@@ -19,7 +20,6 @@ import { getIdFromParams } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@pages/Series/SeriesPage.module.css';
-import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
@@ -64,7 +64,6 @@ const SeriesDetailPage = () => {
       key: 'videos',
       heading: 'Videos',
       data: { items: videos },
-      // to: `/${mediaTypes.TV}/${id}/seasons`,
       Element: MediaDetailVideos
     },
     {

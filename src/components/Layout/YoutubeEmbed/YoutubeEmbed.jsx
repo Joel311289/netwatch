@@ -15,8 +15,8 @@ const YoutubeEmbed = ({ embedId, autoplay }) => (
 );
 
 YoutubeEmbed.defaultProps = {
-  autoplay: false,
-}
+  autoplay: false
+};
 
 YoutubeEmbed.propTypes = {
   embedId: PropTypes.string.isRequired,

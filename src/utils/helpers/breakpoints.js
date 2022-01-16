@@ -28,3 +28,5 @@ export const getWidth = (element) => (element ? element.getBoundingClientRect().
 export const getHeight = (element) => (element ? element.getBoundingClientRect().height : 0);
 export const getSizes = (element) => (element ? element.getBoundingClientRect() : {});
 export const getHeightRatio = (width, ratio) => (width && !isNaN(width) ? width * ratio : 'auto');
+export const getWidthRatio = (height, ratio) =>
+  height && !isNaN(height) ? height / ratio : 'auto';

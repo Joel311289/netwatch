@@ -3,17 +3,16 @@
 .images {
   grid-template-areas:
     'background background'
-    'image header'
-    'buttons buttons'
-    'secondary secondary';
-  grid-template-columns: 150px auto;
-  grid-gap: 0;
+    'image header';
+  grid-gap: 0 20px;
 }
 
 .content {
   position: relative;
   grid-template-areas:
     'images'
+    'buttons'
+    'secondary'
     'general'
     'extras'
     'videos'
@@ -24,7 +23,7 @@
 }
 
 .header {
-  margin-top: 20px;
+  margin-top: var(--padding-aside);
   grid-area: header;
   flex-direction: column !important;
 }
@@ -52,9 +51,9 @@
 }
 
 .image {
-  margin-top: 20px;
+  margin-top: var(--padding-aside);
   grid-area: image;
-  width: 130px !important;
+  flex-direction: row !important;
   overflow: hidden;
 }
 

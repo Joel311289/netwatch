@@ -9,6 +9,7 @@ import MediaModal from '@components/Media/MediaModal/MediaModal';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
+import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 
 import { mediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
@@ -48,6 +49,12 @@ const MoviesDetailPage = () => {
       heading: 'Vista general',
       data: { ...movie },
       Element: MediaDetailGeneral
+    },
+    {
+      key: 'videos',
+      heading: 'Videos',
+      data: { items: videos },
+      Element: MediaDetailVideos
     },
     {
       key: 'credits',
