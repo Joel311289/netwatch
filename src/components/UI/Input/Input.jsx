@@ -62,7 +62,8 @@ const Input = forwardRef(
           <div
             className={styles.icon}
             onClick={onClickIcon}
-            style={onClickIcon && { cursor: 'pointer' }}>
+            style={onClickIcon && { cursor: 'pointer' }}
+          >
             {icon}
           </div>
         )}

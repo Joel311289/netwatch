@@ -9,6 +9,7 @@ import Space from '@components/Layout/Space/Space';
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { string } from '@utils/helpers/strings';
 import MediaHeading from '../MediaHeading/MediaHeading';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 const externalLinkIcons = {
   imdb: <SiImdb />,
@@ -21,13 +22,28 @@ const MediaDetailLinks = ({
   styles,
   original_title,
   original_language,
-  providers,
+  watch_providers,
   homepage,
   external_ids
 }) => {
+  const { providers = [] } = watch_providers || {};
   const data = [
-    { label: 'Nombre original', value: original_title },
-    { label: 'Idioma original', value: original_language }
+    ...(!isEmptyArray(providers)
+      ? [
+          {
+            label: 'Disponible en',
+            content: (
+              <Space gap={10}>
+                {providers.map(({ image }) => (
+                  <img key={image} className={styles['provider-logo']} src={image} />
+                ))}
+              </Space>
+            )
+          }
+        ]
+      : []),
+    { label: 'Nombre original', content: original_title },
+    { label: 'Idioma original', content: original_language }
   ];
   const actions = [
     ...(homepage
@@ -50,10 +66,10 @@ const MediaDetailLinks = ({
         <MediaHeading text="Datos" />
       </div>
 
-      {data.map(({ label, value }) => (
-        <Space key={label} direction="column" className={styles['data-item']}>
+      {data.map(({ label, content }) => (
+        <Space key={label} gap={10} direction="column" className={styles['data-item']}>
           <b>{label}:</b>
-          <span>{value}</span>
+          <div>{content}</div>
         </Space>
       ))}
 
@@ -67,7 +83,8 @@ const MediaDetailLinks = ({
                 tooltip={tooltip}
                 className={`${styles.link} ${string(className)}`}
                 role={role}
-                href={href}>
+                href={href}
+              >
                 {icon}
               </Button>
             )

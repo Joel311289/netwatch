@@ -1,22 +1,19 @@
 @import './MediaDetail.module.css';
 
-.wrapper {
-  /* display: grid;
-  grid-gap: 0 40px;
-  margin-top: -30px; */
-}
-
 .images {
   grid-template-areas:
-    'background'
-    'image';
-  grid-template-columns: auto;
+    'background background'
+    'image header'
+    'buttons buttons'
+    'secondary secondary';
+  grid-template-columns: 150px auto;
+  grid-gap: 0;
 }
 
 .content {
+  position: relative;
   grid-template-areas:
     'images'
-    'header'
     'general'
     'extras'
     'seasons'
@@ -26,30 +23,46 @@
 }
 
 .header {
-  margin: 20px 0 15px 0;
-  display: flex;
+  margin-top: 20px;
+  grid-area: header;
   flex-direction: column !important;
-  justify-content: center;
-  align-items: center;
-}
-
-.image {
-  /* display: none !important; */
 }
 
 .buttons {
+  grid-area: buttons;
+  margin-top: 20px;
   display: grid !important;
   grid-gap: 10px;
+  width: 100%;
+  display: grid !important;
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* ---------- Header */
+.extras {
+  margin: 0;
+}
+
+/* ---------- Images */
 
 .background {
-  display: none;
+  grid-area: background;
+  margin: -16px 0 0 -20px;
+  width: calc(100% + 40px);
+}
+
+.image {
+  margin-top: 20px;
+  grid-area: image;
+  width: 130px !important;
+  overflow: hidden;
 }
 
 /* ---------- Header */
+
+.heading {
+  margin: 0;
+  text-align: left;
+}
 
 .title {
   justify-content: center;
@@ -58,13 +71,8 @@
 
 /* ---------- Watch */
 
-/* ---------- Background */
-
-.background {
-  height: 280px;
-}
-.background::after {
-  background-image: linear-gradient(0deg, var(--background-color), transparent 120px);
+.buttons.secondary {
+  grid-area: secondary !important;
 }
 
 /* ---------- Sections */

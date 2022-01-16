@@ -26,6 +26,7 @@ const MediaDetail = ({
   title,
   duration,
   date,
+  number_seasons,
   watch_providers,
   homepage,
   external_ids,
@@ -38,41 +39,62 @@ const MediaDetail = ({
   onTrailer
 }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  const { tablet, smallDesktop } = useBreakpointViewport();
+  const { mobile, tablet, smallDesktop } = useBreakpointViewport();
 
-  const imageHeight = () => (smallDesktop ? 300 : 375);
+  const imageHeight = (mobileHeight) => {
+    if (mobile) return mobileHeight;
+    if (smallDesktop) return 300;
+    return 375;
+  };
 
   if (skeleton) {
     return <MediaDetailSkeleton styles={styles} />;
   }
 
+  const Header = () => (
+    <MediaDetailHeader
+      styles={styles}
+      title={title}
+      date={date}
+      duration={duration}
+      number_seasons={number_seasons}
+    />
+  );
+  const Watch = () => (
+    <MediaDetailWatch
+      styles={styles}
+      next_episode_to_air={next_episode_to_air}
+      watch_providers={watch_providers}
+      videos={videos}
+      onTrailer={onTrailer}
+    />
+  );
+
   return (
     <div className={styles.wrapper}>
-      <MediaDetailHeader styles={styles} title={title} date={date} duration={duration} />
-
-      <div className={styles.images}>
-        <div className={styles.image}>
-          <MediaDetailBackground styles={styles} items={posters} height={imageHeight()} />
-        </div>
-        <div className={styles.background}>
-          <MediaDetailBackground
-            styles={styles}
-            items={backdrops}
-            height={imageHeight()}
-            type="backdrop"
-          />
-        </div>
-      </div>
-
       <div className={styles.content}>
+        {!tablet && Header()}
+
+        <div className={styles.images}>
+          <div className={styles.image}>
+            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} />
+          </div>
+
+          <div className={styles.background}>
+            <MediaDetailBackground
+              styles={styles}
+              items={backdrops}
+              height={imageHeight(200)}
+              type="backdrop"
+            />
+          </div>
+
+          {tablet && Header()}
+          {tablet && Watch()}
+        </div>
+
         <div className={styles.extras}>
-          <MediaDetailWatch
-            styles={styles}
-            next_episode_to_air={next_episode_to_air}
-            watch_providers={watch_providers}
-            videos={videos}
-            onTrailer={onTrailer}
-          />
+          {!tablet && Watch()}
 
           <MediaDetailLinks
             styles={styles}
@@ -80,18 +102,21 @@ const MediaDetail = ({
             homepage={homepage}
             original_title={original_title}
             original_language={original_language}
+            watch_providers={watch_providers}
           />
         </div>
 
-        {(sections || []).map(({ key, heading, data, to, Element }, index) => (
-          <div key={key} className={`${styles.section} ${styles[`section-${index + 1}`]}`}>
-            <div className={styles['section-heading']}>
-              <MediaHeading text={heading} to={to} />
-            </div>
+        {(sections || [])
+          .filter(({ data }) => Boolean(data))
+          .map(({ key, heading, data, to, Element }, index) => (
+            <div key={key} className={`${styles.section} ${styles[`section-${index + 1}`]}`}>
+              <div className={styles['section-heading']}>
+                <MediaHeading text={heading} to={to} />
+              </div>
 
-            <Element to={to} {...data} styles={styles} />
-          </div>
-        ))}
+              <Element to={to} {...data} styles={styles} />
+            </div>
+          ))}
       </div>
     </div>
   );

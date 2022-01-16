@@ -24,7 +24,8 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
       <Toggle
         labels={[theme]}
         checked={theme === THEMES.DARK}
-        onChange={() => onChangeTheme(theme)}>
+        onChange={() => onChangeTheme(theme)}
+      >
         <div className="content-no-checked">
           <BiSun className={styles['sun-icon']} />
         </div>
@@ -68,7 +69,8 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
         align="center"
         justify="end"
         gap={tablet ? 5 : 30}
-        className={styles.actions}>
+        className={styles.actions}
+      >
         {Search()}
 
         <Space align="center" gap={10} className={styles['theme-action']}>

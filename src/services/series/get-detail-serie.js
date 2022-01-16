@@ -41,11 +41,11 @@ const detailImages = ({ backdrops, posters }, { backdrop_path, poster_path }) =>
   return {
     backdrops: [
       { file_path: backdrop_path },
-      ...removeCollectionBy(backdrops, 'file_path', backdrop_path)
+      ...removeCollectionBy(backdrops, 'file_path', backdrop_path).reverse()
     ].map((item) => imageDetailMapper(item, true)),
     posters: [
       { file_path: poster_path },
-      ...removeCollectionBy(posters, 'file_path', poster_path)
+      ...removeCollectionBy(posters, 'file_path', poster_path).reverse()
     ].map((item) => imageDetailMapper(item, true))
   };
 };

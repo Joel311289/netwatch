@@ -50,7 +50,8 @@ const Modal = ({ children, visible, locked, size, onClose, position }) => {
         className="Modal"
         parent={document.getElementById('root')}
         size={size}
-        position={position}>
+        position={position}
+      >
         <div ref={backdrop} className={`${styles.backdrop} ${active && visible && styles.active}`}>
           <div className={styles['modal-content']}>
             <button className={styles.close} onClick={onClose}>

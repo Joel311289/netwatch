@@ -4,16 +4,18 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '@hooks/useFetch';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import Space from '@components/Layout/Space/Space';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
+import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
+import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 
 import { mediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
 import { getDetailMovie } from '@services/movies/get-detail-movie';
 
 import { getIdFromParams } from '@utils/helpers/strings';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@pages/Movies/MoviesPage.module.css';
 
@@ -22,21 +24,43 @@ const MoviesDetailPage = () => {
   const { data: movie, loading } = useFetch(
     [
       `/api/${mediaTypes.MOVIE}/${id}`,
-      { append_to_response: ['watch/providers', 'credits', 'external_ids', 'images', 'videos'] }
+      {
+        append_to_response: [
+          'watch/providers',
+          'credits',
+          'external_ids',
+          'images',
+          'videos',
+          'recommendations'
+        ]
+      }
     ],
     getDetailMovie
   );
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, watch_providers, external_ids, backdrops, videos } = movie || {};
+  const { credits, watch_providers, external_ids, videos, recommendations } = movie || {};
+
   const sections = [
+    {
+      key: 'general',
+      heading: 'Vista general',
+      data: { ...movie },
+      Element: MediaDetailGeneral
+    },
     {
       key: 'credits',
       heading: 'Reparto principal',
-      data: { ...credits },
+      data: { credits },
       to: `/${mediaTypes.MOVIE}/${id}/credits`,
       Element: MediaCredits
+    },
+    {
+      key: 'recommendations',
+      heading: 'Recomendaciones',
+      data: !isEmptyArray(recommendations) && { items: recommendations },
+      Element: MediaDetailRecommendations
     }
   ];
 
@@ -44,28 +68,24 @@ const MoviesDetailPage = () => {
     setFetchModalData({ ...item, mode: 'video', videoId: getVideoTrailerYoutubeId(videos) });
 
   return (
-    <Space className="full">
-      {!loading && <MediaDetail.Background items={backdrops} />}
-
-      <div className={`App-container App-content ${tablet && styles.tablet}`}>
-        <div className={`${styles.body} fade-in-slow`}>
-          <MediaDetail
-            skeleton={loading}
-            {...movie}
-            watch_providers={watch_providers}
-            external_ids={external_ids}
-            credits={credits}
-            sections={sections}
-            videos={videos}
-            onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
-          />
-        </div>
-
-        {fetchModalData.id && (
-          <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
-        )}
+    <div className={`App-container App-content ${tablet && styles.tablet}`}>
+      <div className={styles.body}>
+        <MediaDetail
+          skeleton={loading}
+          {...movie}
+          watch_providers={watch_providers}
+          external_ids={external_ids}
+          credits={credits}
+          sections={sections}
+          videos={videos}
+          onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
+        />
       </div>
-    </Space>
+
+      {fetchModalData.id && (
+        <MediaModal {...fetchModalData} onClose={() => setFetchModalData({})} />
+      )}
+    </div>
   );
 };
 

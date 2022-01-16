@@ -19,7 +19,8 @@ const MediaModal = ({ id, opened, size, type, mode, onClose, image, videoId, ...
       size={size || 'auto'}
       visible={opened || Boolean(id || image)}
       onClose={onClose}
-      position={mode === 'search' ? 'top' : 'center'}>
+      position={mode === 'search' ? 'top' : 'center'}
+    >
       {mode === 'detail' && <MediaModalDetail styles={styles} id={id} type={type} />}
       {mode === 'video' && (
         <MediaModalVideo

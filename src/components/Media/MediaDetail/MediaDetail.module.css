@@ -5,18 +5,13 @@
   position: relative;
 }
 
-.images {
-  display: grid;
-  grid-gap: 0 20px;
-  grid-template-areas: 'image background';
-  grid-template-columns: var(--size-image) auto;
-}
-
 .content {
   z-index: 2;
   display: grid;
   grid-gap: 0 60px;
   grid-template-areas:
+    'header header'
+    'images images'
     'general extras'
     'seasons extras'
     'credits extras'
@@ -28,21 +23,17 @@
   grid-column: 2 / span 1;
 }
 
+.images {
+  grid-area: images;
+  display: grid;
+  grid-gap: 0 20px;
+  grid-template-areas: 'image background';
+  grid-template-columns: var(--size-image) auto;
+}
+
 .header {
   grid-area: header;
   min-height: 63px;
-}
-
-.image {
-  grid-area: image;
-  height: fit-content;
-  overflow: hidden;
-}
-
-.background {
-  grid-area: background;
-  height: fit-content;
-  overflow: hidden;
 }
 
 .general {
@@ -105,6 +96,10 @@
 
 /* ---------- Watch */
 
+.buttons + .buttons {
+  margin-top: 10px;
+}
+
 .button {
   width: 100%;
   justify-content: flex-start;
@@ -117,6 +112,7 @@
 .provider-logo {
   height: 32px;
   border-radius: 5px;
+  box-shadow: var(--box-shadow-primary);
 }
 .provider-stream {
   padding: 0 20px 0 10px !important;
@@ -127,7 +123,7 @@
 
 .data-item {
   font-size: 0.95rem;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .link {
@@ -146,6 +142,18 @@
 }
 
 /* ---------- Background */
+
+.image {
+  grid-area: image;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.background {
+  grid-area: background;
+  height: fit-content;
+  overflow: hidden;
+}
 
 /* ---------- Sections */
 

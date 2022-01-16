@@ -62,7 +62,7 @@
 }
 
 .wrapper.disabled .icon {
-  opacity: .3;
+  opacity: 0.3;
 }
 .wrapper.disabled .input {
   color: var(--color-border) !important;

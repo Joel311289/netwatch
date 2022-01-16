@@ -22,7 +22,8 @@ const Space = ({ children, className, direction, gap, justify, align, nowrap }) 
         ...(justify && { justifyContent: positions[justify] }),
         ...(align && { alignItems: positions[align] }),
         ...(gap && { gap: Array.isArray(gap) ? gap.map((s) => `${s}px`).join(' ') : gap })
-      }}>
+      }}
+    >
       {children}
     </div>
   );

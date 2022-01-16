@@ -1,11 +1,4 @@
-.body {
-  background-color: var(--background-color);
-  padding: 30px;
-  margin-top: -200px;
-  z-index: 2;
-}
-
-.tablet .body {
-  margin-top: 0;
-  padding: 0;
+.wrapper {
+  width: 100%;
+  background: transparent;
 }

@@ -10,7 +10,7 @@ const Chip = ({ text, className }) => {
 
 Chip.propTypes = {
   text: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Chip;
