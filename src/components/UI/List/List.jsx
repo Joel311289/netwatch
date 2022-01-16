@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
@@ -11,11 +12,12 @@ const List = ({ children, divider }) => {
   });
 
   return (
-    <Space direction="column" className={`${styles.wrapper} ${classes}`}>
+    <Space direction="column" className={`list-wrapper ${styles.wrapper} ${classes}`}>
       {children.map((element, index) => (
-        <Space align="center" key={index} className={styles.item}>
+        <React.Fragment key={index}>
           {element}
-        </Space>
+          {divider && <div className={styles.divider}></div>}
+        </React.Fragment>
       ))}
     </Space>
   );

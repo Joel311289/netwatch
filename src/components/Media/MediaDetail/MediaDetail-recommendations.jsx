@@ -13,7 +13,7 @@ const MediaDetailRecommendations = ({ items }) => {
   const sliderPerView = () => {
     if (mobile) return 2;
     if (smallDesktop) return 4;
-    return 5;
+    return 4;
   };
 
   return (

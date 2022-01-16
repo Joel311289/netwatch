@@ -31,6 +31,8 @@ export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupp
 
 export const getVideoUrl = ({ site, key }) =>
   site === videoSites.youtube ? `https://www.youtube.com/watch?v=${key}` : '';
+export const getImageVideoUrl = ({ site, key }) =>
+  site === videoSites.youtube ? `https://img.youtube.com/vi/${key}/0.jpg` : '';
 export const getVideoTrailerYoutubeId = (videos) => {
   if (!videos || isEmptyArray(videos)) {
     return '';

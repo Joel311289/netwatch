@@ -43,13 +43,9 @@
 }
 
 .characters {
-  font-size: 0.9rem;
-}
-
-.credit {
-  width: fit-content;
-  padding: 10px 20px 10px 0;
-  font-weight: 500;
+  font-size: 0.95rem;
+  color: rgba(var(--divider-color-rgb), 0.5);
+  font-weight: 400;
 }
 
 .cast {

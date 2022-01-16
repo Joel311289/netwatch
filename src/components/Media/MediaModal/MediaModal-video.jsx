@@ -12,6 +12,10 @@ import { getVideosMovie } from '@services/movies/get-videos-movie';
 import { getVideosSerie } from '@services/series/get-videos-serie';
 
 const fetcherVideo = (type) => (type === mediaTypes.MOVIE ? getVideosMovie : getVideosSerie);
+const pathVideo = (type, id) => {
+  if (type && id) return `/api/${type}/${id}/videos`;
+  return null;
+};
 
 const Video = styled.div`
   &:before {
@@ -20,7 +24,7 @@ const Video = styled.div`
 `;
 
 const MediaModalVideo = ({ styles, video, type, id, width, ratio }) => {
-  const { data } = useFetch(!video ? `/api/${type}/${id}/videos` : null, fetcherVideo(type));
+  const { data } = useFetch(pathVideo(type, id), fetcherVideo(type));
 
   const videoId = useMemo(() => video || getVideoTrailerYoutubeId(data), [video, data]);
 
@@ -35,8 +39,8 @@ const MediaModalVideo = ({ styles, video, type, id, width, ratio }) => {
 
 MediaModalVideo.propTypes = {
   video: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  type: PropTypes.string,
+  id: PropTypes.number,
   width: PropTypes.number,
   ratio: PropTypes.number,
   styles: PropTypes.object

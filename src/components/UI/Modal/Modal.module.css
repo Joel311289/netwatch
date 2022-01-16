@@ -69,4 +69,5 @@
 [data-position='top'] .modal-content {
   position: fixed;
   top: 120px;
+  min-height: 61px;
 }

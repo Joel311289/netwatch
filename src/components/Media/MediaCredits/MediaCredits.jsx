@@ -14,6 +14,7 @@ import { isEmptyArray, truncateArray } from '@utils/helpers/arrays';
 
 import mobileStyles from '@components/Media/MediaCredits/MediaCredits-mobile.module.css';
 import desktopStyles from '@components/Media/MediaCredits/MediaCredits.module.css';
+import ListItem from '../../UI/List/List-item';
 
 const MediaCredits = ({ to, credits }) => {
   const styles = useBreakpointStyles({
@@ -56,12 +57,11 @@ const MediaCredits = ({ to, credits }) => {
       {!isEmptyArray(filteredSections()) && (
         <List divider>
           {filteredSections().map(({ label, data }) => (
-            <Space key={label} gap={[5, 20]} className={styles.credit}>
-              <span>{label}</span>
-
+            <ListItem key={label} label={label}>
               <Separator items={data.map(({ name }) => name)} />
-            </Space>
+            </ListItem>
           ))}
+          <ListItem label="Ver todo el reparto" to="/"></ListItem>
         </List>
       )}
     </div>

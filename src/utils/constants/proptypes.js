@@ -27,6 +27,7 @@ export const ElementPropTypes = {
   variant: PropTypes.string,
   type: PropTypes.string,
   heading: PropTypes.string,
+  label: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
   subtext: PropTypes.string,

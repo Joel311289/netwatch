@@ -16,6 +16,7 @@
     'images'
     'general'
     'extras'
+    'videos'
     'seasons'
     'credits'
     'recommendations';
@@ -46,8 +47,8 @@
 
 .background {
   grid-area: background;
-  margin: -16px 0 0 -20px;
-  width: calc(100% + 40px);
+  margin: -16px 0 0 calc(-1 * var(--padding-aside));
+  width: calc(100% + 2 * var(--padding-aside));
 }
 
 .image {

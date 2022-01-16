@@ -22,7 +22,7 @@ const MediaSeasons = ({ to, seasons }) => {
         <MediaItemImage image={image} ratio={1.5} />
       </div>
 
-      <Space direction="column" gap={10}>
+      <Space direction="column">
         <span className={styles.title}>{name}</span>
         <span className={styles.description}>{date ? formattedDate(date) : 'Por determinar'}</span>
         {Boolean(episodes) && <span className={styles.description}>{episodes} episodio(s)</span>}

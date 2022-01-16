@@ -19,6 +19,7 @@ import { getIdFromParams } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@pages/Series/SeriesPage.module.css';
+import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 
 const SeriesDetailPage = () => {
   const id = getIdFromParams(useParams(), 'key');
@@ -58,6 +59,13 @@ const SeriesDetailPage = () => {
       heading: 'Vista general',
       data: { ...serie },
       Element: MediaDetailGeneral
+    },
+    {
+      key: 'videos',
+      heading: 'Videos',
+      data: { items: videos },
+      // to: `/${mediaTypes.TV}/${id}/seasons`,
+      Element: MediaDetailVideos
     },
     {
       key: 'seasons',

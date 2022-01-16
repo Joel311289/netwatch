@@ -62,7 +62,7 @@
 }
 
 .info {
-  background-color: rgb(var(--placeholder-color-rgb), 0.5);
+  background-color: rgba(var(--placeholder-color-rgb), 0.3);
   color: var(--color-text);
   box-sizing: content-box;
   padding: 10px;

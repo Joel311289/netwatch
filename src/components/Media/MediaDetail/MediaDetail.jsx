@@ -77,7 +77,7 @@ const MediaDetail = ({
 
         <div className={styles.images}>
           <div className={styles.image}>
-            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} />
+            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} width={imageHeight(210)} ratio={1.5} />
           </div>
 
           <div className={styles.background}>

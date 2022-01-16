@@ -14,7 +14,7 @@ const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, chil
 
   return (
     <Space direction="column" gap={[5, 10]} className={`media-detail-header ${styles.header}`}>
-      <Space align="center" gap={10} className={styles.headings}>
+      <Space direction="column" className={styles.headings}>
         {children || <h2 className={styles.heading}>{title}</h2>}
         <div className={styles.subheadings}>
           <Separator items={subheadings} />
