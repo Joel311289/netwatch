@@ -63,12 +63,3 @@
 .wrapper.clear:hover {
   opacity: 0.5;
 }
-
-.tooltip {
-  font-family: var(--font-text) !important;
-  background-color: rgba(var(--tooltip-color-rgb), 0.8) !important;
-  font-size: 0.8rem !important;
-}
-.tooltip span {
-  color: rgba(var(--tooltip-color-rgb), 0.8) !important;
-}

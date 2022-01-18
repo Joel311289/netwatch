@@ -45,7 +45,7 @@ const Header = ({ title, logoUrl, theme, onChangeTheme }) => {
           </div>
         )}
         {tablet && (
-          <div className={styles['button-search']}>
+          <div className={styles['button-search']} onClick={() => setOpenedSearch(true)}>
             <FiSearch />
           </div>
         )}

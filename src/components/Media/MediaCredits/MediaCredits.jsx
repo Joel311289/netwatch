@@ -27,10 +27,11 @@ const MediaCredits = ({ to, credits }) => {
   const sections = [
     { id: 'crew', label: 'Director', data: truncateArray(directors, 3) },
     { id: 'crew', label: 'Escritores', data: truncateArray(writers, 3) },
-    { id: 'crew', label: 'Creadores', data: truncateArray(creators, 3) }
+    { id: 'crew', label: 'Creadores', data: truncateArray(creators, 3) },
+    { id: 'all', label: 'Ver todo el reparto', to: '/' }
   ];
 
-  const filteredSections = () => sections.filter(({ data }) => !isEmptyArray(data));
+  const filteredSections = () => sections.filter(({ to, data }) => to || !isEmptyArray(data));
 
   // eslint-disable-next-line react/prop-types
   const Cast = ({ id, characters, image, name }) => (
@@ -56,12 +57,11 @@ const MediaCredits = ({ to, credits }) => {
 
       {!isEmptyArray(filteredSections()) && (
         <List divider>
-          {filteredSections().map(({ label, data }) => (
-            <ListItem key={label} label={label}>
-              <Separator items={data.map(({ name }) => name)} />
+          {filteredSections().map(({ label, data, to }) => (
+            <ListItem key={label} label={label} to={to}>
+              {data && <Separator items={data.map(({ name }) => name)} />}
             </ListItem>
           ))}
-          <ListItem label="Ver todo el reparto" to="/"></ListItem>
         </List>
       )}
     </div>

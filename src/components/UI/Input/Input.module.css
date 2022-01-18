@@ -48,7 +48,7 @@
   color: var(--color-text);
   position: absolute;
   top: 50%;
-  right: 5px;
+  right: 13px;
   transform: translateY(-50%);
   font-size: 0.75rem;
   font-weight: 600;
@@ -66,4 +66,10 @@
 }
 .wrapper.disabled .input {
   color: var(--color-border) !important;
+}
+
+input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  -webkit-user-modify: read-write !important;
+  content: '';
 }

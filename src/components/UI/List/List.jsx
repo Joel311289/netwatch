@@ -16,7 +16,7 @@ const List = ({ children, divider }) => {
       {children.map((element, index) => (
         <React.Fragment key={index}>
           {element}
-          {divider && <div className={styles.divider}></div>}
+          {divider && <div className={styles.separator}></div>}
         </React.Fragment>
       ))}
     </Space>

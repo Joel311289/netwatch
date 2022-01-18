@@ -1,6 +1,7 @@
-import Tooltip from '@mui/material/Tooltip';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+
+import Tooltip from '@components/UI/Tooltip/Tooltip';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
 
@@ -35,32 +36,20 @@ const Button = ({
     }
   };
 
-  const Button = () => (
+  const Content = () => (
     <button
       className={`${styles.wrapper} ${classes}`}
       onClick={handleClick}
-      disabled={Boolean(disabled)}
-    >
+      disabled={Boolean(disabled)}>
       {children}
     </button>
   );
 
   if (!tooltip) {
-    return Button();
+    return Content();
   }
 
-  return (
-    <Tooltip
-      title={tooltip}
-      classes={{ tooltip: styles.tooltip }}
-      PopperProps={{
-        disablePortal: true
-      }}
-      arrow
-    >
-      {Button()}
-    </Tooltip>
-  );
+  return <Tooltip text={tooltip}>{Content()}</Tooltip>;
 };
 
 Button.defaultProps = {

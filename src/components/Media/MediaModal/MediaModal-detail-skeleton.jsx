@@ -1,6 +1,6 @@
 import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Space from '@components/Layout/Space/Space';
-import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 
 import { ElementPropTypes } from '@utils/constants/proptypes';
 import { getEmptyArray } from '@utils/helpers/arrays';
@@ -9,7 +9,7 @@ const MediaModalDetailSkeleton = ({ styles }) => {
   return (
     <Space gap={25} className={styles.detail}>
       <div className={styles.image}>
-        <MediaItem.Skeleton width={200} ratio={1.5} body={false} />
+        <MediaItemSkeleton width={200} ratio={1.5} body={false} />
       </div>
       <div className={styles.background}>
         <Skeleton height={200} />

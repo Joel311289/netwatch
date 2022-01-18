@@ -19,8 +19,7 @@ const MediaModal = ({ id, opened, size, type, mode, onClose, image, videoId, ...
       size={size || 'auto'}
       visible={opened || Boolean(id || image)}
       onClose={onClose}
-      position={mode === 'search' ? 'top' : 'center'}
-    >
+      position={mode === 'search' ? 'top' : 'center'}>
       {mode === 'detail' && <MediaModalDetail styles={styles} id={id} type={type} />}
       {mode === 'video' && (
         <MediaModalVideo
@@ -30,6 +29,7 @@ const MediaModal = ({ id, opened, size, type, mode, onClose, image, videoId, ...
           video={videoId}
           width={850}
           ratio={0.55}
+          {...restProps}
         />
       )}
       {mode === 'image' && <MediaModalImage styles={styles} image={image} {...restProps} />}

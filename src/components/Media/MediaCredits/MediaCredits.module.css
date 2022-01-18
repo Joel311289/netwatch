@@ -44,7 +44,7 @@
 
 .characters {
   font-size: 0.95rem;
-  color: rgba(var(--divider-color-rgb), 0.5);
+  color: rgba(var(--divider-color-rgb), 0.8);
   font-weight: 400;
 }
 

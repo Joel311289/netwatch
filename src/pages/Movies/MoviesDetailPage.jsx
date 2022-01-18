@@ -53,7 +53,7 @@ const MoviesDetailPage = () => {
     {
       key: 'videos',
       heading: 'Videos',
-      data: { items: videos },
+      data: videos && !isEmptyArray(videos) && { items: videos },
       Element: MediaDetailVideos
     },
     {
@@ -66,7 +66,7 @@ const MoviesDetailPage = () => {
     {
       key: 'recommendations',
       heading: 'Recomendaciones',
-      data: !isEmptyArray(recommendations) && { items: recommendations },
+      data: recommendations && !isEmptyArray(recommendations) && { items: recommendations },
       Element: MediaDetailRecommendations
     }
   ];

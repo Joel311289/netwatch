@@ -23,7 +23,7 @@ const Video = styled.div`
   }
 `;
 
-const MediaModalVideo = ({ styles, video, type, id, width, ratio }) => {
+const MediaModalVideo = ({ styles, video, type, id, width, ratio, autoplay }) => {
   const { data } = useFetch(pathVideo(type, id), fetcherVideo(type));
 
   const videoId = useMemo(() => video || getVideoTrailerYoutubeId(data), [video, data]);
@@ -32,7 +32,7 @@ const MediaModalVideo = ({ styles, video, type, id, width, ratio }) => {
     <Video ratio={ratio} className={`media-modal-video ${styles.video}`} style={{ width }}>
       <img src="/assets/images/loader.gif" />
 
-      {videoId && <YoutubeEmbed embedId={videoId} />}
+      {videoId && <YoutubeEmbed embedId={videoId} autoplay={autoplay} />}
     </Video>
   );
 };
@@ -43,6 +43,7 @@ MediaModalVideo.propTypes = {
   id: PropTypes.number,
   width: PropTypes.number,
   ratio: PropTypes.number,
+  autoplay: PropTypes.bool,
   styles: PropTypes.object
 };
 

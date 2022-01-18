@@ -50,10 +50,10 @@ const Input = forwardRef(
       setInputValue(val);
       onChange && onChange(e);
     };
-    const handleReset = () => {
+    const handleReset = (e) => {
       handleFocus(true);
       setInputValue('');
-      onChange && onChange('');
+      onChange && onChange(e);
     };
 
     return (

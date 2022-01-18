@@ -7,8 +7,8 @@
   border-bottom: 1px solid rgba(var(--divider-color-rgb), 0.15);
 }
 
-.divider:not(:last-of-type) {
-  border-bottom: 1px solid rgba(var(--divider-color-rgb), 0.15);
+.separator:not(:last-of-type) {
+  border-top: 1px solid rgba(var(--divider-color-rgb), 0.15);
 }
 
 .item {

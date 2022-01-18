@@ -1,8 +1,10 @@
 import { BiGlobe } from 'react-icons/bi';
 import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
 import { SiImdb } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import Tooltip from '@components/UI/Tooltip/Tooltip';
 import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
 
@@ -34,8 +36,12 @@ const MediaDetailLinks = ({
             label: 'Disponible en',
             content: (
               <Space gap={10}>
-                {providers.map(({ image }) => (
-                  <img key={image} className={styles['provider-logo']} src={image} />
+                {providers.map(({ image, name, id }) => (
+                  <Tooltip key={image} text={name}>
+                    <Link className={styles['provider-button']} to={`/providers/${id}`}>
+                      <img className={styles['provider-link-logo']} src={image} />
+                    </Link>
+                  </Tooltip>
                 ))}
               </Space>
             )
@@ -83,8 +89,7 @@ const MediaDetailLinks = ({
                 tooltip={tooltip}
                 className={`${styles.link} ${string(className)}`}
                 role={role}
-                href={href}
-              >
+                href={href}>
                 {icon}
               </Button>
             )

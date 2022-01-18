@@ -13,6 +13,7 @@ export const styles = css`
           --grid-item-percentage: ${100 / itemsPerRow}%;
           --grid-items-per-row: ${itemsPerRow};
           --size-image: ${sizeImage}px;
+          --modal-position-top: 120px;
         }
       `;
     })}
@@ -22,5 +23,6 @@ export const styles = css`
     --padding-aside: 20px;
     --size-max: 100vw;
     --width-percentage-section: 100%;
+    --modal-position-top: 50px;
   }
 `;
