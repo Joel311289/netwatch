@@ -8,3 +8,4 @@ export const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, del
 
 export const throttle = _.throttle;
 export const debounce = _.debounce;
+export const noop = _.noop;

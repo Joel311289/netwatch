@@ -67,6 +67,8 @@ const HomePage = () => {
           items={trendings}
           imageKey="backdrop"
           ratio={0.56}
+          listable
+          watchable
         />
       </div>
 
@@ -76,7 +78,7 @@ const HomePage = () => {
             <MediaHeading text={heading} to={route ? `/${route}` : ''} content={content} />
           </div>
 
-          <MediaSliderItem skeleton={loading} items={items} />
+          <MediaSliderItem skeleton={loading} items={items} listable />
         </div>
       ))}
     </div>

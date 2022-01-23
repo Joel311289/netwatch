@@ -31,6 +31,7 @@ const SeriesPage = () => {
             key={index}
             ratio={1.5}
             skeleton={!item}
+            listable
             to={routeMediaDetail(item)}
             {...item}
           />

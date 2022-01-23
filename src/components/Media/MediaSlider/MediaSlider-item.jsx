@@ -3,11 +3,19 @@ import MediaItem from '@components/Media/MediaItem/MediaItem';
 
 import { routeMediaDetail } from '@services/helpers';
 
-import { ElementPropTypes, MediaPropTypes } from '@utils/constants/proptypes';
+import { ElementPropTypes } from '@utils/constants/proptypes';
 
 import styles from '@components/Media/MediaSlider/MediaSlider-item.module.css';
 
-const MediaSliderItem = ({ skeleton, items, sliderPerView, ratio, imageKey }) => {
+const MediaSliderItem = ({
+  skeleton,
+  items,
+  sliderPerView,
+  ratio,
+  imageKey,
+  listable,
+  watchable
+}) => {
   return (
     <Slider
       navigation={!skeleton}
@@ -22,6 +30,8 @@ const MediaSliderItem = ({ skeleton, items, sliderPerView, ratio, imageKey }) =>
           skeleton={skeleton}
           to={routeMediaDetail(item)}
           ratio={ratio || 1.5}
+          listable={listable}
+          watchable={watchable}
           {...item}
           image={imageKey === 'backdrop' ? backdrop : image}
         />
@@ -30,9 +40,6 @@ const MediaSliderItem = ({ skeleton, items, sliderPerView, ratio, imageKey }) =>
   );
 };
 
-MediaSliderItem.propTypes = {
-  ...ElementPropTypes,
-  ...MediaPropTypes
-};
+MediaSliderItem.propTypes = ElementPropTypes;
 
 export default MediaSliderItem;

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { noop } from '@utils/helpers';
+
 export const ContextPropTypes = {
   children: PropTypes.node
 };
@@ -11,7 +13,13 @@ export const ElementDefaultProps = {
   disabled: false,
   width: 'auto',
   height: 'auto',
-  items: []
+  items: [],
+  onClick: noop,
+  onChange: noop,
+  onList: noop,
+  onWatch: noop,
+  onTrailer: noop,
+  onDetail: noop
 };
 
 export const ElementPropTypes = {
@@ -33,12 +41,19 @@ export const ElementPropTypes = {
   subtext: PropTypes.string,
   tooltip: PropTypes.string,
   image: PropTypes.string,
+  imageKey: PropTypes.string,
   lazy: PropTypes.bool,
   items: PropTypes.array,
   checked: PropTypes.bool,
+  listable: PropTypes.bool,
+  watchable: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onList: PropTypes.func,
+  onWatch: PropTypes.func,
+  onTrailer: PropTypes.func,
+  onDetail: PropTypes.func
 };
 
 export const MediaDefaultProps = {

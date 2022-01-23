@@ -1,4 +1,6 @@
-import { FiPlay, FiPlus, FiTv } from 'react-icons/fi';
+import { FiTv } from 'react-icons/fi';
+import { IoMdAdd } from 'react-icons/io';
+import { RiPlayFill } from 'react-icons/ri';
 import PropTypes from 'prop-types';
 
 import Button from '@components/UI/Button/Button';
@@ -28,10 +30,10 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
         ]
       : []),
     ...(!isEmptyArray(videos)
-      ? [{ label: 'Ver trailer', icon: <FiPlay />, onClick: onTrailer }]
+      ? [{ label: 'Ver trailer', icon: <RiPlayFill />, onClick: onTrailer }]
       : [])
   ];
-  const secondaryButtons = [{ label: 'Añadir mi lista', icon: <FiPlus /> }];
+  const secondaryButtons = [{ label: 'Añadir mi lista', icon: <IoMdAdd /> }];
 
   const ButtonContent = (icon, label) => (
     <>

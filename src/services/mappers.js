@@ -41,8 +41,7 @@ export const mediaDetailMapper = (media) => {
       original_title: get(media, 'original_title') || get(media, 'title'),
       date: formattedDate(get(media, 'release_date')),
       duration: formattedTime(get(media, 'runtime')),
-      adult: get(media, 'adult'),
-      video: get(media, 'video')
+      adult: get(media, 'adult')
     };
   }
 
