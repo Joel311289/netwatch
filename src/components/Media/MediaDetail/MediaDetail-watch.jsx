@@ -54,7 +54,8 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
             role={role}
             href={href}
             {...attributes}
-            onClick={onClick}>
+            onClick={onClick}
+          >
             {ButtonContent(icon, label)}
           </Button>
         ))}
@@ -63,7 +64,8 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
       <Space
         justify="start"
         gap={5}
-        className={`${styles.actions} ${styles.buttons} ${styles.secondary}`}>
+        className={`${styles.actions} ${styles.buttons} ${styles.secondary}`}
+      >
         {secondaryButtons.map(({ label, icon, onClick }) => (
           <Button key={label} secondary className={`${styles.button}`} onClick={onClick}>
             {ButtonContent(icon, label)}

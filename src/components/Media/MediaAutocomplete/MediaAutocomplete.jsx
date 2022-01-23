@@ -97,7 +97,8 @@ const MediaAutocomplete = ({ onClose }) => {
                             onClick={onClose}
                             onMouseEnter={() =>
                               setAutocompleteState((prev) => ({ ...prev, activeItemId: index }))
-                            }>
+                            }
+                          >
                             <MediaAutocompleteItem
                               to={routeMediaDetail(item)}
                               selected={autocompleteState.activeItemId === index}

@@ -55,7 +55,7 @@ const detailVideos = ({ results }) => {
 };
 
 const detailRecommendations = ({ results }) => {
-  return sortCollectionBy(results.map(mediaDetailMapper), 'popularity', true);
+  return results.map(mediaDetailMapper);
 };
 
 export const getDetailSerie = (url, { append_to_response } = {}) => {

@@ -50,12 +50,7 @@ const MediaDetail = ({
   }
 
   const Header = () => (
-    <MediaDetailHeader
-      styles={styles}
-      title={title}
-      date={date}
-      duration={duration}
-    />
+    <MediaDetailHeader styles={styles} title={title} date={date} duration={duration} />
   );
   const Watch = () => (
     <MediaDetailWatch
@@ -74,11 +69,12 @@ const MediaDetail = ({
 
         <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
           <div className={styles.image} style={{ width: imageWidth() }}>
-            <MediaSliderImage items={posters} height={imageHeight(210)} />
+            <MediaSliderImage zoom items={posters} height={imageHeight(210)} />
           </div>
 
           <div className={styles.background}>
             <MediaSliderImage
+              zoom
               styles={styles}
               items={backdrops}
               height={imageHeight(200)}

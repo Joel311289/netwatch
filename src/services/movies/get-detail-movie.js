@@ -10,7 +10,7 @@ import {
   watchProviderDetailMapper,
   watchProvidersDetailMapper
 } from '@services/mappers';
-import { removeCollectionBy, sortCollectionBy } from '@utils/helpers/collections';
+import { removeCollectionBy } from '@utils/helpers/collections';
 
 // Filter by role type and merge jobs
 const filterCredits = (credits, role) => {
@@ -70,7 +70,7 @@ const detailVideos = ({ results }) => {
 };
 
 const detailRecommendations = ({ results }) => {
-  return sortCollectionBy(results.map(mediaDetailMapper), 'popularity', true);
+  return results.map(mediaDetailMapper);
 };
 
 export const getDetailMovie = (url, { append_to_response } = {}) => {

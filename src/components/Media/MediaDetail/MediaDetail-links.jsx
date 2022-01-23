@@ -89,7 +89,8 @@ const MediaDetailLinks = ({
                 tooltip={tooltip}
                 className={`${styles.link} ${string(className)}`}
                 role={role}
-                href={href}>
+                href={href}
+              >
                 {icon}
               </Button>
             )

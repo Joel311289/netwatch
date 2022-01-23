@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import { FaExpand } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-import Button from '@components/UI/Button/Button';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
@@ -30,7 +29,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
   const Content = () => {
     return (
       <Image
-        className={`media-image-wrapper ${styles.image}`}
+        className={`media-image-wrapper ${styles.image} ${zoom && styles.zoomable}`}
         ratio={ratio}
         style={{
           ...(width && !ratio && { width }),
@@ -49,9 +48,9 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
 
         <div className={styles.actions}>
           {zoom && (
-            <Button className={styles.action} secondary onClick={onZoom}>
+            <button className={styles.action} onClick={onZoom}>
               <FaExpand />
-            </Button>
+            </button>
           )}
         </div>
       </Image>

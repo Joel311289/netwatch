@@ -40,7 +40,8 @@ const Button = ({
     <button
       className={`${styles.wrapper} ${classes}`}
       onClick={handleClick}
-      disabled={Boolean(disabled)}>
+      disabled={Boolean(disabled)}
+    >
       {children}
     </button>
   );

@@ -11,10 +11,10 @@ const MediaSliderImage = ({ items, type, height, sliderPerView, zoom }) => {
           {items.map(({ image }) => (
             <MediaItemImage
               key={image}
-              lazy={true}
+              lazy
+              zoom={zoom}
               image={image}
               height={height}
-              zoom={zoom}
               type={type}
             />
           ))}
@@ -25,8 +25,7 @@ const MediaSliderImage = ({ items, type, height, sliderPerView, zoom }) => {
 };
 
 MediaSliderImage.defaultProps = {
-  sliderPerView: 1,
-  zoom: true
+  sliderPerView: 1
 };
 
 MediaSliderImage.propTypes = {

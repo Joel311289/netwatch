@@ -22,7 +22,8 @@ const MediaSliderItem = ({
       lazy={true}
       offset={1}
       sliderPerView={sliderPerView}
-      navigationClass={styles.navigation}>
+      navigationClass={styles.navigation}
+    >
       {items.map(({ image, backdrop, ...item }, index) => (
         <MediaItem
           key={index}

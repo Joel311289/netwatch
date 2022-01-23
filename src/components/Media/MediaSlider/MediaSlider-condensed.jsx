@@ -23,7 +23,8 @@ const MediaCondensedSlider = ({ skeleton, items, sliderPerView }) => {
           sliderPerView={sliderPerView}
           navigation={!skeleton}
           navigationClass={styles.navigation}
-          paginationBulletsClass={styles.pagination}>
+          paginationBulletsClass={styles.pagination}
+        >
           {items.map(({ image, backdrop, title, date, ...item }, index) => (
             <div key={image || index} className={styles.wrapper}>
               <div className={styles.background}>

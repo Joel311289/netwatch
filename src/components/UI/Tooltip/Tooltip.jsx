@@ -11,7 +11,8 @@ const Tooltip = ({ text, children }) => {
       PopperProps={{
         disablePortal: true
       }}
-      arrow>
+      arrow
+    >
       {children}
     </TooltipMUI>
   );

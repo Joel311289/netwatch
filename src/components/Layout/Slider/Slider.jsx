@@ -37,7 +37,11 @@ const Slider = ({
 
   const renderNavigationButton = (state, icon) => {
     return (
-      <Button className={`${styles['button-navigation']} ${string(navigationClass)} ${styles['button-' + state]}`}>
+      <Button
+        className={`${styles['button-navigation']} ${string(navigationClass)} ${
+          styles['button-' + state]
+        }`}
+      >
         {icon}
       </Button>
     );
