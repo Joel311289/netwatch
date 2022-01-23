@@ -1,40 +1,26 @@
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import Space from '@components/Layout/Space/Space';
-import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
-import Slider from '@components/Layout/Slider/Slider';
-
-import { formattedDate } from '@utils/helpers/strings';
+import MediaSliderItem from '@components/Media/MediaSlider/MediaSlider-item';
 
 import mobileStyles from '@components/Media/MediaSeasons/MediaSeasons-mobile.module.css';
 import desktopStyles from '@components/Media/MediaSeasons/MediaSeasons.module.css';
 
-const MediaSeasons = ({ to, seasons }) => {
+const MediaSeasons = ({ seasons }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
+  const { mobile, smallDesktop } = useBreakpointViewport();
 
-  // eslint-disable-next-line react/prop-types
-  const Season = ({ id, name, date, episodes, image }) => (
-    <Link key={id} to={`${to}/${id}`} className={styles.item}>
-      <div className={styles.image}>
-        <MediaItemImage image={image} ratio={1.5} />
-      </div>
-
-      <Space direction="column">
-        <span className={styles.title}>{name}</span>
-        <span className={styles.description}>{date ? formattedDate(date) : 'Por determinar'}</span>
-        {Boolean(episodes) && <span className={styles.description}>{episodes} episodio(s)</span>}
-      </Space>
-    </Link>
-  );
+  const sliderPerView = () => {
+    if (mobile) return 2;
+    if (smallDesktop) return 4;
+    return 4;
+  };
 
   return (
     <div className={`media-seasons-wrapper ${styles.wrapper}`}>
-      <Slider offset={1} sliderPerView="auto" slideClass={styles['slide-season']}>
-        {seasons.map((season) => Season(season))}
-      </Slider>
+      <MediaSliderItem items={seasons} sliderPerView={sliderPerView()} />
     </div>
   );
 };

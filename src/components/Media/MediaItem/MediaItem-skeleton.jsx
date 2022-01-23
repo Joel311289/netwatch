@@ -27,10 +27,9 @@ const MediaItemSkeleton = ({ width, ratio, body }) => {
       {body && (
         <Space direction="column" justify="between" className={`${styles.info} ${styles.skeleton}`}>
           <div>
-            <Skeleton height={18} />
-            <Skeleton height={18} style={{ marginTop: 3 }} />
+            <Skeleton width="70%" height={18} />
+            <Skeleton width="70%" height={18} style={{ marginTop: 3 }} />
           </div>
-          <Skeleton variant="action" width={100} />
         </Space>
       )}
     </div>

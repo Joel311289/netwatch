@@ -7,19 +7,14 @@ import MediaDetailSkeleton from '@components/Media/MediaDetail/MediaDetail-skele
 import MediaDetailHeader from '@components/Media/MediaDetail/MediaDetail-header';
 import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
 import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
-import MediaDetailBackground from '@components/Media/MediaDetail/MediaDetail-background';
+import MediaSliderImage from '@components/Media/MediaSlider/MediaSlider-image';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
+import { getWidthRatio } from '@utils/helpers/breakpoints';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
-import { getWidthRatio } from '@utils/helpers/breakpoints';
-
-const MediaBackground = (props) => {
-  const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
-  return <MediaDetailBackground styles={styles} {...props} />;
-};
 
 const MediaDetail = ({
   sections,
@@ -27,7 +22,6 @@ const MediaDetail = ({
   title,
   duration,
   date,
-  number_seasons,
   watch_providers,
   homepage,
   external_ids,
@@ -61,7 +55,6 @@ const MediaDetail = ({
       title={title}
       date={date}
       duration={duration}
-      number_seasons={number_seasons}
     />
   );
   const Watch = () => (
@@ -81,11 +74,11 @@ const MediaDetail = ({
 
         <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
           <div className={styles.image} style={{ width: imageWidth() }}>
-            <MediaDetailBackground styles={styles} items={posters} height={imageHeight(210)} />
+            <MediaSliderImage items={posters} height={imageHeight(210)} />
           </div>
 
           <div className={styles.background}>
-            <MediaDetailBackground
+            <MediaSliderImage
               styles={styles}
               items={backdrops}
               height={imageHeight(200)}
@@ -137,6 +130,5 @@ MediaDetail.Skeleton = MediaDetailSkeleton;
 MediaDetail.Header = MediaDetailHeader;
 MediaDetail.Watch = MediaDetailWatch;
 MediaDetail.Links = MediaDetailLinks;
-MediaDetail.Background = MediaBackground;
 
 export default MediaDetail;

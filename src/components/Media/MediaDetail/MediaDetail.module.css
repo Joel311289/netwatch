@@ -13,8 +13,8 @@
     'header header'
     'images images'
     'general extras'
-    'videos extras'
     'seasons extras'
+    'videos extras'
     'credits extras'
     'recommendations extras';
   grid-template-columns: auto calc(var(--size-image) + 50px);
@@ -222,11 +222,11 @@
 }
 
 .section-2 {
-  grid-area: videos;
+  grid-area: seasons;
 }
 
 .section-3 {
-  grid-area: seasons;
+  grid-area: videos;
 }
 
 .section-4 {

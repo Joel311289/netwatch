@@ -1,0 +1,56 @@
+.wrapper {
+  margin-bottom: 100px;
+}
+
+.items {
+  position: relative;
+}
+
+.background {
+  position: relative;
+}
+.background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(0deg, var(--background-color), transparent 20px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.item {
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  z-index: 2;
+}
+
+.info {
+  position: absolute;
+  bottom: 30px;
+  left: 280px;
+  background-color: var(--background-color);
+  margin-top: 215px;
+}
+
+.title {
+  color: var(--color-text);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.title:hover {
+  color: var(--color-yellow);
+}
+
+.navigation {
+  margin-top: -50px;
+}
+
+.pagination {
+  position: absolute;
+  top: 20px;
+}

@@ -2,10 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import Slider from '@components/Layout/Slider/Slider';
-import MediaItem from '@components/Media/MediaItem/MediaItem';
-
-import { routeMediaDetail } from '@services/helpers';
+import MediaSliderItem from '@components/Media/MediaSlider/MediaSlider-item';
 
 const MediaDetailRecommendations = ({ items }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
@@ -18,13 +15,7 @@ const MediaDetailRecommendations = ({ items }) => {
 
   return (
     <div className="fade-in">
-      {items && (
-        <Slider navigation={true} lazy={true} offset={1} sliderPerView={sliderPerView()}>
-          {items.map((item, index) => (
-            <MediaItem key={index} lazy={true} to={routeMediaDetail(item)} ratio={1.5} {...item} />
-          ))}
-        </Slider>
-      )}
+      <MediaSliderItem items={items} sliderPerView={sliderPerView()} />
     </div>
   );
 };

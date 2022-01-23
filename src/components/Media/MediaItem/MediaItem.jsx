@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiInfo } from 'react-icons/fi';
-import PropTypes from 'prop-types';
 
-import Space from '@components/Layout/Space/Space';
 import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
@@ -10,24 +7,17 @@ import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptype
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
-const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail }) => {
+const MediaItem = ({ width, ratio, skeleton, image, title, date, to, lazy }) => {
   return (
     <>
       <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
         {!skeleton && <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />}
 
         {title && (
-          <Space direction="column" justify="between" className={styles.info}>
-            <Link to={to}>
-              <span className={styles.title}>{title}</span>
-            </Link>
-
-            <Space justify="between" direction="row-reverse">
-              <button className={`${styles.button} ${styles.circle}`} onClick={onDetail}>
-                <FiInfo />
-              </button>
-            </Space>
-          </Space>
+          <Link to={to} className={styles.info}>
+            <span className={styles.title}>{title}</span>
+            <span className={styles.date}>{date || 'Por determinar'}</span>
+          </Link>
         )}
       </div>
 
@@ -37,10 +27,6 @@ const MediaItem = ({ width, ratio, skeleton, image, title, to, lazy, onDetail })
 };
 
 MediaItem.defaultProps = ElementDefaultProps;
-MediaItem.propTypes = {
-  ...ElementPropTypes,
-  onDetail: PropTypes.func,
-  onTrailer: PropTypes.func
-};
+MediaItem.propTypes = ElementPropTypes;
 
 export default MediaItem;

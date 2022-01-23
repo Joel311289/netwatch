@@ -85,8 +85,8 @@ export const seasonDetailMapper = (season) => {
   return {
     id: get(season, 'id'),
     number: get(season, 'season_number'),
-    name: get(season, 'name'),
-    date: get(season, 'air_date'),
+    title: get(season, 'name'),
+    date: formattedDate(get(season, 'air_date')),
     episodes: get(season, 'episode_count'),
     description: get(season, 'overview'),
     image: getImageMediaUrl(apiImageUrl, get(season, 'poster_path'))

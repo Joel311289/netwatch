@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Slider from '@components/Layout/Slider/Slider';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
-const MediaDetailBackground = ({ items, type, height, sliderPerView, zoom }) => {
+const MediaSliderImage = ({ items, type, height, sliderPerView, zoom }) => {
   return (
     <div className="fade-in">
       {items && (
@@ -24,12 +24,12 @@ const MediaDetailBackground = ({ items, type, height, sliderPerView, zoom }) => 
   );
 };
 
-MediaDetailBackground.defaultProps = {
+MediaSliderImage.defaultProps = {
   sliderPerView: 1,
   zoom: true
 };
 
-MediaDetailBackground.propTypes = {
+MediaSliderImage.propTypes = {
   items: PropTypes.array,
   height: PropTypes.number,
   ratio: PropTypes.number,
@@ -38,4 +38,4 @@ MediaDetailBackground.propTypes = {
   type: PropTypes.oneOf(['backdrop', 'poster', ''])
 };
 
-export default MediaDetailBackground;
+export default MediaSliderImage;

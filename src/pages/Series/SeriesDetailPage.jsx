@@ -61,17 +61,17 @@ const SeriesDetailPage = () => {
       Element: MediaDetailGeneral
     },
     {
-      key: 'videos',
-      heading: 'Videos',
-      data: videos && !isEmptyArray(videos) && { items: videos },
-      Element: MediaDetailVideos
-    },
-    {
       key: 'seasons',
       heading: `Temporadas (${number_seasons})`,
       data: { seasons },
       to: `/${mediaTypes.TV}/${id}/seasons`,
       Element: MediaSeasons
+    },
+    {
+      key: 'videos',
+      heading: 'Videos',
+      data: videos && !isEmptyArray(videos) && { items: videos },
+      Element: MediaDetailVideos
     },
     {
       key: 'credits',
