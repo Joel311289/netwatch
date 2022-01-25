@@ -53,13 +53,17 @@
   bottom: 87px;
   right: 15px;
   width: calc(100% - 30px);
-  display: flex;
   flex-direction: row-reverse;
   width: fit-content;
   height: fit-content;
+  display: none !important;
 }
 .image .actions {
   bottom: 16px;
+}
+a:hover ~ .actions {
+  display: flex !important;
+  z-index: 2;
 }
 
 .action {
@@ -67,7 +71,6 @@
   box-shadow: var(--box-shadow-primary);
   border: 2px solid currentColor;
   background-color: transparent;
-  display: none;
   cursor: pointer;
   font-size: 1.5rem;
   height: 1.3em;
@@ -77,10 +80,6 @@
 }
 .action:hover {
   color: var(--color-yellow);
-}
-.image:hover .action {
-  display: flex;
-  z-index: 2;
 }
 
 .image.zoomable:hover::before {
@@ -99,6 +98,10 @@
   height: 100%;
   z-index: 2;
 }
+.image.zoomable:hover .actions {
+  display: flex !important;
+  z-index: 2;
+}
 
 .info {
   color: var(--color-text);
@@ -106,8 +109,9 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 20px 3px 12px 3px;
+  padding: 12px 3px;
   height: 40px;
+  width: fit-content;
   z-index: 9;
   overflow: hidden;
   position: relative;
@@ -142,7 +146,7 @@
   color: var(--color-dark);
   position: absolute;
   left: 8px;
-  bottom: 58px;
+  top: 8px;
   font-weight: 600;
   width: 35px;
   height: 35px;

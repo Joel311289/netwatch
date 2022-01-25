@@ -60,7 +60,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
 
   return (
     <>
-      {to && <Link to={to}>{Content(true)}</Link>}
+      {to && <Link to={to}>{Content()}</Link>}
       {!to && Content()}
 
       {zoom && zoomed && (
