@@ -10,6 +10,7 @@ import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
+import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
 import { mediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
@@ -41,7 +42,8 @@ const MoviesDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, watch_providers, external_ids, videos, recommendations } = movie || {};
+  const { credits, watch_providers, external_ids, videos, backdrops, recommendations } =
+    movie || {};
 
   const sections = [
     {
@@ -52,9 +54,17 @@ const MoviesDetailPage = () => {
     },
     {
       key: 'videos',
-      heading: 'Videos',
-      data: videos && !isEmptyArray(videos) && { items: videos },
+      heading: `Videos (${videos && videos.length})`,
+      to: `/${mediaTypes.MOVIE}/${id}/videos`,
+      data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
+    },
+    {
+      key: 'images',
+      heading: `Imágenes (${backdrops && backdrops.length})`,
+      to: `/${mediaTypes.MOVIE}/${id}/images`,
+      data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
+      Element: MediaDetailImages
     },
     {
       key: 'credits',
@@ -66,7 +76,7 @@ const MoviesDetailPage = () => {
     {
       key: 'recommendations',
       heading: 'Recomendaciones',
-      data: recommendations && !isEmptyArray(recommendations) && { items: recommendations },
+      data: recommendations && !isEmptyArray(recommendations) && { recommendations },
       Element: MediaDetailRecommendations
     }
   ];

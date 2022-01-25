@@ -13,7 +13,7 @@ import { getImageVideoUrl } from '@services/helpers';
 
 import { string } from '@utils/helpers/strings';
 
-const MediaDetailVideos = ({ styles, items }) => {
+const MediaDetailVideos = ({ styles, videos }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
   const [videoWatch, setVideoWatch] = useState(null);
 
@@ -25,9 +25,9 @@ const MediaDetailVideos = ({ styles, items }) => {
 
   return (
     <div className="fade-in">
-      {items && (
-        <Slider sliderPerView={sliderPerView} lazy={true} navigation={true}>
-          {items.map((item, index) => (
+      {videos && (
+        <Slider sliderPerView={sliderPerView} lazy navigation>
+          {videos.map((item, index) => (
             <div key={index} className={styles.video} onClick={() => setVideoWatch(item)}>
               <Button secondary className={styles.play}>
                 <BiPlay />
@@ -54,7 +54,7 @@ const MediaDetailVideos = ({ styles, items }) => {
 
 MediaDetailVideos.propTypes = {
   styles: PropTypes.object,
-  items: PropTypes.array
+  videos: PropTypes.array
 };
 
 export default MediaDetailVideos;

@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Space from '@components/Layout/Space/Space';
 import Button from '@components/UI/Button/Button';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from './ToggleButton.module.css';
 
-const ToggleButton = ({ children, activeIndex, onChange }) => {
-  const [selected, setSelected] = useState(activeIndex);
+const ToggleButton = ({ buttons, activeKey, onChange }) => {
+  const [selected, setSelected] = useState(activeKey);
+
+  useEffect(() => !isEmptyArray(buttons) && setSelected(buttons[0].key), [buttons]);
 
   const handleChange = (index) => {
     setSelected(index);
@@ -18,15 +21,14 @@ const ToggleButton = ({ children, activeIndex, onChange }) => {
 
   return (
     <Space align="center" className={styles.wrapper}>
-      {children.map((element, index) => (
+      {buttons.map(({ key, label }) => (
         <Button
-          key={index}
+          key={key}
           size="small"
-          secondary={index !== selected}
-          className={`${styles.button} ${index === selected ? styles.selected : ''}`}
-          onClick={() => handleChange(index)}
-        >
-          {element}
+          secondary={key !== selected}
+          className={`${styles.button} ${key === selected ? styles.selected : ''}`}
+          onClick={() => handleChange(key)}>
+          {label}
         </Button>
       ))}
     </Space>
@@ -35,11 +37,18 @@ const ToggleButton = ({ children, activeIndex, onChange }) => {
 
 ToggleButton.defaultProps = {
   ...ElementDefaultProps,
-  activeIndex: 0
+  activeKey: '',
+  buttons: []
 };
 ToggleButton.propTypes = {
   ...ElementPropTypes,
-  activeIndex: PropTypes.number
+  buttons: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      label: PropTypes.string
+    })
+  ),
+  activeKey: PropTypes.string
 };
 
 export default ToggleButton;

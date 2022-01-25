@@ -82,8 +82,12 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
     try {
       return {
         ...mediaDetailMapper(detail),
-        creators: (creators || []).map(creatorDetailMapper),
-        ...(credits && { credits: detailCredits(credits) }),
+        ...(credits && {
+          credits: {
+            ...detailCredits(credits),
+            creators: (creators || []).map(creatorDetailMapper)
+          }
+        }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
         ...(seasons && { seasons: detailSeasons(seasons) }),

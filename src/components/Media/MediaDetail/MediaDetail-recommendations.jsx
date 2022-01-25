@@ -4,7 +4,7 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaSliderItem from '@components/Media/MediaSlider/MediaSlider-item';
 
-const MediaDetailRecommendations = ({ items }) => {
+const MediaDetailRecommendations = ({ recommendations }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
 
   const sliderPerView = () => {
@@ -15,14 +15,14 @@ const MediaDetailRecommendations = ({ items }) => {
 
   return (
     <div className="fade-in">
-      <MediaSliderItem items={items} sliderPerView={sliderPerView()} />
+      <MediaSliderItem items={recommendations} sliderPerView={sliderPerView()} />
     </div>
   );
 };
 
 MediaDetailRecommendations.propTypes = {
   styles: PropTypes.object,
-  items: PropTypes.array
+  recommendations: PropTypes.array
 };
 
 export default MediaDetailRecommendations;

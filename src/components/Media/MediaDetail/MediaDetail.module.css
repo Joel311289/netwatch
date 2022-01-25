@@ -15,6 +15,7 @@
     'general extras'
     'seasons extras'
     'videos extras'
+    'multimedia extras'
     'credits extras'
     'recommendations extras';
   grid-template-columns: auto calc(var(--size-image) + 50px);
@@ -230,10 +231,14 @@
 }
 
 .section-4 {
-  grid-area: credits;
+  grid-area: multimedia;
 }
 
 .section-5 {
+  grid-area: credits;
+}
+
+.section-6 {
   grid-area: recommendations;
 }
 

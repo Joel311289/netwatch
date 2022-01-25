@@ -1,9 +1,9 @@
 .tooltip {
   font-family: var(--font-text) !important;
-  background-color: rgba(var(--tooltip-color-rgb), 0.8) !important;
+  background-color: rgba(var(--tooltip-color-rgb), 0.95) !important;
   font-size: 0.7rem !important;
   border-radius: 8px !important;
 }
 .tooltip span {
-  color: rgba(var(--tooltip-color-rgb), 0.8) !important;
+  color: rgba(var(--tooltip-color-rgb), 0.95) !important;
 }

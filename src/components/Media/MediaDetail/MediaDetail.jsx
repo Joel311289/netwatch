@@ -7,7 +7,7 @@ import MediaDetailSkeleton from '@components/Media/MediaDetail/MediaDetail-skele
 import MediaDetailHeader from '@components/Media/MediaDetail/MediaDetail-header';
 import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
 import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
-import MediaSliderImage from '@components/Media/MediaSlider/MediaSlider-image';
+import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
@@ -26,8 +26,8 @@ const MediaDetail = ({
   homepage,
   external_ids,
   next_episode_to_air,
-  backdrops,
-  posters,
+  image,
+  backdrop,
   videos,
   original_title,
   original_language,
@@ -69,14 +69,14 @@ const MediaDetail = ({
 
         <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
           <div className={styles.image} style={{ width: imageWidth() }}>
-            <MediaSliderImage zoom items={posters} height={imageHeight(210)} />
+            <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
           </div>
 
           <div className={styles.background}>
-            <MediaSliderImage
+            <MediaItemImage
               zoom
-              styles={styles}
-              items={backdrops}
+              image={backdrop}
+              width="100%"
               height={imageHeight(200)}
               type="backdrop"
             />

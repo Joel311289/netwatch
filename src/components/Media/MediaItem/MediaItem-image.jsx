@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styled from '@emotion/styled';
-import { FaExpand } from 'react-icons/fa';
+import { IoMdExpand } from 'react-icons/io';
 import PropTypes from 'prop-types';
 
 import MediaModal from '@components/Media/MediaModal/MediaModal';
@@ -35,6 +35,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           ...(width && !ratio && { width }),
           ...(height && !ratio && { height })
         }}
+        onClick={onZoom}
       >
         <div
           className={`${styles.content} ${classes}`}
@@ -49,7 +50,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
         <div className={styles.actions}>
           {zoom && (
             <button className={styles.action} onClick={onZoom}>
-              <FaExpand />
+              <IoMdExpand />
             </button>
           )}
         </div>

@@ -15,8 +15,9 @@
     'secondary'
     'general'
     'extras'
-    'videos'
     'seasons'
+    'videos'
+    'multimedia'
     'credits'
     'recommendations';
   grid-template-columns: calc(100vw - 2 * var(--padding-aside));

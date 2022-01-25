@@ -28,8 +28,8 @@ export const mediaDetailMapper = (media) => {
     genres: (get(media, 'genres') || []).map((g) => g.name),
     original_language: languages[get(media, 'original_language')] || languages.en,
     popularity: get(media, 'popularity'),
-    vote_count: get(media, 'vote_count'),
-    vote_average: get(media, 'vote_average'),
+    vote_count: get(media, 'vote_count', 0).toFixed(1),
+    vote_average: get(media, 'vote_average', 0).toFixed(1),
     homepage: get(media, 'homepage')
   };
 

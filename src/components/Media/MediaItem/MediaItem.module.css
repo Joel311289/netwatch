@@ -13,7 +13,6 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
-  position: relative;
 }
 .image.skeleton {
   box-shadow: none;
@@ -23,7 +22,7 @@
   display: block;
 }
 
-.wrapper:hover .image::after {
+.image:hover::after {
   background-image: linear-gradient(
     0deg,
     rgba(var(--color-black-gradient), 0.85),
@@ -51,7 +50,7 @@
 
 .actions {
   position: absolute;
-  bottom: 85px;
+  bottom: 87px;
   right: 15px;
   width: calc(100% - 30px);
   display: flex;
@@ -79,7 +78,6 @@
 .action:hover {
   color: var(--color-yellow);
 }
-.wrapper:hover .action,
 .image:hover .action {
   display: flex;
   z-index: 2;
@@ -91,6 +89,7 @@
     rgba(var(--color-black-gradient), 0.85),
     transparent 200px
   );
+  cursor: pointer;
   content: '';
   position: absolute;
   top: 0;
@@ -107,10 +106,11 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 12px 3px;
-  height: 45px;
+  padding: 20px 3px 12px 3px;
+  height: 40px;
   z-index: 9;
   overflow: hidden;
+  position: relative;
 }
 .info.skeleton {
   background-color: var(--background-color);
@@ -118,6 +118,7 @@
 }
 
 .title {
+  color: currentColor;
   font-weight: 500;
   font-size: 1rem;
   overflow: hidden;
@@ -134,4 +135,17 @@
 .date {
   font-weight: 300;
   font-size: 0.9rem;
+}
+
+.vote {
+  background-color: var(--color-gray-light);
+  color: var(--color-dark);
+  position: absolute;
+  left: 8px;
+  bottom: 58px;
+  font-weight: 600;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  z-index: 2;
 }

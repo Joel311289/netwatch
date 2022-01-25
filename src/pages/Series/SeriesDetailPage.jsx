@@ -11,6 +11,7 @@ import MediaSeasons from '@components/Media/MediaSeasons/MediaSeasons';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
+import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
 import { mediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
@@ -43,13 +44,13 @@ const SeriesDetailPage = () => {
   const { tablet } = useBreakpointViewport();
 
   const {
-    creators,
     credits,
     watch_providers,
     external_ids,
     number_seasons,
     seasons,
     videos,
+    backdrops,
     recommendations
   } = serie || {};
 
@@ -69,21 +70,29 @@ const SeriesDetailPage = () => {
     },
     {
       key: 'videos',
-      heading: 'Videos',
-      data: videos && !isEmptyArray(videos) && { items: videos },
+      heading: `Videos (${videos && videos.length})`,
+      to: `/${mediaTypes.TV}/${id}/videos`,
+      data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
+    },
+    {
+      key: 'images',
+      heading: `Imágenes (${backdrops && backdrops.length})`,
+      to: `/${mediaTypes.TV}/${id}/images`,
+      data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
+      Element: MediaDetailImages
     },
     {
       key: 'credits',
       heading: 'Reparto principal',
-      data: { credits: { ...credits, creators } },
+      data: { credits },
       to: `/${mediaTypes.TV}/${id}/credits`,
       Element: MediaCredits
     },
     {
       key: 'recommendations',
       heading: 'Recomendaciones',
-      data: recommendations && !isEmptyArray(recommendations) && { items: recommendations },
+      data: recommendations && !isEmptyArray(recommendations) && { recommendations },
       Element: MediaDetailRecommendations
     }
   ];
@@ -99,7 +108,6 @@ const SeriesDetailPage = () => {
           {...serie}
           watch_providers={watch_providers}
           external_ids={external_ids}
-          credits={{ ...credits, creators }}
           sections={sections}
           videos={videos}
           onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}

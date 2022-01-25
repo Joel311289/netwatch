@@ -24,7 +24,7 @@ const Video = styled.div`
 `;
 
 const MediaModalVideo = ({ styles, video, type, id, width, ratio, autoplay }) => {
-  const { data } = useFetch(pathVideo(type, id), fetcherVideo(type));
+  const { data } = useFetch(!video && pathVideo(type, id), fetcherVideo(type));
 
   const videoId = useMemo(() => video || getVideoTrailerYoutubeId(data), [video, data]);
 

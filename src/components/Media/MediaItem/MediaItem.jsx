@@ -19,6 +19,7 @@ const MediaItem = ({
   image,
   title,
   date,
+  vote_average,
   to,
   lazy,
   listable,
@@ -45,13 +46,16 @@ const MediaItem = ({
   return (
     <>
       <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
+
         {!skeleton && <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />}
+        
+        {vote_average && <Space align="center" justify="center" className={styles.vote}>{vote_average}</Space>}
 
         {title && (
-          <Link to={to} className={styles.info}>
-            <span className={styles.title}>{title}</span>
+          <Space direction="column" className={styles.info}>   
+            <Link to={to} className={styles.title}>{title}</Link>
             <span className={styles.date}>{date || 'Por determinar'}</span>
-          </Link>
+          </Space>
         )}
 
         <Space gap={10} className={styles.actions}>
