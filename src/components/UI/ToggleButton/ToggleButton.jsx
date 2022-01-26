@@ -27,7 +27,8 @@ const ToggleButton = ({ buttons, activeKey, onChange }) => {
           size="small"
           secondary={key !== selected}
           className={`${styles.button} ${key === selected ? styles.selected : ''}`}
-          onClick={() => handleChange(key)}>
+          onClick={() => handleChange(key)}
+        >
           {label}
         </Button>
       ))}

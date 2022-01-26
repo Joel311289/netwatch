@@ -22,6 +22,7 @@ const MediaDetail = ({
   title,
   duration,
   date,
+  age,
   watch_providers,
   homepage,
   external_ids,
@@ -50,17 +51,18 @@ const MediaDetail = ({
   }
 
   const Header = () => (
-    <MediaDetailHeader styles={styles} title={title} date={date} duration={duration} />
+    <MediaDetailHeader styles={styles} title={title} date={date} duration={duration} age={age} />
   );
-  const Watch = () => (
-    <MediaDetailWatch
-      styles={styles}
-      next_episode_to_air={next_episode_to_air}
-      watch_providers={watch_providers}
-      videos={videos}
-      onTrailer={onTrailer}
-    />
-  );
+  const Watch = () =>
+    duration && (
+      <MediaDetailWatch
+        styles={styles}
+        next_episode_to_air={next_episode_to_air}
+        watch_providers={watch_providers}
+        videos={videos}
+        onTrailer={onTrailer}
+      />
+    );
 
   return (
     <div className={styles.wrapper}>
@@ -72,15 +74,17 @@ const MediaDetail = ({
             <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
           </div>
 
-          <div className={styles.background}>
-            <MediaItemImage
-              zoom
-              image={backdrop}
-              width="100%"
-              height={imageHeight(200)}
-              type="backdrop"
-            />
-          </div>
+          {backdrop && (
+            <div className={styles.background}>
+              <MediaItemImage
+                zoom
+                image={backdrop}
+                width="100%"
+                height={imageHeight(200)}
+                type="backdrop"
+              />
+            </div>
+          )}
 
           {tablet && Header()}
         </div>

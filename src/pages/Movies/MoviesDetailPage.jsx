@@ -12,7 +12,7 @@ import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetai
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
-import { mediaTypes } from '@services/constants';
+import { mediaTypes, routeMediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
 import { getDetailMovie } from '@services/movies/get-detail-movie';
 
@@ -42,8 +42,7 @@ const MoviesDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, watch_providers, external_ids, videos, backdrops, recommendations } =
-    movie || {};
+  const { credits, videos, backdrops, recommendations } = movie || {};
 
   const sections = [
     {
@@ -55,14 +54,14 @@ const MoviesDetailPage = () => {
     {
       key: 'videos',
       heading: `Videos (${videos && videos.length})`,
-      to: `/${mediaTypes.MOVIE}/${id}/videos`,
+      to: `/${routeMediaTypes.movie}/${id}/videos`,
       data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
     },
     {
       key: 'images',
       heading: `Imágenes (${backdrops && backdrops.length})`,
-      to: `/${mediaTypes.MOVIE}/${id}/images`,
+      to: `/${routeMediaTypes.movie}/${id}/images`,
       data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
       Element: MediaDetailImages
     },
@@ -70,7 +69,7 @@ const MoviesDetailPage = () => {
       key: 'credits',
       heading: 'Reparto principal',
       data: { credits },
-      to: `/${mediaTypes.MOVIE}/${id}/credits`,
+      to: `/${routeMediaTypes.movie}/${id}/credits`,
       Element: MediaCredits
     },
     {
@@ -89,13 +88,9 @@ const MoviesDetailPage = () => {
       <div className={styles.body}>
         <MediaDetail
           skeleton={loading}
-          {...movie}
-          watch_providers={watch_providers}
-          external_ids={external_ids}
-          credits={credits}
           sections={sections}
-          videos={videos}
           onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
+          {...movie}
         />
       </div>
 

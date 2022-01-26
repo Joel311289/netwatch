@@ -62,7 +62,8 @@ export const MediaDefaultProps = {
   cast: [],
   director: [],
   writer: [],
-  external_ids: []
+  external_ids: [],
+  videos: []
 };
 
 export const MediaPropTypes = {

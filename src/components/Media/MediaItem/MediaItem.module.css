@@ -22,7 +22,7 @@
   display: block;
 }
 
-.image:hover::after {
+.focused .image::after {
   background-image: linear-gradient(
     0deg,
     rgba(var(--color-black-gradient), 0.85),
@@ -61,7 +61,7 @@
 .image .actions {
   bottom: 16px;
 }
-a:hover ~ .actions {
+.focused .actions {
   display: flex !important;
   z-index: 2;
 }
@@ -119,6 +119,7 @@ a:hover ~ .actions {
 .info.skeleton {
   background-color: var(--background-color);
   padding: 10px 0;
+  width: auto;
 }
 
 .title {
@@ -137,7 +138,8 @@ a:hover ~ .actions {
 }
 
 .date {
-  font-weight: 300;
+  opacity: 0.8;
+  font-weight: 400;
   font-size: 0.9rem;
 }
 

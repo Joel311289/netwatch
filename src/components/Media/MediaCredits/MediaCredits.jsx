@@ -15,6 +15,7 @@ import { isEmptyArray, truncateArray } from '@utils/helpers/arrays';
 import mobileStyles from '@components/Media/MediaCredits/MediaCredits-mobile.module.css';
 import desktopStyles from '@components/Media/MediaCredits/MediaCredits.module.css';
 import ListItem from '../../UI/List/List-item';
+import { routePersonDetail } from '@services/helpers';
 
 const MediaCredits = ({ to, credits }) => {
   const styles = useBreakpointStyles({
@@ -28,14 +29,14 @@ const MediaCredits = ({ to, credits }) => {
     { id: 'crew', label: 'Director', data: truncateArray(directors, 3) },
     { id: 'crew', label: 'Escritores', data: truncateArray(writers, 3) },
     { id: 'crew', label: 'Creadores', data: truncateArray(creators, 3) },
-    { id: 'all', label: 'Ver todo el reparto', to: '/' }
+    { id: 'all', label: 'Ver todo el reparto', to }
   ];
 
   const filteredSections = () => sections.filter(({ to, data }) => to || !isEmptyArray(data));
 
   // eslint-disable-next-line react/prop-types
-  const Cast = ({ id, characters, image, name }) => (
-    <Link key={id} to={`${to}/${id}`} className={styles.item}>
+  const Cast = ({ id, characters, image, name, url }) => (
+    <Link key={id} to={url} className={styles.item}>
       <div className={styles.image} style={{ backgroundImage: `url(${image})` }}></div>
       <Space direction="column" gap={3}>
         <span className={`${styles.name}`}>{name}</span>
@@ -49,10 +50,15 @@ const MediaCredits = ({ to, credits }) => {
       <Space align="center" className={`${styles.credits} ${styles.cast}`}>
         {smallDesktop && (
           <Slider sliderPerView="auto" spaceBetween={30}>
-            {truncateArray(cast, 10).map((credit) => Cast(credit))}
+            {truncateArray(cast, 10).map((credit) =>
+              Cast({ ...credit, url: routePersonDetail(credit) })
+            )}
           </Slider>
         )}
-        {!smallDesktop && truncateArray(cast, 10).map((credit) => Cast(credit))}
+        {!smallDesktop &&
+          truncateArray(cast, 10).map((credit) =>
+            Cast({ ...credit, url: routePersonDetail(credit) })
+          )}
       </Space>
 
       {!isEmptyArray(filteredSections()) && (

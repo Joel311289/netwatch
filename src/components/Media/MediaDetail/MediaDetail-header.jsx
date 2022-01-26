@@ -5,10 +5,11 @@ import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
-const MediaDetailHeader = ({ styles, title, date, duration, number_seasons, children }) => {
+const MediaDetailHeader = ({ styles, title, date, duration, age, number_seasons, children }) => {
   const subheadings = [
     date,
     ...(duration ? [duration] : []),
+    ...(age ? [`${age} años`] : []),
     ...(number_seasons ? [`${number_seasons} temporada(s)`] : [])
   ];
 

@@ -45,7 +45,7 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
   );
 
   return (
-    <>
+    <div className={styles.section}>
       <Space justify="start" gap={5} className={`${styles.actions} ${styles.buttons}`}>
         {buttons.map(({ label, icon, role, href, className, onClick, ...attributes }) => (
           <Button
@@ -72,7 +72,7 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
           </Button>
         ))}
       </Space>
-    </>
+    </div>
   );
 };
 

@@ -13,8 +13,9 @@ import { removeSpecialCharactersText } from '@utils/helpers/strings';
 import { compactArray, isEmptyArray } from '@utils/helpers/arrays';
 
 export const isMediaPerson = (media) =>
-  Object.prototype.hasOwnProperty.call(media, 'media_type') &&
-  media.media_type === mediaTypes.PERSON;
+  (Object.prototype.hasOwnProperty.call(media, 'media_type') &&
+    media.media_type === mediaTypes.PERSON) ||
+  Object.prototype.hasOwnProperty.call(media, 'birthday');
 export const isMediaMovie = (media) =>
   media.media_type === mediaTypes.MOVIE ||
   Object.prototype.hasOwnProperty.call(media, 'release_date');
@@ -58,4 +59,15 @@ export const routeMediaDetail = (media) => {
   const title = removeSpecialCharactersText(original_title, '-');
   const pathType = routeMediaTypes[type];
   return (title ? `/${pathType}/${id}-${title}` : `/${pathType}/${id}`).toLowerCase();
+};
+
+export const routePersonDetail = (person) => {
+  if (!person) {
+    return '/';
+  }
+  const { id, original_name = '' } = person;
+  const name = removeSpecialCharactersText(original_name, '-');
+  return (
+    name ? `/${routeMediaTypes.person}/${id}-${name}` : `/${routeMediaTypes.person}/${id}`
+  ).toLowerCase();
 };

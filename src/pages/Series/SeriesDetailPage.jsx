@@ -13,7 +13,7 @@ import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetai
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
-import { mediaTypes } from '@services/constants';
+import { mediaTypes, routeMediaTypes } from '@services/constants';
 import { getVideoTrailerYoutubeId } from '@services/helpers';
 import { getDetailSerie } from '@services/series/get-detail-serie';
 
@@ -43,16 +43,7 @@ const SeriesDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const {
-    credits,
-    watch_providers,
-    external_ids,
-    number_seasons,
-    seasons,
-    videos,
-    backdrops,
-    recommendations
-  } = serie || {};
+  const { credits, number_seasons, seasons, videos, backdrops, recommendations } = serie || {};
 
   const sections = [
     {
@@ -65,20 +56,20 @@ const SeriesDetailPage = () => {
       key: 'seasons',
       heading: `Temporadas (${number_seasons})`,
       data: { seasons },
-      to: `/${mediaTypes.TV}/${id}/seasons`,
+      to: `/${routeMediaTypes.TV}/${id}/seasons`,
       Element: MediaSeasons
     },
     {
       key: 'videos',
       heading: `Videos (${videos && videos.length})`,
-      to: `/${mediaTypes.TV}/${id}/videos`,
+      to: `/${routeMediaTypes.tv}/${id}/videos`,
       data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
     },
     {
       key: 'images',
       heading: `Imágenes (${backdrops && backdrops.length})`,
-      to: `/${mediaTypes.TV}/${id}/images`,
+      to: `/${routeMediaTypes.tv}/${id}/images`,
       data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
       Element: MediaDetailImages
     },
@@ -86,7 +77,7 @@ const SeriesDetailPage = () => {
       key: 'credits',
       heading: 'Reparto principal',
       data: { credits },
-      to: `/${mediaTypes.TV}/${id}/credits`,
+      to: `/${routeMediaTypes.tv}/${id}/credits`,
       Element: MediaCredits
     },
     {
@@ -105,12 +96,9 @@ const SeriesDetailPage = () => {
       <div className={styles.body}>
         <MediaDetail
           skeleton={loading}
-          {...serie}
-          watch_providers={watch_providers}
-          external_ids={external_ids}
           sections={sections}
-          videos={videos}
           onTrailer={() => onTrailer({ ...serie, type: mediaTypes.TV })}
+          {...serie}
         />
       </div>
 

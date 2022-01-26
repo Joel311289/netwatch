@@ -26,8 +26,10 @@ const MediaItem = ({
   watchable,
   ...item
 }) => {
+  const [focused, setFocused] = useState(false);
   const [fetchModalData, setFetchModalData] = useState({});
 
+  const onFocus = () => setFocused((prev) => !prev);
   const onWatch = () => setFetchModalData({ ...item, mode: 'video' });
 
   const actions = [
@@ -45,26 +47,38 @@ const MediaItem = ({
 
   return (
     <>
-      <div className={`media-item-wrapper ${styles.wrapper}`} style={{ width }}>
+      <div
+        className={`media-item-wrapper ${styles.wrapper} ${focused && styles.focused}`}
+        style={{ width }}
+      >
+        {!skeleton && (
+          <div onMouseEnter={onFocus} onMouseLeave={onFocus}>
+            <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />
 
-        {!skeleton && <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />}
-        
-        {vote_average && <Space align="center" justify="center" className={styles.vote}>{vote_average}</Space>}
+            <Space gap={10} className={styles.actions}>
+              {actions.map(({ key, icon, onClick }) => (
+                <button key={key} onClick={onClick} className={styles.action}>
+                  {icon}
+                </button>
+              ))}
+            </Space>
+          </div>
+        )}
 
-        {title && (
-          <Space direction="column" className={styles.info}>   
-            <Link to={to} className={styles.title}>{title}</Link>
-            <span className={styles.date}>{date || 'Por determinar'}</span>
+        {!skeleton && vote_average && (
+          <Space align="center" justify="center" className={styles.vote}>
+            {vote_average}
           </Space>
         )}
 
-        <Space gap={10} className={styles.actions}>
-          {actions.map(({ key, icon, onClick }) => (
-            <button key={key} onClick={onClick} className={styles.action}>
-              {icon}
-            </button>
-          ))}
-        </Space>
+        {title && (
+          <Space direction="column" className={styles.info}>
+            <Link to={to} className={styles.title}>
+              {title}
+            </Link>
+            <span className={styles.date}>{date || 'Por determinar'}</span>
+          </Space>
+        )}
       </div>
 
       {fetchModalData.id && (

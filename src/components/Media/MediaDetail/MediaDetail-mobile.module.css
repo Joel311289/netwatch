@@ -31,7 +31,6 @@
 
 .buttons {
   grid-area: buttons;
-  margin-top: 20px;
   display: grid !important;
   grid-gap: 10px;
   width: 100%;

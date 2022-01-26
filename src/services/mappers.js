@@ -16,7 +16,7 @@ import {
   isMediaPerson
 } from '@services/helpers';
 
-import { formattedDate, formattedTime } from '@utils/helpers/strings';
+import { diffYearsDate, formattedDate, formattedTime } from '@utils/helpers/strings';
 
 export const mediaDetailMapper = (media) => {
   const commonData = {
@@ -73,7 +73,11 @@ export const mediaDetailMapper = (media) => {
       ...commonData,
       image: getImageMediaUrl(apiImageUrl, get(media, 'profile_path')),
       type: commonData.type || mediaTypes.PERSON,
-      title: get(media, 'name')
+      title: get(media, 'name'),
+      description: get(media, 'biography'),
+      original_title: get(media, 'original_name') || get(media, 'name'),
+      date: formattedDate(get(media, 'birthday')),
+      age: diffYearsDate(get(media, 'birthday'))
     };
   }
 
@@ -130,6 +134,7 @@ export const aggregateCreditDetailMapper = (credit) => {
     id: get(credit, 'id'),
     role: personRoleTypes.Acting,
     name: get(credit, 'name'),
+    original_name: get(credit, 'original_name') || get(credit, 'name'),
     characters: (get(credit, 'roles') || []).map((character) => get(character, 'character')),
     image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };
@@ -160,14 +165,15 @@ export const watchProviderDetailMapper = (provider) => {
   };
 };
 
-export const externalsIdsDetailMapper = (externals) => {
+export const externalsIdsDetailMapper = (externals, isPerson) => {
   const url = (path, key) => {
     const id = get(externals, key);
     return id ? `${path}${id}` : '';
   };
+  const imdbKey = isPerson ? 'name' : 'title';
 
   return [
-    { id: 'imdb', name: 'IMDb', url: url('https://www.imdb.com/title/', 'imdb_id') },
+    { id: 'imdb', name: 'IMDb', url: url(`https://www.imdb.com/${imdbKey}/`, 'imdb_id') },
     { id: 'facebook', name: 'Facebook', url: url('https://www.facebook.com/', 'facebook_id') },
     { id: 'instagram', name: 'Instagram', url: url('https://www.instagram.com/', 'instagram_id') },
     { id: 'twitter', name: 'Twitter', url: url('https://twitter.com/', 'twitter_id') }
