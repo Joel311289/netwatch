@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import Tooltip from '@components/UI/Tooltip/Tooltip';
 import Button from '@components/UI/Button/Button';
 import Space from '@components/Layout/Space/Space';
+import MediaHeading from '../MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { string } from '@utils/helpers/strings';
-import MediaHeading from '../MediaHeading/MediaHeading';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 const externalLinkIcons = {
@@ -20,9 +20,17 @@ const externalLinkIcons = {
   twitter: <FiTwitter />
 };
 
+const genders = {
+  male: 'Masculino',
+  female: 'Femenino'
+};
+
 const MediaDetailLinks = ({
   styles,
   original_title,
+  also_known_as,
+  gender,
+  place_of_birth,
   original_language,
   watch_providers,
   homepage,
@@ -49,7 +57,19 @@ const MediaDetailLinks = ({
         ]
       : []),
     { label: 'Nombre original', content: original_title },
-    { label: 'Idioma original', content: original_language }
+    { label: 'Lugar de nacimiento', content: place_of_birth },
+    { label: 'Sexo', content: genders[gender] },
+    { label: 'Idioma original', content: original_language },
+    {
+      label: 'También conocido por',
+      content: also_known_as && also_known_as.length && (
+        <Space gap={4} direction="column">
+          {also_known_as.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </Space>
+      )
+    }
   ];
   const actions = [
     ...(homepage
@@ -72,12 +92,14 @@ const MediaDetailLinks = ({
         <MediaHeading text="Datos" />
       </div>
 
-      {data.map(({ label, content }) => (
-        <Space key={label} gap={10} direction="column" className={styles['data-item']}>
-          <b>{label}:</b>
-          <div>{content}</div>
-        </Space>
-      ))}
+      {data
+        .filter(({ content }) => Boolean(content))
+        .map(({ label, content }) => (
+          <Space key={label} gap={10} direction="column" className={styles['data-item']}>
+            <b>{label}:</b>
+            <div>{content}</div>
+          </Space>
+        ))}
 
       <Space align="center" gap={10} className={`${styles.actions} ${styles.links}`}>
         {actions.map(

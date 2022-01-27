@@ -11,3 +11,9 @@ export const removeCollectionBy = (array, key, value) => {
   const index = array.findIndex((item) => item[key] === value);
   return removeArrayByIndex(array, index);
 };
+export const removeDuplicatesCollectionBy = (array, key) => {
+  if (!Array.isArray(array)) {
+    return [];
+  }
+  return array.filter((v, i, a) => a.findIndex((t) => t[key] === v[key]) === i);
+};

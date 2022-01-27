@@ -33,7 +33,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
         ratio={ratio}
         style={{
           ...(width && !ratio && { width }),
-          ...(height && !ratio && { height })
+          ...(height && { height })
         }}
         onClick={onZoom}
       >
@@ -41,8 +41,6 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
           style={{
-            ...(width && { width }),
-            ...(height && { height }),
             ...(!lazy && { backgroundImage: `url(${image})` })
           }}
         ></div>
@@ -68,8 +66,8 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           size="auto"
           mode="image"
           image={image}
-          width={type === 'backdrop' ? 1000 : 400}
-          ratio={type === 'backdrop' ? 0.56 : 1.5}
+          width={ratio < 1 || type === 'backdrop' ? 1000 : 400}
+          ratio={ratio ? ratio : type === 'backdrop' ? 0.56 : 1.5}
           onClose={onZoom}
         />
       )}

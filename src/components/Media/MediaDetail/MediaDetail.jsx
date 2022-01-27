@@ -16,24 +16,7 @@ import { getWidthRatio } from '@utils/helpers/breakpoints';
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
 
-const MediaDetail = ({
-  sections,
-  skeleton,
-  title,
-  duration,
-  date,
-  age,
-  watch_providers,
-  homepage,
-  external_ids,
-  next_episode_to_air,
-  image,
-  backdrop,
-  videos,
-  original_title,
-  original_language,
-  onTrailer
-}) => {
+const MediaDetail = ({ sections, skeleton, duration, image, backdrop, ...detail }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
   const { mobile, tablet, smallDesktop } = useBreakpointViewport();
 
@@ -50,19 +33,8 @@ const MediaDetail = ({
     return <MediaDetailSkeleton styles={styles} />;
   }
 
-  const Header = () => (
-    <MediaDetailHeader styles={styles} title={title} date={date} duration={duration} age={age} />
-  );
-  const Watch = () =>
-    duration && (
-      <MediaDetailWatch
-        styles={styles}
-        next_episode_to_air={next_episode_to_air}
-        watch_providers={watch_providers}
-        videos={videos}
-        onTrailer={onTrailer}
-      />
-    );
+  const Header = () => <MediaDetailHeader styles={styles} duration={duration} {...detail} />;
+  const Watch = () => duration && <MediaDetailWatch styles={styles} {...detail} />;
 
   return (
     <div className={styles.wrapper}>
@@ -70,9 +42,11 @@ const MediaDetail = ({
         {!tablet && Header()}
 
         <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
-          <div className={styles.image} style={{ width: imageWidth() }}>
-            <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
-          </div>
+          {image && (
+            <div className={styles.image} style={{ width: imageWidth() }}>
+              <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
+            </div>
+          )}
 
           {backdrop && (
             <div className={styles.background}>
@@ -94,25 +68,18 @@ const MediaDetail = ({
         <div className={styles.extras}>
           {!tablet && Watch()}
 
-          <MediaDetailLinks
-            styles={styles}
-            external_ids={external_ids}
-            homepage={homepage}
-            original_title={original_title}
-            original_language={original_language}
-            watch_providers={watch_providers}
-          />
+          <MediaDetailLinks styles={styles} {...detail} />
         </div>
 
         {(sections || [])
           .filter(({ data }) => Boolean(data))
-          .map(({ key, heading, data, to, Element }, index) => (
+          .map(({ key, heading, data, to, props, Element }, index) => (
             <div key={key} className={`${styles.section} ${styles[`section-${index + 1}`]}`}>
               <div className={styles['section-heading']}>
                 <MediaHeading text={heading} to={to} />
               </div>
 
-              <Element to={to} {...data} styles={styles} />
+              <Element to={to} {...data} {...props} styles={styles} />
             </div>
           ))}
       </div>

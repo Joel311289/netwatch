@@ -88,7 +88,7 @@ const Slider = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`slider-wrapper ${styles.wrapper}`}>
       <Swiper
         {...settings}
         className={string(sliderClass)}
@@ -103,7 +103,7 @@ const Slider = ({
               !sliderPerView && styles.breakpoint
             }`}
           >
-            {React.cloneElement(element, { ...element.props, width: '100%' })}
+            {React.cloneElement(element, { ...element.props })}
           </SwiperSlide>
         ))}
       </Swiper>

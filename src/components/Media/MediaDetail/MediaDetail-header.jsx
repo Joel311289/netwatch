@@ -1,3 +1,4 @@
+import { CgCross } from 'react-icons/cg';
 import PropTypes from 'prop-types';
 
 import Separator from '@components/UI/Separator/Separator';
@@ -5,21 +6,29 @@ import Space from '@components/Layout/Space/Space';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 
-const MediaDetailHeader = ({ styles, title, date, duration, age, number_seasons, children }) => {
+const MediaDetailHeader = ({
+  styles,
+  title,
+  date,
+  duration,
+  date_death,
+  age,
+  children
+}) => {
   const subheadings = [
-    date,
+    ...(date_death ? [`${date} - ${date_death}`] : [date]),
     ...(duration ? [duration] : []),
-    ...(age ? [`${age} años`] : []),
-    ...(number_seasons ? [`${number_seasons} temporada(s)`] : [])
+    ...(age ? [`${age} años`] : [])
   ];
 
   return (
     <Space direction="column" gap={[5, 10]} className={`media-detail-header ${styles.header}`}>
       <Space direction="column" className={styles.headings}>
         {children || <h2 className={styles.heading}>{title}</h2>}
-        <div className={styles.subheadings}>
+        <Space gap={2} align="center" className={styles.subheadings}>
           <Separator items={subheadings} />
-        </div>
+          {date_death && <CgCross className={styles.death} />}
+        </Space>
       </Space>
     </Space>
   );

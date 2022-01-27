@@ -77,7 +77,12 @@ export const mediaDetailMapper = (media) => {
       description: get(media, 'biography'),
       original_title: get(media, 'original_name') || get(media, 'name'),
       date: formattedDate(get(media, 'birthday')),
-      age: diffYearsDate(get(media, 'birthday'))
+      date_death: formattedDate(get(media, 'deathday')),
+      age: diffYearsDate(get(media, 'birthday'), get(media, 'deathday')),
+      gender: get(media, 'gender') === 1 ? 'female' : 'male',
+      place_of_birth: get(media, 'place_of_birth'),
+      also_known_as: get(media, 'also_known_as', []),
+      original_language: ''
     };
   }
 
@@ -112,7 +117,7 @@ export const imageDetailMapper = (image, isBackdrop) => {
     image: getImageMediaUrl(!isBackdrop ? apiImageUrl : apiBackdropUrl, get(image, 'file_path')),
     width: get(image, 'width'),
     height: get(image, 'height'),
-    ratio: get(image, 'aspect_ratio'),
+    ratio: 1 / get(image, 'aspect_ratio'),
     language: get(image, 'iso_639_1')
   };
 };

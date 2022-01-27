@@ -27,10 +27,11 @@
 
 .images {
   grid-area: images;
+  width: 100%;
   display: grid;
   grid-gap: 0 20px;
   grid-template-areas: 'image background';
-  grid-template-columns: var(--size-image) auto;
+  grid-template-columns: auto auto;
 }
 
 .header {
@@ -76,6 +77,10 @@
 
 .subheadings {
   margin-bottom: 25px;
+}
+
+.death {
+  font-size: 1.4rem;
 }
 
 .genres {

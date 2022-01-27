@@ -8,7 +8,7 @@ export const isValidateUrl = (value) => {
   );
 };
 
-export const diffYearsDate = (date) => moment().diff(date, 'years');
+export const diffYearsDate = (date, now) => moment(now || new Date()).diff(date, 'years');
 export const formattedDate = (date) => {
   moment.locale('es');
   return date ? moment(new Date(date)).format('DD MMM YYYY') : '';

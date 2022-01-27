@@ -5,30 +5,36 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaSliderImage from '@components/Media/MediaSlider/MediaSlider-image';
 
-const MediaDetailImages = ({ images }) => {
+const MediaDetailImages = ({ images, type }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
 
   const sliderPerView = useMemo(() => {
-    if (mobile) return 1;
-    if (smallDesktop) return 2;
-    return 2;
-  }, [mobile, smallDesktop]);
+    if (mobile) return type !== 'backdrop' ? 2 : 1;
+    if (smallDesktop) return type !== 'backdrop' ? 4 : 2;
+    return type !== 'backdrop' ? 4 : 2;
+  }, [type, mobile, smallDesktop]);
 
   return (
     <MediaSliderImage
       lazy
       zoom
       items={images}
-      type="backdrop"
-      height={200}
+      type={type || 'backdrop'}
+      height={type !== 'backdrop' ? 250 : 200}
       sliderPerView={sliderPerView}
     />
   );
 };
 
+MediaDetailImages.defaultProps = {
+  images: [],
+  type: 'backdrop'
+};
+
 MediaDetailImages.propTypes = {
   styles: PropTypes.object,
-  images: PropTypes.array
+  images: PropTypes.array,
+  type: PropTypes.string
 };
 
 export default MediaDetailImages;

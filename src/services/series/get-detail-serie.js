@@ -40,11 +40,11 @@ const detailSeasons = (seasons = []) => {
 const detailImages = ({ backdrops, posters }, { backdrop_path, poster_path }) => {
   return {
     backdrops: [
-      { file_path: backdrop_path },
+      { file_path: backdrop_path, aspect_ratio: 1.777 },
       ...removeCollectionBy(backdrops, 'file_path', backdrop_path).reverse()
     ].map((item) => imageDetailMapper(item, true)),
     posters: [
-      { file_path: poster_path },
+      { file_path: poster_path, aspect_ratio: 0.667 },
       ...removeCollectionBy(posters, 'file_path', poster_path).reverse()
     ].map((item) => imageDetailMapper(item, true))
   };

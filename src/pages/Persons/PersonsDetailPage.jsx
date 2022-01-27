@@ -6,10 +6,8 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
-import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
-import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
 import { mediaTypes, routeMediaTypes } from '@services/constants';
@@ -26,7 +24,14 @@ const PersonsDetailPage = () => {
     [
       `/api/${mediaTypes.PERSON}/${id}`,
       {
-        append_to_response: ['external_ids', 'images', 'movie_credits', 'tv_credits']
+        append_to_response: [
+          'external_ids',
+          'images',
+          'tagged_images',
+          'combined_credits',
+          'movie_credits',
+          'tv_credits'
+        ]
       }
     ],
     getDetailPerson
@@ -34,20 +39,28 @@ const PersonsDetailPage = () => {
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { movie_credits, tv_credits, profiles } = person || {};
+  const { combined_credits, movie_credits, tv_credits, images, ...detail } = person || {};
 
   const sections = [
     {
       key: 'general',
       heading: 'Vista general',
-      data: { ...person },
+      data: { ...detail },
       Element: MediaDetailGeneral
     },
     {
+      key: 'medias',
+      heading: 'Conocido por',
+      data: combined_credits &&
+        !isEmptyArray(combined_credits) && { recommendations: combined_credits },
+      Element: MediaDetailRecommendations
+    },
+    {
       key: 'images',
-      heading: `Imágenes (${profiles && profiles.length})`,
+      heading: `Imágenes (${images && images.length})`,
       to: `/${routeMediaTypes.person}/${id}/images`,
-      data: profiles && !isEmptyArray(profiles) && { images: profiles },
+      data: images && !isEmptyArray(images) && { images: images },
+      props: { type: 'poster' },
       Element: MediaDetailImages
     }
   ];
@@ -55,7 +68,7 @@ const PersonsDetailPage = () => {
   return (
     <div className={`App-container App-content ${tablet && styles.tablet}`}>
       <div className={styles.body}>
-        <MediaDetail skeleton={loading} sections={sections} {...person} />
+        <MediaDetail skeleton={loading} sections={sections} {...detail} />
       </div>
 
       {fetchModalData.id && (
