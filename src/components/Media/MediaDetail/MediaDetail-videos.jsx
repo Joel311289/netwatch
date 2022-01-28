@@ -34,7 +34,7 @@ const MediaDetailVideos = ({ styles, videos }) => {
               </Button>
 
               <div className={styles['video-thumbnail']}>
-                <MediaItemImage lazy={true} image={getImageVideoUrl(item)} ratio={0.55} />
+                <MediaItemImage lazy image={getImageVideoUrl(item)} ratio={0.55} />
               </div>
             </div>
           ))}

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Slider from '@components/Layout/Slider/Slider';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
-const MediaSliderImage = ({ items, height, sliderPerView, effectFade }) => {
+const MediaSliderImage = ({ items, sliderPerView, effectFade }) => {
   return (
     <div className="fade-in">
       {items && (
-        <Slider sliderPerView={sliderPerView} lazy={true} effectFade={effectFade} navigation={true}>
+        <Slider sliderPerView={sliderPerView} lazy effectFade={effectFade} navigation>
           {items.map(({ image, ratio }) => (
-            <MediaItemImage key={image} lazy zoom image={image} height={height} ratio={ratio} />
+            <MediaItemImage key={image} lazy zoom image={image} ratio={ratio} />
           ))}
         </Slider>
       )}
@@ -23,12 +23,9 @@ MediaSliderImage.defaultProps = {
 
 MediaSliderImage.propTypes = {
   items: PropTypes.array,
-  height: PropTypes.number,
-  ratio: PropTypes.number,
   effectFade: PropTypes.bool,
   sliderPerView: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  zoom: PropTypes.bool,
-  type: PropTypes.oneOf(['backdrop', 'poster', ''])
+  type: PropTypes.oneOf(['backdrop', 'poster', 'profile', ''])
 };
 
 export default MediaSliderImage;

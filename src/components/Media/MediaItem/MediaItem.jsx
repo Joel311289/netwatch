@@ -19,11 +19,12 @@ const MediaItem = ({
   image,
   title,
   date,
-  vote_average,
+  // vote_average,
   to,
   lazy,
   listable,
   watchable,
+  zoomable,
   ...item
 }) => {
   const [focused, setFocused] = useState(false);
@@ -53,7 +54,7 @@ const MediaItem = ({
       >
         {!skeleton && (
           <div onMouseEnter={onFocus} onMouseLeave={onFocus}>
-            <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} />
+            <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} zoom={zoomable} />
 
             <Space gap={10} className={styles.actions}>
               {actions.map(({ key, icon, onClick }) => (
@@ -65,11 +66,11 @@ const MediaItem = ({
           </div>
         )}
 
-        {!skeleton && vote_average && (
+        {/* {!skeleton && vote_average && (
           <Space align="center" justify="center" className={styles.vote}>
             {vote_average}
           </Space>
-        )}
+        )} */}
 
         {title && (
           <Space direction="column" className={styles.info}>

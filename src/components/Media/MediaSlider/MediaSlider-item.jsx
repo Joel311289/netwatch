@@ -19,7 +19,7 @@ const MediaSliderItem = ({
   return (
     <Slider
       navigation={!skeleton}
-      lazy={true}
+      lazy
       offset={1}
       sliderPerView={sliderPerView}
       navigationClass={styles.navigation}
@@ -27,7 +27,7 @@ const MediaSliderItem = ({
       {items.map(({ image, backdrop, ...item }, index) => (
         <MediaItem
           key={index}
-          lazy={true}
+          lazy
           skeleton={skeleton}
           to={routeMediaDetail(item)}
           ratio={ratio || 1.5}
