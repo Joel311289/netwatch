@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { useContext, useEffect, useRef } from 'react';
+import { Redirect, Route, BrowserRouter as Router, Switch, useLocation } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import { ContainerContext } from '@contexts/ContainerContext';
@@ -21,10 +21,21 @@ import { routeMediaTypes } from '@services/constants';
 import { styles } from '@styles';
 import './App.css';
 
+const ScrollToTop = ({ container }) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    container && container.scrollTo && container.scrollTo(0, 0);
+  }, [pathname, container]);
+
+  return null;
+};
+
 const App = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const { setContainer } = useContext(ContainerContext);
   const { breakpoint } = useBreakpointViewport();
+  const scrollerRef = useRef({});
 
   return (
     <SWRConfig
@@ -32,8 +43,14 @@ const App = () => {
         revalidateOnFocus: false
       }}
     >
-      <div className={`App theme-${theme} ${styles} ${breakpoint}`} data-size={breakpoint}>
+      <div
+        ref={scrollerRef}
+        className={`App theme-${theme} ${styles} ${breakpoint}`}
+        data-size={breakpoint}
+      >
         <Router>
+          <ScrollToTop container={scrollerRef.current} />
+
           <header className="App-header">
             <div className="App-container">
               <Header title="Netwatch" theme={theme} onChangeTheme={setTheme} />
