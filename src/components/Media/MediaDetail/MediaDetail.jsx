@@ -16,7 +16,16 @@ import { getWidthRatio } from '@utils/helpers/breakpoints';
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
 
-const MediaDetail = ({ sections, skeleton, duration, image, backdrop, ...detail }) => {
+const MediaDetail = ({
+  sections,
+  skeleton,
+  duration,
+  image,
+  backdrop,
+  age,
+  description,
+  ...detail
+}) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
   const { mobile, tablet, smallDesktop } = useBreakpointViewport();
 
@@ -33,7 +42,9 @@ const MediaDetail = ({ sections, skeleton, duration, image, backdrop, ...detail 
     return <MediaDetailSkeleton styles={styles} />;
   }
 
-  const Header = () => <MediaDetailHeader styles={styles} duration={duration} {...detail} />;
+  const Header = () => (
+    <MediaDetailHeader styles={styles} duration={duration} age={age} {...detail} />
+  );
   const Watch = () => duration && <MediaDetailWatch styles={styles} {...detail} />;
 
   return (
@@ -61,6 +72,16 @@ const MediaDetail = ({ sections, skeleton, duration, image, backdrop, ...detail 
           )}
 
           {tablet && Header()}
+
+          {age && (
+            <div className={`${styles.section} ${styles.biography}`}>
+              <div className={styles['section-heading']}>
+                <MediaHeading text="Biografía" />
+              </div>
+
+              <span>{description || 'Sin descripción'}</span>
+            </div>
+          )}
         </div>
 
         {tablet && Watch()}

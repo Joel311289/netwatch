@@ -4,17 +4,25 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaSliderItem from '@components/Media/MediaSlider/MediaSlider-item';
+import MediaSliderCondensed from '@components/Media/MediaSlider/MediaSlider-condensed';
 
 import { routeMediaTypes, mediaTypes, timesWindow } from '@services/constants';
 import { getTrending } from '@services/global/get-trending';
 import { getDiscoverMovies } from '@services/movies/get-discover-movies';
 import { getDiscoverSeries } from '@services/series/get-discover-series';
 
+import { truncateArray } from '@utils/helpers/arrays';
+
 import styles from '@pages/Home/HomePage.module.css';
 
 const HomePage = () => {
-  const { mobile, smallDesktop, itemsPerRow } = useBreakpointViewport();
+  const { itemsPerRow } = useBreakpointViewport();
 
+  const { data, loading } = useFetch(
+    `/api/trending/${mediaTypes.ALL}/${timesWindow.WEEK}`,
+    getTrending,
+    itemsPerRow
+  );
   const { data: trendings, loading: loadingTrendings } = useFetch(
     `/api/trending/${mediaTypes.ALL}/${timesWindow.DAY}`,
     getTrending,
@@ -33,6 +41,11 @@ const HomePage = () => {
 
   const categories = [
     {
+      heading: 'Tendencias',
+      items: trendings,
+      loading: loadingTrendings
+    },
+    {
       route: routeMediaTypes.movie,
       heading: 'Películas populares',
       items: movies,
@@ -46,25 +59,15 @@ const HomePage = () => {
     }
   ];
 
-  const trendingsPerView = () => {
-    if (mobile) return 1;
-    if (smallDesktop) return 2;
-    return 3;
-  };
-
   return (
     <div className="App-container App-content">
       <h2 className="heading">Bienvenid@, películas y series para ti</h2>
 
-      <div className={styles.trending}>
-        <div className="sub-heading">
-          <MediaHeading text="Tendencias" />
-        </div>
-
-        <MediaSliderItem
-          skeleton={loadingTrendings}
-          sliderPerView={trendingsPerView()}
-          items={trendings}
+      <div className={styles.main}>
+        <MediaSliderCondensed
+          skeleton={loading}
+          sliderPerView={1}
+          items={truncateArray(data, 10)}
           imageKey="backdrop"
           ratio={0.56}
           listable

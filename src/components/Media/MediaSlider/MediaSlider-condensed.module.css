@@ -1,56 +1,97 @@
 .wrapper {
-  margin-bottom: 100px;
-}
-
-.items {
   position: relative;
+  display: block;
 }
 
 .background {
-  position: relative;
-}
-.background::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(0deg, var(--background-color), transparent 20px);
-  z-index: 1;
   pointer-events: none;
 }
 
-.item {
+.gradient-left {
   position: absolute;
-  bottom: 0;
-  left: 50px;
+  height: 100%;
+  width: 73%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(var(--color-black-gradient), 0.85), transparent 200px);
   z-index: 2;
+}
+.gradient-bottom {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(var(--color-black-gradient), 0.85), transparent 290px);
+  z-index: 1;
 }
 
 .info {
+  color: var(--color-white);
   position: absolute;
-  bottom: 30px;
-  left: 280px;
-  background-color: var(--background-color);
-  margin-top: 215px;
+  bottom: 80px;
+  left: 3em;
+  margin: 0px 50px 0 0;
+  width: 50%;
+  z-index: 2;
 }
 
 .title {
-  color: var(--color-text);
-  font-size: 1.2rem;
+  color: currentColor;
+  font-size: 1.8rem;
   font-weight: 500;
-}
-.title:hover {
-  color: var(--color-yellow);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
-.navigation {
-  margin-top: -50px;
+.description {
+  color: currentColor;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.action {
+  color: var(--color-white);
+  box-shadow: var(--box-shadow-primary);
+  border: 2px solid currentColor;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1.5rem;
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 50%;
+  padding: 0;
+}
+.action:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .pagination {
   position: absolute;
-  top: 20px;
+  bottom: var(--condensed-item-bottom) !important;
+  left: var(--condensed-item-left) !important;
+  width: fit-content !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pagination-bullet {
+  background-color: var(--color-gray-light) !important;
+  border: none !important;
+  display: block;
+  width: 10px;
+  border-radius: 2px;
+}
+.pagination-bullet-active {
+  background-color: var(--color-yellow) !important;
 }

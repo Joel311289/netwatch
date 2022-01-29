@@ -33,7 +33,7 @@ const MediaDetailWatch = ({ styles, watch_providers, videos, onTrailer }) => {
       ? [{ label: 'Ver trailer', icon: <RiPlayFill />, onClick: onTrailer }]
       : [])
   ];
-  const secondaryButtons = [{ label: 'Añadir mi lista', icon: <IoMdAdd /> }];
+  const secondaryButtons = [{ label: 'Mi lista', icon: <IoMdAdd /> }];
 
   const ButtonContent = (icon, label) => (
     <>

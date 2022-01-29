@@ -43,12 +43,6 @@ const PersonsDetailPage = () => {
 
   const sections = [
     {
-      key: 'general',
-      heading: 'Vista general',
-      data: { ...detail },
-      Element: MediaDetailGeneral
-    },
-    {
       key: 'medias',
       heading: 'Conocido por',
       data: combined_credits &&

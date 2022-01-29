@@ -27,8 +27,8 @@ const Slider = ({
   navigationClass,
   paginationBulletsClass,
   paginationBulletClass,
+  paginationBulletActiveClass,
   effectFade,
-  offset,
   onPrev,
   onNext
 }) => {
@@ -62,9 +62,11 @@ const Slider = ({
     pagination: pagination
       ? {
           clickable: true,
-          ...(paginationBulletsClass && { clickableClass: paginationBulletsClass }),
-          ...(paginationBulletClass && { bulletClass: paginationBulletClass }),
-          bulletActiveClass: styles['pagination-bullet-active'],
+          ...(paginationBulletsClass && { clickableClass: string(paginationBulletsClass) }),
+          ...(paginationBulletClass && { bulletClass: string(paginationBulletClass) }),
+          ...(paginationBulletActiveClass && {
+            bulletActiveClass: string(paginationBulletActiveClass)
+          }),
           renderBullet: (_, className) => {
             return `<span class="${className} ${styles['pagination-bullet']}"></span>`;
           }
@@ -75,8 +77,7 @@ const Slider = ({
     },
     autoplay: autoplay && {
       delay: 5000,
-      pauseOnMouseEnter: true,
-      stopOnLastSlide: true
+      pauseOnMouseEnter: true
     },
     ...(effectFade ? { effect: 'fade' } : {}),
     watchSlidesProgress: true,
@@ -89,11 +90,7 @@ const Slider = ({
 
   return (
     <div className={`slider-wrapper ${styles.wrapper}`}>
-      <Swiper
-        {...settings}
-        className={string(sliderClass)}
-        style={{ padding: offset ? `0 ${offset}px` : 0 }}
-      >
+      <Swiper {...settings} className={string(sliderClass)}>
         {navigation && renderNavigationButton('prev', <FiChevronLeft />)}
         {navigation && renderNavigationButton('next', <FiChevronRight />)}
         {children.map((element, index) => (
@@ -130,8 +127,8 @@ Slider.propTypes = {
   navigationClass: PropTypes.string,
   paginationBulletsClass: PropTypes.string,
   paginationBulletClass: PropTypes.string,
+  paginationBulletActiveClass: PropTypes.string,
   effectFade: PropTypes.bool,
-  offset: PropTypes.number,
   onPrev: PropTypes.func,
   onNext: PropTypes.func
 };

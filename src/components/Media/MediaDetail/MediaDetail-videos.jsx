@@ -6,6 +6,8 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Button from '@components/UI/Button/Button';
 import Slider from '@components/Layout/Slider/Slider';
+import List from '@components/UI/List/List';
+import ListItem from '@components/UI/List/List-item';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaModal from '../MediaModal/MediaModal';
 
@@ -39,6 +41,16 @@ const MediaDetailVideos = ({ styles, videos }) => {
             </div>
           ))}
         </Slider>
+      )}
+
+      {videos.length > 5 && (
+        <div style={{ marginTop: 15 }}>
+          <List divider>
+            {[1].map(() => (
+              <ListItem key="videos" label="Ver todos los vídeos" to="/" />
+            ))}
+          </List>
+        </div>
       )}
 
       <MediaModal

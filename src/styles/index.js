@@ -14,6 +14,8 @@ export const styles = css`
           --grid-items-per-row: ${itemsPerRow};
           --size-image: ${sizeImage}px;
           --modal-position-top: 120px;
+          --condensed-item-left: 3em;
+          --condensed-item-bottom: 40px;
         }
       `;
     })}
@@ -24,5 +26,13 @@ export const styles = css`
     --size-max: 100vw;
     --width-percentage-section: 100%;
     --modal-position-top: 50px;
+    --condensed-item-left: 1.3em;
+    --condensed-item-bottom: 20px;
+  }
+
+  ${`@media screen and (max-width: ${BREAKPOINTS.sm.width}px)`} {
+    --size-header: 50px;
+    --condensed-item-left: 1.3em;
+    --condensed-item-bottom: 20px;
   }
 `;

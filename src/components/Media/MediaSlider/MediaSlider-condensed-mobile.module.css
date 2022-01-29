@@ -1,0 +1,15 @@
+@import './MediaSlider-condensed.module.css';
+
+.info {
+  bottom: 50px;
+  left: 1.3em;
+  width: 90%;
+}
+
+.title {
+  font-size: 1.3rem;
+}
+
+.actions {
+  margin-top: 2px;
+}

@@ -20,7 +20,6 @@ const MediaSliderItem = ({
     <Slider
       navigation={!skeleton}
       lazy
-      offset={1}
       sliderPerView={sliderPerView}
       navigationClass={styles.navigation}
     >

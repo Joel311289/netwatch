@@ -51,8 +51,8 @@
 
 .actions {
   position: absolute;
-  bottom: 87px;
-  right: 15px;
+  bottom: 77px;
+  right: 12px;
   width: calc(100% - 30px);
   flex-direction: row-reverse;
   width: fit-content;
@@ -80,7 +80,7 @@
   padding: 0;
 }
 .action:hover {
-  color: var(--color-yellow);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .zoomable {

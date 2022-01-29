@@ -63,6 +63,10 @@
   flex-direction: row !important;
 }
 
+.biography {
+  margin-top: 0 !important;
+}
+
 /* ---------- Header */
 
 .title {
