@@ -11,12 +11,19 @@ const getDetails = {
   [mediaTypes.PERSON]: getDetailPerson
 };
 
+const getCredits = {
+  [mediaTypes.MOVIE]: 'credits',
+  [mediaTypes.TV]: 'aggregate_credits'
+};
+
 export const useServiceMediaDetail = (mediaType, mediaId, sections) => {
   const response = useFetch(
     [
       `/api/${mediaType}/${mediaId}`,
       {
-        append_to_response: sections
+        append_to_response: sections.map((section) =>
+          section === 'credits' ? getCredits[mediaType] : section
+        )
       }
     ],
     getDetails[mediaType]

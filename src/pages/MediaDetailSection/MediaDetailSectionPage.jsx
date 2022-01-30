@@ -21,6 +21,8 @@ const MediaDetailSectionPage = () => {
   const { title, [section]: detail } = data;
   const { label, sections } = sectionProps[section];
 
+  console.log(section, data);
+
   return (
     <Space nowrap direction="column" className={styles.wrapper}>
       <div className={styles.resume}>

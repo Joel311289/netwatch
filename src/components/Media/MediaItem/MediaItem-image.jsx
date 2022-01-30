@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styled from '@emotion/styled';
 import { IoMdExpand } from 'react-icons/io';
+import { CgImage } from 'react-icons/cg';
 import PropTypes from 'prop-types';
 
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
+import { backgroundImageUrl } from '@utils/helpers/strings';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
@@ -32,21 +34,21 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
   const Content = () => {
     return (
       <Image
-        className={`media-image-wrapper ${styles.image} ${zoom && styles.zoomable}`}
+        className={`media-image-wrapper ${styles.image} ${zoom && image && styles.zoomable}`}
         ratio={ratio}
         style={{
           ...(width && !ratio && { width }),
           ...(height && { height })
         }}
-        onClick={onZoom}
-      >
+        onClick={onZoom}>
         <div
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
           style={{
-            ...(!lazy && { backgroundImage: `url(${image})` })
-          }}
-        ></div>
+            ...(!lazy && { backgroundImage: backgroundImageUrl(image) })
+          }}>
+          {!image && <CgImage />}
+        </div>
 
         <div className={styles.actions}>
           {zoom && (
@@ -61,10 +63,10 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
 
   return (
     <>
-      {to && <Link to={to}>{Content()}</Link>}
+      {to && <Link to={to}><div>{Content()}</div></Link>}
       {!to && Content()}
 
-      {zoom && zoomed && (
+      {zoom && zoomed && image && (
         <MediaModal
           size="auto"
           mode="image"

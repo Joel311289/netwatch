@@ -8,10 +8,12 @@ export const isValidateUrl = (value) => {
   );
 };
 
+export const backgroundImageUrl = (path) => (path ? `url(${path})` : '');
+
 export const diffYearsDate = (date, now) => moment(now || new Date()).diff(date, 'years');
 export const formattedDate = (date) => {
   moment.locale('es');
-  return date ? moment(new Date(date)).format('DD MMM YYYY') : 'Por determinar';
+  return date ? moment(new Date(date)).format('DD MMM YYYY') : '';
 };
 export const formattedYear = (date) => (date ? new Date(date).getFullYear() : '');
 export const formattedTime = (duration) => {

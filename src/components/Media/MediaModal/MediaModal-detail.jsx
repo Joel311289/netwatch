@@ -14,7 +14,7 @@ import { routeMediaDetail } from '@services/helpers';
 import { getDetailMovie } from '@services/movies/get-detail-movie';
 import { getDetailSerie } from '@services/series/get-detail-serie';
 
-import { truncatedText } from '@utils/helpers/strings';
+import { backgroundImageUrl, truncatedText } from '@utils/helpers/strings';
 
 const fetcherDetail = (type) => (type === mediaTypes.MOVIE ? getDetailMovie : getDetailSerie);
 
@@ -31,7 +31,9 @@ const MediaModalDetail = ({ styles, type, id }) => {
       <div className={styles.image}>
         <MediaItem image={image} width={200} ratio={1.5} />
       </div>
-      <div className={styles.background} style={{ backgroundImage: `url(${backdrop})` }}></div>
+      <div
+        className={styles.background}
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
 
       <div className={styles.data}>
         <MediaDetail.Header styles={styles} {...data}>

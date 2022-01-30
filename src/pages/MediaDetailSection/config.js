@@ -1,5 +1,13 @@
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemCredit from '@components/Media/MediaItem/MediaItem-credit';
+
+const itemsPerRowCredit = ({ mobile, tablet, smallDesktop }) => {
+  if (mobile) return 1;
+  if (tablet) return 2;
+  if (smallDesktop) return 2;
+  return 3;
+};
 
 const itemsPerRowBackdrop = ({ mobile, tablet, smallDesktop }) => {
   if (mobile) return 2;
@@ -18,6 +26,12 @@ const itemsPerRowPoster = ({ mobile, tablet, smallDesktop }) => {
 const labelImages = {
   backdrops: 'Imágenes de fondo',
   posters: 'Pósteres'
+};
+const labelCredits = {
+  cast: 'Actores',
+  creators: 'Creadores',
+  directors: 'Directores',
+  writers: 'Escritores'
 };
 
 export const sectionProps = {
@@ -61,6 +75,19 @@ export const sectionProps = {
     label: 'Temporadas'
   },
   credits: {
-    label: 'Reparto'
+    label: 'Reparto',
+    sections: (data) =>
+      Object.keys(data).map((key) => ({
+        gridProps: (props) => ({
+          gap: '20px 10px',
+          itemsPerRow: itemsPerRowCredit(props)
+        }),
+        heading: labelCredits[key],
+        Element: MediaItemCredit,
+        items: data[key],
+        props: (item) => ({
+          ...item
+        })
+      }))
   }
 };

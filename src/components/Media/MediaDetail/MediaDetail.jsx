@@ -53,11 +53,9 @@ const MediaDetail = ({
         {!tablet && Header()}
 
         <div className={styles.images} style={{ gridTemplateColumns: `${imageWidth()}px auto` }}>
-          {image && (
-            <div className={styles.image} style={{ width: imageWidth() }}>
-              <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
-            </div>
-          )}
+          <div className={styles.image} style={{ width: imageWidth() }}>
+            <MediaItemImage zoom image={image} width="100%" height={imageHeight(210)} />
+          </div>
 
           {backdrop && (
             <div className={styles.background}>

@@ -13,6 +13,12 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: var(--color-border);
 }
 .image.skeleton {
   box-shadow: none;
@@ -47,6 +53,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  display: block;
+  font-size: 3rem;
+  color: var(--color-border);
+}
+
+.image .content .empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .actions {
@@ -161,6 +178,8 @@
   z-index: 2;
 }
 
+/* ---------- Video */
+
 .video {
   position: relative;
   cursor: pointer;
@@ -190,4 +209,53 @@
 }
 .video:hover .play {
   opacity: 0.7;
+}
+
+/* ---------- Credit */
+
+.credit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.credit .image {
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-skeleton));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: var(--box-shadow-primary);
+}
+.credit:hover .image {
+  opacity: 0.6;
+}
+
+.credit .name,
+.credit .characters {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.credit .name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.credit:hover .name {
+  color: var(--color-yellow);
+}
+
+.credit .characters {
+  font-size: 0.88rem;
+  color: rgba(var(--divider-color-rgb), 0.7);
+  font-weight: 400;
 }

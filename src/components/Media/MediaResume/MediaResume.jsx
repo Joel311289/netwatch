@@ -1,14 +1,15 @@
+import { FiArrowLeft } from 'react-icons/fi';
 import { CgCross } from 'react-icons/cg';
 
 import Space from '@components/Layout/Space/Space';
+import Link from '@components/UI/Link/Link';
 import Separator from '@components/UI/Separator/Separator';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
 import { MediaPropTypes } from '@utils/constants/proptypes';
+import { backgroundImageUrl } from '@utils/helpers/strings';
 
 import styles from '@components/Media/MediaResume/MediaResume.module.css';
-import Link from '@components/UI/Link/Link';
-import { FiArrowLeft } from 'react-icons/fi';
 
 const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, to }) => {
   const subheadings = [
@@ -19,7 +20,9 @@ const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, 
 
   return (
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
-      <div className={styles.backdrop} style={{ backgroundImage: `url(${backdrop})` }}></div>
+      <div
+        className={styles.backdrop}
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
 
       <Space nowrap gap={25} className={styles.content}>
         <div className={styles.image} style={{ width: 100, minWidth: 100 }}>

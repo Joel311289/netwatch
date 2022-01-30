@@ -3,7 +3,8 @@
 .images {
   grid-template-areas:
     'background background'
-    'image header';
+    'image header'
+    'biography biography';
   grid-gap: 0 20px;
 }
 
@@ -40,6 +41,11 @@
 
 .extras {
   margin: 0;
+}
+
+.biography {
+  grid-area: biography;
+  margin: 30px 0 0 0 !important;
 }
 
 /* ---------- Images */
