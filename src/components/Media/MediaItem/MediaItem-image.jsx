@@ -40,7 +40,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           ...(width && !ratio && { width }),
           ...(height && { height })
         }}
-        onClick={onZoom}>
+        onClick={() => setZoomed(true)}>
         <div
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
@@ -63,7 +63,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
 
   return (
     <>
-      {to && <Link to={to}><div>{Content()}</div></Link>}
+      {to && <Link to={to}>{Content()}</Link>}
       {!to && Content()}
 
       {zoom && zoomed && image && (

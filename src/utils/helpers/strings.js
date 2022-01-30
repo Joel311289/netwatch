@@ -49,8 +49,8 @@ export const getFirstPath = (url) => url.split('/')[1];
 export const getLastPath = (url) => url.split('/').reverse()[0];
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
-export const removeSpecialCharactersText = (text, separator = ' ') =>
-  text.replace(/[^a-zA-Z0-9 ]/g, '').replace(/ /g, separator);
+export const removeSpecialCharactersText = (text) =>
+  text.replace(/[^a-zA-Z0-9 ]/g, '');
 export const string = (text) => (text ? String(text) : '');
 
 export const camelCase = _.camelCase;
