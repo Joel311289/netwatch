@@ -9,3 +9,11 @@
   padding-bottom: var(--grid-gap);
   padding-right: var(--grid-gap);
 }
+
+.gridable {
+  display: grid !important;
+}
+
+.gridable .item {
+  padding-bottom: 0 !important;
+}

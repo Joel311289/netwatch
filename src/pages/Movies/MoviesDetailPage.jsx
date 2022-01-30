@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-import { useFetch } from '@hooks/useFetch';
+import { useMediaPath } from '@hooks/useMediaPath';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+import { useServiceMediaDetail } from '@hooks/useServiceMediaDetail';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
@@ -12,39 +12,29 @@ import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetai
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
-import { mediaTypes, routeMediaTypes } from '@services/constants';
-import { getVideoTrailerYoutubeId } from '@services/helpers';
-import { getDetailMovie } from '@services/movies/get-detail-movie';
+import { mediaTypes } from '@services/constants';
+import { getVideoTrailerYoutubeId, routeMediaDetail } from '@services/helpers';
 
-import { getIdFromParams } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@pages/Movies/MoviesPage.module.css';
 
 const MoviesDetailPage = () => {
-  const id = getIdFromParams(useParams(), 'key');
-  const { data: movie, loading } = useFetch(
-    [
-      `/api/${mediaTypes.MOVIE}/${id}`,
-      {
-        append_to_response: [
-          'watch/providers',
-          'credits',
-          'external_ids',
-          'images',
-          'videos',
-          'recommendations'
-        ]
-      }
-    ],
-    getDetailMovie
-  );
+  const { id } = useMediaPath();
+  const { data: movie, loading } = useServiceMediaDetail(mediaTypes.MOVIE, id, [
+    'watch/providers',
+    'credits',
+    'external_ids',
+    'images',
+    'videos',
+    'recommendations'
+  ]);
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, videos, backdrops, recommendations } = movie || {};
+  const { credits, videos, images, recommendations } = movie || {};
 
-  const sections = [
+  const sections = () => [
     {
       key: 'general',
       heading: 'Vista general',
@@ -54,22 +44,24 @@ const MoviesDetailPage = () => {
     {
       key: 'videos',
       heading: `Videos (${videos && videos.length})`,
-      to: `/${routeMediaTypes.movie}/${id}/videos`,
+      to: `${routeMediaDetail(movie)}/videos`,
       data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
     },
     {
       key: 'images',
-      heading: `Imágenes (${backdrops && backdrops.length})`,
-      to: `/${routeMediaTypes.movie}/${id}/images`,
-      data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
+      heading: `Imágenes (${images && images.backdrops.length})`,
+      to: `${routeMediaDetail(movie)}/images`,
+      data: images &&
+        images.backdrops &&
+        !isEmptyArray(images.backdrops) && { images: images.backdrops },
       Element: MediaDetailImages
     },
     {
       key: 'credits',
       heading: 'Reparto principal',
       data: { credits },
-      to: `/${routeMediaTypes.movie}/${id}/credits`,
+      to: `${routeMediaDetail(movie)}/credits`,
       Element: MediaCredits
     },
     {
@@ -88,7 +80,7 @@ const MoviesDetailPage = () => {
       <div className={styles.body}>
         <MediaDetail
           skeleton={loading}
-          sections={sections}
+          sections={sections()}
           onTrailer={() => onTrailer({ ...movie, type: mediaTypes.MOVIE })}
           {...movie}
         />

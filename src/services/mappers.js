@@ -115,8 +115,8 @@ export const videoDetailMapper = (video) => {
 export const imageDetailMapper = (image, isBackdrop) => {
   return {
     image: getImageMediaUrl(!isBackdrop ? apiImageUrl : apiBackdropUrl, get(image, 'file_path')),
-    width: get(image, 'width'),
-    height: get(image, 'height'),
+    // width: get(image, 'width'),
+    // height: get(image, 'height'),
     ratio: 1 / get(image, 'aspect_ratio'),
     language: get(image, 'iso_639_1')
   };

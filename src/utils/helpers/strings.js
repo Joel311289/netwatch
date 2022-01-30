@@ -11,7 +11,7 @@ export const isValidateUrl = (value) => {
 export const diffYearsDate = (date, now) => moment(now || new Date()).diff(date, 'years');
 export const formattedDate = (date) => {
   moment.locale('es');
-  return date ? moment(new Date(date)).format('DD MMM YYYY') : '';
+  return date ? moment(new Date(date)).format('DD MMM YYYY') : 'Por determinar';
 };
 export const formattedYear = (date) => (date ? new Date(date).getFullYear() : '');
 export const formattedTime = (duration) => {
@@ -43,6 +43,8 @@ export const queryString = (params) =>
     })
     .join('&');
 export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
+export const getFirstPath = (url) => url.split('/')[1];
+export const getLastPath = (url) => url.split('/').reverse()[0];
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 export const removeSpecialCharactersText = (text, separator = ' ') =>

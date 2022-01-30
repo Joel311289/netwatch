@@ -1,0 +1,20 @@
+.wrapper {
+  width: 100%;
+}
+
+.body {
+  margin: 0 auto;
+}
+
+.resume {
+  width: 100%;
+  position: relative;
+}
+
+.subsection {
+  margin-bottom: 50px;
+}
+
+.empty {
+  opacity: 0.6;
+}

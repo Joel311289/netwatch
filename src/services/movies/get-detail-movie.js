@@ -102,7 +102,7 @@ export const getDetailMovie = (url, { append_to_response } = {}) => {
         ...(credits && { credits: detailCredits(credits) }),
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
-        ...(images && { ...detailImages(images, detail) }),
+        ...(images && { images: detailImages(images, detail) }),
         ...(videos && { videos: detailVideos(videos) }),
         ...(recommendations && { recommendations: detailRecommendations(recommendations) }),
         ...(similar && { similar: detailRecommendations(similar) })

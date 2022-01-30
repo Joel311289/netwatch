@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
+import List from '@components/UI/List/List';
+import ListItem from '@components/UI/List/List-item';
 import MediaSliderImage from '@components/Media/MediaSlider/MediaSlider-image';
 
-const MediaDetailImages = ({ images, type }) => {
+const MediaDetailImages = ({ images, type, to }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
+
+  const items = [{ key: 'images', label: 'Ver todas las imágenes' }];
 
   const sliderPerView = useMemo(() => {
     if (mobile) return type !== 'backdrop' ? 2 : 1;
@@ -15,14 +19,26 @@ const MediaDetailImages = ({ images, type }) => {
   }, [type, mobile, smallDesktop]);
 
   return (
-    <MediaSliderImage
-      lazy
-      zoom
-      items={images}
-      type={type || 'backdrop'}
-      height={type !== 'backdrop' ? 250 : 200}
-      sliderPerView={sliderPerView}
-    />
+    <>
+      <MediaSliderImage
+        lazy
+        zoom
+        items={images}
+        type={type || 'backdrop'}
+        height={type !== 'backdrop' ? 250 : 200}
+        sliderPerView={sliderPerView}
+      />
+
+      {images.length > 5 && (
+        <div style={{ marginTop: 15 }}>
+          <List divider>
+            {items.map((item) => (
+              <ListItem key={item.key} {...item} to={to} />
+            ))}
+          </List>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -34,7 +50,8 @@ MediaDetailImages.defaultProps = {
 MediaDetailImages.propTypes = {
   styles: PropTypes.object,
   images: PropTypes.array,
-  type: PropTypes.string
+  type: PropTypes.string,
+  to: PropTypes.string
 };
 
 export default MediaDetailImages;

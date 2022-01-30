@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-import { useFetch } from '@hooks/useFetch';
+import { useMediaPath } from '@hooks/useMediaPath';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+import { useServiceMediaDetail } from '@hooks/useServiceMediaDetail';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
@@ -13,37 +13,27 @@ import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetai
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
-import { mediaTypes, routeMediaTypes } from '@services/constants';
-import { getVideoTrailerYoutubeId } from '@services/helpers';
-import { getDetailSerie } from '@services/series/get-detail-serie';
+import { mediaTypes } from '@services/constants';
+import { getVideoTrailerYoutubeId, routeMediaDetail } from '@services/helpers';
 
-import { getIdFromParams } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@pages/Series/SeriesPage.module.css';
 
 const SeriesDetailPage = () => {
-  const id = getIdFromParams(useParams(), 'key');
-  const { data: serie, loading } = useFetch(
-    [
-      `/api/${mediaTypes.TV}/${id}`,
-      {
-        append_to_response: [
-          'watch/providers',
-          'aggregate_credits',
-          'external_ids',
-          'images',
-          'videos',
-          'recommendations'
-        ]
-      }
-    ],
-    getDetailSerie
-  );
+  const { id } = useMediaPath();
+  const { data: serie, loading } = useServiceMediaDetail(mediaTypes.TV, id, [
+    'watch/providers',
+    'aggregate_credits',
+    'external_ids',
+    'images',
+    'videos',
+    'recommendations'
+  ]);
   const [fetchModalData, setFetchModalData] = useState({});
   const { tablet } = useBreakpointViewport();
 
-  const { credits, number_seasons, seasons, videos, backdrops, recommendations } = serie || {};
+  const { credits, number_seasons, seasons, videos, images, recommendations } = serie || {};
 
   const sections = [
     {
@@ -56,28 +46,30 @@ const SeriesDetailPage = () => {
       key: 'seasons',
       heading: `Temporadas (${number_seasons})`,
       data: { seasons },
-      to: `/${routeMediaTypes.TV}/${id}/seasons`,
+      to: `${routeMediaDetail(serie)}/seasons`,
       Element: MediaSeasons
     },
     {
       key: 'videos',
       heading: `Videos (${videos && videos.length})`,
-      to: `/${routeMediaTypes.tv}/${id}/videos`,
+      to: `${routeMediaDetail(serie)}/videos`,
       data: videos && !isEmptyArray(videos) && { videos },
       Element: MediaDetailVideos
     },
     {
       key: 'images',
-      heading: `Imágenes (${backdrops && backdrops.length})`,
-      to: `/${routeMediaTypes.tv}/${id}/images`,
-      data: backdrops && !isEmptyArray(backdrops) && { images: backdrops },
+      heading: `Imágenes (${images && images.backdrops.length})`,
+      to: `${routeMediaDetail(serie)}/images`,
+      data: images &&
+        images.backdrops &&
+        !isEmptyArray(images.backdrops) && { images: images.backdrops },
       Element: MediaDetailImages
     },
     {
       key: 'credits',
       heading: 'Reparto principal',
       data: { credits },
-      to: `/${routeMediaTypes.tv}/${id}/credits`,
+      to: `${routeMediaDetail(serie)}/credits`,
       Element: MediaCredits
     },
     {

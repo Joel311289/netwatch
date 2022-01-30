@@ -13,6 +13,7 @@ import SeriesPage from '@pages/Series/SeriesPage';
 import MoviesDetailPage from '@pages/Movies/MoviesDetailPage';
 import SeriesDetailPage from '@pages/Series/SeriesDetailPage';
 import PersonsDetailPage from '@pages/Persons/PersonsDetailPage';
+import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
 import Header from '@components/Layout/Header/Header';
 
@@ -65,6 +66,19 @@ const App = () => {
               <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
               <Route exact component={SeriesDetailPage} path={`/${routeMediaTypes.tv}/:key`} />
               <Route exact component={PersonsDetailPage} path={`/${routeMediaTypes.person}/:key`} />
+              <Route
+                exact
+                component={MediaDetailSectionPage}
+                path={[
+                  `/${routeMediaTypes.tv}/:key/videos`,
+                  `/${routeMediaTypes.tv}/:key/images`,
+                  `/${routeMediaTypes.tv}/:key/credits`,
+                  `/${routeMediaTypes.tv}/:key/seasons`,
+                  `/${routeMediaTypes.movie}/:key/videos`,
+                  `/${routeMediaTypes.movie}/:key/images`,
+                  `/${routeMediaTypes.movie}/:key/credits`
+                ]}
+              />
               <Redirect to="/home" />
             </Switch>
           </div>

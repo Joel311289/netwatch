@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import MediaItemSkeleton from '@components/Media/MediaItem/MediaItem-skeleton';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
+import MediaItemVideo from '@components/Media/MediaItem/MediaItem-video';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 
 import { ElementDefaultProps, ElementPropTypes } from '@utils/constants/proptypes';
@@ -17,6 +18,8 @@ const MediaItem = ({
   ratio,
   skeleton,
   image,
+  videoKey,
+  videoSite,
   title,
   date,
   // vote_average,
@@ -54,7 +57,11 @@ const MediaItem = ({
       >
         {!skeleton && (
           <div onMouseEnter={onFocus} onMouseLeave={onFocus}>
-            <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} zoom={zoomable} />
+            {videoKey ? (
+              <MediaItemVideo lazy={lazy} videoKey={videoKey} site={videoSite} />
+            ) : (
+              <MediaItemImage image={image} ratio={ratio} to={to} lazy={lazy} zoom={zoomable} />
+            )}
 
             <Space gap={10} className={styles.actions}>
               {actions.map(({ key, icon, onClick }) => (
@@ -74,10 +81,14 @@ const MediaItem = ({
 
         {title && (
           <Space direction="column" className={styles.info}>
-            <Link to={to} className={styles.title}>
-              {title}
-            </Link>
-            <span className={styles.date}>{date || 'Por determinar'}</span>
+            {to ? (
+              <Link to={to} className={styles.title}>
+                {title}
+              </Link>
+            ) : (
+              <span className={styles.title}>{title}</span>
+            )}
+            {date && <span className={styles.date}>{date}</span>}
           </Space>
         )}
       </div>

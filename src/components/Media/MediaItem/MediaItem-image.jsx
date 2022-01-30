@@ -24,7 +24,10 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
     link: to
   });
 
-  const onZoom = () => setZoomed((prev) => !prev);
+  const onZoom = (event) => {
+    event && event.stopPropagation();
+    setZoomed((prev) => !prev);
+  };
 
   const Content = () => {
     return (

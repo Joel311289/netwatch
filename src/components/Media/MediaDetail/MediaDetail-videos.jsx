@@ -1,23 +1,17 @@
-import { useMemo, useState } from 'react';
-import { BiPlay } from 'react-icons/bi';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
-import Button from '@components/UI/Button/Button';
 import Slider from '@components/Layout/Slider/Slider';
 import List from '@components/UI/List/List';
 import ListItem from '@components/UI/List/List-item';
-import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
-import MediaModal from '../MediaModal/MediaModal';
+import MediaItemVideo from '@components/Media/MediaItem/MediaItem-video';
 
-import { getImageVideoUrl } from '@services/helpers';
-
-import { string } from '@utils/helpers/strings';
-
-const MediaDetailVideos = ({ styles, videos }) => {
+const MediaDetailVideos = ({ videos, to }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
-  const [videoWatch, setVideoWatch] = useState(null);
+
+  const items = [{ key: 'videos', label: 'Ver todos los vídeos' }];
 
   const sliderPerView = useMemo(() => {
     if (mobile) return 1;
@@ -30,15 +24,9 @@ const MediaDetailVideos = ({ styles, videos }) => {
       {videos && (
         <Slider sliderPerView={sliderPerView} lazy navigation>
           {videos.map((item, index) => (
-            <div key={index} className={styles.video} onClick={() => setVideoWatch(item)}>
-              <Button secondary className={styles.play}>
-                <BiPlay />
-              </Button>
-
-              <div className={styles['video-thumbnail']}>
-                <MediaItemImage lazy image={getImageVideoUrl(item)} ratio={0.55} />
-              </div>
-            </div>
+            <React.Fragment key={index}>
+              <MediaItemVideo lazy {...item} videoKey={item.key} />
+            </React.Fragment>
           ))}
         </Slider>
       )}
@@ -46,27 +34,20 @@ const MediaDetailVideos = ({ styles, videos }) => {
       {videos.length > 5 && (
         <div style={{ marginTop: 15 }}>
           <List divider>
-            {[1].map(() => (
-              <ListItem key="videos" label="Ver todos los vídeos" to="/" />
+            {items.map((item) => (
+              <ListItem key={item.key} {...item} to={to} />
             ))}
           </List>
         </div>
       )}
-
-      <MediaModal
-        size="auto"
-        mode="video"
-        opened={Boolean(videoWatch)}
-        videoId={string(videoWatch && videoWatch.key)}
-        onClose={() => setVideoWatch(false)}
-      />
     </div>
   );
 };
 
 MediaDetailVideos.propTypes = {
   styles: PropTypes.object,
-  videos: PropTypes.array
+  videos: PropTypes.array,
+  to: PropTypes.string
 };
 
 export default MediaDetailVideos;

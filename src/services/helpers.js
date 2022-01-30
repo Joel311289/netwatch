@@ -51,6 +51,16 @@ export const getVideoTrailerYoutubeId = (videos) => {
   );
 };
 
+export const mediaTypeByRoute = (mediaRoute) => {
+  const types = ['movie', 'tv', 'person'];
+  return types
+    .map((type) => ({
+      key: mediaTypes[type.toUpperCase()],
+      route: routeMediaTypes[type]
+    }))
+    .find(({ route }) => route === mediaRoute)['key'];
+};
+
 export const routeMediaDetail = (media) => {
   if (!media) {
     return '/';

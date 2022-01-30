@@ -91,7 +91,7 @@ export const getDetailSerie = (url, { append_to_response } = {}) => {
         ...(watch_providers && { watch_providers: detailWatchProviders(watch_providers) }),
         ...(external_ids && { external_ids: externalsIdsDetailMapper(external_ids) }),
         ...(seasons && { seasons: detailSeasons(seasons) }),
-        ...(images && { ...detailImages(images, detail) }),
+        ...(images && { images: detailImages(images, detail) }),
         ...(videos && { videos: detailVideos(videos) }),
         ...(recommendations && { recommendations: detailRecommendations(recommendations) }),
         ...(similar && { similar: detailRecommendations(similar) })
