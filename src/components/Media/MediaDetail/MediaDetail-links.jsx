@@ -58,7 +58,7 @@ const MediaDetailLinks = ({
       : []),
     { label: 'Nombre original', content: original_title },
     { label: 'Lugar de nacimiento', content: place_of_birth },
-    { label: 'Sexo', content: genders[gender] },
+    { label: 'Sexo', content: gender && (genders[gender] || '-') },
     { label: 'Idioma original', content: original_language },
     {
       label: 'También conocido por',

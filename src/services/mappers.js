@@ -6,6 +6,7 @@ import {
   apiLogoUrl,
   languages,
   mediaTypes,
+  personGenders,
   personRoleTypes
 } from '@services/constants';
 import {
@@ -79,7 +80,7 @@ export const mediaDetailMapper = (media) => {
       date: formattedDate(get(media, 'birthday')),
       date_death: formattedDate(get(media, 'deathday')),
       age: diffYearsDate(get(media, 'birthday'), get(media, 'deathday')),
-      gender: get(media, 'gender') === 1 ? 'female' : 'male',
+      gender: personGenders[get(media, 'gender', 0)],
       place_of_birth: get(media, 'place_of_birth'),
       also_known_as: get(media, 'also_known_as', []),
       original_language: ''
@@ -127,9 +128,9 @@ export const creditDetailMapper = (credit) => {
   return {
     id: get(credit, 'id'),
     role: getPersonRoleType(credit),
-    job: [get(credit, 'job')],
+    job: [character ? 'cast' : get(credit, 'job', '')],
     name: get(credit, 'name'),
-    characters: character && character.split(' / '),
+    characters: character ? character.split(' / ') : [],
     image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };
 };

@@ -34,6 +34,11 @@ export const personRoleTypes = {
   Acting: 'acting',
   Creator: 'creator'
 };
+export const personGenders = {
+  0: '-',
+  1: 'female',
+  2: 'male'
+};
 export const tvWatchProvidersSupported = {
   8: 'Netflix',
   119: 'Amazon Prime Video',

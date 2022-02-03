@@ -25,8 +25,10 @@ export const isMediaSerie = (media) =>
 
 export const getImageMediaUrl = (baseUrl, path) => (path ? `${baseUrl}${path}` : '');
 
-export const getPersonRoleType = ({ character, department }) =>
-  character ? personRoleTypes.Acting : personRoleTypes[department];
+export const getPersonRoleType = (credit) =>
+  Object.prototype.hasOwnProperty.call(credit, 'character')
+    ? personRoleTypes.Acting
+    : personRoleTypes[get(credit, 'department', '')];
 
 export const getWatchProvidersSupported = () => Object.keys(tvWatchProvidersSupported).join('|');
 

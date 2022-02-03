@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Space from '@components/Layout/Space/Space';
 
 import { backgroundImageUrl } from '@utils/helpers/strings';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
@@ -17,8 +18,8 @@ const MediaItemCredit = ({ id, image, name, characters }) => {
 
       <Space direction="column" gap={3}>
         <span className={`${styles.name}`}>{name}</span>
-        {characters && (
-          <span className={`${styles.characters}`}>como {(characters || []).join('/')}</span>
+        {characters && !isEmptyArray(characters) && (
+          <span className={`${styles.characters}`}>como {characters.join('/')}</span>
         )}
       </Space>
     </Link>
@@ -26,7 +27,8 @@ const MediaItemCredit = ({ id, image, name, characters }) => {
 };
 
 MediaItemCredit.defaultProps = {
-  direction: 'row'
+  direction: 'row',
+  characters: []
 };
 
 MediaItemCredit.propTypes = {

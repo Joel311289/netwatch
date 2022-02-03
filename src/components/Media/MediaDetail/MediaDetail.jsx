@@ -12,17 +12,19 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { getWidthRatio } from '@utils/helpers/breakpoints';
+import { string } from '@utils/helpers/strings';
+import { mediaTypes } from '@services/constants';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
 
 const MediaDetail = ({
+  type,
   sections,
   skeleton,
   duration,
   image,
   backdrop,
-  age,
   description,
   ...detail
 }) => {
@@ -42,13 +44,11 @@ const MediaDetail = ({
     return <MediaDetailSkeleton styles={styles} />;
   }
 
-  const Header = () => (
-    <MediaDetailHeader styles={styles} duration={duration} age={age} {...detail} />
-  );
+  const Header = () => <MediaDetailHeader styles={styles} duration={duration} {...detail} />;
   const Watch = () => duration && <MediaDetailWatch styles={styles} {...detail} />;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${string(styles[`wrapper-detail-${detail}`])}`}>
       <div className={styles.content}>
         {!tablet && Header()}
 
@@ -71,13 +71,13 @@ const MediaDetail = ({
 
           {tablet && Header()}
 
-          {age && (
+          {type === mediaTypes.PERSON && (
             <div className={`${styles.section} ${styles.biography}`}>
               <div className={styles['section-heading']}>
                 <MediaHeading text="Biografía" />
               </div>
 
-              <span>{description || 'Sin descripción'}</span>
+              <span>{description || 'Sin biografía'}</span>
             </div>
           )}
         </div>
