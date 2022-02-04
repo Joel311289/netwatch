@@ -16,14 +16,22 @@ const getCredits = {
   [mediaTypes.TV]: 'aggregate_credits'
 };
 
+const getImages = {
+  [mediaTypes.MOVIE]: 'images',
+  [mediaTypes.TV]: 'images',
+  [mediaTypes.PERSON]: 'images,tagged_images'
+};
+
 export const useServiceMediaDetail = (mediaType, mediaId, sections) => {
   const response = useFetch(
     [
       `/api/${mediaType}/${mediaId}`,
       {
-        append_to_response: sections.map((section) =>
-          section === 'credits' ? getCredits[mediaType] : section
-        )
+        append_to_response: sections.map((section) => {
+          if (section === 'credits') return getCredits[mediaType];
+          if (section === 'images') return getImages[mediaType];
+          return section;
+        })
       }
     ],
     getDetails[mediaType]

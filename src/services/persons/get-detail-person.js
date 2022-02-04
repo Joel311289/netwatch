@@ -10,11 +10,12 @@ const detailImages = (images, tagged_images) => {
   const _images = Object.keys(images).reduce((prev, key) => [...prev, ...images[key]], []);
   const _taggedImages = get(tagged_images, 'results', []);
 
-  return sortCollectionBy(
-    [..._images, ..._taggedImages].map(imageDetailMapper),
-    'popularity',
-    true
-  );
+  return {
+    tagged_images: sortCollectionBy(_taggedImages, 'vote_average', true).map((item) =>
+      imageDetailMapper(item, true)
+    ),
+    profiles: sortCollectionBy(_images, 'vote_average', true).map((item) => imageDetailMapper(item))
+  };
 };
 
 const detailCredits = ({ cast, crew }) => {

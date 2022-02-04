@@ -1,17 +1,16 @@
-import React from 'react';
 import { useMediaPath } from '@hooks/useMediaPath';
 import { useServiceMediaDetail } from '@hooks/useServiceMediaDetail';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
+import Grid from '@components/Layout/Grid/Grid';
+import Space from '@components/Layout/Space/Space';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 import MediaResume from '@components/Media/MediaResume/MediaResume';
 
 import { routeMediaDetail } from '@services/helpers';
 
-import { sectionProps } from './config';
+import { sectionProps } from '@pages/MediaDetailSection/config';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
-import Grid from '@components/Layout/Grid/Grid';
-import Space from '@components/Layout/Space/Space';
 
 const MediaDetailSectionPage = () => {
   const breakpoint = useBreakpointViewport();
@@ -21,7 +20,7 @@ const MediaDetailSectionPage = () => {
   const { title, [section]: detail } = data;
   const { label, sections } = sectionProps[section];
 
-  console.log(section, data);
+  console.log(section, data, detail);
 
   return (
     <Space nowrap direction="column" className={styles.wrapper}>

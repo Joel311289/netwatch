@@ -2,30 +2,27 @@ import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaItemCredit from '@components/Media/MediaItem/MediaItem-credit';
 
-const itemsPerRowCredit = ({ mobile, tablet, smallDesktop }) => {
-  if (mobile) return 1;
-  if (tablet) return 2;
-  if (smallDesktop) return 2;
-  return 3;
+const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 3 }) => {
+  if (breakpoint.mobile) return mobile;
+  if (breakpoint.tablet) return tablet;
+  if (breakpoint.smallDesktop) return smallDesktop;
+  return defaultValue;
 };
 
-const itemsPerRowBackdrop = ({ mobile, tablet, smallDesktop }) => {
-  if (mobile) return 2;
-  if (tablet) return 3;
-  if (smallDesktop) return 3;
-  return 4;
-};
+const itemsPerRowCredit = (breakpoint) =>
+  itemsPerRow(breakpoint, { mobile: 1, tablet: 2, smallDesktop: 2, defaultValue: 3 });
 
-const itemsPerRowPoster = ({ mobile, tablet, smallDesktop }) => {
-  if (mobile) return 3;
-  if (tablet) return 4;
-  if (smallDesktop) return 5;
-  return 6;
-};
+const itemsPerRowBackdrop = (breakpoint) =>
+  itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 3, defaultValue: 4 });
+
+const itemsPerRowPoster = (breakpoint) =>
+  itemsPerRow(breakpoint, { mobile: 3, tablet: 4, smallDesktop: 5, defaultValue: 6 });
 
 const labelImages = {
   backdrops: 'Imágenes de fondo',
-  posters: 'Pósteres'
+  posters: 'Pósteres',
+  profiles: 'Perfiles',
+  tagged_images: 'Imágenes etiquetadas',
 };
 const labelCredits = {
   cast: 'Actores',
@@ -39,9 +36,9 @@ export const sectionProps = {
     label: 'Vídeos',
     sections: (detail) => [
       {
-        gridProps: (props) => ({
+        gridProps: (breakpoint) => ({
           gap: '0 10px',
-          itemsPerRow: itemsPerRowBackdrop(props)
+          itemsPerRow: itemsPerRowBackdrop(breakpoint)
         }),
         Element: MediaItem,
         items: detail,
@@ -57,9 +54,10 @@ export const sectionProps = {
     label: 'Imágenes',
     sections: (data) =>
       Object.keys(data).map((key) => ({
-        gridProps: (props) => ({
+        gridProps: (breakpoint) => ({
           gap: '20px 10px',
-          itemsPerRow: key === 'backdrops' ? itemsPerRowBackdrop(props) : itemsPerRowPoster(props)
+          itemsPerRow:
+            key === 'backdrops' ? itemsPerRowBackdrop(breakpoint) : itemsPerRowPoster(breakpoint)
         }),
         heading: labelImages[key],
         Element: MediaItemImage,
@@ -78,9 +76,9 @@ export const sectionProps = {
     label: 'Reparto',
     sections: (data) =>
       Object.keys(data).map((key) => ({
-        gridProps: (props) => ({
+        gridProps: (breakpoint) => ({
           gap: '20px 10px',
-          itemsPerRow: itemsPerRowCredit(props)
+          itemsPerRow: itemsPerRowCredit(breakpoint)
         }),
         heading: labelCredits[key],
         Element: MediaItemCredit,

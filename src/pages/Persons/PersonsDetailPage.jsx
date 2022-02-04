@@ -6,7 +6,6 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
 import MediaModal from '@components/Media/MediaModal/MediaModal';
-import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 
@@ -51,9 +50,9 @@ const PersonsDetailPage = () => {
     },
     {
       key: 'images',
-      heading: `Imágenes (${images && images.length})`,
+      heading: `Imágenes (${images && [...images.profiles, ...images.tagged_images].length})`,
       to: `/${routeMediaTypes.person}/${id}/images`,
-      data: images && !isEmptyArray(images) && { images: images },
+      data: images && !isEmptyArray(images) && { images: [...images.profiles, ...images.tagged_images] },
       props: { type: 'poster' },
       Element: MediaDetailImages
     }

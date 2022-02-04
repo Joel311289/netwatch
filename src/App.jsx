@@ -76,7 +76,8 @@ const App = () => {
                   `/${routeMediaTypes.tv}/:key/seasons`,
                   `/${routeMediaTypes.movie}/:key/videos`,
                   `/${routeMediaTypes.movie}/:key/images`,
-                  `/${routeMediaTypes.movie}/:key/credits`
+                  `/${routeMediaTypes.movie}/:key/credits`,
+                  `/${routeMediaTypes.person}/:key/images`,
                 ]}
               />
               <Redirect to="/home" />
