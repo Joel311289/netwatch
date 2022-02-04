@@ -8,8 +8,7 @@ import { ThemeContext } from '@contexts/ThemeContext';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import HomePage from '@pages/Home/HomePage';
-import MoviesPage from '@pages/Movies/MoviesPage';
-import SeriesPage from '@pages/Series/SeriesPage';
+import MediaPage from '@pages/Media/MediaPage';
 import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
@@ -40,13 +39,11 @@ const App = () => {
     <SWRConfig
       value={{
         revalidateOnFocus: false
-      }}
-    >
+      }}>
       <div
         ref={scrollerRef}
         className={`App theme-${theme} ${styles} ${breakpoint}`}
-        data-size={breakpoint}
-      >
+        data-size={breakpoint}>
         <Router>
           <ScrollToTop container={scrollerRef.current} />
 
@@ -59,8 +56,11 @@ const App = () => {
           <div className="App-body" ref={setContainer}>
             <Switch>
               <Route exact component={HomePage} path="/home" />
-              <Route exact component={MoviesPage} path={`/${routeMediaTypes.movie}`} />
-              <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
+              <Route
+                exact
+                component={MediaPage}
+                path={[`/${routeMediaTypes.tv}`, `/${routeMediaTypes.movie}`]}
+              />
               <Route
                 exact
                 component={MediaDetailPage}

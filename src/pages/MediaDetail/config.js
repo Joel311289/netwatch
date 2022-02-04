@@ -47,42 +47,49 @@ const sectionsDetail = (detail, mediaType) => {
     general: {
       heading: 'Vista general',
       data: { ...detail },
-      Element: MediaDetailGeneral
+      Element: MediaDetailGeneral,
+      visible: true
     },
     seasons: {
       heading: `Temporadas (${number_seasons})`,
       data: { seasons },
       to: `${routeMediaDetail(detail)}/seasons`,
-      Element: MediaSeasons
+      Element: MediaSeasons,
+      visible: Boolean(number_seasons)
     },
     videos: {
       heading: `Vídeos (${videos.length})`,
       to: `${routeMediaDetail(detail)}/videos`,
       data: { videos },
-      Element: MediaDetailVideos
+      Element: MediaDetailVideos,
+      visible: Boolean(videos.length)
     },
     images: {
       heading: `Imágenes (${images.length})`,
       to: `${routeMediaDetail(detail)}/images`,
       data: { images },
       props: propsImagesMedia[mediaType],
-      Element: MediaDetailImages
+      Element: MediaDetailImages,
+      visible: Boolean(images.length)
     },
     credits: {
       heading: `Reparto principal`,
       to: `${routeMediaDetail(detail)}/credits`,
       data: { credits },
-      Element: MediaCredits
+      Element: MediaCredits,
+      visible: true
     },
     recommendations: {
       heading: `Recomendaciones`,
       data: { recommendations },
-      Element: MediaDetailRecommendations
+      Element: MediaDetailRecommendations,
+      visible: Boolean(recommendations.length)
     },
     medias: {
       heading: `Conocido por`,
       data: { recommendations: combined_credits },
-      Element: MediaDetailRecommendations
+      Element: MediaDetailRecommendations,
+      visible: Boolean(combined_credits.length)
     }
   };
 };
@@ -92,8 +99,10 @@ export const getTrailer = (detail) => getVideoTrailerYoutubeId(get(detail, 'vide
 export const detailProps = (mediaType) => ({
   append_to_response: appendToResponsesMedia[mediaType].split(','),
   sections: (detail) =>
-    sectionsMedia[mediaType].map((section) => ({
-      key: section,
-      ...sectionsDetail(detail, mediaType)[section]
-    }))
+    sectionsMedia[mediaType]
+      .filter((section) => sectionsDetail(detail, mediaType)[section].visible)
+      .map((section) => ({
+        key: section,
+        ...sectionsDetail(detail, mediaType)[section]
+      }))
 });
