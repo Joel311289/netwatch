@@ -10,11 +10,16 @@ const detailImages = (images, tagged_images) => {
   const _images = Object.keys(images).reduce((prev, key) => [...prev, ...images[key]], []);
   const _taggedImages = get(tagged_images, 'results', []);
 
+  const taggedImages = sortCollectionBy(_taggedImages, 'vote_average', true).map((item) =>
+    imageDetailMapper(item, true)
+  );
+  const profiles = sortCollectionBy(_images, 'vote_average', true).map((item) =>
+    imageDetailMapper(item)
+  );
   return {
-    tagged_images: sortCollectionBy(_taggedImages, 'vote_average', true).map((item) =>
-      imageDetailMapper(item, true)
-    ),
-    profiles: sortCollectionBy(_images, 'vote_average', true).map((item) => imageDetailMapper(item))
+    combined: sortCollectionBy([...taggedImages, ...profiles], 'vote_average', true),
+    tagged_images: taggedImages,
+    profiles
   };
 };
 

@@ -40,13 +40,15 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
           ...(width && !ratio && { width }),
           ...(height && { height })
         }}
-        onClick={() => setZoomed(true)}>
+        onClick={() => setZoomed(true)}
+      >
         <div
           className={`${styles.content} ${classes}`}
           {...(lazy && { 'data-background': image })}
           style={{
             ...(!lazy && { backgroundImage: backgroundImageUrl(image) })
-          }}>
+          }}
+        >
           {!image && <CgImage />}
         </div>
 

@@ -22,7 +22,8 @@ const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, 
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
       <div
         className={styles.backdrop}
-        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}
+      ></div>
 
       <Space nowrap gap={25} className={styles.content}>
         <div className={styles.image} style={{ width: 100, minWidth: 100 }}>

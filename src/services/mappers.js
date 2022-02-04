@@ -62,7 +62,7 @@ export const mediaDetailMapper = (media) => {
         next_episode_description: get(media, 'next_episode_to_air.description')
       },
       duration: formattedTime(get(media, 'episode_run_time[0]')),
-      origin_country: get(media, 'origin_country'),
+      origin_country: get(media, 'origin_country[0]'),
       number_seasons: get(media, 'number_of_seasons'),
       number_episodes: get(media, 'number_of_episodes'),
       creators: get(media, 'created_by')
@@ -118,6 +118,7 @@ export const imageDetailMapper = (image, isBackdrop) => {
     image: getImageMediaUrl(!isBackdrop ? apiImageUrl : apiBackdropUrl, get(image, 'file_path')),
     // width: get(image, 'width'),
     // height: get(image, 'height'),
+    vote_average: get(image, 'vote_average'),
     ratio: 1 / get(image, 'aspect_ratio'),
     language: get(image, 'iso_639_1')
   };

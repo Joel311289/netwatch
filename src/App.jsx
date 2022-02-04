@@ -10,9 +10,7 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import HomePage from '@pages/Home/HomePage';
 import MoviesPage from '@pages/Movies/MoviesPage';
 import SeriesPage from '@pages/Series/SeriesPage';
-import MoviesDetailPage from '@pages/Movies/MoviesDetailPage';
-import SeriesDetailPage from '@pages/Series/SeriesDetailPage';
-import PersonsDetailPage from '@pages/Persons/PersonsDetailPage';
+import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
 import Header from '@components/Layout/Header/Header';
@@ -62,10 +60,16 @@ const App = () => {
             <Switch>
               <Route exact component={HomePage} path="/home" />
               <Route exact component={MoviesPage} path={`/${routeMediaTypes.movie}`} />
-              <Route exact component={MoviesDetailPage} path={`/${routeMediaTypes.movie}/:key`} />
               <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
-              <Route exact component={SeriesDetailPage} path={`/${routeMediaTypes.tv}/:key`} />
-              <Route exact component={PersonsDetailPage} path={`/${routeMediaTypes.person}/:key`} />
+              <Route
+                exact
+                component={MediaDetailPage}
+                path={[
+                  `/${routeMediaTypes.tv}/:key`,
+                  `/${routeMediaTypes.movie}/:key`,
+                  `/${routeMediaTypes.person}/:key`
+                ]}
+              />
               <Route
                 exact
                 component={MediaDetailSectionPage}
@@ -77,7 +81,7 @@ const App = () => {
                   `/${routeMediaTypes.movie}/:key/videos`,
                   `/${routeMediaTypes.movie}/:key/images`,
                   `/${routeMediaTypes.movie}/:key/credits`,
-                  `/${routeMediaTypes.person}/:key/images`,
+                  `/${routeMediaTypes.person}/:key/images`
                 ]}
               />
               <Redirect to="/home" />

@@ -22,7 +22,7 @@ const labelImages = {
   backdrops: 'Imágenes de fondo',
   posters: 'Pósteres',
   profiles: 'Perfiles',
-  tagged_images: 'Imágenes etiquetadas',
+  tagged_images: 'Imágenes etiquetadas'
 };
 const labelCredits = {
   cast: 'Actores',
@@ -53,21 +53,23 @@ export const sectionProps = {
   images: {
     label: 'Imágenes',
     sections: (data) =>
-      Object.keys(data).map((key) => ({
-        gridProps: (breakpoint) => ({
-          gap: '20px 10px',
-          itemsPerRow:
-            key === 'backdrops' ? itemsPerRowBackdrop(breakpoint) : itemsPerRowPoster(breakpoint)
-        }),
-        heading: labelImages[key],
-        Element: MediaItemImage,
-        items: data[key],
-        props: (item) => ({
-          ...item,
-          ratio: Math.max(...data[key].map(({ ratio }) => ratio)),
-          zoom: true
-        })
-      }))
+      Object.keys(data)
+        .filter((key) => labelImages[key])
+        .map((key) => ({
+          gridProps: (breakpoint) => ({
+            gap: '20px 10px',
+            itemsPerRow:
+              key === 'backdrops' ? itemsPerRowBackdrop(breakpoint) : itemsPerRowPoster(breakpoint)
+          }),
+          heading: labelImages[key],
+          Element: MediaItemImage,
+          items: data[key],
+          props: (item) => ({
+            ...item,
+            ratio: Math.max(...data[key].map(({ ratio }) => ratio)),
+            zoom: true
+          })
+        }))
   },
   seasons: {
     label: 'Temporadas'

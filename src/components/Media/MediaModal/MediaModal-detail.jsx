@@ -33,7 +33,8 @@ const MediaModalDetail = ({ styles, type, id }) => {
       </div>
       <div
         className={styles.background}
-        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}
+      ></div>
 
       <div className={styles.data}>
         <MediaDetail.Header styles={styles} {...data}>
