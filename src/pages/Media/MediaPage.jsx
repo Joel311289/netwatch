@@ -40,9 +40,7 @@ const MediaPage = () => {
 
       {!loading && !paginationEnd && (
         <div className="block">
-          <Button onClick={onLoadMore}>
-            Mostrar más
-          </Button>
+          <Button onClick={onLoadMore}>Mostrar más</Button>
         </div>
       )}
     </div>

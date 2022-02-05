@@ -11,7 +11,7 @@ const MediaItemSeason = ({ route, image, title, description, date, number, episo
   const subheadings = [date, ...(episodes ? [`${episodes} episodios`] : [])];
 
   return (
-    <Link to={`/${route}/seasons/${number}`} className={`${styles.season}`}>
+    <Link to={`${route}/seasons/${number}`} className={`${styles.season}`}>
       <div className={styles.image}>
         <MediaItemImage image={image} ratio={1.5} type="poster" />
       </div>

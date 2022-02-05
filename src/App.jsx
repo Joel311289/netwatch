@@ -39,11 +39,13 @@ const App = () => {
     <SWRConfig
       value={{
         revalidateOnFocus: false
-      }}>
+      }}
+    >
       <div
         ref={scrollerRef}
         className={`App theme-${theme} ${styles} ${breakpoint}`}
-        data-size={breakpoint}>
+        data-size={breakpoint}
+      >
         <Router>
           <ScrollToTop container={scrollerRef.current} />
 

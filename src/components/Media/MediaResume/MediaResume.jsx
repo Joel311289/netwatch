@@ -11,7 +11,7 @@ import { backgroundImageUrl } from '@utils/helpers/strings';
 
 import styles from '@components/Media/MediaResume/MediaResume.module.css';
 
-const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, to }) => {
+const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, to, linkName }) => {
   const subheadings = [
     ...(date_death ? [`${date} - ${date_death}`] : [date]),
     ...(duration ? [duration] : []),
@@ -38,10 +38,12 @@ const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, 
             {date_death && <CgCross className={styles.death} />}
           </Space>
 
-          <Link to={to} className={styles.link}>
-            <FiArrowLeft />
-            Volver a principal
-          </Link>
+          {linkName && (
+            <Link to={to} className={styles.link}>
+              <FiArrowLeft />
+              {linkName}
+            </Link>
+          )}
         </Space>
       </Space>
 

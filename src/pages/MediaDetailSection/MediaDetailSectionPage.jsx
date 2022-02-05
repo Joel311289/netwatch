@@ -25,7 +25,13 @@ const MediaDetailSectionPage = () => {
   return (
     <Space nowrap direction="column" className={styles.wrapper}>
       <div className={styles.resume}>
-        <MediaResume skeleton={loading} to={`${routeMediaDetail(data)}`} title={title} {...data} />
+        <MediaResume
+          skeleton={loading}
+          to={`${routeMediaDetail(data)}`}
+          title={title}
+          linkName="Volver a principal"
+          {...data}
+        />
       </div>
 
       <div className={`App-container App-content ${styles.body}`}>
@@ -43,7 +49,13 @@ const MediaDetailSectionPage = () => {
               {Array.isArray(items) && (
                 <Grid {...gridProps(breakpoint)}>
                   {items.map((item, index) => (
-                    <Element key={index} skeleton={loading} route={routeMediaDetail(data)} {...item} {...props(item)} />
+                    <Element
+                      key={index}
+                      skeleton={loading}
+                      route={routeMediaDetail(data)}
+                      {...item}
+                      {...props(item)}
+                    />
                   ))}
                 </Grid>
               )}

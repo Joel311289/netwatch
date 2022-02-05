@@ -45,8 +45,7 @@ export const queryString = (params) =>
     })
     .join('&');
 export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
-export const getFirstPath = (url) => url.split('/')[1];
-export const getLastPath = (url) => url.split('/').reverse()[0];
+export const getSectionPath = (url, index = 1) => url.split('/')[index];
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 export const removeSpecialCharactersText = (text) => text.replace(/[^a-zA-Z0-9 ]/g, '');
