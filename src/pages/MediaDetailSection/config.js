@@ -1,6 +1,7 @@
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaItemCredit from '@components/Media/MediaItem/MediaItem-credit';
+import MediaItemSeason from '@components/Media/MediaItem/MediaItem-season';
 
 const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 3 }) => {
   if (breakpoint.mobile) return mobile;
@@ -72,7 +73,18 @@ export const sectionProps = {
         }))
   },
   seasons: {
-    label: 'Temporadas'
+    label: 'Temporadas',
+    sections: (detail) => [
+      {
+        gridProps: () => ({
+          gap: '20px',
+          itemsPerRow: 1
+        }),
+        Element: MediaItemSeason,
+        items: detail,
+        props: (props) => ({ ...props })
+      }
+    ]
   },
   credits: {
     label: 'Reparto',
@@ -85,9 +97,7 @@ export const sectionProps = {
         heading: labelCredits[key],
         Element: MediaItemCredit,
         items: data[key],
-        props: (item) => ({
-          ...item
-        })
+        props: (item) => ({ ...item })
       }))
   }
 };

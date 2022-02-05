@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
-import MediaSeasons from '@components/Media/MediaSeasons/MediaSeasons';
+import MediaSeasons from '@components/Media/MediaDetail/MediaDetail-seasons';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 

@@ -27,7 +27,6 @@ const MediaItemCredit = ({ id, image, name, characters }) => {
 };
 
 MediaItemCredit.defaultProps = {
-  direction: 'row',
   characters: []
 };
 

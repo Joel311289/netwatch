@@ -43,7 +43,7 @@ const MediaDetailSectionPage = () => {
               {Array.isArray(items) && (
                 <Grid {...gridProps(breakpoint)}>
                   {items.map((item, index) => (
-                    <Element key={index} skeleton={loading} {...item} {...props(item)} />
+                    <Element key={index} skeleton={loading} route={routeMediaDetail(data)} {...item} {...props(item)} />
                   ))}
                 </Grid>
               )}

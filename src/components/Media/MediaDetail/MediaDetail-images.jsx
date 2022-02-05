@@ -29,7 +29,7 @@ const MediaDetailImages = ({ images, type, to }) => {
         sliderPerView={sliderPerView}
       />
 
-      {images.length > 5 && (
+      {images.length > sliderPerView && (
         <div style={{ marginTop: 15 }}>
           <List divider>
             {items.map((item) => (

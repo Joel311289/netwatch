@@ -50,7 +50,6 @@ export const tvWatchProvidersSupported = {
   62: 'Atres Player',
   456: 'Mitele',
   541: 'rtve',
-  118: 'HBO',
   188: 'Youtube Premium',
   35: 'Rakuten TV',
   194: 'Starz Play Amazon Channel',

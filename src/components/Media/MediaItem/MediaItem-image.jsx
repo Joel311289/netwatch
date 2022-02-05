@@ -49,7 +49,7 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
             ...(!lazy && { backgroundImage: backgroundImageUrl(image) })
           }}
         >
-          {!image && <CgImage />}
+          {!image && <CgImage className={styles.empty} />}
         </div>
 
         <div className={styles.actions}>

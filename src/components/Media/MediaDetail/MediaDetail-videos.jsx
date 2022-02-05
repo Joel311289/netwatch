@@ -31,7 +31,7 @@ const MediaDetailVideos = ({ videos, to }) => {
         </Slider>
       )}
 
-      {videos.length > 5 && (
+      {videos.length > sliderPerView && (
         <div style={{ marginTop: 15 }}>
           <List divider>
             {items.map((item) => (
