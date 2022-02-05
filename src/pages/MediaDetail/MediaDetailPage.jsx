@@ -11,7 +11,7 @@ import { detailProps, getTrailer } from '@pages/MediaDetail/config';
 import styles from '@pages/MediaDetail/MediaDetailPage.module.css';
 
 const MediaDetailPage = () => {
-  const { mediaType, id } = useMediaPath();
+  const { mediaType, id } = useMediaPath('/:mediaType/:key');
   const { append_to_response, sections } = detailProps(mediaType);
 
   const { data: detail, loading } = useServiceMediaDetail(mediaType, id, append_to_response);

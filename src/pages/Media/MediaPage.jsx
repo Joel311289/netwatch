@@ -12,7 +12,7 @@ import { discoverProps } from '@pages/Media/config';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
 
 const MediaPage = () => {
-  const { mediaType } = useMediaPath();
+  const { mediaType } = useMediaPath('/:mediaType');
   const { data: items, loading, onLoadMore, paginationEnd } = useServiceMedia(mediaType);
 
   const { heading } = discoverProps(mediaType);

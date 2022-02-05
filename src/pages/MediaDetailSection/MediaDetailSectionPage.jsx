@@ -14,7 +14,7 @@ import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css'
 
 const MediaDetailSectionPage = () => {
   const breakpoint = useBreakpointViewport();
-  const { mediaType, id, section } = useMediaPath();
+  const { mediaType, id, section } = useMediaPath('/:mediaType/:key/:section');
   const { data, loading } = useServiceMediaDetail(mediaType, id, [section]);
 
   const { title, [section]: detail } = data;

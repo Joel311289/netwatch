@@ -44,8 +44,6 @@ export const queryString = (params) =>
       return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])})`;
     })
     .join('&');
-export const getIdFromParams = (params, key) => (params[key] ? params[key].split('-')[0] : '');
-export const getSectionPath = (url, index = 1) => url.split('/')[index];
 
 export const truncatedText = (text, limit) => _.truncate(text, { length: limit, separator: ' ' });
 export const removeSpecialCharactersText = (text) => text.replace(/[^a-zA-Z0-9 ]/g, '');
