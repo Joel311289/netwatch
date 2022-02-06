@@ -1,8 +1,10 @@
+import { Link as LinkRouter, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { CgCross } from 'react-icons/cg';
 
 import Space from '@components/Layout/Space/Space';
 import Link from '@components/UI/Link/Link';
+import Select from '@components/UI/Select/Select';
 import Separator from '@components/UI/Separator/Separator';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
@@ -11,12 +13,30 @@ import { backgroundImageUrl } from '@utils/helpers/strings';
 
 import styles from '@components/Media/MediaResume/MediaResume.module.css';
 
-const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, to, linkName }) => {
+const MediaResume = ({
+  image,
+  backdrop,
+  title,
+  date,
+  date_death,
+  age,
+  duration,
+  to,
+  route,
+  linkName,
+  numberSeasonActive,
+  seasons
+}) => {
+  const history = useHistory();
   const subheadings = [
-    ...(date_death ? [`${date} - ${date_death}`] : [date]),
-    ...(duration ? [duration] : []),
-    ...(age ? [`${age} años`] : [])
+    ...(date ? (date_death ? [`${date} - ${date_death}`] : [date]) : []),
+    ...(date && duration ? [duration] : []),
+    ...(date && age ? [`${age} años`] : [])
   ];
+
+  const onChangeSeason = (seasonId) => {
+    history.push(`${to}/${seasonId}`);
+  };
 
   return (
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
@@ -31,7 +51,21 @@ const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, 
         </div>
 
         <Space direction="column" gap={5} className="theme-dark">
-          <span className={styles.title}>{title}</span>
+          <Space>
+            <LinkRouter to={route}>
+              <span className={styles.title}>{title}</span>
+            </LinkRouter>
+          </Space>
+
+          {!isNaN(numberSeasonActive) && (
+            <Select
+              items={seasons}
+              identifierKey="number"
+              identifierSelected={String(numberSeasonActive)}
+              displayKey="title"
+              onChange={onChangeSeason}
+            />
+          )}
 
           <Space gap={2} align="center" className={styles.subheadings}>
             <Separator items={subheadings} />
@@ -39,7 +73,7 @@ const MediaResume = ({ image, backdrop, title, date, date_death, age, duration, 
           </Space>
 
           {linkName && (
-            <Link to={to} className={styles.link}>
+            <Link to={to} className={styles.back}>
               <FiArrowLeft />
               {linkName}
             </Link>

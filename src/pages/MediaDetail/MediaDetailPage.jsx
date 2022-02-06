@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { useMediaPath } from '@hooks/useMediaPath';
 import { useServiceMediaDetail } from '@hooks/useServiceMediaDetail';
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaModal from '@components/Media/MediaModal/MediaModal';
 import MediaDetail from '@components/Media/MediaDetail/MediaDetail';
@@ -16,13 +15,12 @@ const MediaDetailPage = () => {
 
   const { data: detail, loading } = useServiceMediaDetail(mediaType, id, append_to_response);
   const [fetchModalData, setFetchModalData] = useState({});
-  const { tablet } = useBreakpointViewport();
 
   const onTrailer = (item) =>
     setFetchModalData({ ...item, mode: 'video', videoId: getTrailer(detail) });
 
   return (
-    <div className={`App-container App-content ${tablet && styles.tablet}`}>
+    <div className={`App-container App-content`}>
       <div className={styles.body}>
         <MediaDetail
           skeleton={loading}

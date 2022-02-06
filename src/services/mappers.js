@@ -90,6 +90,18 @@ export const mediaDetailMapper = (media) => {
   return commonData;
 };
 
+export const episodeDetailMapper = (episode) => {
+  return {
+    id: get(episode, 'id'),
+    season_number: get(episode, 'season_number'),
+    episode_number: get(episode, 'episode_number'),
+    title: get(episode, 'name'),
+    date: formattedDate(get(episode, 'air_date')),
+    description: get(episode, 'overview'),
+    image: getImageMediaUrl(apiBackdropUrl, get(episode, 'still_path'))
+  };
+};
+
 export const seasonDetailMapper = (season) => {
   return {
     id: get(season, 'id'),

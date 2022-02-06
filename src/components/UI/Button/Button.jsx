@@ -28,11 +28,11 @@ const Button = ({
     [className]: Boolean(className)
   });
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (role === 'link') {
       window.open(href, '_blank').focus();
     } else {
-      onClick && onClick();
+      onClick && onClick(e);
     }
   };
 

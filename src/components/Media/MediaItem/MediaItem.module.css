@@ -266,7 +266,6 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  flex-wrap: nowrap;
   cursor: pointer;
   color: var(--color-text);
   padding: 0 0 20px 0;
@@ -274,15 +273,15 @@
 }
 
 .season .image {
-  width: 85px;
-  min-width: 85px;
+  width: 110px;
+  min-width: 110px;
 }
 .season:hover .image {
   opacity: 0.8;
 }
 
 .season .title {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 500;
 }
 .season:hover .title {
@@ -290,13 +289,23 @@
 }
 
 .season .description {
-  font-size: 0.88rem;
-  color: rgba(var(--divider-color-rgb), 0.7);
+  font-size: 0.95rem;
+  color: rgba(var(--divider-color-rgb), 0.6);
   font-weight: 400;
   margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
+}
+
+/* ---------- Episode */
+.episode {
+  flex-wrap: nowrap;
+}
+
+.episode .image {
+  width: 250px;
+  min-width: 250px;
 }

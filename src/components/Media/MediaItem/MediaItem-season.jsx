@@ -8,7 +8,7 @@ import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
 const MediaItemSeason = ({ route, image, title, description, date, number, episodes }) => {
-  const subheadings = [date, ...(episodes ? [`${episodes} episodios`] : [])];
+  const subheadings = [...(date ? [date] : []), ...(episodes ? [`${episodes} episodios`] : [])];
 
   return (
     <Link to={`${route}/seasons/${number}`} className={`${styles.season}`}>

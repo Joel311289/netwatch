@@ -1,3 +1,4 @@
+import { useFetch } from '@hooks/useFetch';
 import { useMediaPath } from '@hooks/useMediaPath';
 import { useServiceMediaDetail } from '@hooks/useServiceMediaDetail';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
@@ -9,36 +10,54 @@ import MediaResume from '@components/Media/MediaResume/MediaResume';
 
 import { routeMediaDetail } from '@services/helpers';
 
-import { sectionProps } from '@pages/MediaDetailSection/config';
+import {
+  apiSectionDetail,
+  fetcherSectionDetail,
+  resumeProps,
+  sectionProps
+} from '@pages/MediaDetailSection/config';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
 
 const MediaDetailSectionPage = () => {
   const breakpoint = useBreakpointViewport();
-  const { mediaType, id, section } = useMediaPath('/:mediaType/:key/:section');
+  const { mediaType, id, section, sectionId } = useMediaPath([
+    '/:mediaType/:key/:section',
+    '/:mediaType/:key/:section/:keySection'
+  ]);
+
   const { data, loading } = useServiceMediaDetail(mediaType, id, [section]);
+  const { data: detailSection, loading: loadingSection } = useFetch(
+    sectionId ? apiSectionDetail(id, sectionId)[section] : null,
+    fetcherSectionDetail[section]
+  );
 
   const { title, [section]: detail } = data;
-  const { label, sections } = sectionProps[section];
+  const resume = resumeProps({ data, detail, detailSection })[section] || {};
+  const { label, length, sections } = sectionProps({ detail, detailSection })[section];
 
-  console.log(section, data, detail);
+  console.log(data, detail, detailSection);
 
   return (
     <Space nowrap direction="column" className={styles.wrapper}>
       <div className={styles.resume}>
         <MediaResume
           skeleton={loading}
+          route={`${routeMediaDetail(data)}`}
           to={`${routeMediaDetail(data)}`}
           title={title}
           linkName="Volver a principal"
           {...data}
+          {...resume}
         />
       </div>
 
       <div className={`App-container App-content ${styles.body}`}>
-        <h2 className="heading">{label}</h2>
+        <h2 className="heading">
+          {label} {length ? `(${length})` : ''}
+        </h2>
 
-        {detail &&
-          sections(detail).map(({ heading, gridProps, Element, items, props }, index) => (
+        {(detail || detailSection) &&
+          sections.map(({ heading, gridProps, Element, items, props }, index) => (
             <div className={styles.subsection} key={index}>
               {heading && (
                 <div className="sub-heading">
@@ -51,7 +70,7 @@ const MediaDetailSectionPage = () => {
                   {items.map((item, index) => (
                     <Element
                       key={index}
-                      skeleton={loading}
+                      skeleton={!sectionId ? loading : loadingSection}
                       route={routeMediaDetail(data)}
                       {...item}
                       {...props(item)}

@@ -1,7 +1,14 @@
+import { get } from 'lodash';
+
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 import MediaItem from '@components/Media/MediaItem/MediaItem';
 import MediaItemCredit from '@components/Media/MediaItem/MediaItem-credit';
 import MediaItemSeason from '@components/Media/MediaItem/MediaItem-season';
+import MediaItemEpisode from '@components/Media/MediaItem/MediaItem-episode';
+
+import { mediaTypes } from '@services/constants';
+import { routeMediaDetail } from '@services/helpers';
+import { getSeasonSerie } from '@services/series/get-season';
 
 const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 3 }) => {
   if (breakpoint.mobile) return mobile;
@@ -32,10 +39,34 @@ const labelCredits = {
   writers: 'Escritores'
 };
 
-export const sectionProps = {
+export const apiSectionDetail = (mediaId, sectionId) => ({
+  'seasons/detail': `/api/${mediaTypes.TV}/${mediaId}/season/${sectionId}`
+});
+export const fetcherSectionDetail = {
+  'seasons/detail': getSeasonSerie
+};
+
+export const resumeProps = ({ data, detailSection }) => ({
+  'seasons/detail': {
+    to: `${routeMediaDetail(data)}/seasons`,
+    seasons: get(data, 'seasons'),
+    numberSeasonActive: get(detailSection, 'number'),
+    linkName: 'Volver a temporadas',
+    date: get(detailSection, 'date'),
+    image: get(detailSection, 'image') || get(data, 'image')
+  }
+});
+
+const getSeasonIndicator = (detail) => {
+  const season_number = get(detail, 'number');
+  return season_number ? `T${season_number}` : '';
+};
+
+export const sectionProps = ({ data, detail, detailSection }) => ({
   videos: {
     label: 'Vídeos',
-    sections: (detail) => [
+    length: (detail || []).length,
+    sections: [
       {
         gridProps: (breakpoint) => ({
           gap: '0 10px',
@@ -53,28 +84,28 @@ export const sectionProps = {
   },
   images: {
     label: 'Imágenes',
-    sections: (data) =>
-      Object.keys(data)
-        .filter((key) => labelImages[key])
-        .map((key) => ({
-          gridProps: (breakpoint) => ({
-            gap: '20px 10px',
-            itemsPerRow:
-              key === 'backdrops' ? itemsPerRowBackdrop(breakpoint) : itemsPerRowPoster(breakpoint)
-          }),
-          heading: labelImages[key],
-          Element: MediaItemImage,
-          items: data[key],
-          props: (item) => ({
-            ...item,
-            ratio: Math.max(...data[key].map(({ ratio }) => ratio)),
-            zoom: true
-          })
-        }))
+    sections: Object.keys(detail || {})
+      .filter((key) => labelImages[key])
+      .map((key) => ({
+        gridProps: (breakpoint) => ({
+          gap: '20px 10px',
+          itemsPerRow:
+            key === 'backdrops' ? itemsPerRowBackdrop(breakpoint) : itemsPerRowPoster(breakpoint)
+        }),
+        heading: `${labelImages[key]} (${detail[key].length})`,
+        Element: MediaItemImage,
+        items: detail[key],
+        props: (item) => ({
+          ...item,
+          ratio: Math.max(...detail[key].map(({ ratio }) => ratio)),
+          zoom: true
+        })
+      }))
   },
   seasons: {
     label: 'Temporadas',
-    sections: (detail) => [
+    length: get(data, 'number_seasons'),
+    sections: [
       {
         gridProps: () => ({
           gap: '20px',
@@ -88,16 +119,30 @@ export const sectionProps = {
   },
   credits: {
     label: 'Reparto',
-    sections: (data) =>
-      Object.keys(data).map((key) => ({
-        gridProps: (breakpoint) => ({
-          gap: '20px 10px',
-          itemsPerRow: itemsPerRowCredit(breakpoint)
+    sections: Object.keys(detail || {}).map((key) => ({
+      gridProps: (breakpoint) => ({
+        gap: '20px 10px',
+        itemsPerRow: itemsPerRowCredit(breakpoint)
+      }),
+      heading: labelCredits[key],
+      Element: MediaItemCredit,
+      items: detail[key],
+      props: (item) => ({ ...item })
+    }))
+  },
+  'seasons/detail': {
+    label: `${getSeasonIndicator(detailSection)} Episodios`.trim(),
+    length: get(detailSection, 'episodes', []).length,
+    sections: [
+      {
+        gridProps: () => ({
+          gap: '20px',
+          itemsPerRow: 1
         }),
-        heading: labelCredits[key],
-        Element: MediaItemCredit,
-        items: data[key],
-        props: (item) => ({ ...item })
-      }))
+        Element: MediaItemEpisode,
+        items: get(detailSection, 'episodes', []),
+        props: (props) => ({ ...props })
+      }
+    ]
   }
-};
+});

@@ -80,6 +80,7 @@ const App = () => {
                   `/${routeMediaTypes.tv}/:key/images`,
                   `/${routeMediaTypes.tv}/:key/credits`,
                   `/${routeMediaTypes.tv}/:key/seasons`,
+                  `/${routeMediaTypes.tv}/:key/seasons/:number_season`,
                   `/${routeMediaTypes.movie}/:key/videos`,
                   `/${routeMediaTypes.movie}/:key/images`,
                   `/${routeMediaTypes.movie}/:key/credits`,

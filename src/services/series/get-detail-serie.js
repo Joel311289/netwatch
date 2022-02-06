@@ -32,7 +32,7 @@ const detailWatchProviders = ({ results }) => {
 };
 
 const detailSeasons = (seasons = []) => {
-  const sortedSeasons = sortCollectionBy(seasons, 'season_number', true);
+  const sortedSeasons = sortCollectionBy(seasons, 'season_number');
 
   return sortedSeasons.map(seasonDetailMapper);
 };
@@ -41,11 +41,11 @@ const detailImages = ({ backdrops, posters }, { backdrop_path, poster_path }) =>
   return {
     backdrops: [
       { file_path: backdrop_path, aspect_ratio: 1.777 },
-      ...removeCollectionBy(backdrops, 'file_path', backdrop_path).reverse()
+      ...removeCollectionBy(backdrops, 'file_path', backdrop_path)
     ].map((item) => imageDetailMapper(item, true)),
     posters: [
       { file_path: poster_path, aspect_ratio: 0.667 },
-      ...removeCollectionBy(posters, 'file_path', poster_path).reverse()
+      ...removeCollectionBy(posters, 'file_path', poster_path)
     ].map((item) => imageDetailMapper(item, true))
   };
 };
