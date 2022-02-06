@@ -10,7 +10,8 @@ export const useMediaPath = (pathRegexp) => {
 
   const matches = pathToRegexp(pathRegexp).exec(url);
   // eslint-disable-next-line no-unused-vars
-  const [_, mediaType, key, section, keySection] = compactArray(matches);
+  const [_, mediaType, key, ...sections] = compactArray(matches);
+  const [section, keySection] = sections.splice(-2);
 
   return {
     mediaType: mediaTypeByRoute(mediaType),

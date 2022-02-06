@@ -20,22 +20,22 @@ import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css'
 
 const MediaDetailSectionPage = () => {
   const breakpoint = useBreakpointViewport();
-  const { mediaType, id, section, sectionId } = useMediaPath([
+  const { mediaType, id, section, sectionId, params } = useMediaPath([
     '/:mediaType/:key/:section',
-    '/:mediaType/:key/:section/:keySection'
+    '/:mediaType/:key/:section/:keySection',
+    '/:mediaType/:key/:section/:keySection/:section/:keySection'
   ]);
+  console.log(section, params);
 
   const { data, loading } = useServiceMediaDetail(mediaType, id, [section]);
   const { data: detailSection, loading: loadingSection } = useFetch(
-    sectionId ? apiSectionDetail(id, sectionId)[section] : null,
+    sectionId ? apiSectionDetail(id, params)[section] : null,
     fetcherSectionDetail[section]
   );
 
   const { title, [section]: detail } = data;
   const resume = resumeProps({ data, detail, detailSection })[section] || {};
-  const { label, length, sections } = sectionProps({ detail, detailSection })[section];
-
-  console.log(data, detail, detailSection);
+  const { label, length, sections } = sectionProps({ detail, detailSection })[section] || {};
 
   return (
     <Space nowrap direction="column" className={styles.wrapper}>
@@ -57,7 +57,7 @@ const MediaDetailSectionPage = () => {
         </h2>
 
         {(detail || detailSection) &&
-          sections.map(({ heading, gridProps, Element, items, props }, index) => (
+          (sections || []).map(({ heading, gridProps, Element, items, props }, index) => (
             <div className={styles.subsection} key={index}>
               {heading && (
                 <div className="sub-heading">

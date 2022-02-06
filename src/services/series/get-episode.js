@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-import { videoDetailMapper } from '@services/mappers';
+import { episodeDetailMapper } from '@services/mappers';
 
 const params = {
-  include_video_language: 'es,null'
+  append_to_response: 'external_ids,videos,images'
 };
 
 export const getSeasonEpisodeSerie = (url) => {
-  return axios.get(`${url}`, { params }).then(({ results }) => {
-    return results.map(videoDetailMapper);
+  return axios.get(`${url}`, { params }).then((response) => {
+    return episodeDetailMapper(response);
   });
 };

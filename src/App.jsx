@@ -81,6 +81,7 @@ const App = () => {
                   `/${routeMediaTypes.tv}/:key/credits`,
                   `/${routeMediaTypes.tv}/:key/seasons`,
                   `/${routeMediaTypes.tv}/:key/seasons/:number_season`,
+                  `/${routeMediaTypes.tv}/:key/seasons/:number_season/episodes/:number_episode`,
                   `/${routeMediaTypes.movie}/:key/videos`,
                   `/${routeMediaTypes.movie}/:key/images`,
                   `/${routeMediaTypes.movie}/:key/credits`,

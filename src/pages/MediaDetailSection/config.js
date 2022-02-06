@@ -9,6 +9,7 @@ import MediaItemEpisode from '@components/Media/MediaItem/MediaItem-episode';
 import { mediaTypes } from '@services/constants';
 import { routeMediaDetail } from '@services/helpers';
 import { getSeasonSerie } from '@services/series/get-season';
+import { getSeasonEpisodeSerie } from '@services/series/get-episode';
 
 const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 3 }) => {
   if (breakpoint.mobile) return mobile;
@@ -39,11 +40,16 @@ const labelCredits = {
   writers: 'Escritores'
 };
 
-export const apiSectionDetail = (mediaId, sectionId) => ({
-  'seasons/detail': `/api/${mediaTypes.TV}/${mediaId}/season/${sectionId}`
+export const apiSectionDetail = (mediaId, params) => ({
+  'seasons/detail': `/api/${mediaTypes.TV}/${mediaId}/season/${get(params, 'number_season')}`,
+  'episodes/detail': `/api/${mediaTypes.TV}/${mediaId}/season/${get(
+    params,
+    'number_season'
+  )}/episode/${get(params, 'number_episode')}`
 });
 export const fetcherSectionDetail = {
-  'seasons/detail': getSeasonSerie
+  'seasons/detail': getSeasonSerie,
+  'episodes/detail': getSeasonEpisodeSerie
 };
 
 export const resumeProps = ({ data, detailSection }) => ({
@@ -59,7 +65,7 @@ export const resumeProps = ({ data, detailSection }) => ({
 
 const getSeasonIndicator = (detail) => {
   const season_number = get(detail, 'number');
-  return season_number ? `T${season_number}` : '';
+  return season_number ? `T${season_number} - ` : '';
 };
 
 export const sectionProps = ({ data, detail, detailSection }) => ({
