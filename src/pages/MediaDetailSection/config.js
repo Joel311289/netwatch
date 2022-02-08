@@ -56,17 +56,12 @@ export const resumeProps = ({ data, detailSection }) => ({
   'seasons/detail': {
     to: `${routeMediaDetail(data)}/seasons`,
     seasons: get(data, 'seasons'),
-    numberSeasonActive: get(detailSection, 'number'),
+    numberSeasonActive: get(detailSection, 'season_number'),
     linkName: 'Volver a temporadas',
     date: get(detailSection, 'date'),
-    image: get(detailSection, 'image') || get(data, 'image')
+    // image: get(detailSection, 'image')
   }
 });
-
-const getSeasonIndicator = (detail) => {
-  const season_number = get(detail, 'number');
-  return season_number ? `T${season_number} - ` : '';
-};
 
 export const sectionProps = ({ data, detail, detailSection }) => ({
   videos: {
@@ -137,10 +132,11 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
     }))
   },
   'seasons/detail': {
-    label: `${getSeasonIndicator(detailSection)} Episodios`.trim(),
-    length: get(detailSection, 'episodes', []).length,
+    // label: `${get(detailSection, 'title')}`,
+    // length: get(detailSection, 'episodes', []).length,
     sections: [
       {
+        heading: 'Episodios',
         gridProps: () => ({
           gap: '20px',
           itemsPerRow: 1

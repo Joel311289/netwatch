@@ -105,7 +105,7 @@ export const episodeDetailMapper = (episode) => {
 export const seasonDetailMapper = (season) => {
   return {
     id: get(season, 'id'),
-    number: get(season, 'season_number'),
+    season_number: get(season, 'season_number'),
     title: get(season, 'name'),
     date: formattedDate(get(season, 'air_date')),
     episodes: get(season, 'episode_count'),

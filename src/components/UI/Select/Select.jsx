@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 
 import Button from '@components/UI/Button/Button';
 
+import { string } from '../../../utils/helpers/strings';
+
 import styles from '@components/UI/Select/Select.module.css';
 
-const Select = ({ items, identifierSelected, identifierKey, displayKey, onChange }) => {
+const Select = ({ items, identifierSelected, identifierKey, displayKey, hideArrow,className, onChange }) => {
   const isUniqueItem = items && items.length === 1;
   const [selected, setSelected] = useState(identifierSelected);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,16 +49,15 @@ const Select = ({ items, identifierSelected, identifierKey, displayKey, onChange
         size="small"
         secondary
         rounded
-        className={`select-wrapper ${styles.button}`}
+        className={`select-wrapper ${string(className)} ${styles.button}`}
         id="selector-button"
         aria-controls={open ? 'selector-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
+        onClick={handleClick}>
         <span className={styles.label}>{itemSelected && itemSelected[displayKey]}</span>
 
-        {!isUniqueItem && <FiChevronDown className={styles.arrow} />}
+        {!isUniqueItem && !hideArrow && <FiChevronDown className={styles.arrow} />}
       </Button>
 
       <Menu
@@ -73,14 +74,12 @@ const Select = ({ items, identifierSelected, identifierKey, displayKey, onChange
         transformOrigin={{
           vertical: 'top',
           horizontal: 'left'
-        }}
-      >
+        }}>
         {items.map(({ [identifierKey]: identifier, [displayKey]: display }) => (
           <MenuItem
             key={identifier}
             onClick={() => handleClickItem(identifier)}
-            className={styles.item}
-          >
+            className={styles.item}>
             {display}
           </MenuItem>
         ))}
@@ -97,10 +96,12 @@ Select.defaultProps = {
 };
 
 Select.propTypes = {
+  className: PropTypes.string,
   items: PropTypes.array,
   identifierKey: PropTypes.string,
   displayKey: PropTypes.string,
   identifierSelected: PropTypes.string,
+  hideArrow: PropTypes.bool,
   onChange: PropTypes.func
 };
 

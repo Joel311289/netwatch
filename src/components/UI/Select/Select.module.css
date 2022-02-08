@@ -1,13 +1,11 @@
 .button {
   width: fit-content;
-  padding: 0 13px !important;
   display: flex;
   align-items: center;
 }
 
 .label {
   margin-top: -2px;
-  font-size: 1rem;
   font-weight: 600;
 }
 

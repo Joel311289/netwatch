@@ -10,12 +10,15 @@ import MediaResume from '@components/Media/MediaResume/MediaResume';
 
 import { routeMediaDetail } from '@services/helpers';
 
+import { string } from '@utils/helpers/strings';
+
 import {
   apiSectionDetail,
   fetcherSectionDetail,
   resumeProps,
   sectionProps
 } from '@pages/MediaDetailSection/config';
+import { Selector } from '@pages/MediaDetailSection/components';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
 
 const MediaDetailSectionPage = () => {
@@ -37,9 +40,16 @@ const MediaDetailSectionPage = () => {
   const resume = resumeProps({ data, detail, detailSection })[section] || {};
   const { label, length, sections } = sectionProps({ detail, detailSection })[section] || {};
 
+  const SectionSelector = Selector({ data, detail, detailSection }, () => {})[section];
+
+  console.log(data, detail, detailSection, section);
+
   return (
-    <Space nowrap direction="column" className={styles.wrapper}>
-      <div className={styles.resume}>
+    <Space
+      nowrap
+      direction="column"
+      className={`${styles.wrapper} ${string(styles[section.replace(/\//g, '_')])}`}>
+      <div className={`${styles.resume} theme-dark`}>
         <MediaResume
           skeleton={loading}
           route={`${routeMediaDetail(data)}`}
@@ -52,9 +62,13 @@ const MediaDetailSectionPage = () => {
       </div>
 
       <div className={`App-container App-content ${styles.body}`}>
-        <h2 className="heading">
-          {label} {length ? `(${length})` : ''}
-        </h2>
+        {label && (
+          <h2 className="heading">
+            {label} {length ? `(${length})` : ''}
+          </h2>
+        )}
+
+        {SectionSelector && SectionSelector()}
 
         {(detail || detailSection) &&
           (sections || []).map(({ heading, gridProps, Element, items, props }, index) => (

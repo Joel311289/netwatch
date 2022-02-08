@@ -1,10 +1,9 @@
-import { Link as LinkRouter, useHistory } from 'react-router-dom';
+import { Link as LinkRouter } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { CgCross } from 'react-icons/cg';
 
 import Space from '@components/Layout/Space/Space';
 import Link from '@components/UI/Link/Link';
-import Select from '@components/UI/Select/Select';
 import Separator from '@components/UI/Separator/Separator';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
@@ -23,49 +22,33 @@ const MediaResume = ({
   duration,
   to,
   route,
-  linkName,
-  numberSeasonActive,
-  seasons
+  linkName
 }) => {
-  const history = useHistory();
   const subheadings = [
     ...(date ? (date_death ? [`${date} - ${date_death}`] : [date]) : []),
     ...(date && duration ? [duration] : []),
     ...(date && age ? [`${age} años`] : [])
   ];
 
-  const onChangeSeason = (seasonId) => {
-    history.push(`${to}/${seasonId}`);
-  };
-
   return (
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
       <div
         className={styles.backdrop}
-        style={{ backgroundImage: backgroundImageUrl(backdrop) }}
-      ></div>
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
 
       <Space nowrap gap={25} className={styles.content}>
-        <div className={styles.image} style={{ width: 100, minWidth: 100 }}>
-          <MediaItemImage image={image} ratio={1.5} />
-        </div>
+        {image && (
+          <div className={styles.image} style={{ width: 100, minWidth: 100 }}>
+            <MediaItemImage image={image} ratio={1.5} />
+          </div>
+        )}
 
-        <Space direction="column" gap={5} className="theme-dark">
+        <Space direction="column" gap={5}>
           <Space>
             <LinkRouter to={route}>
               <span className={styles.title}>{title}</span>
             </LinkRouter>
           </Space>
-
-          {!isNaN(numberSeasonActive) && (
-            <Select
-              items={seasons}
-              identifierKey="number"
-              identifierSelected={String(numberSeasonActive)}
-              displayKey="title"
-              onChange={onChangeSeason}
-            />
-          )}
 
           <Space gap={2} align="center" className={styles.subheadings}>
             <Separator items={subheadings} />
@@ -81,7 +64,7 @@ const MediaResume = ({
         </Space>
       </Space>
 
-      <div className={styles['gradient-bottom']}></div>
+      {backdrop && <div className={styles['gradient-bottom']}></div>}
     </div>
   );
 };

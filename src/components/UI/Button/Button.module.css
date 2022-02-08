@@ -24,9 +24,11 @@
   opacity: 0.7;
 }
 .wrapper[disabled] {
-  background-color: var(--color-disabled);
-  color: var(--color-gray);
-  cursor: default;
+  background-color: var(--color-disabled) !important;
+  color: var(--color-gray) !important;
+  cursor: default !important;
+  pointer-events: none;
+  opacity: 0.6 !important;
 }
 .wrapper.rounded {
   border-radius: 30px;

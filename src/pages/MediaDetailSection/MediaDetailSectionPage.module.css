@@ -21,3 +21,31 @@
 .empty {
   opacity: 0.6;
 }
+
+.selector {
+  padding: 0 !important;
+  font-size: 1.5rem !important;
+  background-color: transparent !important;
+  height: 29px;
+  margin: 20px 0 5px 0;
+}
+.selector:hover {
+  color: var(--color-yellow) !important;
+
+}
+
+.navigation {
+  margin-bottom: 25px;
+}
+.indicator {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-right: 25px;
+}
+.navigation-link {
+  padding: 0 10px !important;
+}
+.navigation-arrow {
+  font-size: 1.3rem !important;
+  padding: 0 8px !important;
+}
