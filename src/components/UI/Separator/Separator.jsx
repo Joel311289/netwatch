@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 import Space from '@components/Layout/Space/Space';
 
+import { string } from '@utils/helpers/strings';
+
 import styles from '@components/UI/Separator/Separator.module.css';
 
-const Separator = ({ items, separator }) => {
+const Separator = ({ items, separator, className }) => {
   return (
-    <Space align="center" className={`separator-wrapper ${styles.wrapper}`}>
+    <Space align="center" className={`separator-wrapper ${styles.wrapper} ${string(className)}`}>
       {items.map((label, index) => (
         <React.Fragment key={index}>
           <span>{label}</span>
@@ -24,7 +26,8 @@ Separator.defaultProps = {
 };
 Separator.propTypes = {
   items: PropTypes.array,
-  separator: PropTypes.string
+  separator: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Separator;

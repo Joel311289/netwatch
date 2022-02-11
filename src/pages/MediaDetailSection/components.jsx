@@ -17,6 +17,8 @@ const getNavigationSeason = ({ seasons, current }) => {
   const last = get(seasons.reverse(), '[0].season_number');
   let navigation = { next: null, prev: null };
 
+  console.log(first, last);
+
   if (seasons.length) {
     if (season_number > first) navigation = { ...navigation, prev: season_number - 1 };
     if (season_number < last) navigation = { ...navigation, next: season_number + 1 };
@@ -27,54 +29,59 @@ const getNavigationSeason = ({ seasons, current }) => {
   return navigation;
 };
 
+// eslint-disable-next-line react/prop-types
+const SelectorSeason = ({ data, detailSection }) => {
+  const season_number = get(detailSection, 'season_number');
+  const route = routeMediaDetail(data);
+  const buttonProps = {
+    size: 'small',
+    rounded: true,
+    secondary: true
+  };
+
+  const { prev, next } = getNavigationSeason({
+    seasons: get(data, 'seasons', []),
+    current: { season_number }
+  });
+
+  console.log(season_number, prev, next);
+
+  const onChange = () => {};
+
+  return (
+    <Space direction="column">
+      <Select
+        className={styles.selector}
+        items={get(data, 'seasons', [])}
+        identifierKey="season_number"
+        identifierSelected={String(season_number)}
+        displayKey="title"
+        onChange={onChange}
+      />
+
+      <Space align="center" gap={5} className={styles.navigation}>
+        <div className={styles.indicator}>T{season_number}</div>
+
+        <Button {...buttonProps} disabled={isNaN(prev)} className={styles['navigation-arrow']}>
+          <Link to={`${route}/seasons/${prev}`}>
+            <FiChevronLeft />{prev}
+          </Link>
+        </Button>
+        <Button {...buttonProps} className={styles['navigation-link']}>
+          <Link to={`${route}/seasons`}>Todas las temporadas</Link>
+        </Button>
+        <Button {...buttonProps} disabled={isNaN(next)} className={styles['navigation-arrow']}>
+          <Link to={`${route}/seasons/${next}`}>
+            <FiChevronRight />{next}
+          </Link>
+        </Button>
+      </Space>
+    </Space>
+  );
+};
+
 export const Selector = ({ data, detail, detailSection }, onChange) => ({
   'seasons/detail': () => {
-    const season_number = get(detailSection, 'season_number');
-    const navigation = () => getNavigationSeason({
-      seasons: get(data, 'seasons', []),
-      current: { season_number }
-    });
-    const date = get(detailSection, 'date');
-    const route = routeMediaDetail(data);
-    const buttonProps = {
-      size: 'small',
-      rounded: true,
-      secondary: true
-    };
-
-    console.log(navigation());
-
-    return (
-      <Space direction="column">
-        <Select
-          className={styles.selector}
-          items={get(data, 'seasons', [])}
-          identifierKey="season_number"
-          identifierSelected={String(season_number)}
-          displayKey="title"
-          onChange={onChange}
-        />
-
-        <Space align="center" gap={5} className={styles.navigation}>
-          <div className={styles.indicator}>
-            T{season_number} - {date}
-          </div>
-
-          <Button {...buttonProps} disabled={isNaN(navigation().prev)} className={styles['navigation-arrow']}>
-            <Link to={`${route}/seasons/${navigation().prev}`}>
-              <FiChevronLeft />
-            </Link>
-          </Button>
-          <Button {...buttonProps} className={styles['navigation-link']}>
-            <Link to={`${route}/seasons`}>Todas las temporadas</Link>
-          </Button>
-          <Button {...buttonProps} disabled={isNaN(navigation().next)} className={styles['navigation-arrow']}>
-            <Link to={`${route}/seasons/${navigation().next}`}>
-              <FiChevronRight />
-            </Link>
-          </Button>
-        </Space>
-      </Space>
-    );
+    return <SelectorSeason data={data} detailSection={detailSection} />;
   }
 });

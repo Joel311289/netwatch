@@ -35,12 +35,17 @@
 }
 
 .navigation {
-  margin-bottom: 25px;
+  background-color: rgba(var(--color-skeleton), 0.8);
+  border-radius: 10px;
+  margin: 5px 0 25px 0;
+  padding: 5px 15px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 .indicator {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  margin-right: 25px;
+  margin-right: 10px;
 }
 .navigation-link {
   padding: 0 10px !important;
