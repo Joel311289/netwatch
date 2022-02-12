@@ -59,7 +59,7 @@ export const resumeProps = ({ data, detailSection }) => ({
     numberSeasonActive: get(detailSection, 'season_number'),
     linkName: 'Volver a temporadas',
     date: get(detailSection, 'date'),
-    // image: get(detailSection, 'image')
+    image: get(detailSection, 'image')
   }
 });
 
@@ -69,6 +69,7 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
     length: (detail || []).length,
     sections: [
       {
+        emptyMessage: `No se han encontrado vídeos para ${get(data, 'title')}`,
         gridProps: (breakpoint) => ({
           gap: '0 10px',
           itemsPerRow: itemsPerRowBackdrop(breakpoint)
@@ -88,6 +89,10 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
     sections: Object.keys(detail || {})
       .filter((key) => labelImages[key])
       .map((key) => ({
+        emptyMessage: `No se han encontrado ${(labelImages[key] || '').toLowerCase()} para ${get(
+          data,
+          'title'
+        )}`,
         gridProps: (breakpoint) => ({
           gap: '20px 10px',
           itemsPerRow:
@@ -108,6 +113,7 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
     length: get(data, 'number_seasons'),
     sections: [
       {
+        emptyMessage: `No se han encontrado temporadas para ${get(data, 'title')}`,
         gridProps: () => ({
           gap: '20px',
           itemsPerRow: 1
@@ -121,6 +127,10 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
   credits: {
     label: 'Reparto',
     sections: Object.keys(detail || {}).map((key) => ({
+      emptyMessage: `No se han encontrado ${(labelCredits[key] || '').toLowerCase()} para ${get(
+        data,
+        'title'
+      )}`,
       gridProps: (breakpoint) => ({
         gap: '20px 10px',
         itemsPerRow: itemsPerRowCredit(breakpoint)
@@ -137,6 +147,10 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
     sections: [
       {
         heading: 'Episodios',
+        emptyMessage: `No se han encontrado episodios para "${get(
+          detailSection,
+          'title'
+        )}" de ${get(data, 'title')}`,
         gridProps: () => ({
           gap: '20px',
           itemsPerRow: 1
@@ -144,6 +158,48 @@ export const sectionProps = ({ data, detail, detailSection }) => ({
         Element: MediaItemEpisode,
         items: get(detailSection, 'episodes', []),
         props: (props) => ({ ...props })
+      },
+      {
+        heading: 'Vídeos',
+        gridProps: (breakpoint) => ({
+          gap: '0 10px',
+          itemsPerRow: itemsPerRowBackdrop(breakpoint)
+        }),
+        Element: MediaItem,
+        items: get(detailSection, 'videos', null),
+        props: ({ site, key, name }) => ({
+          title: name,
+          videoKey: key,
+          videoSite: site
+        })
+      },
+      {
+        heading: labelImages.backdrops,
+        gridProps: (breakpoint) => ({
+          gap: '20px 10px',
+          itemsPerRow: itemsPerRowBackdrop(breakpoint)
+        }),
+        Element: MediaItemImage,
+        items: get(detailSection, 'images.backdrops', []),
+        props: (item) => ({
+          ...item,
+          ratio: Math.max(...get(detailSection, 'images.backdrops', []).map(({ ratio }) => ratio)),
+          zoom: true
+        })
+      },
+      {
+        heading: labelImages.posters,
+        gridProps: (breakpoint) => ({
+          gap: '20px 10px',
+          itemsPerRow: itemsPerRowPoster(breakpoint)
+        }),
+        Element: MediaItemImage,
+        items: get(detailSection, 'images.posters', []),
+        props: (item) => ({
+          ...item,
+          ratio: Math.max(...get(detailSection, 'images.posters', []).map(({ ratio }) => ratio)),
+          zoom: true
+        })
       }
     ]
   }

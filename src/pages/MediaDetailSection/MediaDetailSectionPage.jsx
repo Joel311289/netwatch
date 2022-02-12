@@ -11,6 +11,7 @@ import MediaResume from '@components/Media/MediaResume/MediaResume';
 import { routeMediaDetail } from '@services/helpers';
 
 import { string } from '@utils/helpers/strings';
+import { isEmptyArray } from '@utils/helpers/arrays';
 
 import {
   apiSectionDetail,
@@ -28,7 +29,6 @@ const MediaDetailSectionPage = () => {
     '/:mediaType/:key/:section/:keySection',
     '/:mediaType/:key/:section/:keySection/:section/:keySection'
   ]);
-  console.log(section, params);
 
   const { data, loading } = useServiceMediaDetail(mediaType, id, [section]);
   const { data: detailSection, loading: loadingSection } = useFetch(
@@ -38,11 +38,11 @@ const MediaDetailSectionPage = () => {
 
   const { title, [section]: detail } = data;
   const resume = resumeProps({ data, detail, detailSection })[section] || {};
-  const { label, length, sections } = sectionProps({ detail, detailSection })[section] || {};
+  const { label, length, sections } = sectionProps({ data, detail, detailSection })[section] || {};
 
   const SectionSelector = Selector({ data, detail, detailSection }, () => {})[section];
 
-  console.log(data, detail, detailSection, section);
+  console.log(data, detailSection, section);
 
   return (
     <Space
@@ -70,36 +70,39 @@ const MediaDetailSectionPage = () => {
 
         {SectionSelector && SectionSelector()}
 
-        {(detail || detailSection) &&
-          (sections || []).map(({ heading, gridProps, Element, items, props }, index) => (
-            <div className={styles.subsection} key={index}>
-              {heading && (
-                <div className="sub-heading">
-                  <MediaHeading text={heading} />
-                </div>
-              )}
+        <Space direction="column" gap={50} nowrap>
+          {(detail || detailSection) &&
+            (sections || []).map(
+              ({ heading, gridProps, Element, items, props, emptyMessage }, index) =>
+                (!isEmptyArray(items) || emptyMessage) && (
+                  <div className={styles.subsection} key={index}>
+                    {heading && (
+                      <div className="sub-heading">
+                        <MediaHeading text={heading} />
+                      </div>
+                    )}
 
-              {Array.isArray(items) && (
-                <Grid {...gridProps(breakpoint)}>
-                  {items.map((item, index) => (
-                    <Element
-                      key={index}
-                      skeleton={!sectionId ? loading : loadingSection}
-                      route={routeMediaDetail(data)}
-                      {...item}
-                      {...props(item)}
-                    />
-                  ))}
-                </Grid>
-              )}
+                    {Array.isArray(items) && (
+                      <Grid {...gridProps(breakpoint)}>
+                        {items.map((item, index) => (
+                          <Element
+                            key={index}
+                            skeleton={!sectionId ? loading : loadingSection}
+                            route={routeMediaDetail(data)}
+                            {...item}
+                            {...props(item)}
+                          />
+                        ))}
+                      </Grid>
+                    )}
 
-              {Array.isArray(items) && !items.length && (
-                <div className={styles.empty}>{`No se han encontrado ${(
-                  heading || label
-                ).toLowerCase()} para "${title}"`}</div>
-              )}
-            </div>
-          ))}
+                    {Array.isArray(items) && !items.length && emptyMessage && (
+                      <div className={styles.empty}>{emptyMessage}</div>
+                    )}
+                  </div>
+                )
+            )}
+        </Space>
       </div>
     </Space>
   );

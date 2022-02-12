@@ -1,4 +1,5 @@
 .button {
+  color: var(--color-text) !important;
   width: fit-content;
   display: flex;
   align-items: center;
@@ -11,6 +12,7 @@
 
 .arrow {
   font-size: 1.5rem;
+  margin-top: 1.5px;
 }
 
 .paper {

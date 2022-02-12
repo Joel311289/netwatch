@@ -34,7 +34,8 @@ const MediaResume = ({
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
       <div
         className={styles.backdrop}
-        style={{ backgroundImage: backgroundImageUrl(backdrop) }}></div>
+        style={{ backgroundImage: backgroundImageUrl(backdrop) }}
+      ></div>
 
       <Space nowrap gap={25} className={styles.content}>
         {image && (

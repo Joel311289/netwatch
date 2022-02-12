@@ -10,7 +10,15 @@ import { string } from '../../../utils/helpers/strings';
 
 import styles from '@components/UI/Select/Select.module.css';
 
-const Select = ({ items, identifierSelected, identifierKey, displayKey, hideArrow,className, onChange }) => {
+const Select = ({
+  items,
+  identifierSelected,
+  identifierKey,
+  displayKey,
+  hideArrow,
+  className,
+  onChange
+}) => {
   const isUniqueItem = items && items.length === 1;
   const [selected, setSelected] = useState(identifierSelected);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -54,7 +62,8 @@ const Select = ({ items, identifierSelected, identifierKey, displayKey, hideArro
         aria-controls={open ? 'selector-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}>
+        onClick={handleClick}
+      >
         <span className={styles.label}>{itemSelected && itemSelected[displayKey]}</span>
 
         {!isUniqueItem && !hideArrow && <FiChevronDown className={styles.arrow} />}
@@ -74,12 +83,14 @@ const Select = ({ items, identifierSelected, identifierKey, displayKey, hideArro
         transformOrigin={{
           vertical: 'top',
           horizontal: 'left'
-        }}>
+        }}
+      >
         {items.map(({ [identifierKey]: identifier, [displayKey]: display }) => (
           <MenuItem
             key={identifier}
             onClick={() => handleClickItem(identifier)}
-            className={styles.item}>
+            className={styles.item}
+          >
             {display}
           </MenuItem>
         ))}

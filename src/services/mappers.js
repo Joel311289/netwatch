@@ -93,6 +93,10 @@ export const mediaDetailMapper = (media) => {
 export const episodeDetailMapper = (episode) => {
   return {
     id: get(episode, 'id'),
+    key: `T${get(episode, 'season_number')}x${get(episode, 'episode_number')} - ${get(
+      episode,
+      'name'
+    )}`,
     season_number: get(episode, 'season_number'),
     episode_number: get(episode, 'episode_number'),
     title: get(episode, 'name'),
@@ -105,6 +109,7 @@ export const episodeDetailMapper = (episode) => {
 export const seasonDetailMapper = (season) => {
   return {
     id: get(season, 'id'),
+    key: `T${get(season, 'season_number')} - ${get(season, 'name')}`,
     season_number: get(season, 'season_number'),
     title: get(season, 'name'),
     date: formattedDate(get(season, 'air_date')),
