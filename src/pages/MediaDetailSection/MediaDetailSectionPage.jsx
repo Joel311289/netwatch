@@ -48,7 +48,8 @@ const MediaDetailSectionPage = () => {
     <Space
       nowrap
       direction="column"
-      className={`${styles.wrapper} ${string(styles[section.replace(/\//g, '_')])}`}>
+      className={`${styles.wrapper} ${string(styles[section.replace(/\//g, '_')])}`}
+    >
       <div className={`${styles.resume} theme-dark`}>
         <MediaResume
           skeleton={loading}

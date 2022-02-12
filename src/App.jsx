@@ -10,6 +10,8 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 import HomePage from '@pages/Home/HomePage';
 import MoviesPage from '@pages/Movies/MoviesPage';
 import SeriesPage from '@pages/Series/SeriesPage';
+import MovieDetailPage from '@pages/MovieDetail/MovieDetailPage';
+import SerieDetailPage from '@pages/SerieDetail/SerieDetailPage';
 import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
@@ -61,15 +63,9 @@ const App = () => {
               <Route exact component={HomePage} path="/home" />
               <Route exact component={MoviesPage} path={`/${routeMediaTypes.movie}`} />
               <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
-              <Route
-                exact
-                component={MediaDetailPage}
-                path={[
-                  `/${routeMediaTypes.tv}/:key`,
-                  `/${routeMediaTypes.movie}/:key`,
-                  `/${routeMediaTypes.person}/:key`
-                ]}
-              />
+              <Route exact component={MovieDetailPage} path={`/${routeMediaTypes.movie}/:key`} />
+              <Route exact component={SerieDetailPage} path={`/${routeMediaTypes.tv}/:key`} />
+              <Route exact component={MediaDetailPage} path={[`/${routeMediaTypes.person}/:key`]} />
               <Route
                 exact
                 component={MediaDetailSectionPage}

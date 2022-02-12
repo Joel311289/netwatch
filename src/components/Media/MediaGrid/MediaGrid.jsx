@@ -32,7 +32,7 @@ MediaGrid.defaultProps = {
 
 MediaGrid.propTypes = {
   items: PropTypes.array,
-  skeleton: PropTypes.bool,
+  skeleton: PropTypes.bool
 };
 
 export default MediaGrid;
