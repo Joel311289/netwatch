@@ -1,12 +1,9 @@
 import { useMediaPath } from '@hooks/useMediaPath';
 import { useServiceMedia } from '@hooks/useServiceMedia';
 
-import Grid from '@components/Layout/Grid/Grid';
 import Button from '@components/UI/Button/Button';
 import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
-import MediaItem from '@components/Media/MediaItem/MediaItem';
-
-import { routeMediaDetail } from '@services/helpers';
+import MediaGrid from '@components/Media/MediaGrid/MediaGrid';
 
 import { discoverProps } from '@pages/Media/config';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
@@ -25,18 +22,7 @@ const MediaPage = () => {
         <MediaHeading text="Más populares" />
       </div>
 
-      <Grid>
-        {items.map((item, index) => (
-          <MediaItem
-            key={index}
-            ratio={1.5}
-            skeleton={!item}
-            listable
-            to={routeMediaDetail(item)}
-            {...item}
-          />
-        ))}
-      </Grid>
+      <MediaGrid items={items} />
 
       {!loading && !paginationEnd && (
         <div className="block">

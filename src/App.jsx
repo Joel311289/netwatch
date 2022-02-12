@@ -8,7 +8,8 @@ import { ThemeContext } from '@contexts/ThemeContext';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import HomePage from '@pages/Home/HomePage';
-import MediaPage from '@pages/Media/MediaPage';
+import MoviesPage from '@pages/Movies/MoviesPage';
+import SeriesPage from '@pages/Series/SeriesPage';
 import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
@@ -58,11 +59,8 @@ const App = () => {
           <div className="App-body" ref={setContainer}>
             <Switch>
               <Route exact component={HomePage} path="/home" />
-              <Route
-                exact
-                component={MediaPage}
-                path={[`/${routeMediaTypes.tv}`, `/${routeMediaTypes.movie}`]}
-              />
+              <Route exact component={MoviesPage} path={`/${routeMediaTypes.movie}`} />
+              <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
               <Route
                 exact
                 component={MediaDetailPage}

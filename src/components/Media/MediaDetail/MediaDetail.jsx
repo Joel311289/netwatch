@@ -12,7 +12,7 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { getWidthRatio } from '@utils/helpers/breakpoints';
-import { string } from '@utils/helpers/strings';
+
 import { mediaTypes } from '@services/constants';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
@@ -48,7 +48,7 @@ const MediaDetail = ({
   const Watch = () => duration && <MediaDetailWatch styles={styles} {...detail} />;
 
   return (
-    <div className={`${styles.wrapper} ${string(styles[`wrapper-detail-${detail}`])}`}>
+    <div className={`media-detail-wrapper ${styles.wrapper}`}>
       <div className={styles.content}>
         {!tablet && Header()}
 
