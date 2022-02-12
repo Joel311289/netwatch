@@ -12,7 +12,7 @@ import MoviesPage from '@pages/Movies/MoviesPage';
 import SeriesPage from '@pages/Series/SeriesPage';
 import MovieDetailPage from '@pages/MovieDetail/MovieDetailPage';
 import SerieDetailPage from '@pages/SerieDetail/SerieDetailPage';
-import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
+import PersonDetailPage from '@pages/PersonDetail/PersonDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
 
 import Header from '@components/Layout/Header/Header';
@@ -65,7 +65,7 @@ const App = () => {
               <Route exact component={SeriesPage} path={`/${routeMediaTypes.tv}`} />
               <Route exact component={MovieDetailPage} path={`/${routeMediaTypes.movie}/:key`} />
               <Route exact component={SerieDetailPage} path={`/${routeMediaTypes.tv}/:key`} />
-              <Route exact component={MediaDetailPage} path={[`/${routeMediaTypes.person}/:key`]} />
+              <Route exact component={PersonDetailPage} path={`/${routeMediaTypes.person}/:key`} />
               <Route
                 exact
                 component={MediaDetailSectionPage}
