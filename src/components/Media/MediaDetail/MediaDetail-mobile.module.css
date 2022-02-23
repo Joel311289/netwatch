@@ -3,7 +3,7 @@
 .images {
   grid-template-areas:
     'background background'
-    'image header'
+    'header header'
     'biography biography';
   grid-gap: 0 20px;
 }
@@ -58,9 +58,10 @@
 
 .image {
   margin-top: var(--padding-aside);
-  grid-area: image;
+  grid-area: background;
   flex-direction: row !important;
   overflow: hidden;
+  z-index: 2;
 }
 
 /* ---------- Header */
@@ -75,6 +76,10 @@
   text-align: center;
 }
 
+.subheadings {
+  margin: 0;
+}
+
 /* ---------- Watch */
 
 .buttons.secondary {
@@ -82,6 +87,10 @@
 }
 
 /* ---------- Sections */
+
+.images + .section {
+  margin-top: 10px !important;
+}
 
 /* ---------- Skeleton */
 

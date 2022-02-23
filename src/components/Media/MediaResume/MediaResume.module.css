@@ -6,6 +6,7 @@
 }
 
 .backdrop {
+  background-color: rgba(var(--menu-color-rgb), 0.5);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -46,7 +47,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.title:hover {
+.link .title:hover {
   color: var(--color-yellow);
 }
 

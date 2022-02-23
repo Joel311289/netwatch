@@ -27,7 +27,7 @@ export const useServiceMediaDetail = (mediaType, mediaId, sections) => {
     [
       `/api/${mediaType}/${mediaId}`,
       {
-        append_to_response: sections.map((section) => {
+        append_to_response: (sections || []).map((section) => {
           if (section === 'credits') return getCredits[mediaType];
           if (section === 'images') return getImages[mediaType];
           return section;

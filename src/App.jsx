@@ -11,6 +11,7 @@ import HomePage from '@pages/Home/HomePage';
 import MediaPage from '@pages/Media/MediaPage';
 import MediaDetailPage from '@pages/MediaDetail/MediaDetailPage';
 import MediaDetailSectionPage from '@pages/MediaDetailSection/MediaDetailSectionPage';
+import MediaDetailSeasonPage from '@pages/MediaDetailSeason/MediaDetailSeasonPage';
 
 import Header from '@components/Layout/Header/Header';
 
@@ -80,12 +81,18 @@ const App = () => {
                   `/${routeMediaTypes.tv}/:key/images`,
                   `/${routeMediaTypes.tv}/:key/credits`,
                   `/${routeMediaTypes.tv}/:key/seasons`,
-                  `/${routeMediaTypes.tv}/:key/seasons/:number_season`,
-                  `/${routeMediaTypes.tv}/:key/seasons/:number_season/episodes/:number_episode`,
                   `/${routeMediaTypes.movie}/:key/videos`,
                   `/${routeMediaTypes.movie}/:key/images`,
                   `/${routeMediaTypes.movie}/:key/credits`,
                   `/${routeMediaTypes.person}/:key/images`
+                ]}
+              />
+              <Route
+                exact
+                component={MediaDetailSeasonPage}
+                path={[
+                  `/${routeMediaTypes.tv}/:key/seasons/:season_number`,
+                  `/${routeMediaTypes.tv}/:key/seasons/:season_number/episodes/:episode_number`
                 ]}
               />
               <Redirect to="/home" />

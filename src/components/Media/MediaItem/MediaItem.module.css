@@ -260,6 +260,27 @@
   font-weight: 400;
 }
 
+.credit.rounded {
+  flex-direction: column;
+  text-align: center;
+}
+
+.credit.rounded .image {
+  width: 100%;
+  min-width: 120px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.credit.rounded .name,
+.credit.rounded .characters {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
 /* ---------- Season */
 
 .season {

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
@@ -25,7 +25,7 @@ const MediaCredits = ({ to, credits }) => {
     mobileStyles,
     smallDesktopStyles: mobileStyles
   });
-  const { mobile, smallDesktop } = useBreakpointViewport();
+  const { smallDesktop } = useBreakpointViewport();
   const { cast, directors, creators, writers } = credits || {};
   const sections = [
     { id: 'crew', label: 'Director', data: truncateArray(directors, 3) },
@@ -34,11 +34,11 @@ const MediaCredits = ({ to, credits }) => {
     { id: 'all', label: 'Ver todo el reparto', to }
   ];
 
-  const sliderPerView = useMemo(() => {
-    if (mobile) return 1;
-    if (smallDesktop) return 2;
-    return 2;
-  }, [mobile, smallDesktop]);
+  // const sliderPerView = useMemo(() => {
+  //   if (mobile) return 1;
+  //   if (smallDesktop) return 2;
+  //   return 2;
+  // }, [mobile, smallDesktop]);
 
   const filteredSections = () => sections.filter(({ to, data }) => to || !isEmptyArray(data));
 
@@ -52,7 +52,7 @@ const MediaCredits = ({ to, credits }) => {
     <div className={`media-credits-wrapper ${styles.wrapper}`}>
       <Space align="center" className={`${styles.credits} ${styles.cast}`}>
         {smallDesktop && (
-          <Slider sliderPerView={sliderPerView} spaceBetween={10}>
+          <Slider sliderPerView="auto" spaceBetween={5}>
             {truncateArray(cast, 10).map((credit) =>
               Cast({ ...credit, url: routePersonDetail(credit) })
             )}

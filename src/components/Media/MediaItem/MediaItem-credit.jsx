@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { IoPersonOutline } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+
 import Space from '@components/Layout/Space/Space';
 
 import { backgroundImageUrl } from '@utils/helpers/strings';
@@ -10,8 +12,13 @@ import { isEmptyArray } from '@utils/helpers/arrays';
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
 const MediaItemCredit = ({ id, image, name, characters }) => {
+  const { smallDesktop } = useBreakpointViewport();
+
   return (
-    <Link to={`/persons/${id}`} className={`${styles.credit}`}>
+    <Link
+      to={`/persons/${id}`}
+      className={`${styles.credit} ${smallDesktop ? styles.rounded : ''}`}
+    >
       <div className={styles.image} style={{ backgroundImage: backgroundImageUrl(image) }}>
         {!image && <IoPersonOutline />}
       </div>
@@ -19,7 +26,9 @@ const MediaItemCredit = ({ id, image, name, characters }) => {
       <Space direction="column" gap={3}>
         <span className={`${styles.name}`}>{name}</span>
         {characters && !isEmptyArray(characters) && (
-          <span className={`${styles.characters}`}>como {characters.join('/')}</span>
+          <span className={`${styles.characters}`}>
+            {!smallDesktop && 'como'} {characters.join('/')}
+          </span>
         )}
       </Space>
     </Link>

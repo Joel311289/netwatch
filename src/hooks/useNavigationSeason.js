@@ -2,27 +2,28 @@ import { useState, useEffect } from 'react';
 import { get } from 'lodash';
 
 import { sortCollectionBy } from '@utils/helpers/collections';
+import { routeSeasonDetail } from '@services/helpers';
 
-export const useNavigationSeason = ({
-  seasons,
-  episodes,
-  current_season = '',
-  current_episode = ''
-}) => {
+export const useNavigationSeason = ({ seasons, current_season = '', current_episode = '' }) => {
   const [navigation, setNavigation] = useState({ prev: null, next: null });
   const [routes, setRoutes] = useState({ routePrev: null, routeNext: null });
 
   useEffect(() => {
     let noFilteredItems = [];
-    if (!episodes) {
+    if (!current_episode) {
       noFilteredItems = [...seasons.map(({ season_number }) => ({ season_number }))];
     } else {
       noFilteredItems = [
         ...seasons.reduce(
-          (prev, { season_number }) =>
-            current_season === season_number
-              ? [...prev, ...episodes]
-              : [...prev, ...[{ season_number }]],
+          (prev, { season_number, episodes }) => [
+            ...prev,
+            ...Array(episodes)
+              .fill()
+              .map((_, index) => ({
+                season_number,
+                episode_number: index + 1
+              }))
+          ],
           []
         )
       ];
@@ -30,6 +31,7 @@ export const useNavigationSeason = ({
 
     if (noFilteredItems.length) {
       const filteredItems = sortCollectionBy(noFilteredItems, ['season_number', 'episode_number']);
+      console.log(seasons, noFilteredItems);
 
       const position = filteredItems.findIndex((item) => {
         const season_number = get(item, 'season_number', '');
@@ -41,18 +43,12 @@ export const useNavigationSeason = ({
       const next = position === filteredItems.length - 1 ? null : filteredItems[position + 1];
       setNavigation((nav) => ({ ...nav, prev, next }));
 
-      const routeSeasonPrev = `seasons/${get(prev, 'season_number')}`;
-      const routeSeasonNext = `seasons/${get(next, 'season_number')}`;
       setRoutes({
-        routePrev: !episodes
-          ? routeSeasonPrev
-          : `${routeSeasonPrev}/episodes/${get(prev, 'episode_number')}`,
-        routeNext: !episodes
-          ? routeSeasonNext
-          : `${routeSeasonNext}/episodes/${get(next, 'episode_number')}`
+        routePrev: routeSeasonDetail(prev),
+        routeNext: routeSeasonDetail(next)
       });
     }
-  }, [current_episode, current_season, episodes, seasons]);
+  }, [current_episode, current_season, seasons]);
 
   return { ...navigation, ...routes };
 };

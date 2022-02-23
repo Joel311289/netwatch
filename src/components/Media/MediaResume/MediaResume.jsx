@@ -2,6 +2,9 @@ import { Link as LinkRouter } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { CgCross } from 'react-icons/cg';
 
+import { useVibrantColor } from '@hooks/useVibrantColor';
+import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
+
 import Space from '@components/Layout/Space/Space';
 import Link from '@components/UI/Link/Link';
 import Separator from '@components/UI/Separator/Separator';
@@ -22,8 +25,12 @@ const MediaResume = ({
   duration,
   to,
   route,
-  linkName
+  linkName,
+  season,
+  ratio = 1.5
 }) => {
+  const { tablet } = useBreakpointViewport();
+  const { hex: vibrantColor } = useVibrantColor(image);
   const subheadings = [
     ...(date ? (date_death ? [`${date} - ${date_death}`] : [date]) : []),
     ...(date && duration ? [duration] : []),
@@ -34,21 +41,32 @@ const MediaResume = ({
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
       <div
         className={styles.backdrop}
-        style={{ backgroundImage: backgroundImageUrl(backdrop) }}
+        style={{
+          backgroundImage: backgroundImageUrl(backdrop),
+          backgroundColor: vibrantColor
+        }}
       ></div>
 
       <Space nowrap gap={25} className={styles.content}>
         {image && (
-          <div className={styles.image} style={{ width: 100, minWidth: 100 }}>
-            <MediaItemImage image={image} ratio={1.5} />
+          <div className={styles.image} style={{ width: 160 / ratio, minWidth: 160 / ratio }}>
+            <MediaItemImage image={image} ratio={ratio} />
           </div>
         )}
 
         <Space direction="column" gap={5}>
-          <Space>
-            <LinkRouter to={route}>
-              <span className={styles.title}>{title}</span>
-            </LinkRouter>
+          <Space gap={10}>
+            {season && (
+              <>
+                <span className={styles.title}>{season}</span>
+                {!tablet && <span className={styles.title}>•</span>}
+              </>
+            )}
+            {title && (
+              <LinkRouter to={route} className={styles.link}>
+                <span className={styles.title}>{title}</span>
+              </LinkRouter>
+            )}
           </Space>
 
           <Space gap={2} align="center" className={styles.subheadings}>
@@ -65,7 +83,7 @@ const MediaResume = ({
         </Space>
       </Space>
 
-      {backdrop && <div className={styles['gradient-bottom']}></div>}
+      <div className={styles['gradient-bottom']}></div>
     </div>
   );
 };

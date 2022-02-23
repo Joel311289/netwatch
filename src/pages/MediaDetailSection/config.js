@@ -13,7 +13,7 @@ const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 
 };
 
 const itemsPerRowCredit = (breakpoint) =>
-  itemsPerRow(breakpoint, { mobile: 1, tablet: 2, smallDesktop: 2, defaultValue: 3 });
+  itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 4, defaultValue: 3 });
 
 const itemsPerRowBackdrop = (breakpoint) =>
   itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 3, defaultValue: 4 });
@@ -110,7 +110,7 @@ export const sectionProps = (data, section) => {
             'title'
           )}`,
           gridProps: (breakpoint) => ({
-            gap: '20px 10px',
+            gap: '20px 25px',
             itemsPerRow: itemsPerRowCredit(breakpoint)
           }),
           heading: labelCredits[key],

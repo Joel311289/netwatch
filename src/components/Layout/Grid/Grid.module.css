@@ -12,8 +12,10 @@
 
 .gridable {
   display: grid !important;
+  width: 100%;
 }
 
 .gridable .item {
   padding-bottom: 0 !important;
+  padding-right: 0 !important;
 }

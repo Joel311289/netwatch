@@ -14,7 +14,7 @@ const MediaDetailImages = ({ images, type, to }) => {
 
   const sliderPerView = useMemo(() => {
     if (mobile) return type !== 'backdrop' ? 2 : 1;
-    if (smallDesktop) return type !== 'backdrop' ? 4 : 2;
+    if (smallDesktop) return type !== 'backdrop' ? 3 : 2;
     return type !== 'backdrop' ? 4 : 2;
   }, [type, mobile, smallDesktop]);
 

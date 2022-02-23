@@ -73,7 +73,6 @@ export const routeMediaDetail = (media) => {
   const pathType = routeMediaTypes[type];
   return (title ? `/${pathType}/${id}-${title}` : `/${pathType}/${id}`).toLowerCase();
 };
-
 export const routePersonDetail = (person) => {
   if (!person) {
     return '/';
@@ -84,4 +83,9 @@ export const routePersonDetail = (person) => {
   return (
     name ? `/${routeMediaTypes.person}/${id}-${name}` : `/${routeMediaTypes.person}/${id}`
   ).toLowerCase();
+};
+export const routeSeasonDetail = (detail) => {
+  const { season_number, episode_number } = detail || {};
+  const routeSeason = `seasons/${season_number}`;
+  return !episode_number ? routeSeason : `${routeSeason}/episodes/${episode_number}`;
 };

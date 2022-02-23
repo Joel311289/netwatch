@@ -1,14 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { FiChevronDown } from 'react-icons/fi';
 import PropTypes from 'prop-types';
 
+import Space from '@components/Layout/Space/Space';
 import Button from '@components/UI/Button/Button';
 
 import { string } from '../../../utils/helpers/strings';
 
 import styles from '@components/UI/Select/Select.module.css';
+import { ThemeContext } from '@contexts/ThemeContext';
 
 const Select = ({
   items,
@@ -19,6 +21,7 @@ const Select = ({
   className,
   onChange
 }) => {
+  const { theme } = useContext(ThemeContext);
   const isUniqueItem = items && items.length === 1;
   const [selected, setSelected] = useState(identifierSelected);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -39,7 +42,8 @@ const Select = ({
     setSelected(identifier);
     setAnchorEl(null);
 
-    onChange && onChange(identifier);
+    onChange &&
+      onChange(items.find(({ [identifierKey]: id }) => String(id) === String(identifier)));
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -64,15 +68,16 @@ const Select = ({
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <span className={styles.label}>{itemSelected && itemSelected[displayKey]}</span>
-
-        {!isUniqueItem && !hideArrow && <FiChevronDown className={styles.arrow} />}
+        <Space align="center" gap={5}>
+          <span className={styles.label}>{itemSelected && itemSelected[displayKey]}</span>
+          {!isUniqueItem && !hideArrow && <FiChevronDown className={styles.arrow} />}
+        </Space>
       </Button>
 
       <Menu
         id="selector-menu"
         aria-labelledby="selector-button"
-        classes={{ paper: styles.paper, list: styles.menu }}
+        classes={{ paper: styles.paper, list: `${styles.menu} theme-${theme}` }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -89,7 +94,9 @@ const Select = ({
           <MenuItem
             key={identifier}
             onClick={() => handleClickItem(identifier)}
-            className={styles.item}
+            className={`${styles.item} ${
+              Number(identifier) === Number(selected) ? styles.selected : ''
+            }`}
           >
             {display}
           </MenuItem>
@@ -111,7 +118,7 @@ Select.propTypes = {
   items: PropTypes.array,
   identifierKey: PropTypes.string,
   displayKey: PropTypes.string,
-  identifierSelected: PropTypes.string,
+  identifierSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hideArrow: PropTypes.bool,
   onChange: PropTypes.func
 };
