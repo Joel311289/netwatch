@@ -12,21 +12,11 @@ import MediaHeading from '@components/Media/MediaHeading/MediaHeading';
 
 import { MediaDefaultProps, MediaPropTypes } from '@utils/constants/proptypes';
 import { getWidthRatio } from '@utils/helpers/breakpoints';
-import { mediaTypes } from '@services/constants';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
 
-const MediaDetail = ({
-  type,
-  sections,
-  skeleton,
-  duration,
-  image,
-  backdrop,
-  description,
-  ...detail
-}) => {
+const MediaDetail = ({ sections, skeleton, duration, image, backdrop, biography, ...detail }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
   const { mobile, tablet, smallDesktop } = useBreakpointViewport();
 
@@ -70,13 +60,13 @@ const MediaDetail = ({
 
           {tablet && Header()}
 
-          {type === mediaTypes.PERSON && (
+          {biography && (
             <div className={`${styles.section} ${styles.biography}`}>
               <div className={styles['section-heading']}>
                 <MediaHeading text="Biografía" />
               </div>
 
-              <span>{description || 'Sin biografía'}</span>
+              <span>{biography || 'Sin biografía'}</span>
             </div>
           )}
         </div>

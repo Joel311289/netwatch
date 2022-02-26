@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import MediaDetailGeneral from '@components/Media/MediaDetail/MediaDetail-general';
 import MediaDetailImages from '@components/Media/MediaDetail/MediaDetail-images';
 import MediaDetailVideos from '@components/Media/MediaDetail/MediaDetail-videos';
-import MediaSeasons from '@components/Media/MediaDetail/MediaDetail-seasons';
+import MediaDetailSeasons from '@components/Media/MediaDetail/MediaDetail-seasons';
 import MediaCredits from '@components/Media/MediaCredits/MediaCredits';
 import MediaDetailRecommendations from '@components/Media/MediaDetail/MediaDetail-recommendations';
 
@@ -54,7 +54,7 @@ const sectionsDetail = (detail, mediaType) => {
       heading: `Temporadas (${number_seasons})`,
       data: { seasons },
       to: `${routeMediaDetail(detail)}/seasons`,
-      Element: MediaSeasons,
+      Element: MediaDetailSeasons,
       visible: Boolean(number_seasons)
     },
     videos: {

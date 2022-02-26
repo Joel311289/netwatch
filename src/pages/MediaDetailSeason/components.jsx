@@ -17,7 +17,6 @@ import styles from '@pages/MediaDetailSeason/MediaDetailSeasonPage.module.css';
 
 // eslint-disable-next-line react/prop-types
 const SelectorSeason = ({ initials, data, detail, items, identifierKey }) => {
-  console.log(initials, data, detail);
   const route = routeMediaDetail(data);
   const season_number = get(detail, 'season_number');
   const episode_number = get(detail, 'episode_number');

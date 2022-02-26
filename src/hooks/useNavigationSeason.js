@@ -31,8 +31,6 @@ export const useNavigationSeason = ({ seasons, current_season = '', current_epis
 
     if (noFilteredItems.length) {
       const filteredItems = sortCollectionBy(noFilteredItems, ['season_number', 'episode_number']);
-      console.log(seasons, noFilteredItems);
-
       const position = filteredItems.findIndex((item) => {
         const season_number = get(item, 'season_number', '');
         const episode_number = get(item, 'episode_number', '');

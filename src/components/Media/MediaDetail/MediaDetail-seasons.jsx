@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
+import Slider from '@components/Layout/Slider/Slider';
 import List from '@components/UI/List/List';
 import ListItem from '@components/UI/List/List-item';
-import MediaSliderItem from '@components/Media/MediaSlider/MediaSlider-item';
+import MediaItem from '@components/Media/MediaItem/MediaItem';
 
 const MediaDetailSeasons = ({ seasons, to }) => {
   const { mobile, smallDesktop } = useBreakpointViewport();
@@ -20,7 +21,11 @@ const MediaDetailSeasons = ({ seasons, to }) => {
 
   return (
     <div className={`media-seasons-wrapper`}>
-      <MediaSliderItem items={seasons} sliderPerView={sliderPerView} />
+      <Slider lazy sliderPerView={sliderPerView}>
+        {seasons.map(({ season_number, ...item }, index) => (
+          <MediaItem key={index} lazy to={`${to}/${season_number}`} ratio={1.5} {...item} />
+        ))}
+      </Slider>
 
       {seasons.length > sliderPerView && (
         <div style={{ marginTop: 15 }}>

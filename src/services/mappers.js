@@ -75,7 +75,7 @@ export const mediaDetailMapper = (media) => {
       image: getImageMediaUrl(apiImageUrl, get(media, 'profile_path')),
       type: commonData.type || mediaTypes.PERSON,
       title: get(media, 'name'),
-      description: get(media, 'biography'),
+      biography: get(media, 'biography'),
       original_title: get(media, 'original_name') || get(media, 'name'),
       date: formattedDate(get(media, 'birthday')),
       date_death: formattedDate(get(media, 'deathday')),
