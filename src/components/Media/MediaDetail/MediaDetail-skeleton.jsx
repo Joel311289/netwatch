@@ -30,16 +30,11 @@ const MediaDetailSkeleton = ({ styles }) => {
 
         <div
           className={styles.images}
-          style={{ gridTemplateColumns: mobile ? 'auto' : `${imageWidth()}px auto` }}>
+          style={{ gridTemplateColumns: mobile ? 'auto' : `${imageWidth()}px auto` }}
+        >
           <div className={styles.image} style={{ width: imageWidth(), height: imageHeight(210) }}>
             <Skeleton height="100%" />
           </div>
-
-          {!mobile && (
-            <div className={styles.background} style={{ width: '100%', height: imageHeight(210) }}>
-              <Skeleton height="100%" />
-            </div>
-          )}
         </div>
 
         <div className={`${styles.extras} ${styles.section}`}>

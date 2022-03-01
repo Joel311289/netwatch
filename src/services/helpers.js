@@ -68,7 +68,7 @@ export const routeMediaDetail = (media) => {
     return '/';
   }
   const { id, type, original_title = '' } = media;
-  const removed = removeSpecialCharactersText(original_title);
+  const removed = removeSpecialCharactersText(original_title.replace(/-/g, ' '));
   const title = removed.trim() ? removed.replace(/ /g, '-') : '';
   const pathType = routeMediaTypes[type];
   return (title ? `/${pathType}/${id}-${title}` : `/${pathType}/${id}`).toLowerCase();
@@ -78,7 +78,7 @@ export const routePersonDetail = (person) => {
     return '/';
   }
   const { id, original_name = '' } = person;
-  const removed = removeSpecialCharactersText(original_name);
+  const removed = removeSpecialCharactersText(original_name.replace(/-/g, ' '));
   const name = removed.trim() ? removed.replace(/ /g, '-') : '';
   return (
     name ? `/${routeMediaTypes.person}/${id}-${name}` : `/${routeMediaTypes.person}/${id}`

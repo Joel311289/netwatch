@@ -16,10 +16,10 @@ const itemsPerRowCredit = (breakpoint) =>
   itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 4, defaultValue: 3 });
 
 const itemsPerRowBackdrop = (breakpoint) =>
-  itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 3, defaultValue: 4 });
+  itemsPerRow(breakpoint, { mobile: 1, tablet: 2, smallDesktop: 2, defaultValue: 3 });
 
 const itemsPerRowPoster = (breakpoint) =>
-  itemsPerRow(breakpoint, { mobile: 3, tablet: 4, smallDesktop: 5, defaultValue: 6 });
+  itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 4, defaultValue: 5 });
 
 const labelImages = {
   backdrops: 'Imágenes de fondo',

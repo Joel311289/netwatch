@@ -148,6 +148,7 @@ export const creditDetailMapper = (credit) => {
     role: getPersonRoleType(credit),
     job: [character ? 'cast' : get(credit, 'job', '')],
     name: get(credit, 'name'),
+    original_name: get(credit, 'original_name'),
     characters: character ? character.split(' / ') : [],
     image: getImageMediaUrl(apiImageUrl, get(credit, 'profile_path'))
   };

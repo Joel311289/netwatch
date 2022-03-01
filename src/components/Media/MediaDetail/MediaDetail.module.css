@@ -68,6 +68,18 @@
   margin-left: 30px;
 }
 
+.biography-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+}
+
+.biography-link-more {
+  margin-top: 20px;
+}
+
 /* ---------- Header */
 
 .title {

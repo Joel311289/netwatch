@@ -4,6 +4,7 @@ import { useBreakpointStyles } from '@hooks/useBreakpointStyles';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import MediaDetailSkeleton from '@components/Media/MediaDetail/MediaDetail-skeleton';
+import MediaDetailBiography from '@components/Media/MediaDetail/MediaDetail-biography';
 import MediaDetailHeader from '@components/Media/MediaDetail/MediaDetail-header';
 import MediaDetailWatch from '@components/Media/MediaDetail/MediaDetail-watch';
 import MediaDetailLinks from '@components/Media/MediaDetail/MediaDetail-links';
@@ -15,6 +16,7 @@ import { getWidthRatio } from '@utils/helpers/breakpoints';
 
 import desktopStyles from '@components/Media/MediaDetail/MediaDetail.module.css';
 import mobileStyles from '@components/Media/MediaDetail/MediaDetail-mobile.module.css';
+import { routeMediaDetail } from '@services/helpers';
 
 const MediaDetail = ({ sections, skeleton, duration, image, backdrop, biography, ...detail }) => {
   const styles = useBreakpointStyles({ desktopStyles, mobileStyles });
@@ -61,13 +63,11 @@ const MediaDetail = ({ sections, skeleton, duration, image, backdrop, biography,
           {tablet && Header()}
 
           {biography && (
-            <div className={`${styles.section} ${styles.biography}`}>
-              <div className={styles['section-heading']}>
-                <MediaHeading text="Biografía" />
-              </div>
-
-              <span>{biography || 'Sin biografía'}</span>
-            </div>
+            <MediaDetailBiography
+              styles={styles}
+              biography={biography}
+              to={`${routeMediaDetail(detail)}/biography`}
+            />
           )}
         </div>
 

@@ -6,17 +6,19 @@ import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
 
+import { routePersonDetail } from '@services/helpers';
+
 import { backgroundImageUrl } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
-const MediaItemCredit = ({ id, image, name, characters }) => {
+const MediaItemCredit = ({ image, name, characters, ...detail }) => {
   const { smallDesktop } = useBreakpointViewport();
 
   return (
     <Link
-      to={`/persons/${id}`}
+      to={routePersonDetail(detail)}
       className={`${styles.credit} ${smallDesktop ? styles.rounded : ''}`}
     >
       <div className={styles.image} style={{ backgroundImage: backgroundImageUrl(image) }}>
