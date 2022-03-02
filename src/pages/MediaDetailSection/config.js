@@ -12,13 +12,13 @@ const itemsPerRow = (breakpoint, { mobile, tablet, smallDesktop, defaultValue = 
   return defaultValue;
 };
 
-const itemsPerRowCredit = (breakpoint) =>
+export const itemsPerRowCredit = (breakpoint) =>
   itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 4, defaultValue: 3 });
 
-const itemsPerRowBackdrop = (breakpoint) =>
+export const itemsPerRowBackdrop = (breakpoint) =>
   itemsPerRow(breakpoint, { mobile: 1, tablet: 2, smallDesktop: 2, defaultValue: 3 });
 
-const itemsPerRowPoster = (breakpoint) =>
+export const itemsPerRowPoster = (breakpoint) =>
   itemsPerRow(breakpoint, { mobile: 2, tablet: 3, smallDesktop: 4, defaultValue: 5 });
 
 const labelImages = {
@@ -48,7 +48,7 @@ export const sectionProps = (data, section) => {
           {
             emptyMessage: `No se han encontrado vídeos para ${title}`,
             gridProps: (breakpoint) => ({
-              gap: '0 10px',
+              gap: '10px 20px',
               itemsPerRow: itemsPerRowBackdrop(breakpoint)
             }),
             Element: MediaItem,
@@ -70,7 +70,7 @@ export const sectionProps = (data, section) => {
               labelImages[key] || ''
             ).toLowerCase()} para ${get(data, 'title')}`,
             gridProps: (breakpoint) => ({
-              gap: '20px 10px',
+              gap: '20px',
               itemsPerRow:
                 key === 'backdrops'
                   ? itemsPerRowBackdrop(breakpoint)

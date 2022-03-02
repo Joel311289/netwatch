@@ -12,6 +12,7 @@ import { routeMediaDetail } from '@services/helpers';
 import { string } from '@utils/helpers/strings';
 import { isEmptyArray } from '@utils/helpers/arrays';
 
+import { skeleton } from '@pages/MediaDetailSection/components';
 import { sectionProps } from '@pages/MediaDetailSection/config';
 import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
 
@@ -20,6 +21,7 @@ const MediaDetailSectionPage = () => {
   const { mediaType, id, section } = useMediaPath(['/:mediaType/:key/:section']);
   const { data, loading } = useServiceMediaDetail(mediaType, id, [section]);
 
+  const ElementSkeleton = skeleton(breakpoint, section);
   const { title, [section]: detail } = data;
   const { label, length, sections } = sectionProps(data, section);
 
@@ -29,7 +31,7 @@ const MediaDetailSectionPage = () => {
       direction="column"
       className={`${styles.wrapper} ${string(styles[section.replace(/\//g, '_')])}`}
     >
-      <div className={`${styles.resume} theme-dark`}>
+      <div className={`${styles.resume} ${!loading && 'theme-dark'}`}>
         <MediaResume
           skeleton={loading}
           route={`${routeMediaDetail(data)}`}
@@ -40,45 +42,48 @@ const MediaDetailSectionPage = () => {
         />
       </div>
 
-      <div className={`App-container App-content ${styles.body}`}>
-        {label && (
-          <h2 className="heading">
-            {label} {length ? `(${length})` : ''}
-          </h2>
-        )}
+      {loading && ElementSkeleton && ElementSkeleton()}
 
-        {detail &&
-          (sections || []).map(
-            ({ heading, gridProps, Element, items, props, emptyMessage }, index) =>
-              (!isEmptyArray(items) || emptyMessage) && (
-                <div className={styles.subsection} key={index}>
-                  {heading && (
-                    <div className="sub-heading">
-                      <MediaHeading text={heading} />
-                    </div>
-                  )}
-
-                  {Array.isArray(items) && (
-                    <Grid {...gridProps(breakpoint)}>
-                      {items.map((item, index) => (
-                        <Element
-                          key={index}
-                          skeleton={loading}
-                          route={routeMediaDetail(data)}
-                          {...item}
-                          {...props(item)}
-                        />
-                      ))}
-                    </Grid>
-                  )}
-
-                  {Array.isArray(items) && !items.length && emptyMessage && (
-                    <div className={styles.empty}>{emptyMessage}</div>
-                  )}
-                </div>
-              )
+      {!loading && (
+        <div className={`App-container App-content ${styles.body}`}>
+          {label && (
+            <h2 className="heading">
+              {label} {length ? `(${length})` : ''}
+            </h2>
           )}
-      </div>
+
+          {detail &&
+            (sections || []).map(
+              ({ heading, gridProps, Element, items, props, emptyMessage }, index) =>
+                (!isEmptyArray(items) || emptyMessage) && (
+                  <div className={styles.subsection} key={index}>
+                    {heading && (
+                      <div className="sub-heading">
+                        <MediaHeading text={heading} />
+                      </div>
+                    )}
+
+                    {Array.isArray(items) && (
+                      <Grid {...gridProps(breakpoint)}>
+                        {items.map((item, index) => (
+                          <Element
+                            key={index}
+                            route={routeMediaDetail(data)}
+                            {...item}
+                            {...props(item)}
+                          />
+                        ))}
+                      </Grid>
+                    )}
+
+                    {Array.isArray(items) && !items.length && emptyMessage && (
+                      <div className={styles.empty}>{emptyMessage}</div>
+                    )}
+                  </div>
+                )
+            )}
+        </div>
+      )}
     </Space>
   );
 };

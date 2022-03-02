@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
+import Skeleton from '@components/UI/Skeleton/Skeleton';
 
 import { routePersonDetail } from '@services/helpers';
 
@@ -13,8 +14,23 @@ import { isEmptyArray } from '@utils/helpers/arrays';
 
 import styles from '@components/Media/MediaItem/MediaItem.module.css';
 
-const MediaItemCredit = ({ image, name, characters, ...detail }) => {
+const MediaItemCredit = ({ skeleton, image, name, characters, ...detail }) => {
   const { smallDesktop } = useBreakpointViewport();
+
+  if (skeleton) {
+    return (
+      <div className={`${styles.credit} ${smallDesktop ? styles.rounded : ''}`}>
+        <div className={`${styles.image} ${styles.skeleton}`}>
+          <Skeleton height="100%" width="100%" />
+        </div>
+
+        <Space direction="column" gap={3}>
+          <Skeleton className={styles.name} height={20} width={100} />
+          <Skeleton className={styles.characters} height={16} width={150} />
+        </Space>
+      </div>
+    );
+  }
 
   return (
     <Link
@@ -26,7 +42,7 @@ const MediaItemCredit = ({ image, name, characters, ...detail }) => {
       </div>
 
       <Space direction="column" gap={3}>
-        <span className={`${styles.name}`}>{name}</span>
+        <span className={styles.name}>{name}</span>
         {characters && !isEmptyArray(characters) && (
           <span className={`${styles.characters}`}>
             {!smallDesktop && 'como'} {characters.join('/')}
@@ -42,9 +58,10 @@ MediaItemCredit.defaultProps = {
 };
 
 MediaItemCredit.propTypes = {
-  id: PropTypes.number.isRequired,
+  skeleton: PropTypes.bool,
+  id: PropTypes.number,
   image: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   characters: PropTypes.array
 };
 

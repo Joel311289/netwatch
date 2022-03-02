@@ -22,6 +22,7 @@
 }
 .image.skeleton {
   box-shadow: none;
+  background-color: transparent !important;
 }
 .image:before {
   content: '';

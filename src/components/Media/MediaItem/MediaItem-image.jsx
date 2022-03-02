@@ -19,7 +19,7 @@ const Image = styled.div`
   }
 `;
 
-const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) => {
+const MediaItemImage = ({ skeleton, type, image, ratio, to, lazy, width, height, zoom }) => {
   const [zoomed, setZoomed] = useState(false);
   const classes = classNames.bind(styles)({
     'swiper-lazy': lazy,
@@ -62,6 +62,19 @@ const MediaItemImage = ({ type, image, ratio, to, lazy, width, height, zoom }) =
       </Image>
     );
   };
+
+  if (skeleton) {
+    return (
+      <Image
+        className={`media-image-wrapper ${styles.image} ${zoom && image && styles.zoomable}`}
+        ratio={ratio}
+        style={{
+          ...(width && !ratio && { width }),
+          ...(height && { height })
+        }}
+      ></Image>
+    );
+  }
 
   return (
     <>

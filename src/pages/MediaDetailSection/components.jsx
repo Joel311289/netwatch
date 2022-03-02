@@ -1,88 +1,76 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { get } from 'lodash';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-import { useNavigationSeason } from '@hooks/useNavigationSeason';
-import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
-
-import Select from '@components/UI/Select/Select';
-import Space from '@components/Layout/Space/Space';
-import Button from '@components/UI/Button/Button';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import Grid from '@components/Layout/Grid/Grid';
+import SkeletonUI from '@components/UI/Skeleton/Skeleton';
+import MediaItem from '@components/Media/MediaItem/MediaItem';
+import MediaItemCredit from '@components/Media/MediaItem/MediaItem-credit';
+import MediaItemSeason from '@components/Media/MediaItem/MediaItem-season';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
 
-import { routeMediaDetail, routeSeasonDetail } from '@services/helpers';
+import { getEmptyArray } from '@utils/helpers/arrays';
 
-import styles from '@pages/MediaDetailSeason/MediaDetailSeasonPage.module.css';
+import { itemsPerRowBackdrop, itemsPerRowCredit } from '@pages/MediaDetailSection/config';
+import styles from '@pages/MediaDetailSection/MediaDetailSectionPage.module.css';
 
-// eslint-disable-next-line react/prop-types
-const Skeleton = ({ loading, loadingDetail }) => {
-  const route = routeMediaDetail(data);
-  const season_number = get(detail, 'season_number');
-  const episode_number = get(detail, 'episode_number');
+const Template = ({ children, heading }) => (
+  <div className={`App-container App-content ${styles.body}`}>
+    <h2 className="heading">{heading}</h2>
 
-  const history = useHistory();
-  const { tablet } = useBreakpointViewport();
-  const { prev, next, routePrev, routeNext } = useNavigationSeason({
-    seasons: get(data, 'seasons', []),
-    current_season: season_number,
-    current_episode: episode_number
-  });
-  const buttons = [
-    {
-      key: 'prev',
-      to: `${route}/${routePrev}`,
-      Icon: <FiChevronLeft />,
-      label: `${initials}. Anterior`,
-      visible: Boolean(prev)
-    },
-    {
-      key: 'next',
-      to: `${route}/${routeNext}`,
-      Icon: <FiChevronRight />,
-      label: `${initials}. Siguiente`,
-      visible: Boolean(next)
-    }
-  ];
+    <div className="sub-heading">
+      <SkeletonUI height={28} width={200} />
+    </div>
 
-  const onChange = (event) => history.push(`${route}/${routeSeasonDetail(event)}`);
+    {children}
+  </div>
+);
 
+const Skeleton = ({ heading, gridProps, itemProps, size, Element }) => {
   return (
-    <Space
-      classNames="full"
-      direction="row"
-      justify="between"
-      className={`${styles.selector} ${tablet && styles.tablet}`}
-    >
-      <Select
-        className={styles['selector-button']}
-        items={items}
-        identifierKey={identifierKey}
-        identifierSelected={get(detail, identifierKey)}
-        displayKey="key"
-        onChange={onChange}
-        hideArrow
-      />
-
-      <Space align="center" gap={5} className={styles.navigation}>
-        {buttons.map(
-          ({ key, visible, to, Icon, label }) =>
-            visible && (
-              <Button
-                key={key}
-                size="small"
-                secondary
-                rounded
-                className={`${styles['navigation-button']} ${styles[key]}`}
-              >
-                <Link to={to} className={styles['navigation-link']}>
-                  {React.cloneElement(Icon, { className: styles['navigation-arrow'] })}
-                  <span className={styles['navigation-label']}>{label}</span>
-                </Link>
-              </Button>
-            )
-        )}
-      </Space>
-    </Space>
+    <Template heading={heading}>
+      <Grid {...gridProps}>
+        {getEmptyArray(size).map((_, index) => (
+          <Element key={index} skeleton {...(itemProps || {})} />
+        ))}
+      </Grid>
+    </Template>
   );
+};
+
+export const skeleton = (breakpoint, section) => {
+  return {
+    videos: () => (
+      <Skeleton
+        heading="Vídeos"
+        gridProps={{ gap: '10px 20px', itemsPerRow: itemsPerRowBackdrop(breakpoint) }}
+        itemProps={{ ratio: 0.5 }}
+        size={6}
+        Element={MediaItem}
+      />
+    ),
+    images: () => (
+      <Skeleton
+        heading="Imágenes"
+        gridProps={{ gap: '20px', itemsPerRow: itemsPerRowBackdrop(breakpoint) }}
+        itemProps={{ ratio: 0.5 }}
+        size={8}
+        Element={MediaItemImage}
+      />
+    ),
+    seasons: () => (
+      <Skeleton
+        heading="Temporadas"
+        gridProps={{ gap: '20px', itemsPerRow: 1 }}
+        size={3}
+        Element={MediaItemSeason}
+      />
+    ),
+    credits: () => (
+      <Skeleton
+        heading="Reparto"
+        gridProps={{ gap: '20px 25px', itemsPerRow: itemsPerRowCredit(breakpoint) }}
+        size={15}
+        Element={MediaItemCredit}
+      />
+    )
+  }[section];
 };

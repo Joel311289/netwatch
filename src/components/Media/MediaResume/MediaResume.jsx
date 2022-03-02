@@ -6,6 +6,7 @@ import { useVibrantColor } from '@hooks/useVibrantColor';
 import { useBreakpointViewport } from '@hooks/useBreakpointViewport';
 
 import Space from '@components/Layout/Space/Space';
+import Skeleton from '@components/UI/Skeleton/Skeleton';
 import Link from '@components/UI/Link/Link';
 import Separator from '@components/UI/Separator/Separator';
 import MediaItemImage from '@components/Media/MediaItem/MediaItem-image';
@@ -16,6 +17,7 @@ import { backgroundImageUrl } from '@utils/helpers/strings';
 import styles from '@components/Media/MediaResume/MediaResume.module.css';
 
 const MediaResume = ({
+  skeleton,
   image,
   backdrop,
   title,
@@ -26,16 +28,20 @@ const MediaResume = ({
   to,
   route,
   linkName,
-  season,
-  ratio = 1.5
+  season
 }) => {
   const { tablet } = useBreakpointViewport();
+  const ratio = 1.5;
   const { hex: vibrantColor } = useVibrantColor(image);
   const subheadings = [
     ...(date ? (date_death ? [`${date} - ${date_death}`] : [date]) : []),
     ...(date && duration ? [duration] : []),
     ...(date && age ? [`${age} años`] : [])
   ];
+
+  if (skeleton) {
+    return <Skeleton width="100%" height={235} />;
+  }
 
   return (
     <div className={`media-resume-wrapper ${styles.wrapper}`}>
